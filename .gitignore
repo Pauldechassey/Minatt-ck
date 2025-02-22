@@ -1,0 +1,102 @@
+# -----------------------
+# 🐍 Python-related files
+# -----------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.so
+*.egg-info/
+*.dist-info/
+
+# -----------------------
+# 🚀 Virtual Environment
+# -----------------------
+venv/
+env/
+minattack_env
+.Venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# -----------------------
+# 🖥️ IDE & Editor-specific files
+# -----------------------
+# VS Code
+.vscode/
+.settings/
+.history/
+
+# PyCharm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# -----------------------
+# ⚙️ Logs & Temporary Files
+# -----------------------
+logs/
+*.log
+nohup.out
+debug.log
+dump.rdb
+Thumbs.db
+.DS_Store
+*.swp
+*.swo
+*.swn
+
+# -----------------------
+# 🖥️ Backend (FastAPI)
+# -----------------------
+backend/__pycache__/
+backend/venv/
+backend/*.sqlite3
+backend/*.db
+backend/db.sqlite3
+
+# -----------------------
+# 🎨 Frontend (PySide6)
+# -----------------------
+frontend/__pycache__/
+frontend/venv/
+frontend/dist/
+frontend/build/
+frontend/.cache/
+
+# -----------------------
+# 🏗️ PyInstaller Build Artifacts
+# -----------------------
+build/
+dist/
+*.spec
+*.exe
+*.app
+*.dmg
+*.AppImage
+
+# -----------------------
+# 🛠️ Package Managers
+# -----------------------
+node_modules/
+package-lock.json
+yarn.lock
+
+# -----------------------
+# 🔒 Security-related (Ensure no sensitive files are committed)
+# -----------------------
+*.pem
+*.key
+*.crt
+config.json
+config.yaml
+.env
+
+# -----------------------
+# 🏗️ Deployment Artifacts
+# -----------------------
+*.tar.gz
+*.zip
