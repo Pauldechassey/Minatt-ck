@@ -2,7 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
 import time
-import logging
 import random
 import re
 from datetime import datetime
@@ -13,17 +12,6 @@ TARGET_URL = "http://testphp.vulnweb.com"  # URL cible
 MAX_DEPTH = 2  # Profondeur de crawling
 MAX_URLS_TO_SCAN = 20  # Nombre maximum d'URLs à scanner
 # ======================
-
-# Configuration du logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler(f"sqli_scan_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"),
-        logging.StreamHandler(sys.stdout)
-    ]
-)
-logger = logging.getLogger(__name__)
 
 # Variables globales
 visited_urls = set()
@@ -68,14 +56,14 @@ def crawl_url(url, depth, max_depth, session):
         return set()
     
     visited_urls.add(url)
-    logger.info(f"Exploration: {url} (Profondeur: {depth}/{max_depth})")
+    print(f"Exploration: {url} (Profondeur: {depth}/{max_depth})")
     
     try:
         headers = {"User-Agent": get_random_user_agent()}
         response = session.get(url, headers=headers, timeout=5)
         response.raise_for_status()
     except Exception as e:
-        logger.error(f"Erreur lors de l'exploration de {url}: {str(e)}")
+        print(f"Erreur lors de l'exploration de {url}: {str(e)}")
         return set()
 
     # Analyse la page pour trouver les formulaires
@@ -174,7 +162,7 @@ def test_sqli(url, form_details, session):
     method = form_details["method"]
     inputs = form_details["inputs"]
     
-    logger.info(f"Test SQLi sur: {action_url} [Méthode: {method.upper()}]")
+    print(f"Test SQLi sur: {action_url} [Méthode: {method.upper()}]")
     
     # Mesure du temps de réponse normal (référence)
     baseline_times = []
@@ -205,7 +193,7 @@ def test_sqli(url, form_details, session):
             continue
     
     if not baseline_times:
-        logger.warning(f"Impossible d'établir un temps de référence pour {action_url}")
+        print(f"Impossible d'établir un temps de référence pour {action_url}")
         return
     
     avg_baseline = sum(baseline_times) / len(baseline_times)
@@ -223,7 +211,7 @@ def test_sqli(url, form_details, session):
         
         # Vérifie si ce champ a déjà été testé
         if field_id in tested_fields:
-            logger.info(f"Champ {input_name} déjà testé sur {action_url}, ignoré")
+            print(f"Champ {input_name} déjà testé sur {action_url}, ignoré")
             continue
             
         tested_fields.add(field_id)
@@ -257,21 +245,21 @@ def test_sqli(url, form_details, session):
             except Exception as e:
                 # Les timeouts peuvent indiquer une vulnérabilité time-based
                 if "timeout" in str(e).lower():
-                    logger.warning(f"Timeout détecté avec payload: {payload} sur {input_name}")
+                    print(f"Timeout détecté avec payload: {payload} sur {input_name}")
                     record_vulnerability(url, input_name, payload, "Time-based SQLi (timeout)", form_details)
                 continue
             
             # Détection basée sur les erreurs
             for pattern in SQL_ERROR_PATTERNS:
                 if re.search(pattern, response.text, re.IGNORECASE):
-                    logger.warning(f"Error-based SQLi détectée sur {input_name} avec: {payload}")
+                    print(f"Error-based SQLi détectée sur {input_name} avec: {payload}")
                     record_vulnerability(url, input_name, payload, "Error-based SQLi", form_details)
                     break
             
             # Détection basée sur le temps (pour les payloads time-based)
             if "SLEEP" in payload or "BENCHMARK" in payload or "DELAY" in payload:
                 if elapsed_time > time_threshold:
-                    logger.warning(f"Time-based SQLi détectée sur {input_name} avec: {payload} ({elapsed_time:.2f}s vs {avg_baseline:.2f}s baseline)")
+                    print(f"Time-based SQLi détectée sur {input_name} avec: {payload} ({elapsed_time:.2f}s vs {avg_baseline:.2f}s baseline)")
                     record_vulnerability(url, input_name, payload, "Time-based SQLi", form_details)
 
 def record_vulnerability(url, input_name, payload, vuln_type, form_details):
@@ -298,7 +286,7 @@ def record_vulnerability(url, input_name, payload, vuln_type, form_details):
 def generate_report():
     """Génère un rapport des vulnérabilités trouvées"""
     if not found_vulnerabilities:
-        logger.info("Aucune vulnérabilité SQLi détectée.")
+        print("Aucune vulnérabilité SQLi détectée.")
         return
     
     report = f"""
@@ -333,16 +321,16 @@ RECOMMANDATIONS:
 ==============================================
 """
     
-    logger.info("\n" + report)
+    print("\n" + report)
     
     # Enregistre le rapport dans un fichier
     report_file = f"rapport_sqli_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
     try:
         with open(report_file, 'w') as f:
             f.write(report)
-        logger.info(f"Rapport enregistré dans {report_file}")
+        print(f"Rapport enregistré dans {report_file}")
     except Exception as e:
-        logger.error(f"Erreur lors de l'enregistrement du rapport: {str(e)}")
+        print(f"Erreur lors de l'enregistrement du rapport: {str(e)}")
 
 def main():
     print(f"\n{'=' * 60}")
@@ -359,28 +347,28 @@ def main():
         headers = {"User-Agent": get_random_user_agent()}
         session.get(TARGET_URL, headers=headers, timeout=5).raise_for_status()
     except Exception as e:
-        logger.error(f"Impossible d'accéder à l'URL cible {TARGET_URL}: {str(e)}")
+        print(f"Impossible d'accéder à l'URL cible {TARGET_URL}: {str(e)}")
         sys.exit(1)
     
     try:
         start_time = time.time()
         
         # Crawl le site pour trouver des URLs intéressantes
-        logger.info("Début de l'exploration...")
+        print("Début de l'exploration...")
         crawl_url(TARGET_URL, 1, MAX_DEPTH, session)
-        logger.info(f"Exploration terminée. {len(visited_urls)} URLs découvertes.")
+        print(f"Exploration terminée. {len(visited_urls)} URLs découvertes.")
         
         elapsed_time = time.time() - start_time
         
         # Génération du rapport
-        logger.info(f"\nScan terminé en {elapsed_time:.2f} secondes.")
+        print(f"\nScan terminé en {elapsed_time:.2f} secondes.")
         generate_report()
         
     except KeyboardInterrupt:
-        logger.info("\nScan interrompu par l'utilisateur.")
+        print("\nScan interrompu par l'utilisateur.")
         generate_report()
     except Exception as e:
-        logger.error(f"Erreur inattendue: {str(e)}")
+        print(f"Erreur inattendue: {str(e)}")
         sys.exit(1)
 
 if __name__ == "__main__":
