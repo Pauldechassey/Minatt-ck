@@ -79,7 +79,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("Main Window")
         self.resize(800, 600)
-        self.central_widget = QStackedWidget()
+        self.central_widget = QStackedWidget()  # SUPER IMPORTANT
         self.setCentralWidget(self.central_widget)
 
         self.login_widget = LoginWidget(self.central_widget)
