@@ -8,7 +8,7 @@ from datetime import datetime
 import sys
 
 # ==== CONFIGURATION ====
-TARGET_URL = "http://testphp.vulnweb.com"  # URL cible
+TARGET_URL = "http://epf.fr"  # URL cible
 MAX_DEPTH = 2  # Profondeur de crawling
 MAX_URLS_TO_SCAN = 20  # Nombre maximum d'URLs à scanner
 # ======================
@@ -320,7 +320,7 @@ RECOMMANDATIONS:
 4. Activer les pare-feu applicatifs web (WAF)
 ==============================================
 """
-    
+    """
     print("\n" + report)
     
     # Enregistre le rapport dans un fichier
@@ -331,6 +331,7 @@ RECOMMANDATIONS:
         print(f"Rapport enregistré dans {report_file}")
     except Exception as e:
         print(f"Erreur lors de l'enregistrement du rapport: {str(e)}")
+    """
 
 def main():
     print(f"\n{'=' * 60}")
