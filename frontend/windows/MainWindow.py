@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QMainWindow, QLabel, QPushButton, QVBoxLayout, QWidget
-from frontend.ui.ui_main_window import Ui_MainWindow
+from ui.ui_main_window import Ui_MainWindow
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
