@@ -14,13 +14,13 @@
    <string>StackedWidget</string>
   </property>
   <widget class="QWidget" name="page">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>160</y>
-      <width>144</width>
-      <height>145</height>
+      <x>280</x>
+      <y>190</y>
+      <width>491</width>
+      <height>191</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
