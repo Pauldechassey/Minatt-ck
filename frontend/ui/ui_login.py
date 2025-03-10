@@ -15,44 +15,67 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QLabel, QLineEdit, QPushButton,
-    QSizePolicy, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QLabel, QLineEdit,
+    QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout,
+    QWidget)
 
 class Ui_Login(object):
     def setupUi(self, Login):
         if not Login.objectName():
             Login.setObjectName(u"Login")
         Login.resize(1000, 700)
-        self.layoutWidget = QWidget(Login)
-        self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(320, 270, 381, 191))
-        self.verticalLayoutLogin = QVBoxLayout(self.layoutWidget)
+        self.gridLayoutWidget = QWidget(Login)
+        self.gridLayoutWidget.setObjectName(u"gridLayoutWidget")
+        self.gridLayoutWidget.setGeometry(QRect(110, 33, 871, 581))
+        self.gridLayoutLogin = QGridLayout(self.gridLayoutWidget)
+        self.gridLayoutLogin.setObjectName(u"gridLayoutLogin")
+        self.gridLayoutLogin.setContentsMargins(0, 0, 0, 0)
+        self.verticalSpacerTopLogin = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayoutLogin.addItem(self.verticalSpacerTopLogin, 0, 1, 1, 1)
+
+        self.horizontalSpacerLeftLogin = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayoutLogin.addItem(self.horizontalSpacerLeftLogin, 1, 0, 1, 1)
+
+        self.horizontalSpacerRightLogin = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayoutLogin.addItem(self.horizontalSpacerRightLogin, 1, 2, 1, 1)
+
+        self.verticalSpacerBottomLogin = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayoutLogin.addItem(self.verticalSpacerBottomLogin, 2, 1, 1, 1)
+
+        self.verticalLayoutLogin = QVBoxLayout()
         self.verticalLayoutLogin.setObjectName(u"verticalLayoutLogin")
-        self.verticalLayoutLogin.setContentsMargins(0, 0, 0, 0)
-        self.labelUsernameLogin = QLabel(self.layoutWidget)
+        self.labelUsernameLogin = QLabel(self.gridLayoutWidget)
         self.labelUsernameLogin.setObjectName(u"labelUsernameLogin")
 
         self.verticalLayoutLogin.addWidget(self.labelUsernameLogin)
 
-        self.lineEdit_username_2 = QLineEdit(self.layoutWidget)
-        self.lineEdit_username_2.setObjectName(u"lineEdit_username_2")
+        self.lineEditUsernameLogin = QLineEdit(self.gridLayoutWidget)
+        self.lineEditUsernameLogin.setObjectName(u"lineEditUsernameLogin")
 
-        self.verticalLayoutLogin.addWidget(self.lineEdit_username_2)
+        self.verticalLayoutLogin.addWidget(self.lineEditUsernameLogin)
 
-        self.labelPasswordLogin = QLabel(self.layoutWidget)
+        self.labelPasswordLogin = QLabel(self.gridLayoutWidget)
         self.labelPasswordLogin.setObjectName(u"labelPasswordLogin")
 
         self.verticalLayoutLogin.addWidget(self.labelPasswordLogin)
 
-        self.lineEditPasswordLogin = QLineEdit(self.layoutWidget)
+        self.lineEditPasswordLogin = QLineEdit(self.gridLayoutWidget)
         self.lineEditPasswordLogin.setObjectName(u"lineEditPasswordLogin")
+        self.lineEditPasswordLogin.setEchoMode(QLineEdit.EchoMode.Password)
 
         self.verticalLayoutLogin.addWidget(self.lineEditPasswordLogin)
 
-        self.buttonLogin = QPushButton(self.layoutWidget)
+        self.buttonLogin = QPushButton(self.gridLayoutWidget)
         self.buttonLogin.setObjectName(u"buttonLogin")
 
         self.verticalLayoutLogin.addWidget(self.buttonLogin)
+
+
+        self.gridLayoutLogin.addLayout(self.verticalLayoutLogin, 1, 1, 1, 1)
 
 
         self.retranslateUi(Login)
