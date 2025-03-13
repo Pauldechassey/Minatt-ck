@@ -17,9 +17,6 @@ class Attaque:
         resultats = scanner.run_xss(url)
         return resultats
     
-    def reinitialiser(self):
-        self.resultats_attaques = {"sqli": []}
-        return True
 
     def get_resultats(self):
         return self.resultats_attaques
@@ -33,8 +30,8 @@ if __name__ == "__main__":
     """
     urls_test = [
         "http://127.0.0.1:5000",
-        "http://127.0.0.1:5000/xss",
-        "http://127.0.0.1:5000/sqli",
+        "http://127.0.0.1:5000/echo",
+        "http://127.0.0.1:5000/recherche",
         "http://127.0.0.1:5000/login"
     ]
     attaque = Attaque()
