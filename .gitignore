@@ -54,9 +54,7 @@ Thumbs.db
 # -----------------------
 backend/__pycache__/
 backend/venv/
-backend/*.sqlite3
-backend/*.db
-backend/db.sqlite3
+backend/db/*.sqlite3
 
 # -----------------------
 # 🎨 Frontend (PySide6)
