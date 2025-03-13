@@ -11,16 +11,15 @@ class Attaque:
     def attaque_sqli(self, url):
         scanner = Attaque_sqli()
         resultats = scanner.run_sqli(url)
-        return resultats
+        return resultats if resultats else []
     def attaque_xss(self, url):
         scanner = Attaque_xss()
         resultats = scanner.run_xss(url)
-        return resultats
-    
+        return resultats if resultats else []
+     
 
     def get_resultats(self):
         return self.resultats_attaques
-
 
 if __name__ == "__main__":
     """
@@ -32,12 +31,18 @@ if __name__ == "__main__":
         "http://127.0.0.1:5000",
         "http://127.0.0.1:5000/echo",
         "http://127.0.0.1:5000/recherche",
-        "http://127.0.0.1:5000/login"
+        "http://127.0.0.1:5000/login",
+        "http://127.0.0.1:5000/comments",
+        "http://127.0.0.1:5000/profile"
     ]
     attaque = Attaque()
     for url in urls_test:
         attaque.resultats_attaques["sqli"].append(attaque.attaque_sqli(url))
         attaque.resultats_attaques["xss"].append(attaque.attaque_xss(url))
-    print(attaque.resultats_attaques)
+    print(attaque.resultats_attaques) 
 
 
+"""
+stored xss -> ne marche pas (page comments)
+sqli -> à améliorer : ne remarque pas le problème sur login
+"""
