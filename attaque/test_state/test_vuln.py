@@ -464,6 +464,8 @@ def echo():
         </body>
         </html>
     ''', current_user=current_user)
+
+
 @app.route('/comments', methods=['GET', 'POST'])
 def comments():
     current_user = get_current_user()
@@ -583,7 +585,7 @@ def comments():
 
 
 # Page profil utilisateur
-@app.route('/profile')
+@app.route('/profile', methods=['GET', 'POST'])
 def profile():
     current_user = get_current_user()
     if not current_user:
@@ -670,6 +672,8 @@ def profile():
         </body>
         </html>
     ''', user=user, current_user=current_user)
+
+    
 
 if __name__ == '__main__':
     app.run(debug=True)

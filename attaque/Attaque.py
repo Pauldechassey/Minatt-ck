@@ -39,7 +39,7 @@ if __name__ == "__main__":
     for url in urls_test:
         attaque.resultats_attaques["sqli"].append(attaque.attaque_sqli(url))
         attaque.resultats_attaques["xss"].append(attaque.attaque_xss(url))
-    print(attaque.resultats_attaques) 
+    #print(attaque.resultats_attaques)
 
 
 """
