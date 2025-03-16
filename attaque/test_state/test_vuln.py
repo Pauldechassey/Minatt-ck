@@ -173,9 +173,143 @@ def home():
     ''', comments_html=comments_html, username_display=username_display)
 
 
-# Formulaire de connexion/inscription (SQLi vulnérable)
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    current_user = get_current_user()
+    msg = ""
+    
+    # Si l'utilisateur est déjà connecté, on affiche juste le bouton de déconnexion
+    if current_user:
+        return render_template_string('''
+            <!doctype html>
+            <html lang="fr">
+            <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+                <style>
+                    body {
+                        background-color: #121212;
+                        color: #00ff00;
+                        font-family: 'Courier New', Courier, monospace;
+                    }
+                    .container {
+                        margin-top: 50px;
+                    }
+                    h1 {
+                        font-size: 2.5rem;
+                        text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00;
+                    }
+                    .btn {
+                        background-color: #00ff00;
+                        color: #121212;
+                        border: 1px solid #00ff00;
+                    }
+                    .btn:hover {
+                        background-color: #1e1e1e;
+                        color: #00ff00;
+                    }
+                </style>
+                <title>Déconnexion</title>
+            </head>
+            <body>
+                <div class="container text-center">
+                    <h1>💀 Compte 💀</h1>
+                    <p>Vous êtes connecté en tant que : {{ current_user }}</p>
+                    <a href="/logout" class="btn mt-3">Déconnexion</a>
+                    <a href="/" class="btn mt-3">Retour</a>
+                </div>
+            </body>
+            </html>
+        ''', current_user=current_user)
+    
+    # Si l'utilisateur n'est pas connecté, on affiche le formulaire de connexion
+    if request.method == 'POST':
+        username = request.form.get('username', '')
+        password = request.form.get('password', '')
+        db = get_db()
+        
+        # 🚨 Requête SQL VULNÉRABLE 🚨
+        query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"
+        res = db.execute(query).fetchall()
+
+        if res:
+            session['username'] = username
+            session['user_id'] = res[0][0]
+            session['role'] = res[0][3]
+            msg = f"✅ Connexion réussie ! Bienvenue {username}."
+            log_action(f"Connexion de l'utilisateur {username}")
+            return redirect(url_for('login'))
+        else:
+            msg = "❌ Accès refusé !"
+            log_action(f"Tentative de connexion échouée pour {username}")
+
+    return render_template_string('''
+        <!doctype html>
+        <html lang="fr">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+            <style>
+                body {
+                    background-color: #121212;
+                    color: #00ff00;
+                    font-family: 'Courier New', Courier, monospace;
+                }
+                .container {
+                    margin-top: 50px;
+                }
+                h1 {
+                    font-size: 2.5rem;
+                    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00;
+                }
+                .form-group {
+                    margin-bottom: 1.5rem;
+                }
+                .form-control {
+                    background-color: #1e1e1e;
+                    border: 1px solid #00ff00;
+                    color: #00ff00;
+                }
+                .btn {
+                    background-color: #00ff00;
+                    color: #121212;
+                    border: 1px solid #00ff00;
+                }
+                .btn:hover {
+                    background-color: #1e1e1e;
+                    color: #00ff00;
+                }
+            </style>
+            <title>Connexion</title>
+        </head>
+        <body>
+            <div class="container text-center">
+                <h1>💀 Connexion 💀</h1>
+                
+                <form method="post">
+                    <div class="form-group">
+                        <label for="username">Nom d'utilisateur</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn">Se connecter</button>
+                </form>
+                
+                <p class="mt-3">{{ msg }}</p>
+                <p class="mt-2">Pas encore de compte ? <a href="/inscription">S'inscrire</a></p>
+                <a href="/" class="btn mt-3">Retour</a>
+            </div>
+            
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+        </body>
+        </html>
+    ''', msg=msg)
     current_user = get_current_user()
     msg = ""
     if request.method == 'POST':
@@ -208,7 +342,6 @@ def login():
             if existing:
                 msg = "❌ Nom d'utilisateur déjà utilisé !"
             else:
-                # Note: vulnérable car utilise des paramètres directs sans échappement
                 user=username
                 insert_query = f"INSERT INTO users (username, password, role) VALUES ('{username}', '{password}', 'user')"
                 db.execute(insert_query)
@@ -324,6 +457,112 @@ def login():
         </body>
         </html>
     ''', msg=msg, current_user=current_user)
+
+@app.route('/inscription', methods=['GET', 'POST'])
+def inscription():
+    current_user = get_current_user()
+    msg = ""
+    
+    # Si l'utilisateur est déjà connecté, on le redirige
+    if current_user:
+        return redirect(url_for('login'))
+    
+    if request.method == 'POST':
+        username = request.form.get('username', '')
+        password = request.form.get('password', '')
+        db = get_db()
+        
+        # 🚨 Vulnérable à l'injection SQL dans la création de compte
+        check_query = f"SELECT * FROM users WHERE username = '{username}'"
+        existing = db.execute(check_query).fetchone()
+        
+        if existing:
+            msg = "❌ Nom d'utilisateur déjà utilisé !"
+        else:
+            # Note: vulnérable car utilise des paramètres directs sans échappement
+            insert_query = f"INSERT INTO users (username, password, role) VALUES ('{username}', '{password}', 'user')"
+            db.execute(insert_query)
+            db.commit()
+            msg = f"✅ Compte créé avec succès ! Vous pouvez maintenant vous connecter."
+            log_action(f"Création du compte utilisateur {username}")
+            return redirect(url_for('login'))
+
+    return render_template_string('''
+        <!doctype html>
+        <html lang="fr">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+            <style>
+                body {
+                    background-color: #121212;
+                    color: #00ff00;
+                    font-family: 'Courier New', Courier, monospace;
+                }
+                .container {
+                    margin-top: 50px;
+                }
+                h1 {
+                    font-size: 2.5rem;
+                    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00;
+                }
+                .form-group {
+                    margin-bottom: 1.5rem;
+                }
+                .form-control {
+                    background-color: #1e1e1e;
+                    border: 1px solid #00ff00;
+                    color: #00ff00;
+                }
+                .btn {
+                    background-color: #00ff00;
+                    color: #121212;
+                    border: 1px solid #00ff00;
+                }
+                .btn:hover {
+                    background-color: #1e1e1e;
+                    color: #00ff00;
+                }
+            </style>
+            <title>Inscription</title>
+        </head>
+        <body>
+            <div class="container text-center">
+                <h1>💀 Inscription 💀</h1>
+                
+                <form method="post">
+                    <div class="form-group">
+                        <label for="username">Nom d'utilisateur</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn">S'inscrire</button>
+                </form>
+                
+                <p class="mt-3">{{ msg }}</p>
+                <p class="mt-2">Déjà un compte ? <a href="/login">Se connecter</a></p>
+                <a href="/" class="btn mt-3">Retour</a>
+            </div>
+            
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+        </body>
+        </html>
+    ''', msg=msg)
+
+@app.route('/logout')
+def logout():
+    # Vider la session
+    session.pop('username', None)
+    session.pop('user_id', None)
+    session.pop('role', None)
+    
+    # Rediriger vers la page de connexion
+    return redirect(url_for('login'))
 
 # Recherche d'utilisateur vulnérable à SQLi
 @app.route('/recherche')
