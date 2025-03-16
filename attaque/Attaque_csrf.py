@@ -1,72 +1,137 @@
 import requests
 from bs4 import BeautifulSoup
 from http.cookies import SimpleCookie
+import re
+from urllib.parse import urljoin
+
 
 class Attaque_csrf:
     def __init__(self):
         self.results = []
         self.session = requests.Session()
 
-    def test_csrf(self, url):
-        """Teste la vulnérabilité CSRF sur l'URL donnée."""
+    def test_csrf(self, url, timeout=10):
         vuln = False
         
-        # Récupération du token CSRF
+        # Retrieving the CSRF token
         try:
-            response = self.session.get(url)
-            response.raise_for_status()  # Lève une exception si le code de status n'est pas 200
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
+            response = self.session.get(url, headers=headers, timeout=timeout, allow_redirects=True)
+            response.raise_for_status()
         except requests.RequestException as e:
-            print(f"CSRF: Erreur lors de l'accès à {url}: {e}")
+            print(f"Error accessing {url}: {e}")
             return False
         
         soup = BeautifulSoup(response.text, 'html.parser')
-
-        # -- Vérification des formulaires --
+        
+        has_csrf_token = self._check_page_for_csrf_token(soup)
+        self._analyze_forms(soup, url, has_csrf_token)
+        self._analyze_cookies(response, url)
+        
+        return len(self.results) > 0
+    
+    def _check_page_for_csrf_token(self, soup):
+        # Looking for CSRF tokens in meta tags
+        meta_csrf = soup.find('meta', attrs={'name': re.compile(r'csrf|xsrf', re.I)})
+        if meta_csrf:
+            return True
+            
+        # Looking for tokens in JavaScript variables
+        scripts = soup.find_all('script')
+        for script in scripts:
+            if script.string and re.search(r'(csrf|xsrf).*token', script.string, re.I):
+                return True
+                
+        return False
+        
+    def _analyze_forms(self, soup, url, has_csrf_token):
         forms = soup.find_all('form')
-        for i, form in enumerate(forms):
+        
+        for form in forms:
             action = form.get("action", "")
+            if action:
+                action_url = urljoin(url, action)
+            else:
+                action_url = url
+                
             method = form.get("method", "GET").upper()
             
+            # We're only interested in POST forms that potentially modify data
+            if method != "POST":
+                continue
+            
             inputs = form.find_all("input")
-            if any("csrf" in (inp.get("name", "") + inp.get("id", "")).lower() for inp in inputs) and method == "POST":
-                print(f"Formulaire vulnérable trouvé: {action}")
+            has_form_csrf = False
+            
+            csrf_keywords = ['csrf', 'xsrf', 'token', 'nonce', '_token', 'authenticity']
+            
+            for inp in inputs:
+                input_name = inp.get("name", "").lower()
+                input_id = inp.get("id", "").lower()
+                
+                if any(keyword in input_name or keyword in input_id for keyword in csrf_keywords):
+                    has_form_csrf = True
+                    break
+            
+            # If no CSRF token is found, the form is potentially vulnerable
+            if not has_form_csrf and not has_csrf_token:
+                print(f"Potentially vulnerable form: {action_url}")
                 
                 self.results.append({
                     "type": "CSRF",
                     "url": url,
-                    "proof": "méthode POST sans token CSRF"
+                    "element": f"Form targeting {action_url}",
+                    "method": method,
+                    "proof": "POST method without detectable CSRF protection"
                 })
-                vuln = True
-
-        # -- Vérification des cookies --
-        # Récupérer les cookies en format brut
+    
+    def _analyze_cookies(self, response, url):
+        # Retrieve cookies in raw format
         cookie_header = response.headers.get("Set-Cookie")
         
         if cookie_header:
             cookies = SimpleCookie()
-            for header in cookie_header.split(','):
-                cookies.load(header.strip())
-            
+            try:
+                for header in cookie_header.split(','):
+                    cookies.load(header.strip())
+            except Exception:
+                # Alternative method if parsing fails
+                try:
+                    for header in response.headers.getlist('Set-Cookie'):
+                        cookies.load(header)
+                except:
+                    pass
+
             for cookie_name, cookie in cookies.items():
-                # Vérifier l'attribut SameSite
+                # Check SameSite attribute
                 samesite = None
-                for attr in cookie['set-cookie'].split(';'):
-                    if attr.strip().startswith('samesite='):
+                for attr in str(cookie).split(';'):
+                    if attr.strip().lower().startswith('samesite='):
                         samesite = attr.strip().split('=')[1].lower()
-                if samesite is not None and samesite not in ["strict", "lax"]:
-                    print(f"Cookie vulnérable trouvé: {cookie_name} avec SameSite = {samesite}")
+                        break
+                
+                # Check cookie security attributes
+                is_secure = 'secure' in str(cookie).lower()
+                is_httponly = 'httponly' in str(cookie).lower()
+                
+                if samesite is None or samesite not in ["strict", "lax"]:
+                    print(f"Vulnerable cookie found: {cookie_name} without proper SameSite attribute")
                     self.results.append({
                         "type": "CSRF",
                         "url": url,
-                        "proof": f"cookie {cookie_name} avec SameSite = {samesite}"
+                        "element": f"Cookie: {cookie_name}",
+                        "proof": f"Cookie without SameSite strict/lax attribute" + 
+                                (", non-secure" if not is_secure else "") + 
+                                (", non-httponly" if not is_httponly else "")
                     })
-                    vuln = True
-        
-        return vuln
     
     def run_csrf(self, url):
         if self.test_csrf(url):
-            print(f"Vulnérabilité CSRF trouvée sur {url}")
+            print(f"CSRF vulnerability found on {url}")
+            print(self.results)
             return self.results
         else:
+            print(f"No CSRF vulnerability detected on {url}")
             return None
