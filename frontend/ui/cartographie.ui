@@ -13,46 +13,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLineEdit" name="lineEditURLAttaques">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>270</y>
-     <width>291</width>
-     <height>27</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labelURL">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>240</y>
-     <width>121</width>
-     <height>19</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Rentrer l'URL:</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButtonURLAttaques">
-   <property name="geometry">
-    <rect>
-     <x>510</x>
-     <y>320</y>
-     <width>88</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Rechercher</string>
-   </property>
-  </widget>
   <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>20</x>
      <y>0</y>
      <width>221</width>
      <height>701</height>
@@ -64,7 +28,7 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QPushButton" name="pushButtonDeconnexionAttaques">
+   <widget class="QPushButton" name="pushButtonDeconnexionCartographie">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -88,7 +52,7 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="pushButtonOngletAccueilAttaques">
+      <widget class="QPushButton" name="pushButtonOngletAccueilCartographie">
        <property name="text">
         <string>Accueil</string>
        </property>
@@ -97,21 +61,21 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QPushButton" name="pushButtonOnglet1Accueil">
+        <widget class="QPushButton" name="pushButtonOnglet1Cartographie">
          <property name="text">
           <string>Attaques</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButtonOnglet2Attaques">
+        <widget class="QPushButton" name="pushButtonOnglet2Cartographie">
          <property name="text">
           <string>Rapports</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButtonOnglet3Attaques">
+        <widget class="QPushButton" name="pushButtonOnglet3Cartographie">
          <property name="text">
           <string>Cartographie</string>
          </property>
@@ -121,6 +85,19 @@
      </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>40</y>
+     <width>121</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cartographie</string>
+   </property>
   </widget>
  </widget>
  <resources/>

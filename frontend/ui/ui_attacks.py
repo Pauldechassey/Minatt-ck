@@ -15,8 +15,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QLabel, QLineEdit, QPushButton,
-    QSizePolicy, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QFrame, QLabel, QLineEdit,
+    QPushButton, QSizePolicy, QVBoxLayout, QWidget)
 
 class Ui_Attacks(object):
     def setupUi(self, Form):
@@ -32,24 +32,44 @@ class Ui_Attacks(object):
         self.pushButtonURLAttaques = QPushButton(Form)
         self.pushButtonURLAttaques.setObjectName(u"pushButtonURLAttaques")
         self.pushButtonURLAttaques.setGeometry(QRect(510, 320, 88, 27))
-        self.pushButtonDeconnexionAttaques = QPushButton(Form)
+        self.frame = QFrame(Form)
+        self.frame.setObjectName(u"frame")
+        self.frame.setGeometry(QRect(0, 0, 221, 701))
+        self.frame.setFrameShape(QFrame.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Raised)
+        self.pushButtonDeconnexionAttaques = QPushButton(self.frame)
         self.pushButtonDeconnexionAttaques.setObjectName(u"pushButtonDeconnexionAttaques")
-        self.pushButtonDeconnexionAttaques.setGeometry(QRect(110, 620, 111, 27))
-        self.layoutWidget = QWidget(Form)
-        self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(110, 50, 99, 61))
-        self.verticalLayout = QVBoxLayout(self.layoutWidget)
+        self.pushButtonDeconnexionAttaques.setGeometry(QRect(0, 670, 221, 27))
+        self.widget = QWidget(self.frame)
+        self.widget.setObjectName(u"widget")
+        self.widget.setGeometry(QRect(0, 10, 221, 130))
+        self.verticalLayout = QVBoxLayout(self.widget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.pushButtonOnglet2Attaques = QPushButton(self.layoutWidget)
+        self.pushButtonOngletAccueilAttaques = QPushButton(self.widget)
+        self.pushButtonOngletAccueilAttaques.setObjectName(u"pushButtonOngletAccueilAttaques")
+
+        self.verticalLayout.addWidget(self.pushButtonOngletAccueilAttaques)
+
+        self.verticalLayout_2 = QVBoxLayout()
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.pushButtonOnglet1Accueil = QPushButton(self.widget)
+        self.pushButtonOnglet1Accueil.setObjectName(u"pushButtonOnglet1Accueil")
+
+        self.verticalLayout_2.addWidget(self.pushButtonOnglet1Accueil)
+
+        self.pushButtonOnglet2Attaques = QPushButton(self.widget)
         self.pushButtonOnglet2Attaques.setObjectName(u"pushButtonOnglet2Attaques")
 
-        self.verticalLayout.addWidget(self.pushButtonOnglet2Attaques)
+        self.verticalLayout_2.addWidget(self.pushButtonOnglet2Attaques)
 
-        self.pushButtonOnglet3Attaques = QPushButton(self.layoutWidget)
+        self.pushButtonOnglet3Attaques = QPushButton(self.widget)
         self.pushButtonOnglet3Attaques.setObjectName(u"pushButtonOnglet3Attaques")
 
-        self.verticalLayout.addWidget(self.pushButtonOnglet3Attaques)
+        self.verticalLayout_2.addWidget(self.pushButtonOnglet3Attaques)
+
+
+        self.verticalLayout.addLayout(self.verticalLayout_2)
 
 
         self.retranslateUi(Form)
@@ -62,6 +82,8 @@ class Ui_Attacks(object):
         self.labelURL.setText(QCoreApplication.translate("Form", u"Rentrer l'URL:", None))
         self.pushButtonURLAttaques.setText(QCoreApplication.translate("Form", u"Rechercher", None))
         self.pushButtonDeconnexionAttaques.setText(QCoreApplication.translate("Form", u"D\u00e9connexion", None))
+        self.pushButtonOngletAccueilAttaques.setText(QCoreApplication.translate("Form", u"Accueil", None))
+        self.pushButtonOnglet1Accueil.setText(QCoreApplication.translate("Form", u"Attaques", None))
         self.pushButtonOnglet2Attaques.setText(QCoreApplication.translate("Form", u"Rapports", None))
         self.pushButtonOnglet3Attaques.setText(QCoreApplication.translate("Form", u"Cartographie", None))
     # retranslateUi
