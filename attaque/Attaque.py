@@ -1,13 +1,15 @@
 from Attaque_sqli import Attaque_sqli
 from Attaque_xss import Attaque_xss
 from Attaque_csrf import Attaque_csrf
+from Attaque_headers_cookies import Attaque_headers_cookies
 
 class Attaque:
     def __init__(self):
         self.resultats_attaques = {
             "sqli": [],
             "xss": [],
-            "csrf": []
+            "csrf": [],
+            "headers_cookies": []
         }
         
     def attaque_sqli(self, url):
@@ -23,6 +25,11 @@ class Attaque:
     def attaque_csrf(self, url):
         scanner = Attaque_csrf()
         resultats = scanner.run_csrf(url)
+        return resultats if resultats else []
+    
+    def attaque_headers_cookies(self, url):
+        scanner = Attaque_headers_cookies()
+        resultats = scanner.run_headers_cookies(url)
         return resultats if resultats else []
      
 
@@ -50,11 +57,7 @@ if __name__ == "__main__":
         print("-------------------------")
         #attaque.resultats_attaques["sqli"].append(attaque.attaque_sqli(url))
         #attaque.resultats_attaques["xss"].append(attaque.attaque_xss(url))
-        attaque.resultats_attaques["csrf"].append(attaque.attaque_csrf(url))
+        #attaque.resultats_attaques["csrf"].append(attaque.attaque_csrf(url))
+        #attaque.resultats_attaques["headers_cookies"].append(attaque.attaque_headers_cookies(url))
+    print(attaque.get_resultats())
 
-
-
-"""
-stored xss -> ne marche pas (page comments)
-sqli -> à améliorer : ne remarque pas le problème sur login
-"""
