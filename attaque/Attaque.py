@@ -2,10 +2,12 @@ from Attaque_sqli import Attaque_sqli
 from Attaque_xss import Attaque_xss
 from Attaque_csrf import Attaque_csrf
 from Attaque_headers_cookies import Attaque_headers_cookies
+from Rapport import generate_security_report
 
 class Attaque:
     def __init__(self):
         self.resultats_attaques = {
+            "url" : None,
             "sqli": [],
             "xss": [],
             "csrf": [],
@@ -31,6 +33,7 @@ class Attaque:
         scanner = Attaque_headers_cookies()
         resultats = scanner.run_headers_cookies(url)
         return resultats if resultats else []
+
      
 
     def get_resultats(self):
@@ -56,9 +59,10 @@ if __name__ == "__main__":
         print("-----------------------------------------------------------")
         print(f"test sur {url}")
         print("-------------------------")
+        attaque.resultats_attaques["url"]=url
         attaque.resultats_attaques["sqli"].append(attaque.attaque_sqli(url))
         attaque.resultats_attaques["xss"].append(attaque.attaque_xss(url))
         attaque.resultats_attaques["csrf"].append(attaque.attaque_csrf(url))
         attaque.resultats_attaques["headers_cookies"].append(attaque.attaque_headers_cookies(url))
 
-    print(attaque.get_resultats())
+    rapport=generate_security_report(attaque.get_resultats())
