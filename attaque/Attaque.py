@@ -47,6 +47,7 @@ if __name__ == "__main__":
         "http://127.0.0.1:5000/echo",
         "http://127.0.0.1:5000/recherche",
         "http://127.0.0.1:5000/login",
+        "http://127.0.0.1:5000/inscription",
         "http://127.0.0.1:5000/comments",
         "http://127.0.0.1:5000/profile"
     ]
@@ -55,9 +56,9 @@ if __name__ == "__main__":
         print("-----------------------------------------------------------")
         print(f"test sur {url}")
         print("-------------------------")
-        #attaque.resultats_attaques["sqli"].append(attaque.attaque_sqli(url))
-        #attaque.resultats_attaques["xss"].append(attaque.attaque_xss(url))
-        #attaque.resultats_attaques["csrf"].append(attaque.attaque_csrf(url))
-        #attaque.resultats_attaques["headers_cookies"].append(attaque.attaque_headers_cookies(url))
-    print(attaque.get_resultats())
+        attaque.resultats_attaques["sqli"].append(attaque.attaque_sqli(url))
+        attaque.resultats_attaques["xss"].append(attaque.attaque_xss(url))
+        attaque.resultats_attaques["csrf"].append(attaque.attaque_csrf(url))
+        attaque.resultats_attaques["headers_cookies"].append(attaque.attaque_headers_cookies(url))
 
+    print(attaque.get_resultats())

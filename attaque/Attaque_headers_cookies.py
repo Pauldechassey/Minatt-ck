@@ -68,6 +68,7 @@ class Attaque_headers_cookies:
         if 'Content-Security-Policy' in headers:
             csp = headers['Content-Security-Policy']
             if "default-src 'self'" not in csp and "script-src 'self'" not in csp:
+                print(f"[VULNÉRABLE] {url} - Header: Weak CSP configuration: {csp}")
                 self.results.append({
                     "type": "Header Security",
                     "url": url,
@@ -78,6 +79,7 @@ class Attaque_headers_cookies:
         if 'Strict-Transport-Security' in headers:
             hsts = headers['Strict-Transport-Security']
             if "max-age=" not in hsts:
+                print(f"[VULNÉRABLE] {url} - Header: Weak HSTS configuration: {hsts}")
                 self.results.append({
                     "type": "Header Security",
                     "url": url,
@@ -126,7 +128,7 @@ class Attaque_headers_cookies:
                     vulnerabilities.append("non-httponly")
                 
                 if vulnerabilities:
-                    print(f"Vulnerable cookie found: {cookie_name} - {', '.join(vulnerabilities)}")
+                    print(f"[VULNÉRABLE] {url} - Cookie: Vulnerability found: {cookie_name} - {', '.join(vulnerabilities)}")
                     self.results.append({
                         "type": "Cookie Security",
                         "url": url,
@@ -136,10 +138,8 @@ class Attaque_headers_cookies:
     
     def run_headers_cookies(self, url):
         if self.test_headers_cookies(url):
-            print(f"Security vulnerabilities found in headers and cookies on {url}")
             return self.results
         else:
-            print(f"No security vulnerabilities detected in headers and cookies on {url}")
             return None
 
 
