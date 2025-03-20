@@ -74,7 +74,7 @@ class Attaque_csrf:
             
             # If no CSRF token is found, the form is potentially vulnerable
             if not has_form_csrf and not has_csrf_token:
-                
+                print(f"[VULNÉRABLE] {url} - CSRF: POST method without detectable CSRF protection")
                 self.results.append({
                     "type": "CSRF",
                     "url": url,
@@ -85,9 +85,7 @@ class Attaque_csrf:
     
     def run_csrf(self, url):
         if self.test_csrf(url):
-            print(f"CSRF vulnerability found on {url}")
             return self.results
         else:
-            print(f"No CSRF vulnerability detected on {url}")
             return None
 
