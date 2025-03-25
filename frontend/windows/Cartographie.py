@@ -10,13 +10,23 @@ class CartographieWindow(QWidget, Ui_Cartographie):
 
         # Connexion des boutons
         self.ui.pushButtonDeconnexionCartographie.clicked.connect(self.logout)
-        self.ui.pushButtonOnglet1Cartographie.clicked.connect(self.goToAttacks)
-        self.ui.pushButtonOnglet2Cartographie.clicked.connect(self.goToRapports)
-        self.ui.pushButtonOngletAccueilCartographie.clicked.connect(self.goToAccueil)
+        self.ui.pushButtonAttaquesCartographie.clicked.connect(self.goToAttacks)
+        self.ui.pushButtonRapportsCartographie.clicked.connect(self.goToRapports)
+        self.ui.pushButtonHomeCartographie.clicked.connect(self.goToAccueil)  
 
     def logout(self):
-        # Retourne à la page de login
-        self.main_window.mainStackedWidget.setCurrentIndex(0)
+        msg = QMessageBox(self)
+        msg.setWindowTitle("Déconnexion")
+        msg.setText("Voulez-vous vraiment vous déconnecter ?")
+        msg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Cancel)
+        msg.setIcon(QMessageBox.Icon.Question)
+
+        result = msg.exec()
+
+        if result == QMessageBox.StandardButton.Yes:
+            self.main_window.loginPage.ui.lineEditUsernameLogin.clear()
+            self.main_window.loginPage.ui.lineEditPasswordLogin.clear()
+            self.main_window.mainStackedWidget.setCurrentIndex(0)
 
     def goToAttacks(self):
         self.main_window.mainStackedWidget.setCurrentIndex(

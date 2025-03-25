@@ -1,6 +1,8 @@
 from PySide6.QtWidgets import QMainWindow, QLabel, QPushButton, QVBoxLayout, QWidget
 
 from ui.ui_main_window import Ui_MainWindow
+from PySide6.QtWidgets import QSizePolicy
+from PySide6.QtWidgets import QLayout
 
 from windows.Accueil import AccueilWindow
 from windows.Login import LoginWindow
@@ -14,6 +16,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.setStyleSheet("background-color: #121212; color: white;")
+        self.setMinimumSize(800, 600)  # Taille minimale pour éviter une fenêtre trop petite
+        self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        layout = self.layout()
+        if layout is not None:
+            layout.setSizeConstraint(QLayout.SizeConstraint.SetDefaultConstraint)
+
+
+
 
         # Initialisation des pages
         self.loginPage = LoginWindow()

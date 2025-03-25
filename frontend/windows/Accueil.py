@@ -10,13 +10,23 @@ class AccueilWindow(QWidget, Ui_Accueil):
 
         # Connexion des boutons
         self.ui.pushButtonDeconnexionAccueil.clicked.connect(self.logout)
-        self.ui.pushButtonOnglet1Accueil.clicked.connect(self.goToAttacks)
-        self.ui.pushButtonOnglet2Accueil.clicked.connect(self.goToRapports)
-        self.ui.pushButtonOnglet3Accueil.clicked.connect(self.goToCartographie)
+        self.ui.pushButtonAttaquesAccueil.clicked.connect(self.goToAttacks)
+        self.ui.pushButtonRapportsAccueil.clicked.connect(self.goToRapports)
+        self.ui.pushButtonCartographieAccueil.clicked.connect(self.goToCartographie)
 
     def logout(self):
-        # Retourne à la page de login
-        self.main_window.mainStackedWidget.setCurrentIndex(0)
+        msg = QMessageBox(self)
+        msg.setWindowTitle("Déconnexion")
+        msg.setText("Voulez-vous vraiment vous déconnecter ?")
+        msg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Cancel)
+        msg.setIcon(QMessageBox.Icon.Question)
+
+        result = msg.exec()
+
+        if result == QMessageBox.StandardButton.Yes:
+            self.main_window.loginPage.ui.lineEditUsernameLogin.clear()
+            self.main_window.loginPage.ui.lineEditPasswordLogin.clear()
+            self.main_window.mainStackedWidget.setCurrentIndex(0)
 
     def goToAttacks(self):
         self.main_window.mainStackedWidget.setCurrentIndex(

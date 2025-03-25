@@ -15,49 +15,72 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QLabel, QPushButton,
-    QSizePolicy, QToolButton, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QLabel,
+    QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout,
+    QWidget)
 
 class Ui_Accueil(object):
     def setupUi(self, Accueil):
         if not Accueil.objectName():
             Accueil.setObjectName(u"Accueil")
-        Accueil.resize(1000, 700)
+        Accueil.resize(1367, 682)
+        Accueil.setStyleSheet(u"background-color: #121212;\n"
+"color: white;\n"
+"")
+        self.verticalLayout = QVBoxLayout(Accueil)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer)
+
+        self.pushButtonHomeAccueil = QPushButton(Accueil)
+        self.pushButtonHomeAccueil.setObjectName(u"pushButtonHomeAccueil")
+
+        self.horizontalLayout.addWidget(self.pushButtonHomeAccueil)
+
+        self.pushButtonAttaquesAccueil = QPushButton(Accueil)
+        self.pushButtonAttaquesAccueil.setObjectName(u"pushButtonAttaquesAccueil")
+
+        self.horizontalLayout.addWidget(self.pushButtonAttaquesAccueil)
+
+        self.pushButtonRapportsAccueil = QPushButton(Accueil)
+        self.pushButtonRapportsAccueil.setObjectName(u"pushButtonRapportsAccueil")
+
+        self.horizontalLayout.addWidget(self.pushButtonRapportsAccueil)
+
+        self.pushButtonCartographieAccueil = QPushButton(Accueil)
+        self.pushButtonCartographieAccueil.setObjectName(u"pushButtonCartographieAccueil")
+
+        self.horizontalLayout.addWidget(self.pushButtonCartographieAccueil)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer_2)
+
+        self.pushButtonDeconnexionAccueil = QPushButton(Accueil)
+        self.pushButtonDeconnexionAccueil.setObjectName(u"pushButtonDeconnexionAccueil")
+
+        self.horizontalLayout.addWidget(self.pushButtonDeconnexionAccueil)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout)
+
         self.labelNomAccueil = QLabel(Accueil)
         self.labelNomAccueil.setObjectName(u"labelNomAccueil")
-        self.labelNomAccueil.setGeometry(QRect(440, 20, 81, 71))
-        self.frame = QFrame(Accueil)
-        self.frame.setObjectName(u"frame")
-        self.frame.setGeometry(QRect(0, 0, 221, 701))
-        self.frame.setFrameShape(QFrame.StyledPanel)
-        self.frame.setFrameShadow(QFrame.Raised)
-        self.pushButtonDeconnexionAccueil = QPushButton(self.frame)
-        self.pushButtonDeconnexionAccueil.setObjectName(u"pushButtonDeconnexionAccueil")
-        self.pushButtonDeconnexionAccueil.setGeometry(QRect(0, 670, 221, 27))
-        self.widget = QWidget(self.frame)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(0, 20, 221, 95))
-        self.verticalLayout = QVBoxLayout(self.widget)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.pushButtonOnglet1Accueil = QPushButton(self.widget)
-        self.pushButtonOnglet1Accueil.setObjectName(u"pushButtonOnglet1Accueil")
 
-        self.verticalLayout.addWidget(self.pushButtonOnglet1Accueil)
+        self.verticalLayout.addWidget(self.labelNomAccueil)
 
-        self.pushButtonOnglet2Accueil = QPushButton(self.widget)
-        self.pushButtonOnglet2Accueil.setObjectName(u"pushButtonOnglet2Accueil")
+        self.gridLayout = QGridLayout()
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.verticalLayout.addWidget(self.pushButtonOnglet2Accueil)
+        self.gridLayout.addItem(self.verticalSpacer, 0, 0, 1, 1)
 
-        self.pushButtonOnglet3Accueil = QPushButton(self.widget)
-        self.pushButtonOnglet3Accueil.setObjectName(u"pushButtonOnglet3Accueil")
 
-        self.verticalLayout.addWidget(self.pushButtonOnglet3Accueil)
+        self.verticalLayout.addLayout(self.gridLayout)
 
-        self.toolButton = QToolButton(Accueil)
-        self.toolButton.setObjectName(u"toolButton")
-        self.toolButton.setGeometry(QRect(250, 20, 26, 26))
 
         self.retranslateUi(Accueil)
 
@@ -66,11 +89,11 @@ class Ui_Accueil(object):
 
     def retranslateUi(self, Accueil):
         Accueil.setWindowTitle(QCoreApplication.translate("Accueil", u"Accueil", None))
+        self.pushButtonHomeAccueil.setText(QCoreApplication.translate("Accueil", u"Home", None))
+        self.pushButtonAttaquesAccueil.setText(QCoreApplication.translate("Accueil", u"Attaques", None))
+        self.pushButtonRapportsAccueil.setText(QCoreApplication.translate("Accueil", u"Rapports", None))
+        self.pushButtonCartographieAccueil.setText(QCoreApplication.translate("Accueil", u"Cartographie", None))
+        self.pushButtonDeconnexionAccueil.setText("")
         self.labelNomAccueil.setText(QCoreApplication.translate("Accueil", u"MinAtt&ck", None))
-        self.pushButtonDeconnexionAccueil.setText(QCoreApplication.translate("Accueil", u"D\u00e9connexion", None))
-        self.pushButtonOnglet1Accueil.setText(QCoreApplication.translate("Accueil", u"Attaques", None))
-        self.pushButtonOnglet2Accueil.setText(QCoreApplication.translate("Accueil", u"Rapports", None))
-        self.pushButtonOnglet3Accueil.setText(QCoreApplication.translate("Accueil", u"Cartographie", None))
-        self.toolButton.setText(QCoreApplication.translate("Accueil", u"+", None))
     # retranslateUi
 

@@ -15,56 +15,85 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QLabel, QPushButton,
-    QSizePolicy, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
+    QLabel, QPushButton, QSizePolicy, QSpacerItem,
+    QWidget)
 
 class Ui_Rapports(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(1000, 700)
+        Form.resize(818, 474)
+        Form.setStyleSheet(u"background-color: #121212;\n"
+"color: white;\n"
+"")
+        self.gridLayout_2 = QGridLayout(Form)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer)
+
+        self.pushButtonHomeRapports = QPushButton(Form)
+        self.pushButtonHomeRapports.setObjectName(u"pushButtonHomeRapports")
+
+        self.horizontalLayout.addWidget(self.pushButtonHomeRapports)
+
+        self.pushButtonAttaquesRapports = QPushButton(Form)
+        self.pushButtonAttaquesRapports.setObjectName(u"pushButtonAttaquesRapports")
+
+        self.horizontalLayout.addWidget(self.pushButtonAttaquesRapports)
+
+        self.pushButtonRapportsRapports = QPushButton(Form)
+        self.pushButtonRapportsRapports.setObjectName(u"pushButtonRapportsRapports")
+
+        self.horizontalLayout.addWidget(self.pushButtonRapportsRapports)
+
+        self.pushButtonCartographieRapports = QPushButton(Form)
+        self.pushButtonCartographieRapports.setObjectName(u"pushButtonCartographieRapports")
+
+        self.horizontalLayout.addWidget(self.pushButtonCartographieRapports)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer_2)
+
+        self.pushButtonDeconnexionRapports = QPushButton(Form)
+        self.pushButtonDeconnexionRapports.setObjectName(u"pushButtonDeconnexionRapports")
+        icon = QIcon()
+        icon.addFile(u"../../../../Downloads/image.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.pushButtonDeconnexionRapports.setIcon(icon)
+        self.pushButtonDeconnexionRapports.setIconSize(QSize(32, 32))
+
+        self.horizontalLayout.addWidget(self.pushButtonDeconnexionRapports)
+
+
+        self.gridLayout_2.addLayout(self.horizontalLayout, 0, 0, 1, 1)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout_2.addItem(self.verticalSpacer, 1, 0, 1, 1)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout_2.addItem(self.verticalSpacer_2, 2, 0, 1, 1)
+
+        self.gridLayout = QGridLayout()
+        self.gridLayout.setObjectName(u"gridLayout")
         self.frame = QFrame(Form)
         self.frame.setObjectName(u"frame")
-        self.frame.setGeometry(QRect(0, 0, 221, 701))
         self.frame.setFrameShape(QFrame.StyledPanel)
         self.frame.setFrameShadow(QFrame.Raised)
-        self.pushButtonDeconnexionRapports = QPushButton(self.frame)
-        self.pushButtonDeconnexionRapports.setObjectName(u"pushButtonDeconnexionRapports")
-        self.pushButtonDeconnexionRapports.setGeometry(QRect(0, 670, 221, 27))
-        self.widget = QWidget(self.frame)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(0, 10, 221, 130))
-        self.verticalLayout = QVBoxLayout(self.widget)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.pushButtonOngletAccueilRapports = QPushButton(self.widget)
-        self.pushButtonOngletAccueilRapports.setObjectName(u"pushButtonOngletAccueilRapports")
-
-        self.verticalLayout.addWidget(self.pushButtonOngletAccueilRapports)
-
-        self.verticalLayout_2 = QVBoxLayout()
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.pushButtonOnglet1Rapports = QPushButton(self.widget)
-        self.pushButtonOnglet1Rapports.setObjectName(u"pushButtonOnglet1Rapports")
-
-        self.verticalLayout_2.addWidget(self.pushButtonOnglet1Rapports)
-
-        self.pushButtonOnglet2Rapports = QPushButton(self.widget)
-        self.pushButtonOnglet2Rapports.setObjectName(u"pushButtonOnglet2Rapports")
-
-        self.verticalLayout_2.addWidget(self.pushButtonOnglet2Rapports)
-
-        self.pushButtonOnglet3Rapports = QPushButton(self.widget)
-        self.pushButtonOnglet3Rapports.setObjectName(u"pushButtonOnglet3Rapports")
-
-        self.verticalLayout_2.addWidget(self.pushButtonOnglet3Rapports)
-
-
-        self.verticalLayout.addLayout(self.verticalLayout_2)
-
-        self.labelRapports = QLabel(Form)
+        self.labelRapports = QLabel(self.frame)
         self.labelRapports.setObjectName(u"labelRapports")
-        self.labelRapports.setGeometry(QRect(470, 40, 66, 19))
+        self.labelRapports.setGeometry(QRect(430, 110, 91, 31))
+
+        self.gridLayout.addWidget(self.frame, 0, 0, 1, 1)
+
+
+        self.gridLayout_2.addLayout(self.gridLayout, 3, 0, 1, 1)
+
 
         self.retranslateUi(Form)
 
@@ -73,11 +102,11 @@ class Ui_Rapports(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
-        self.pushButtonDeconnexionRapports.setText(QCoreApplication.translate("Form", u"D\u00e9connexion", None))
-        self.pushButtonOngletAccueilRapports.setText(QCoreApplication.translate("Form", u"Accueil", None))
-        self.pushButtonOnglet1Rapports.setText(QCoreApplication.translate("Form", u"Attaques", None))
-        self.pushButtonOnglet2Rapports.setText(QCoreApplication.translate("Form", u"Rapports", None))
-        self.pushButtonOnglet3Rapports.setText(QCoreApplication.translate("Form", u"Cartographie", None))
+        self.pushButtonHomeRapports.setText(QCoreApplication.translate("Form", u"Home", None))
+        self.pushButtonAttaquesRapports.setText(QCoreApplication.translate("Form", u"Attaques", None))
+        self.pushButtonRapportsRapports.setText(QCoreApplication.translate("Form", u"Rapports", None))
+        self.pushButtonCartographieRapports.setText(QCoreApplication.translate("Form", u"Cartographie", None))
+        self.pushButtonDeconnexionRapports.setText("")
         self.labelRapports.setText(QCoreApplication.translate("Form", u"Rapports", None))
     # retranslateUi
 

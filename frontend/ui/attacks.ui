@@ -6,122 +6,209 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>700</height>
+    <width>1437</width>
+    <height>694</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLineEdit" name="lineEditURLAttaques">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>270</y>
-     <width>291</width>
-     <height>27</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labelURL">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>240</y>
-     <width>121</width>
-     <height>19</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Rentrer l'URL:</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButtonURLAttaques">
-   <property name="geometry">
-    <rect>
-     <x>510</x>
-     <y>320</y>
-     <width>88</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Rechercher</string>
-   </property>
-  </widget>
-  <widget class="QFrame" name="frame">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>221</width>
-     <height>701</height>
-    </rect>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::StyledPanel</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Raised</enum>
-   </property>
-   <widget class="QPushButton" name="pushButtonDeconnexionAttaques">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>670</y>
-      <width>221</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Déconnexion</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>10</y>
-      <width>221</width>
-      <height>130</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
+  <property name="styleSheet">
+   <string notr="true">background-color: #121212;
+color: white;
+</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QPushButton" name="pushButtonOngletAccueilAttaques">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonHomeAttaques">
        <property name="text">
-        <string>Accueil</string>
+        <string>Home</string>
        </property>
       </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <widget class="QPushButton" name="pushButtonOnglet1Accueil">
-         <property name="text">
-          <string>Attaques</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButtonOnglet2Attaques">
-         <property name="text">
-          <string>Rapports</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButtonOnglet3Attaques">
-         <property name="text">
-          <string>Cartographie</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QPushButton" name="pushButtonAttaquesAttaques">
+       <property name="text">
+        <string>Attaques</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonRapportsAttaques">
+       <property name="text">
+        <string>Rapports</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonCartographieAttaques">
+       <property name="text">
+        <string>Cartographie</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonDeconnexionAttaques">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../../../../Downloads/image.png</normaloff>../../../../Downloads/image.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
+       </property>
+      </widget>
      </item>
     </layout>
-   </widget>
-  </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLabel" name="labelChoixAttaques">
+     <property name="text">
+      <string>Choisissez votre attaque:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QCheckBox" name="checkBoxSQLI">
+     <property name="styleSheet">
+      <string notr="true">QCheckBox {
+    color: white;
+    font-size: 14px;
+}
+
+QCheckBox::indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    border: 2px solid #00FF00; 
+    background: black;
+}
+
+QCheckBox::indicator:checked {
+    background: #00FF00; 
+}</string>
+     </property>
+     <property name="text">
+      <string>SQLI</string>
+     </property>
+     <property name="tristate">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QLabel" name="labelURL">
+     <property name="text">
+      <string>Rentrer l'URL:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QLineEdit" name="lineEditURlAttaques"/>
+   </item>
+   <item row="7" column="1">
+    <widget class="QPushButton" name="pushButtonLancerAttaques">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #00C853; /* Vert */
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 8px;
+}
+QPushButton:hover {
+    background-color: #009624; / survol */
+}</string>
+     </property>
+     <property name="text">
+      <string>Lancer</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QCheckBox" name="checkBoxCSRF">
+     <property name="styleSheet">
+      <string notr="true">QCheckBox {
+    color: white;
+    font-size: 14px;
+}
+
+QCheckBox::indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    border: 2px solid #00FF00; 
+    background: black;
+}
+
+QCheckBox::indicator:checked {
+    background: #00FF00; 
+}</string>
+     </property>
+     <property name="text">
+      <string>CSRF</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QCheckBox" name="checkBoxXSS">
+     <property name="styleSheet">
+      <string notr="true">QCheckBox {
+    color: white;
+    font-size: 14px;
+}
+
+QCheckBox::indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    border: 2px solid #00FF00; 
+    background: black;
+}
+
+QCheckBox::indicator:checked {
+    background: #00FF00; 
+}</string>
+     </property>
+     <property name="text">
+      <string>XSS</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
