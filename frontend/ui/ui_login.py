@@ -24,12 +24,10 @@ class Ui_Login(object):
         if not Login.objectName():
             Login.setObjectName(u"Login")
         Login.resize(1000, 700)
-        self.gridLayoutWidget = QWidget(Login)
-        self.gridLayoutWidget.setObjectName(u"gridLayoutWidget")
-        self.gridLayoutWidget.setGeometry(QRect(110, 33, 871, 581))
-        self.gridLayoutLogin = QGridLayout(self.gridLayoutWidget)
+        self.gridLayout = QGridLayout(Login)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.gridLayoutLogin = QGridLayout()
         self.gridLayoutLogin.setObjectName(u"gridLayoutLogin")
-        self.gridLayoutLogin.setContentsMargins(0, 0, 0, 0)
         self.verticalSpacerTopLogin = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayoutLogin.addItem(self.verticalSpacerTopLogin, 0, 1, 1, 1)
@@ -48,34 +46,37 @@ class Ui_Login(object):
 
         self.verticalLayoutLogin = QVBoxLayout()
         self.verticalLayoutLogin.setObjectName(u"verticalLayoutLogin")
-        self.labelUsernameLogin = QLabel(self.gridLayoutWidget)
+        self.labelUsernameLogin = QLabel(Login)
         self.labelUsernameLogin.setObjectName(u"labelUsernameLogin")
 
         self.verticalLayoutLogin.addWidget(self.labelUsernameLogin)
 
-        self.lineEditUsernameLogin = QLineEdit(self.gridLayoutWidget)
+        self.lineEditUsernameLogin = QLineEdit(Login)
         self.lineEditUsernameLogin.setObjectName(u"lineEditUsernameLogin")
 
         self.verticalLayoutLogin.addWidget(self.lineEditUsernameLogin)
 
-        self.labelPasswordLogin = QLabel(self.gridLayoutWidget)
+        self.labelPasswordLogin = QLabel(Login)
         self.labelPasswordLogin.setObjectName(u"labelPasswordLogin")
 
         self.verticalLayoutLogin.addWidget(self.labelPasswordLogin)
 
-        self.lineEditPasswordLogin = QLineEdit(self.gridLayoutWidget)
+        self.lineEditPasswordLogin = QLineEdit(Login)
         self.lineEditPasswordLogin.setObjectName(u"lineEditPasswordLogin")
         self.lineEditPasswordLogin.setEchoMode(QLineEdit.EchoMode.Password)
 
         self.verticalLayoutLogin.addWidget(self.lineEditPasswordLogin)
 
-        self.buttonLogin = QPushButton(self.gridLayoutWidget)
+        self.buttonLogin = QPushButton(Login)
         self.buttonLogin.setObjectName(u"buttonLogin")
 
         self.verticalLayoutLogin.addWidget(self.buttonLogin)
 
 
         self.gridLayoutLogin.addLayout(self.verticalLayoutLogin, 1, 1, 1, 1)
+
+
+        self.gridLayout.addLayout(self.gridLayoutLogin, 0, 0, 1, 1)
 
 
         self.retranslateUi(Login)
