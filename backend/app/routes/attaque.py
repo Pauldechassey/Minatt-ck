@@ -1,95 +1,69 @@
-from flask import Blueprint, jsonify, request
+from fastapi import APIRouter, Depends, HTTPException
+from typing import List, Dict
 from backend.app.database.database import SessionLocal
-from backend.app.services.attaque_service import AttaqueService
-from backend.app.scripts.attaque_script import AttaqueScript
+from backend.app.services.attaque_service import run_attack_on_urls
+from backend.app.services.sous_domaine_service import get_all_child_urls_recursively
+from sqlalchemy.orm import Session
 
-attaque_bp = Blueprint('attaque', __name__)
 
-@attaque_bp.route('/scan_domaines', methods=['POST'])
-def scan_domaines():
-    """
-    Endpoint to scan all active domains
-    """
-    db_session = SessionLocal()
-    attaque_service = AttaqueService(db_session)
-    attaque_script = AttaqueScript()
+router = APIRouter(prefix="/attaque", tags=["Attaque"])
 
+# probleme dans les routes: on appelle plusieurs fois la focntion urls_cibles = get_all_child_urls_recursively(url)
+# si on veut lancer plusieurs attaques en meme temps
+
+def get_db():
+    db = SessionLocal()
     try:
-        # Get domains to scan
-        domaines = attaque_service.get_domaines_to_scan()
-        
-        # Results container
-        scan_results = []
-
-        # Scan each domain
-        for domaine in domaines:
-            url = domaine.url  # Assuming domaine model has a url attribute
-            
-            # Run attacks on the URL
-            results = attaque_script.run_attack(url)
-            
-            # Save attacks and vulnerabilities
-            attaque_service.add_attaques_for_domaine(url, results)
-            
-            # Collect results
-            scan_results.append({
-                'url': url,
-                'results': results
-            })
-
-        return jsonify({
-            'status': 'success',
-            'scan_results': scan_results
-        }), 200
-
-    except Exception as e:
-        return jsonify({
-            'status': 'error',
-            'message': str(e)
-        }), 500
+        yield db
     finally:
-        db_session.close()
+        db.close()
 
-@attaque_bp.route('/get_domaine_attacks/<path:url>', methods=['GET'])
-def get_domaine_attacks(url):
-    """
-    Retrieve attacks for a specific domain
-    """
-    db_session = SessionLocal()
-    attaque_service = AttaqueService(db_session)
+##
+@router.post("/all/{url}", response_model=List[Dict])
+def attaque_sqli(url: str, db: Session = Depends(get_db)):
+    urls_cibles = get_all_child_urls_recursively(url)
+    if not urls_cibles:
+        raise HTTPException(status_code=404, detail="Aucune URL trouvée pour cette attaque.")
+    resultats = run_attack_on_urls(urls_cibles, "all")
+    
+    return {"url_cible": url, "resultats": resultats}
 
-    try:
-        # Get attacks
-        attacks = attaque_service.get_attaques_by_domaine(url)
-        
-        # Get vulnerabilities
-        vulnerabilities = attaque_service.get_vulnerabilites_by_domaine(url)
+##
+@router.post("/sqli/{url}", response_model=List[Dict])
+def attaque_sqli(url: str, db: Session = Depends(get_db)):
+    urls_cibles = get_all_child_urls_recursively(url)
+    if not urls_cibles:
+        raise HTTPException(status_code=404, detail="Aucune URL trouvée pour cette attaque.")
+    resultats = run_attack_on_urls(urls_cibles, "sqli")
+    
+    return {"url_cible": url, "resultats": resultats}
 
-        return jsonify({
-            'status': 'success',
-            'attacks': [
-                {
-                    'id': attack.id_attaque,
-                    'payload': attack.payload,
-                    'date': attack.date_attaque,
-                    'result': attack.resultat,
-                    'type': attack.type.nom_type if attack.type else 'Unknown'
-                } for attack in attacks
-            ],
-            'vulnerabilities': [
-                {
-                    'id': vuln.id_faille,
-                    'severity': vuln.gravite,
-                    'description': vuln.description,
-                    'tag': vuln.balise
-                } for vuln in vulnerabilities
-            ]
-        }), 200
+##
+@router.post("/xss/{url}", response_model=List[Dict])
+def attaque_sqli(url: str, db: Session = Depends(get_db)):
+    urls_cibles = get_all_child_urls_recursively(url)
+    if not urls_cibles:
+        raise HTTPException(status_code=404, detail="Aucune URL trouvée pour cette attaque.")
+    resultats = run_attack_on_urls(urls_cibles, "xss")
+    
+    return {"url_cible": url, "resultats": resultats}
 
-    except Exception as e:
-        return jsonify({
-            'status': 'error',
-            'message': str(e)
-        }), 500
-    finally:
-        db_session.close()
+##
+@router.post("/csrf/{url}", response_model=List[Dict])
+def attaque_sqli(url: str, db: Session = Depends(get_db)):
+    urls_cibles = get_all_child_urls_recursively(url)
+    if not urls_cibles:
+        raise HTTPException(status_code=404, detail="Aucune URL trouvée pour cette attaque.")
+    resultats = run_attack_on_urls(urls_cibles, "csrf")
+    
+    return {"url_cible": url, "resultats": resultats}
+
+##
+@router.post("/headers_cookies/{url}", response_model=List[Dict])
+def attaque_sqli(url: str, db: Session = Depends(get_db)):
+    urls_cibles = get_all_child_urls_recursively(url)
+    if not urls_cibles:
+        raise HTTPException(status_code=404, detail="Aucune URL trouvée pour cette attaque.")
+    resultats = run_attack_on_urls(urls_cibles, "headers_cookies")
+    
+    return {"url_cible": url, "resultats": resultats}
