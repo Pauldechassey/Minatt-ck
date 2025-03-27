@@ -46,13 +46,13 @@ if __name__ == "__main__":
 
     """
     urls_test = [
-        "http://127.0.0.1:5000",
-        "http://127.0.0.1:5000/echo",
-        "http://127.0.0.1:5000/recherche",
-        "http://127.0.0.1:5000/login",
-        "http://127.0.0.1:5000/inscription",
-        "http://127.0.0.1:5000/comments",
-        "http://127.0.0.1:5000/profile"
+        # "http://127.0.0.1:5000",
+        # "http://127.0.0.1:5000/echo",
+        # "http://127.0.0.1:5000/recherche",
+        # "http://127.0.0.1:5000/login",
+        # "http://127.0.0.1:5000/inscription",
+        # "http://127.0.0.1:5000/comments",
+        # "http://127.0.0.1:5000/profile"
     ]
     attaque = Attaque()
     for url in urls_test:
@@ -65,4 +65,4 @@ if __name__ == "__main__":
         attaque.resultats_attaques["csrf"].append(attaque.attaque_csrf(url))
         attaque.resultats_attaques["headers_cookies"].append(attaque.attaque_headers_cookies(url))
 
-    rapport=generate_security_report(attaque.get_resultats())
+    #rapport=generate_security_report(attaque.get_resultats())
