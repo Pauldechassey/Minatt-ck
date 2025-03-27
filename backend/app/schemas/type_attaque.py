@@ -1,9 +1,9 @@
 from pydantic import BaseModel
-
+from  app.schemas.type_attaque_enum import TypeAttaque
 
 class TypeAttaqueSchema(BaseModel):
     id_Type: int
-    nom_type: str
+    nom_type: TypeAttaque
     description_type: str
 
     class Config:

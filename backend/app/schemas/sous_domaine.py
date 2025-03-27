@@ -1,9 +1,17 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, HttpUrl
 from typing import Optional
+
+
+class SousDomaineBase(BaseModel):
+    id_SD: int
+    url_SD: HttpUrl
+
+class SousDomaineCreate(SousDomaineBase):
+    id_domaine: int
 
 class SousDomaineSchema(BaseModel):
     id_SD: int
-    url_SD: str
+    url_SD: HttpUrl
     description_SD: str
     degre: int
     id_domaine: int
