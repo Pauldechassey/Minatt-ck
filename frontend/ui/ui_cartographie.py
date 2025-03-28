@@ -47,34 +47,7 @@ class Ui_Cartographie(object):
 "    background-color: #009624; / survol */\n"
 "}")
 
-        self.gridLayoutMenuCartographie.addWidget(self.pushButtonAttaquesCartographie, 0, 1, 1, 1)
-
-        self.pushButtonDeconnexionCartographie = QPushButton(Cartographie)
-        self.pushButtonDeconnexionCartographie.setObjectName(u"pushButtonDeconnexionCartographie")
-        self.pushButtonDeconnexionCartographie.setStyleSheet(u"background-color: #121212;\n"
-"color: white;\n"
-"")
-        icon = QIcon()
-        icon.addFile(u"../../../../Downloads/image.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.pushButtonDeconnexionCartographie.setIcon(icon)
-        self.pushButtonDeconnexionCartographie.setIconSize(QSize(32, 32))
-
-        self.gridLayoutMenuCartographie.addWidget(self.pushButtonDeconnexionCartographie, 0, 6, 1, 1)
-
-        self.pushButtonHomeCartographie = QPushButton(Cartographie)
-        self.pushButtonHomeCartographie.setObjectName(u"pushButtonHomeCartographie")
-        self.pushButtonHomeCartographie.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
-"    color: white;\n"
-"    font-weight: bold;\n"
-"    border-radius: 5px;\n"
-"    padding: 8px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
-"}")
-
-        self.gridLayoutMenuCartographie.addWidget(self.pushButtonHomeCartographie, 0, 2, 1, 1)
+        self.gridLayoutMenuCartographie.addWidget(self.pushButtonAttaquesCartographie, 0, 2, 1, 1)
 
         self.pushButtonRapportsCartographie = QPushButton(Cartographie)
         self.pushButtonRapportsCartographie.setObjectName(u"pushButtonRapportsCartographie")
@@ -89,7 +62,7 @@ class Ui_Cartographie(object):
 "    background-color: #009624; / survol */\n"
 "}")
 
-        self.gridLayoutMenuCartographie.addWidget(self.pushButtonRapportsCartographie, 0, 3, 1, 1)
+        self.gridLayoutMenuCartographie.addWidget(self.pushButtonRapportsCartographie, 0, 4, 1, 1)
 
         self.pushButtonCartographieCartographie = QPushButton(Cartographie)
         self.pushButtonCartographieCartographie.setObjectName(u"pushButtonCartographieCartographie")
@@ -104,11 +77,38 @@ class Ui_Cartographie(object):
 "    background-color: #009624; / survol */\n"
 "}")
 
-        self.gridLayoutMenuCartographie.addWidget(self.pushButtonCartographieCartographie, 0, 4, 1, 1)
+        self.gridLayoutMenuCartographie.addWidget(self.pushButtonCartographieCartographie, 0, 5, 1, 1)
+
+        self.pushButtonDeconnexionCartographie = QPushButton(Cartographie)
+        self.pushButtonDeconnexionCartographie.setObjectName(u"pushButtonDeconnexionCartographie")
+        self.pushButtonDeconnexionCartographie.setStyleSheet(u"background-color: #121212;\n"
+"color: white;\n"
+"")
+        icon = QIcon()
+        icon.addFile(u"../../../../Downloads/image.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.pushButtonDeconnexionCartographie.setIcon(icon)
+        self.pushButtonDeconnexionCartographie.setIconSize(QSize(32, 32))
+
+        self.gridLayoutMenuCartographie.addWidget(self.pushButtonDeconnexionCartographie, 0, 7, 1, 1)
 
         self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.gridLayoutMenuCartographie.addItem(self.horizontalSpacer_2, 0, 5, 1, 1)
+        self.gridLayoutMenuCartographie.addItem(self.horizontalSpacer_2, 0, 6, 1, 1)
+
+        self.pushButtonHomeCartographie = QPushButton(Cartographie)
+        self.pushButtonHomeCartographie.setObjectName(u"pushButtonHomeCartographie")
+        self.pushButtonHomeCartographie.setStyleSheet(u"QPushButton {\n"
+"    background-color: #00C853; /* Vert */\n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #009624; / survol */\n"
+"}")
+
+        self.gridLayoutMenuCartographie.addWidget(self.pushButtonHomeCartographie, 0, 1, 1, 1)
 
 
         self.gridLayout_4.addLayout(self.gridLayoutMenuCartographie, 0, 0, 1, 1)
@@ -131,9 +131,9 @@ class Ui_Cartographie(object):
     def retranslateUi(self, Cartographie):
         Cartographie.setWindowTitle(QCoreApplication.translate("Cartographie", u"Cartographie", None))
         self.pushButtonAttaquesCartographie.setText(QCoreApplication.translate("Cartographie", u"Attaques", None))
-        self.pushButtonDeconnexionCartographie.setText("")
-        self.pushButtonHomeCartographie.setText(QCoreApplication.translate("Cartographie", u"Home", None))
         self.pushButtonRapportsCartographie.setText(QCoreApplication.translate("Cartographie", u"Rapports", None))
         self.pushButtonCartographieCartographie.setText(QCoreApplication.translate("Cartographie", u"Cartographie", None))
+        self.pushButtonDeconnexionCartographie.setText("")
+        self.pushButtonHomeCartographie.setText(QCoreApplication.translate("Cartographie", u"Home", None))
     # retranslateUi
 

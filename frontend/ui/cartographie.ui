@@ -34,7 +34,7 @@ color: white;
        </property>
       </spacer>
      </item>
-     <item row="0" column="1">
+     <item row="0" column="2">
       <widget class="QPushButton" name="pushButtonAttaquesCartographie">
        <property name="styleSheet">
         <string notr="true">QPushButton {
@@ -53,7 +53,45 @@ QPushButton:hover {
        </property>
       </widget>
      </item>
-     <item row="0" column="6">
+     <item row="0" column="4">
+      <widget class="QPushButton" name="pushButtonRapportsCartographie">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #00C853; /* Vert */
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 8px;
+}
+QPushButton:hover {
+    background-color: #009624; / survol */
+}</string>
+       </property>
+       <property name="text">
+        <string>Rapports</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="5">
+      <widget class="QPushButton" name="pushButtonCartographieCartographie">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #00C853; /* Vert */
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 8px;
+}
+QPushButton:hover {
+    background-color: #009624; / survol */
+}</string>
+       </property>
+       <property name="text">
+        <string>Cartographie</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="7">
       <widget class="QPushButton" name="pushButtonDeconnexionCartographie">
        <property name="styleSheet">
         <string notr="true">background-color: #121212;
@@ -75,7 +113,20 @@ color: white;
        </property>
       </widget>
      </item>
-     <item row="0" column="2">
+     <item row="0" column="6">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="1">
       <widget class="QPushButton" name="pushButtonHomeCartographie">
        <property name="styleSheet">
         <string notr="true">QPushButton {
@@ -93,57 +144,6 @@ QPushButton:hover {
         <string>Home</string>
        </property>
       </widget>
-     </item>
-     <item row="0" column="3">
-      <widget class="QPushButton" name="pushButtonRapportsCartographie">
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    padding: 8px;
-}
-QPushButton:hover {
-    background-color: #009624; / survol */
-}</string>
-       </property>
-       <property name="text">
-        <string>Rapports</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="4">
-      <widget class="QPushButton" name="pushButtonCartographieCartographie">
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    padding: 8px;
-}
-QPushButton:hover {
-    background-color: #009624; / survol */
-}</string>
-       </property>
-       <property name="text">
-        <string>Cartographie</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="5">
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Orientation::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
