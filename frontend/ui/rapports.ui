@@ -73,7 +73,7 @@ QPushButton:hover {
       </widget>
      </item>
      <item row="0" column="6">
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="pushButtonDeconnexionRapports">
        <property name="text">
         <string/>
        </property>

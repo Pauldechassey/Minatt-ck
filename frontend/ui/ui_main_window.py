@@ -15,24 +15,32 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QMainWindow, QSizePolicy, QStackedWidget,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QMainWindow, QSizePolicy,
+    QStackedWidget, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(1000, 700)
-        self.centralwidget = QWidget(MainWindow)
-        self.centralwidget.setObjectName(u"centralwidget")
-        self.mainStackedWidget = QStackedWidget(self.centralwidget)
-        self.mainStackedWidget.setObjectName(u"mainStackedWidget")
-        self.mainStackedWidget.setGeometry(QRect(0, 0, 1000, 700))
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
+        MainWindow.setSizePolicy(sizePolicy)
+        self.centralwidget = QWidget(MainWindow)
+        self.centralwidget.setObjectName(u"centralwidget")
+        sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
+        self.centralwidget.setSizePolicy(sizePolicy)
+        self.gridLayout = QGridLayout(self.centralwidget)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.mainStackedWidget = QStackedWidget(self.centralwidget)
+        self.mainStackedWidget.setObjectName(u"mainStackedWidget")
         sizePolicy.setHeightForWidth(self.mainStackedWidget.sizePolicy().hasHeightForWidth())
         self.mainStackedWidget.setSizePolicy(sizePolicy)
+
+        self.gridLayout.addWidget(self.mainStackedWidget, 0, 0, 1, 1)
+
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)

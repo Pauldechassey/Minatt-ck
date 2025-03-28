@@ -24,6 +24,11 @@ class Ui_Login(object):
         if not Login.objectName():
             Login.setObjectName(u"Login")
         Login.resize(1049, 694)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(Login.sizePolicy().hasHeightForWidth())
+        Login.setSizePolicy(sizePolicy)
         Login.setStyleSheet(u"background-color: rgb(18, 18, 18);\n"
 "color:white")
         self.gridLayout = QGridLayout(Login)
@@ -31,22 +36,6 @@ class Ui_Login(object):
         self.gridLayoutLogin = QGridLayout()
         self.gridLayoutLogin.setObjectName(u"gridLayoutLogin")
         self.gridLayoutLogin.setSizeConstraint(QLayout.SizeConstraint.SetMaximumSize)
-        self.verticalSpacerTopLogin = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayoutLogin.addItem(self.verticalSpacerTopLogin, 0, 1, 1, 1)
-
-        self.horizontalSpacerLeftLogin = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayoutLogin.addItem(self.horizontalSpacerLeftLogin, 1, 0, 1, 1)
-
-        self.horizontalSpacerRightLogin = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayoutLogin.addItem(self.horizontalSpacerRightLogin, 1, 2, 1, 1)
-
-        self.verticalSpacerBottomLogin = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayoutLogin.addItem(self.verticalSpacerBottomLogin, 2, 1, 1, 1)
-
         self.verticalLayoutLogin = QVBoxLayout()
         self.verticalLayoutLogin.setObjectName(u"verticalLayoutLogin")
         self.labelUsernameLogin = QLabel(Login)
@@ -87,6 +76,22 @@ class Ui_Login(object):
 
 
         self.gridLayoutLogin.addLayout(self.verticalLayoutLogin, 1, 1, 1, 1)
+
+        self.horizontalSpacerRightLogin = QSpacerItem(40, 20, QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayoutLogin.addItem(self.horizontalSpacerRightLogin, 1, 2, 1, 1)
+
+        self.horizontalSpacerLeftLogin = QSpacerItem(40, 20, QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayoutLogin.addItem(self.horizontalSpacerLeftLogin, 1, 0, 1, 1)
+
+        self.verticalSpacerBottomLogin = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.MinimumExpanding)
+
+        self.gridLayoutLogin.addItem(self.verticalSpacerBottomLogin, 2, 1, 1, 1)
+
+        self.verticalSpacerTopLogin = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.MinimumExpanding)
+
+        self.gridLayoutLogin.addItem(self.verticalSpacerTopLogin, 0, 1, 1, 1)
 
 
         self.gridLayout.addLayout(self.gridLayoutLogin, 0, 0, 1, 1)

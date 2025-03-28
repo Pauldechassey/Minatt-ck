@@ -37,4 +37,3 @@ class RapportsWindow(QWidget, Ui_Rapports):
 
     def goToAccueil(self):
         self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.accueilPage))
-

@@ -64,10 +64,10 @@ class Ui_Rapports(object):
 
         self.gridLayoutMenuRapports.addWidget(self.pushButtonCartographieRapports, 0, 4, 1, 1)
 
-        self.pushButton = QPushButton(Rapports)
-        self.pushButton.setObjectName(u"pushButton")
+        self.pushButtonDeconnexionRapports = QPushButton(Rapports)
+        self.pushButtonDeconnexionRapports.setObjectName(u"pushButtonDeconnexionRapports")
 
-        self.gridLayoutMenuRapports.addWidget(self.pushButton, 0, 6, 1, 1)
+        self.gridLayoutMenuRapports.addWidget(self.pushButtonDeconnexionRapports, 0, 6, 1, 1)
 
         self.pushButtonAttaquesRapports = QPushButton(Rapports)
         self.pushButtonAttaquesRapports.setObjectName(u"pushButtonAttaquesRapports")
@@ -125,7 +125,7 @@ class Ui_Rapports(object):
         Rapports.setWindowTitle(QCoreApplication.translate("Rapports", u"Rapports", None))
         self.pushButtonHomeRapports.setText(QCoreApplication.translate("Rapports", u"Home", None))
         self.pushButtonCartographieRapports.setText(QCoreApplication.translate("Rapports", u"Cartographie", None))
-        self.pushButton.setText("")
+        self.pushButtonDeconnexionRapports.setText("")
         self.pushButtonAttaquesRapports.setText(QCoreApplication.translate("Rapports", u"Attaques", None))
         self.pushButtonRapportsRapports.setText(QCoreApplication.translate("Rapports", u"Rapports", None))
     # retranslateUi
