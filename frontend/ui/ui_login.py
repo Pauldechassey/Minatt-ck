@@ -24,6 +24,8 @@ class Ui_Login(object):
         if not Login.objectName():
             Login.setObjectName(u"Login")
         Login.resize(1000, 700)
+        Login.setStyleSheet(u"background-color: rgb(18, 18, 18);\n"
+"color:white")
         self.gridLayout = QGridLayout(Login)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayoutLogin = QGridLayout()
@@ -69,6 +71,16 @@ class Ui_Login(object):
 
         self.buttonLogin = QPushButton(Login)
         self.buttonLogin.setObjectName(u"buttonLogin")
+        self.buttonLogin.setStyleSheet(u"QPushButton {\n"
+"    background-color: #00C853; /* Vert */\n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 10px;\n"
+"    padding: 8px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #009624; / survol */\n"
+"}")
 
         self.verticalLayoutLogin.addWidget(self.buttonLogin)
 

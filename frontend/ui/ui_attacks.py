@@ -15,20 +15,20 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QFormLayout, QHBoxLayout,
+from PySide6.QtWidgets import (QApplication, QCheckBox, QGridLayout, QHBoxLayout,
     QLabel, QLineEdit, QPushButton, QSizePolicy,
     QSpacerItem, QWidget)
 
-class Ui_Attacks(object):
+class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(1437, 694)
+        Form.resize(1000, 700)
         Form.setStyleSheet(u"background-color: #121212;\n"
 "color: white;\n"
 "")
-        self.formLayout = QFormLayout(Form)
-        self.formLayout.setObjectName(u"formLayout")
+        self.gridLayout = QGridLayout(Form)
+        self.gridLayout.setObjectName(u"gridLayout")
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
@@ -69,12 +69,12 @@ class Ui_Attacks(object):
         self.horizontalLayout_2.addWidget(self.pushButtonDeconnexionAttaques)
 
 
-        self.formLayout.setLayout(0, QFormLayout.SpanningRole, self.horizontalLayout_2)
+        self.gridLayout.addLayout(self.horizontalLayout_2, 0, 0, 1, 1)
 
         self.labelChoixAttaques = QLabel(Form)
         self.labelChoixAttaques.setObjectName(u"labelChoixAttaques")
 
-        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.labelChoixAttaques)
+        self.gridLayout.addWidget(self.labelChoixAttaques, 1, 0, 1, 1)
 
         self.checkBoxSQLI = QCheckBox(Form)
         self.checkBoxSQLI.setObjectName(u"checkBoxSQLI")
@@ -96,32 +96,7 @@ class Ui_Attacks(object):
 "}")
         self.checkBoxSQLI.setTristate(False)
 
-        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.checkBoxSQLI)
-
-        self.labelURL = QLabel(Form)
-        self.labelURL.setObjectName(u"labelURL")
-
-        self.formLayout.setWidget(5, QFormLayout.FieldRole, self.labelURL)
-
-        self.lineEditURlAttaques = QLineEdit(Form)
-        self.lineEditURlAttaques.setObjectName(u"lineEditURlAttaques")
-
-        self.formLayout.setWidget(6, QFormLayout.FieldRole, self.lineEditURlAttaques)
-
-        self.pushButtonLancerAttaques = QPushButton(Form)
-        self.pushButtonLancerAttaques.setObjectName(u"pushButtonLancerAttaques")
-        self.pushButtonLancerAttaques.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
-"    color: white;\n"
-"    font-weight: bold;\n"
-"    border-radius: 10px;\n"
-"    padding: 8px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
-"}")
-
-        self.formLayout.setWidget(7, QFormLayout.FieldRole, self.pushButtonLancerAttaques)
+        self.gridLayout.addWidget(self.checkBoxSQLI, 2, 0, 1, 1)
 
         self.checkBoxCSRF = QCheckBox(Form)
         self.checkBoxCSRF.setObjectName(u"checkBoxCSRF")
@@ -142,7 +117,7 @@ class Ui_Attacks(object):
 "    background: #00FF00; \n"
 "}")
 
-        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.checkBoxCSRF)
+        self.gridLayout.addWidget(self.checkBoxCSRF, 3, 0, 1, 1)
 
         self.checkBoxXSS = QCheckBox(Form)
         self.checkBoxXSS.setObjectName(u"checkBoxXSS")
@@ -163,7 +138,32 @@ class Ui_Attacks(object):
 "    background: #00FF00; \n"
 "}")
 
-        self.formLayout.setWidget(4, QFormLayout.FieldRole, self.checkBoxXSS)
+        self.gridLayout.addWidget(self.checkBoxXSS, 4, 0, 1, 1)
+
+        self.labelURL = QLabel(Form)
+        self.labelURL.setObjectName(u"labelURL")
+
+        self.gridLayout.addWidget(self.labelURL, 5, 0, 1, 1)
+
+        self.lineEditURlAttaques = QLineEdit(Form)
+        self.lineEditURlAttaques.setObjectName(u"lineEditURlAttaques")
+
+        self.gridLayout.addWidget(self.lineEditURlAttaques, 6, 0, 1, 1)
+
+        self.pushButtonLancerAttaques = QPushButton(Form)
+        self.pushButtonLancerAttaques.setObjectName(u"pushButtonLancerAttaques")
+        self.pushButtonLancerAttaques.setStyleSheet(u"QPushButton {\n"
+"    background-color: #00C853; /* Vert */\n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 10px;\n"
+"    padding: 8px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #009624; / survol */\n"
+"}")
+
+        self.gridLayout.addWidget(self.pushButtonLancerAttaques, 7, 0, 1, 1)
 
 
         self.retranslateUi(Form)
@@ -180,9 +180,9 @@ class Ui_Attacks(object):
         self.pushButtonDeconnexionAttaques.setText("")
         self.labelChoixAttaques.setText(QCoreApplication.translate("Form", u"Choisissez votre attaque:", None))
         self.checkBoxSQLI.setText(QCoreApplication.translate("Form", u"SQLI", None))
-        self.labelURL.setText(QCoreApplication.translate("Form", u"Rentrer l'URL:", None))
-        self.pushButtonLancerAttaques.setText(QCoreApplication.translate("Form", u"Lancer", None))
         self.checkBoxCSRF.setText(QCoreApplication.translate("Form", u"CSRF", None))
         self.checkBoxXSS.setText(QCoreApplication.translate("Form", u"XSS", None))
+        self.labelURL.setText(QCoreApplication.translate("Form", u"Rentrer l'URL:", None))
+        self.pushButtonLancerAttaques.setText(QCoreApplication.translate("Form", u"Lancer", None))
     # retranslateUi
 

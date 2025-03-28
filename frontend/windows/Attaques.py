@@ -1,11 +1,11 @@
-
 from PySide6.QtWidgets import QWidget, QStackedWidget, QMessageBox, QLineEdit
-from ui.ui_attacks import Ui_Attacks
+from ui.ui_attaques import Ui_Attaques
 
-class AttacksWindow(QWidget, Ui_Attacks):
+
+class AttaquesWindow(QWidget, Ui_Attaques):
     def __init__(self, main_window, parent=None):
         super().__init__(parent)
-        self.ui = Ui_Attacks()
+        self.ui = Ui_Attaques()
         self.ui.setupUi(self)
         self.main_window = main_window
 
@@ -30,16 +30,10 @@ class AttacksWindow(QWidget, Ui_Attacks):
             self.main_window.mainStackedWidget.setCurrentIndex(0)
 
     def goToCartographie(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(
-            self.main_window.mainStackedWidget.indexOf(self.main_window.cartographiePage)
-        )
+        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.cartographiePage))
 
     def goToRapports(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(
-            self.main_window.mainStackedWidget.indexOf(self.main_window.rapportsPage)
-        )
+        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.rapportsPage))
 
     def goToAccueil(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(
-            self.main_window.mainStackedWidget.indexOf(self.main_window.accueilPage)
-        )
+        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.accueilPage))
