@@ -1,6 +1,7 @@
 from PySide6.QtWidgets import QWidget, QStackedWidget, QMessageBox
 from ui.ui_accueil import Ui_Accueil
 
+
 class AccueilWindow(QWidget, Ui_Accueil):
     def __init__(self, main_window, parent=None):
         super().__init__(parent)
@@ -10,7 +11,7 @@ class AccueilWindow(QWidget, Ui_Accueil):
 
         # Connexion des boutons
         self.ui.pushButtonDeconnexionAccueil.clicked.connect(self.logout)
-        self.ui.pushButtonAttaquesAccueil.clicked.connect(self.goToAttacks)
+        self.ui.pushButtonAttaquesAccueil.clicked.connect(self.goToAttaques)
         self.ui.pushButtonRapportsAccueil.clicked.connect(self.goToRapports)
         self.ui.pushButtonCartographieAccueil.clicked.connect(self.goToCartographie)
 
@@ -28,22 +29,11 @@ class AccueilWindow(QWidget, Ui_Accueil):
             self.main_window.loginPage.ui.lineEditPasswordLogin.clear()
             self.main_window.mainStackedWidget.setCurrentIndex(0)
 
-    def goToAttacks(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(
-            self.main_window.mainStackedWidget.indexOf(self.main_window.attacksPage)
-        )
+    def goToAttaques(self):
+        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.attaquesPage))
 
     def goToRapports(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(
-            self.main_window.mainStackedWidget.indexOf(self.main_window.rapportsPage)
-        )
+        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.rapportsPage))
 
     def goToCartographie(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(
-            self.main_window.mainStackedWidget.indexOf(self.main_window.cartographiePage)
-        )
-
-
-
-
-
+        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.cartographiePage))

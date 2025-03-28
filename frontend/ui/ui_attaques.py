@@ -17,7 +17,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QGridLayout, QHBoxLayout,
     QLabel, QLineEdit, QPushButton, QSizePolicy,
-    QSpacerItem, QVBoxLayout, QWidget)
+    QSpacerItem, QWidget)
 
 class Ui_Attaques(object):
     def setupUi(self, Attaques):
@@ -26,8 +26,8 @@ class Ui_Attaques(object):
         Attaques.resize(1000, 700)
         Attaques.setStyleSheet(u"background-color: rgb(18, 18, 18);\n"
 "color:white")
-        self.verticalLayout = QVBoxLayout(Attaques)
-        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.gridLayout = QGridLayout(Attaques)
+        self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayoutMenuAttaques = QHBoxLayout()
         self.gridLayoutMenuAttaques.setObjectName(u"gridLayoutMenuAttaques")
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
@@ -104,7 +104,7 @@ class Ui_Attaques(object):
         self.gridLayoutMenuAttaques.addWidget(self.pushButtonDeconnexionAttaques)
 
 
-        self.verticalLayout.addLayout(self.gridLayoutMenuAttaques)
+        self.gridLayout.addLayout(self.gridLayoutMenuAttaques, 0, 0, 1, 1)
 
         self.gridLayoutContentAttaques = QGridLayout()
         self.gridLayoutContentAttaques.setObjectName(u"gridLayoutContentAttaques")
@@ -214,7 +214,7 @@ class Ui_Attaques(object):
         self.gridLayoutContentAttaques.addItem(self.verticalSpacer_2, 5, 0, 1, 1)
 
 
-        self.verticalLayout.addLayout(self.gridLayoutContentAttaques)
+        self.gridLayout.addLayout(self.gridLayoutContentAttaques, 1, 0, 1, 1)
 
 
         self.retranslateUi(Attaques)

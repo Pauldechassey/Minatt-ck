@@ -15,67 +15,41 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
-    QLabel, QPushButton, QSizePolicy, QSpacerItem,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QPushButton, QSizePolicy,
+    QSpacerItem, QWidget)
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        if not Form.objectName():
-            Form.setObjectName(u"Form")
-        Form.resize(1479, 754)
-        Form.setStyleSheet(u"background-color: #121212;\n"
+class Ui_Cartographie(object):
+    def setupUi(self, Cartographie):
+        if not Cartographie.objectName():
+            Cartographie.setObjectName(u"Cartographie")
+        Cartographie.resize(1000, 700)
+        Cartographie.setStyleSheet(u"background-color: #121212;\n"
 "color: white;\n"
 "")
-        self.gridLayout_4 = QGridLayout(Form)
+        self.gridLayout_4 = QGridLayout(Cartographie)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.gridLayout_3 = QGridLayout()
-        self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.frame = QFrame(Form)
-        self.frame.setObjectName(u"frame")
-        self.frame.setFrameShape(QFrame.StyledPanel)
-        self.frame.setFrameShadow(QFrame.Raised)
-        self.labelRapports = QLabel(self.frame)
-        self.labelRapports.setObjectName(u"labelRapports")
-        self.labelRapports.setGeometry(QRect(440, 260, 91, 31))
-
-        self.gridLayout_3.addWidget(self.frame, 3, 1, 1, 1)
-
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout_3.addItem(self.verticalSpacer, 2, 1, 1, 1)
-
-        self.horizontalLayout_2 = QHBoxLayout()
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.gridLayoutMenuCartographie = QGridLayout()
+        self.gridLayoutMenuCartographie.setObjectName(u"gridLayoutMenuCartographie")
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_2.addItem(self.horizontalSpacer)
+        self.gridLayoutMenuCartographie.addItem(self.horizontalSpacer, 0, 0, 1, 1)
 
-        self.pushButtonHomeCartographie = QPushButton(Form)
-        self.pushButtonHomeCartographie.setObjectName(u"pushButtonHomeCartographie")
-
-        self.horizontalLayout_2.addWidget(self.pushButtonHomeCartographie)
-
-        self.pushButtonAttaquesCartographie = QPushButton(Form)
+        self.pushButtonAttaquesCartographie = QPushButton(Cartographie)
         self.pushButtonAttaquesCartographie.setObjectName(u"pushButtonAttaquesCartographie")
+        self.pushButtonAttaquesCartographie.setStyleSheet(u"QPushButton {\n"
+"    background-color: #00C853; /* Vert */\n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #009624; / survol */\n"
+"}")
 
-        self.horizontalLayout_2.addWidget(self.pushButtonAttaquesCartographie)
+        self.gridLayoutMenuCartographie.addWidget(self.pushButtonAttaquesCartographie, 0, 1, 1, 1)
 
-        self.pushButtonRapportsCartographie = QPushButton(Form)
-        self.pushButtonRapportsCartographie.setObjectName(u"pushButtonRapportsCartographie")
-
-        self.horizontalLayout_2.addWidget(self.pushButtonRapportsCartographie)
-
-        self.pushButtonCartographieCartographie = QPushButton(Form)
-        self.pushButtonCartographieCartographie.setObjectName(u"pushButtonCartographieCartographie")
-
-        self.horizontalLayout_2.addWidget(self.pushButtonCartographieCartographie)
-
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_2.addItem(self.horizontalSpacer_2)
-
-        self.pushButtonDeconnexionCartographie = QPushButton(Form)
+        self.pushButtonDeconnexionCartographie = QPushButton(Cartographie)
         self.pushButtonDeconnexionCartographie.setObjectName(u"pushButtonDeconnexionCartographie")
         self.pushButtonDeconnexionCartographie.setStyleSheet(u"background-color: #121212;\n"
 "color: white;\n"
@@ -85,33 +59,81 @@ class Ui_Form(object):
         self.pushButtonDeconnexionCartographie.setIcon(icon)
         self.pushButtonDeconnexionCartographie.setIconSize(QSize(32, 32))
 
-        self.horizontalLayout_2.addWidget(self.pushButtonDeconnexionCartographie)
+        self.gridLayoutMenuCartographie.addWidget(self.pushButtonDeconnexionCartographie, 0, 6, 1, 1)
+
+        self.pushButtonHomeCartographie = QPushButton(Cartographie)
+        self.pushButtonHomeCartographie.setObjectName(u"pushButtonHomeCartographie")
+        self.pushButtonHomeCartographie.setStyleSheet(u"QPushButton {\n"
+"    background-color: #00C853; /* Vert */\n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #009624; / survol */\n"
+"}")
+
+        self.gridLayoutMenuCartographie.addWidget(self.pushButtonHomeCartographie, 0, 2, 1, 1)
+
+        self.pushButtonRapportsCartographie = QPushButton(Cartographie)
+        self.pushButtonRapportsCartographie.setObjectName(u"pushButtonRapportsCartographie")
+        self.pushButtonRapportsCartographie.setStyleSheet(u"QPushButton {\n"
+"    background-color: #00C853; /* Vert */\n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #009624; / survol */\n"
+"}")
+
+        self.gridLayoutMenuCartographie.addWidget(self.pushButtonRapportsCartographie, 0, 3, 1, 1)
+
+        self.pushButtonCartographieCartographie = QPushButton(Cartographie)
+        self.pushButtonCartographieCartographie.setObjectName(u"pushButtonCartographieCartographie")
+        self.pushButtonCartographieCartographie.setStyleSheet(u"QPushButton {\n"
+"    background-color: #00C853; /* Vert */\n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #009624; / survol */\n"
+"}")
+
+        self.gridLayoutMenuCartographie.addWidget(self.pushButtonCartographieCartographie, 0, 4, 1, 1)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayoutMenuCartographie.addItem(self.horizontalSpacer_2, 0, 5, 1, 1)
 
 
-        self.gridLayout_3.addLayout(self.horizontalLayout_2, 0, 1, 1, 1)
+        self.gridLayout_4.addLayout(self.gridLayoutMenuCartographie, 0, 0, 1, 1)
 
-        self.label = QLabel(Form)
-        self.label.setObjectName(u"label")
+        self.gridLayout = QGridLayout()
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.gridLayout_3.addWidget(self.label, 1, 1, 1, 1)
-
-
-        self.gridLayout_4.addLayout(self.gridLayout_3, 0, 0, 1, 1)
+        self.gridLayout.addItem(self.verticalSpacer, 0, 0, 1, 1)
 
 
-        self.retranslateUi(Form)
+        self.gridLayout_4.addLayout(self.gridLayout, 1, 0, 1, 1)
 
-        QMetaObject.connectSlotsByName(Form)
+
+        self.retranslateUi(Cartographie)
+
+        QMetaObject.connectSlotsByName(Cartographie)
     # setupUi
 
-    def retranslateUi(self, Form):
-        Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
-        self.labelRapports.setText(QCoreApplication.translate("Form", u"Cartographie", None))
-        self.pushButtonHomeCartographie.setText(QCoreApplication.translate("Form", u"Home", None))
-        self.pushButtonAttaquesCartographie.setText(QCoreApplication.translate("Form", u"Attaques", None))
-        self.pushButtonRapportsCartographie.setText(QCoreApplication.translate("Form", u"Rapports", None))
-        self.pushButtonCartographieCartographie.setText(QCoreApplication.translate("Form", u"Cartographie", None))
+    def retranslateUi(self, Cartographie):
+        Cartographie.setWindowTitle(QCoreApplication.translate("Cartographie", u"Cartographie", None))
+        self.pushButtonAttaquesCartographie.setText(QCoreApplication.translate("Cartographie", u"Attaques", None))
         self.pushButtonDeconnexionCartographie.setText("")
-        self.label.setText(QCoreApplication.translate("Form", u"Cartographie", None))
+        self.pushButtonHomeCartographie.setText(QCoreApplication.translate("Cartographie", u"Home", None))
+        self.pushButtonRapportsCartographie.setText(QCoreApplication.translate("Cartographie", u"Rapports", None))
+        self.pushButtonCartographieCartographie.setText(QCoreApplication.translate("Cartographie", u"Cartographie", None))
     # retranslateUi
 

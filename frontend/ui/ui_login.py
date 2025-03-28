@@ -15,21 +15,22 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QLabel, QLineEdit,
-    QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QLabel, QLayout,
+    QLineEdit, QPushButton, QSizePolicy, QSpacerItem,
+    QVBoxLayout, QWidget)
 
 class Ui_Login(object):
     def setupUi(self, Login):
         if not Login.objectName():
             Login.setObjectName(u"Login")
-        Login.resize(1000, 700)
+        Login.resize(1049, 694)
         Login.setStyleSheet(u"background-color: rgb(18, 18, 18);\n"
 "color:white")
         self.gridLayout = QGridLayout(Login)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayoutLogin = QGridLayout()
         self.gridLayoutLogin.setObjectName(u"gridLayoutLogin")
+        self.gridLayoutLogin.setSizeConstraint(QLayout.SizeConstraint.SetMaximumSize)
         self.verticalSpacerTopLogin = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayoutLogin.addItem(self.verticalSpacerTopLogin, 0, 1, 1, 1)

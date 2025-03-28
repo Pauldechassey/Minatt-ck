@@ -7,8 +7,9 @@ from PySide6.QtWidgets import QLayout
 from windows.Accueil import AccueilWindow
 from windows.Login import LoginWindow
 from windows.Attaques import AttaquesWindow
-from windows.Rapports import RapportsWindow
-from windows.Cartographie import CartographieWindow
+
+# from windows.Rapports import RapportsWindow
+# from windows.Cartographie import CartographieWindow
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -26,15 +27,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.loginPage = LoginWindow()
         self.accueilPage = AccueilWindow(self)  # Passez une référence à MainWindow
         self.attaquesPage = AttaquesWindow(self)
-        self.rapportsPage = RapportsWindow(self)
-        self.cartographiePage = CartographieWindow(self)
+        #         self.rapportsPage = RapportsWindow(self)
+        #         self.cartographiePage = CartographieWindow(self)
 
         # Ajout des pages au QStackedWidget
         self.mainStackedWidget.addWidget(self.loginPage)
         self.mainStackedWidget.addWidget(self.accueilPage)
         self.mainStackedWidget.addWidget(self.attaquesPage)
-        self.mainStackedWidget.addWidget(self.rapportsPage)
-        self.mainStackedWidget.addWidget(self.cartographiePage)
+        #         self.mainStackedWidget.addWidget(self.rapportsPage)
+        #         self.mainStackedWidget.addWidget(self.cartographiePage)
 
         # Définir la page initiale
         self.mainStackedWidget.setCurrentIndex(0)

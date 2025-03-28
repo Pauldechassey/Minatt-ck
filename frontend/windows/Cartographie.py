@@ -11,7 +11,7 @@ class CartographieWindow(QWidget, Ui_Cartographie):
 
         # Connexion des boutons
         self.ui.pushButtonDeconnexionCartographie.clicked.connect(self.logout)
-        self.ui.pushButtonAttaquesCartographie.clicked.connect(self.goToAttacks)
+        self.ui.pushButtonAttaquesCartographie.clicked.connect(self.goToAttaques)
         self.ui.pushButtonRapportsCartographie.clicked.connect(self.goToRapports)
         self.ui.pushButtonHomeCartographie.clicked.connect(self.goToAccueil)
 
@@ -29,8 +29,8 @@ class CartographieWindow(QWidget, Ui_Cartographie):
             self.main_window.loginPage.ui.lineEditPasswordLogin.clear()
             self.main_window.mainStackedWidget.setCurrentIndex(0)
 
-    def goToAttacks(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.attacksPage))
+    def goToAttaques(self):
+        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.attaquesPage))
 
     def goToRapports(self):
         self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.rapportsPage))

@@ -17,8 +17,8 @@
    <string notr="true">background-color: rgb(18, 18, 18);
 color:white</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
     <layout class="QHBoxLayout" name="gridLayoutMenuAttaques">
      <item>
       <spacer name="horizontalSpacer">
@@ -131,7 +131,7 @@ QPushButton:hover {
      </item>
     </layout>
    </item>
-   <item>
+   <item row="1" column="0">
     <layout class="QGridLayout" name="gridLayoutContentAttaques">
      <item row="7" column="0">
       <widget class="QLineEdit" name="lineEditUrlAttaques"/>
