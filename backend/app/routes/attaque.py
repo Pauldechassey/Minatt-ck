@@ -1,15 +1,11 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import List, Dict
-from backend.app.database.database import SessionLocal
-from backend.app.services.attaque_service import run_attack_on_urls
-from backend.app.services.sous_domaine_service import get_all_child_urls_recursively
+from app.database.database import SessionLocal
+from app.services.attaque_service import run_attack_on_urls
+from app.services.sous_domaine_service import get_all_child_urls_recursively
 from sqlalchemy.orm import Session
 
-
 router = APIRouter(prefix="/attaque", tags=["Attaque"])
-
-# probleme dans les routes: on appelle plusieurs fois la focntion urls_cibles = get_all_child_urls_recursively(url)
-# si on veut lancer plusieurs attaques en meme temps
 
 def get_db():
     db = SessionLocal()
@@ -19,51 +15,34 @@ def get_db():
         db.close()
 
 ##
-@router.post("/all/{url}", response_model=List[Dict])
-def attaque_sqli(url: str, db: Session = Depends(get_db)):
+def lancer_attaque(url: str, attaque_type: str):
     urls_cibles = get_all_child_urls_recursively(url)
     if not urls_cibles:
         raise HTTPException(status_code=404, detail="Aucune URL trouvée pour cette attaque.")
-    resultats = run_attack_on_urls(urls_cibles, "all")
-    
+    resultats = run_attack_on_urls(urls_cibles, attaque_type)
     return {"url_cible": url, "resultats": resultats}
 
 ##
-@router.post("/sqli/{url}", response_model=List[Dict])
-def attaque_sqli(url: str, db: Session = Depends(get_db)):
-    urls_cibles = get_all_child_urls_recursively(url)
-    if not urls_cibles:
-        raise HTTPException(status_code=404, detail="Aucune URL trouvée pour cette attaque.")
-    resultats = run_attack_on_urls(urls_cibles, "sqli")
-    
-    return {"url_cible": url, "resultats": resultats}
+@router.post("/all/", response_model=Dict, summary="Attaque ALL")
+def attaque_all(url: str = Query(..., description="URL cible"), db: Session = Depends(get_db)):
+    return lancer_attaque(url, "all")
 
 ##
-@router.post("/xss/{url}", response_model=List[Dict])
-def attaque_sqli(url: str, db: Session = Depends(get_db)):
-    urls_cibles = get_all_child_urls_recursively(url)
-    if not urls_cibles:
-        raise HTTPException(status_code=404, detail="Aucune URL trouvée pour cette attaque.")
-    resultats = run_attack_on_urls(urls_cibles, "xss")
-    
-    return {"url_cible": url, "resultats": resultats}
+@router.post("/sqli/", response_model=Dict, summary="Attaque SQLi")
+def attaque_sqli(url: str = Query(..., description="URL cible"), db: Session = Depends(get_db)):
+    return lancer_attaque(url, "sqli")
 
 ##
-@router.post("/csrf/{url}", response_model=List[Dict])
-def attaque_sqli(url: str, db: Session = Depends(get_db)):
-    urls_cibles = get_all_child_urls_recursively(url)
-    if not urls_cibles:
-        raise HTTPException(status_code=404, detail="Aucune URL trouvée pour cette attaque.")
-    resultats = run_attack_on_urls(urls_cibles, "csrf")
-    
-    return {"url_cible": url, "resultats": resultats}
+@router.post("/xss/", response_model=Dict, summary="Attaque XSS")
+def attaque_xss(url: str = Query(..., description="URL cible"), db: Session = Depends(get_db)):
+    return lancer_attaque(url, "xss")
 
 ##
-@router.post("/headers_cookies/{url}", response_model=List[Dict])
-def attaque_sqli(url: str, db: Session = Depends(get_db)):
-    urls_cibles = get_all_child_urls_recursively(url)
-    if not urls_cibles:
-        raise HTTPException(status_code=404, detail="Aucune URL trouvée pour cette attaque.")
-    resultats = run_attack_on_urls(urls_cibles, "headers_cookies")
-    
-    return {"url_cible": url, "resultats": resultats}
+@router.post("/csrf/", response_model=Dict, summary="Attaque CSRF")
+def attaque_csrf(url: str = Query(..., description="URL cible"), db: Session = Depends(get_db)):
+    return lancer_attaque(url, "csrf")
+
+##
+@router.post("/headers_cookies/", response_model=Dict, summary="Attaque Header_Cookie")
+def attaque_headers_cookies(url: str = Query(..., description="URL cible"), db: Session = Depends(get_db)):
+    return lancer_attaque(url, "headers_cookies")

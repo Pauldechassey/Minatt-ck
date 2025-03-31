@@ -1,5 +1,5 @@
 from typing import List, Dict
-from backend.app.scripts.attaque_script import AttaqueScript
+from app.scripts.attaque_script import AttaqueScript
 
 def run_attack_on_urls(urls: List[str], attaque: str) -> List[Dict[str, List]]:
     attaque_service = AttaqueScript()

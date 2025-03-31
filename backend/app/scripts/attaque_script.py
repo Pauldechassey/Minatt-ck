@@ -1,8 +1,8 @@
 from typing import Dict, List, Optional
-from backend.app.scripts.sqli_script import SQLIScanner
-from backend.app.scripts.xss_script import XSSScanner
-from backend.app.scripts.csrf_script import CSRFScanner
-from backend.app.scripts.headers_cookies_script import HeadersCookiesScanner
+from app.scripts.sqli_script import SQLIScanner
+from app.scripts.xss_script import XSSScanner
+from app.scripts.csrf_script import CSRFScanner
+from app.scripts.headers_cookies_script import HeadersCookiesScanner
 
 class AttaqueScript:
     def __init__(self):
