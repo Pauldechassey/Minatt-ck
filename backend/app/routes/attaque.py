@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import List, Dict
-from app.database.database import SessionLocal
+from app.database import SessionLocal
 from app.services.attaque_service import run_attack_on_urls
 from app.services.sous_domaine_service import get_all_child_urls_recursively
 from sqlalchemy.orm import Session

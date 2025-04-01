@@ -1,8 +1,8 @@
 from sqlalchemy import Column, Integer, String, Text
 from app.database import Base
 
-class Type(Base):
-    __tablename__ = "Type"
+class Type_attaque(Base):
+    __tablename__ = "Type_attaque"
 
     id_Type = Column(Integer, primary_key=True, autoincrement=True)
     nom_type = Column(String, nullable=False)

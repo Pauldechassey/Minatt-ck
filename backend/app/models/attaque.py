@@ -10,7 +10,7 @@ class Attaque(Base):
     date_attaque = Column(DateTime, nullable=False)
     resultat = Column(Integer, nullable=False)  # 0 = False, 1 = True
     id_SD = Column(Integer, ForeignKey("Sous_domaine.id_SD"), nullable=False)
-    id_Type = Column(Integer, ForeignKey("Type.id_Type"), nullable=False)
+    id_Type = Column(Integer, ForeignKey("Type_attaque.id_Type"), nullable=False)
 
     sous_domaine = relationship("SousDomaine", backref="attaques")
-    attaque_type = relationship("Type", backref="attaques")
+    attaque_type = relationship("Type_attaque", backref="attaques")

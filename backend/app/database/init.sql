@@ -30,7 +30,7 @@ CREATE TABLE Technologie (
     version_techno TEXT NOT NULL
 );
 
-CREATE TABLE Type (
+CREATE TABLE Type_attaque (
     id_Type INTEGER PRIMARY KEY AUTOINCREMENT,
     nom_type TEXT NOT NULL,
     description_type TEXT NOT NULL
@@ -63,7 +63,7 @@ CREATE TABLE Attaque (
     id_SD INTEGER NOT NULL,
     id_Type INTEGER NOT NULL,
     FOREIGN KEY (id_SD) REFERENCES Sous_domaine (id_SD) ON DELETE CASCADE,
-    FOREIGN KEY (id_Type) REFERENCES Type (id_Type) ON DELETE CASCADE
+    FOREIGN KEY (id_Type) REFERENCES Type_attaque  (id_Type) ON DELETE CASCADE
 );
 
 CREATE TABLE Faille (
@@ -74,3 +74,11 @@ CREATE TABLE Faille (
     id_attaque INTEGER NOT NULL UNIQUE,
     FOREIGN KEY (id_attaque) REFERENCES Attaque (id_attaque) ON DELETE CASCADE
 );
+
+--test
+INSERT INTO User (nom_user, mdp_user, role) VALUES
+('admin', 'admin123', 1),  -- Admin (role = 1)
+('alice', 'password1', 0), -- Utilisateur standard (role = 0)
+('bob', 'password2', 0),
+('charlie', 'password3', 0),
+('eve', 'hacker42', 1); -- Autre admin

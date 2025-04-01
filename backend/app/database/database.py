@@ -10,10 +10,10 @@ DB_FILE = os.path.join(DB_DIR, "minattack.sqlite")
 
 SQLALCHEMY_DATABASE_URL = f"sqlite:///{DB_FILE}"
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+#engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
+#SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-Base = declarative_base()
+#Base = declarative_base()
 
 
 def init_db():
