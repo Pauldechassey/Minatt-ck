@@ -11,7 +11,7 @@ class RapportsWindow(QWidget, Ui_Rapports):
 
         # Connexion des boutons
         self.ui.pushButtonDeconnexionRapports.clicked.connect(self.logout)
-        self.ui.pushButtonAttaquesRapports.clicked.connect(self.goToAttacks)
+        self.ui.pushButtonAttaquesRapports.clicked.connect(self.goToAttaques)
         self.ui.pushButtonCartographieRapports.clicked.connect(self.goToCartographie)
         self.ui.pushButtonHomeRapports.clicked.connect(self.goToAccueil)
 
@@ -29,8 +29,8 @@ class RapportsWindow(QWidget, Ui_Rapports):
             self.main_window.loginPage.ui.lineEditPasswordLogin.clear()
             self.main_window.mainStackedWidget.setCurrentIndex(0)
 
-    def goToAttacks(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.attacksPage))
+    def goToAttaques(self):
+        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.attaquesPage))
 
     def goToCartographie(self):
         self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.cartographiePage))
