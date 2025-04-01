@@ -28,6 +28,25 @@ class Ui_Accueil(object):
 "")
         self.gridLayout_2 = QGridLayout(Accueil)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.gridLayout = QGridLayout()
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout.addItem(self.verticalSpacer, 2, 0, 1, 1)
+
+        self.labelNomAccueil = QLabel(Accueil)
+        self.labelNomAccueil.setObjectName(u"labelNomAccueil")
+        font = QFont()
+        font.setPointSize(13)
+        font.setBold(True)
+        self.labelNomAccueil.setFont(font)
+        self.labelNomAccueil.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.gridLayout.addWidget(self.labelNomAccueil, 1, 0, 1, 1)
+
+
+        self.gridLayout_2.addLayout(self.gridLayout, 2, 0, 1, 1)
+
         self.menuAccueil = QHBoxLayout()
         self.menuAccueil.setObjectName(u"menuAccueil")
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
@@ -48,6 +67,21 @@ class Ui_Accueil(object):
 "}")
 
         self.menuAccueil.addWidget(self.pushButtonHomeAccueil)
+
+        self.pushButtonAuditsAccueil = QPushButton(Accueil)
+        self.pushButtonAuditsAccueil.setObjectName(u"pushButtonAuditsAccueil")
+        self.pushButtonAuditsAccueil.setStyleSheet(u"QPushButton {\n"
+"    background-color: #00C853; /* Vert */\n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #009624; / survol */\n"
+"}")
+
+        self.menuAccueil.addWidget(self.pushButtonAuditsAccueil)
 
         self.pushButtonAttaquesAccueil = QPushButton(Accueil)
         self.pushButtonAttaquesAccueil.setObjectName(u"pushButtonAttaquesAccueil")
@@ -106,20 +140,6 @@ class Ui_Accueil(object):
 
         self.gridLayout_2.addLayout(self.menuAccueil, 0, 0, 1, 1)
 
-        self.labelNomAccueil = QLabel(Accueil)
-        self.labelNomAccueil.setObjectName(u"labelNomAccueil")
-
-        self.gridLayout_2.addWidget(self.labelNomAccueil, 1, 0, 1, 1)
-
-        self.gridLayout = QGridLayout()
-        self.gridLayout.setObjectName(u"gridLayout")
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout.addItem(self.verticalSpacer, 0, 0, 1, 1)
-
-
-        self.gridLayout_2.addLayout(self.gridLayout, 2, 0, 1, 1)
-
 
         self.retranslateUi(Accueil)
 
@@ -128,11 +148,12 @@ class Ui_Accueil(object):
 
     def retranslateUi(self, Accueil):
         Accueil.setWindowTitle(QCoreApplication.translate("Accueil", u"Accueil", None))
+        self.labelNomAccueil.setText(QCoreApplication.translate("Accueil", u"Accueil", None))
         self.pushButtonHomeAccueil.setText(QCoreApplication.translate("Accueil", u"Home", None))
+        self.pushButtonAuditsAccueil.setText(QCoreApplication.translate("Accueil", u"Audits", None))
         self.pushButtonAttaquesAccueil.setText(QCoreApplication.translate("Accueil", u"Attaques", None))
         self.pushButtonRapportsAccueil.setText(QCoreApplication.translate("Accueil", u"Rapports", None))
         self.pushButtonCartographieAccueil.setText(QCoreApplication.translate("Accueil", u"Cartographie", None))
         self.pushButtonDeconnexionAccueil.setText("")
-        self.labelNomAccueil.setText(QCoreApplication.translate("Accueil", u"MinAtt&ck", None))
     # retranslateUi
 
