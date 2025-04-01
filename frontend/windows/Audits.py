@@ -1,20 +1,20 @@
-from PySide6.QtWidgets import QWidget, QStackedWidget, QMessageBox
-from ui.ui_accueil import Ui_Accueil
+from PySide6.QtWidgets import QMessageBox, QWidget
+from ui.ui_audits import Ui_Audits
 
 
-class AccueilWindow(QWidget, Ui_Accueil):
+class AuditsWindow(QWidget, Ui_Audits):
     def __init__(self, main_window, parent=None):
         super().__init__(parent)
-        self.ui = Ui_Accueil()
+        self.ui = Ui_Audits()
         self.ui.setupUi(self)
         self.main_window = main_window  # Stockez la référence à MainWindow
 
         # Connexion des boutons
-        self.ui.pushButtonDeconnexionAccueil.clicked.connect(self.logout)
-        self.ui.pushButtonAuditsAccueil.clicked.connect(self.goToAudits)
-        self.ui.pushButtonAttaquesAccueil.clicked.connect(self.goToAttaques)
-        self.ui.pushButtonRapportsAccueil.clicked.connect(self.goToRapports)
-        self.ui.pushButtonCartographieAccueil.clicked.connect(self.goToCartographie)
+        self.ui.pushButtonDeconnexionAudits.clicked.connect(self.logout)
+        self.ui.pushButtonHomeAudits.clicked.connect(self.goToAccueil)
+        self.ui.pushButtonAttaquesAudits.clicked.connect(self.goToAttaques)
+        self.ui.pushButtonRapportsAudits.clicked.connect(self.goToRapports)
+        self.ui.pushButtonCartographieAudits.clicked.connect(self.goToCartographie)
 
     def logout(self):
         msg = QMessageBox(self)
@@ -30,8 +30,8 @@ class AccueilWindow(QWidget, Ui_Accueil):
             self.main_window.loginPage.ui.lineEditPasswordLogin.clear()
             self.main_window.mainStackedWidget.setCurrentIndex(0)
 
-    def goToAudits(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.auditsPage))
+    def goToAccueil(self):
+        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.accueilPage))
 
     def goToAttaques(self):
         self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.attaquesPage))
