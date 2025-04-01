@@ -11,9 +11,10 @@ class AttaquesWindow(QWidget, Ui_Attaques):
 
         # Connexion des boutons
         self.ui.pushButtonDeconnexionAttaques.clicked.connect(self.logout)
+        self.ui.pushButtonHomeAttaques.clicked.connect(self.goToAccueil)
+        self.ui.pushButtonAuditsAttaques.clicked.connect(self.goToAudits)
         self.ui.pushButtonRapportsAttaques.clicked.connect(self.goToRapports)
         self.ui.pushButtonCartographieAttaques.clicked.connect(self.goToCartographie)
-        self.ui.pushButtonHomeAttaques.clicked.connect(self.goToAccueil)
 
     def logout(self):
         msg = QMessageBox(self)
@@ -29,11 +30,14 @@ class AttaquesWindow(QWidget, Ui_Attaques):
             self.main_window.loginPage.ui.lineEditPasswordLogin.clear()
             self.main_window.mainStackedWidget.setCurrentIndex(0)
 
+    def goToAccueil(self):
+        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.accueilPage))
+
+    def goToAudits(self):
+        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.auditsPage))
+
     def goToCartographie(self):
         self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.cartographiePage))
 
     def goToRapports(self):
         self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.rapportsPage))
-
-    def goToAccueil(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.accueilPage))

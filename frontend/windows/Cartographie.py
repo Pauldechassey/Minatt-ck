@@ -11,9 +11,10 @@ class CartographieWindow(QWidget, Ui_Cartographie):
 
         # Connexion des boutons
         self.ui.pushButtonDeconnexionCartographie.clicked.connect(self.logout)
+        self.ui.pushButtonHomeCartographie.clicked.connect(self.goToAccueil)
+        self.ui.pushButtonAuditsCartographie.clicked.connect(self.goToAudits)
         self.ui.pushButtonAttaquesCartographie.clicked.connect(self.goToAttaques)
         self.ui.pushButtonRapportsCartographie.clicked.connect(self.goToRapports)
-        self.ui.pushButtonHomeCartographie.clicked.connect(self.goToAccueil)
 
     def logout(self):
         msg = QMessageBox(self)
@@ -29,11 +30,14 @@ class CartographieWindow(QWidget, Ui_Cartographie):
             self.main_window.loginPage.ui.lineEditPasswordLogin.clear()
             self.main_window.mainStackedWidget.setCurrentIndex(0)
 
+    def goToAccueil(self):
+        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.accueilPage))
+
+    def goToAudits(self):
+        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.auditsPage))
+
     def goToAttaques(self):
         self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.attaquesPage))
 
     def goToRapports(self):
         self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.rapportsPage))
-
-    def goToAccueil(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.accueilPage))
