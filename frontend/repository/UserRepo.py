@@ -1,3 +1,4 @@
+import _hashlib
 import os
 import requests
 from dotenv import load_dotenv
@@ -6,6 +7,13 @@ load_dotenv()
 
 
 class UserRepo:
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(UserRepo, cls).__new__(cls)
+        return cls._instance
+
     def __init__(self):
         base_url = os.getenv("BASE_URL")
         port = os.getenv("PORT")
@@ -13,13 +21,18 @@ class UserRepo:
             raise ValueError("UserRepo: BASE_URL or PORT environment variables not set")
         self.__url = f"{base_url}:{port}/"
 
-    def login(self, nom_user: str, mdp_user: str):
+    def login(self, nom_user: str, hashed_credentials: str):
         new_url = self.__url + "auth/login"
-        data = {"api_name": nom_user, "api_password": mdp_user}
+        data = {"nom_user": nom_user, "hashed_credentials": hashed_credentials}
         try:
-            response = requests.post(url=new_url, data=data, timeout=30)
-            return response.status_code
+            response = requests.post(url=new_url, json=data, timeout=30)
+            if response.status_code == 200:
+                print("UserRepo [SUCCESS]: login successful")
+                return True
+            print("UserRepo [FAILED]: login failed")
+            return False
         except requests.exceptions.Timeout:
-            print("UserRepo: request timed out")
+            print(f"UserRepo [TIMEOUT]: request timed out")
         except requests.exceptions.RequestException as e:
-            print(f"Errors sending credentials: {e}")
+            print(f"UserRepo [ERROR]: {e}")
+        return False

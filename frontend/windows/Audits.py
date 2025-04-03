@@ -20,6 +20,7 @@ class AuditsWindow(QWidget, Ui_Audits):
         self.ui.pushButtonRapportsAudits.clicked.connect(self.goToRapports)
         self.ui.pushButtonCartographieAudits.clicked.connect(self.goToCartographie)
 
+    # Deconnexion
     def logout(self):
         msg = QMessageBox(self)
         msg.setWindowTitle("Déconnexion")
@@ -34,6 +35,7 @@ class AuditsWindow(QWidget, Ui_Audits):
             self.main_window.loginPage.ui.lineEditPasswordLogin.clear()
             self.main_window.mainStackedWidget.setCurrentIndex(0)
 
+    # Changement de page
     def goToAccueil(self):
         self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.accueilPage))
 

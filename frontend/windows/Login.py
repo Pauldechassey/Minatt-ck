@@ -18,22 +18,21 @@ class LoginWindow(QWidget, Ui_Login):
         # Connexion de la touche Entrée
         self.ui.lineEditPasswordLogin.returnPressed.connect(self.check_credentials)  # Appuie sur "Entrée" pour se connecter
 
-    def check_credentials(self):
-        if self.ui.lineEditUsernameLogin.text() == "admin" and self.ui.lineEditPasswordLogin.text() == "admin":
-            parent = self.parentWidget()
-            if isinstance(parent, QStackedWidget):
-                parent.setCurrentIndex(1)
-        else:
-            QMessageBox.warning(self, "Error", "Invalid credentials")
-
     # def check_credentials(self):
-    #     user = self.ui.lineEditUsernameLogin.text()
-    #     password = self.ui.lineEditPasswordLogin.text()
-    #     hashed_credentials = sha256((user + password).encode())
-    #     response = self.userRepo.login(user, password)
-    #     if response == 200:
+    #     if self.ui.lineEditUsernameLogin.text() == "admin" and self.ui.lineEditPasswordLogin.text() == "admin":
     #         parent = self.parentWidget()
     #         if isinstance(parent, QStackedWidget):
     #             parent.setCurrentIndex(1)
     #     else:
     #         QMessageBox.warning(self, "Error", "Invalid credentials")
+
+    def check_credentials(self):
+        user = self.ui.lineEditUsernameLogin.text()
+        password = self.ui.lineEditPasswordLogin.text()
+        hashed_credentials = sha256((user + password).encode())
+        if self.userRepo.login(user, hashed_credentials.hexdigest()):
+            parent = self.parentWidget()
+            if isinstance(parent, QStackedWidget):
+                parent.setCurrentIndex(1)
+        else:
+            QMessageBox.warning(self, "Error", "Invalid credentials")
