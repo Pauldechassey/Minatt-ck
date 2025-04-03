@@ -9,6 +9,10 @@ class AccueilWindow(QWidget, Ui_Accueil):
         self.ui.setupUi(self)
         self.main_window = main_window  # Stockez la référence à MainWindow
 
+        # self.ui.pushButtonAttaquesAccueil.setEnabled(False)
+        # self.ui.pushButtonRapportsAccueil.setEnabled(False)
+        # self.ui.pushButtonCartographieAccueil.setEnabled(False)
+
         # Connexion des boutons
         self.ui.pushButtonDeconnexionAccueil.clicked.connect(self.logout)
         self.ui.pushButtonAuditsAccueil.clicked.connect(self.goToAudits)

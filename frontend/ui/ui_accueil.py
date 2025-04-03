@@ -37,7 +37,7 @@ class Ui_Accueil(object):
         self.labelNomAccueil = QLabel(Accueil)
         self.labelNomAccueil.setObjectName(u"labelNomAccueil")
         font = QFont()
-        font.setPointSize(13)
+        font.setPointSize(14)
         font.setBold(True)
         self.labelNomAccueil.setFont(font)
         self.labelNomAccueil.setAlignment(Qt.AlignmentFlag.AlignCenter)

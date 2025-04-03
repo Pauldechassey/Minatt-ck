@@ -9,6 +9,10 @@ class AuditsWindow(QWidget, Ui_Audits):
         self.ui.setupUi(self)
         self.main_window = main_window  # Stockez la référence à MainWindow
 
+        # self.ui.pushButtonAttaquesAudits.setEnabled(False)
+        # self.ui.pushButtonRapportsAudits.setEnabled(False)
+        # self.ui.pushButtonCartographieAudits.setEnabled(False)
+
         # Connexion des boutons
         self.ui.pushButtonDeconnexionAudits.clicked.connect(self.logout)
         self.ui.pushButtonHomeAudits.clicked.connect(self.goToAccueil)

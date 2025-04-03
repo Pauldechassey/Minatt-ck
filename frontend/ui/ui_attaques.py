@@ -220,20 +220,24 @@ class Ui_Attaques(object):
 
         self.labelChoixAttaques = QLabel(Attaques)
         self.labelChoixAttaques.setObjectName(u"labelChoixAttaques")
+        font = QFont()
+        font.setPointSize(13)
+        self.labelChoixAttaques.setFont(font)
 
         self.gridLayoutContentAttaques.addWidget(self.labelChoixAttaques, 2, 0, 1, 1)
 
         self.labelUrlAttaques = QLabel(Attaques)
         self.labelUrlAttaques.setObjectName(u"labelUrlAttaques")
+        self.labelUrlAttaques.setFont(font)
 
         self.gridLayoutContentAttaques.addWidget(self.labelUrlAttaques, 7, 0, 1, 1)
 
         self.labelNomAttaques = QLabel(Attaques)
         self.labelNomAttaques.setObjectName(u"labelNomAttaques")
-        font = QFont()
-        font.setPointSize(13)
-        font.setBold(True)
-        self.labelNomAttaques.setFont(font)
+        font1 = QFont()
+        font1.setPointSize(15)
+        font1.setBold(True)
+        self.labelNomAttaques.setFont(font1)
         self.labelNomAttaques.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.gridLayoutContentAttaques.addWidget(self.labelNomAttaques, 0, 0, 1, 1)

@@ -15,8 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QLabel, QPushButton,
-    QSizePolicy, QSpacerItem, QWidget)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QLabel, QLineEdit,
+    QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout,
+    QWidget)
 
 class Ui_Audits(object):
     def setupUi(self, Audits):
@@ -130,10 +131,6 @@ class Ui_Audits(object):
 
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout.addItem(self.verticalSpacer, 5, 1, 1, 1)
-
         self.labelNomAudits = QLabel(Audits)
         self.labelNomAudits.setObjectName(u"labelNomAudits")
         font = QFont()
@@ -143,6 +140,38 @@ class Ui_Audits(object):
         self.labelNomAudits.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.gridLayout.addWidget(self.labelNomAudits, 4, 1, 1, 1)
+
+        self.verticalLayoutContentAudits = QVBoxLayout()
+        self.verticalLayoutContentAudits.setObjectName(u"verticalLayoutContentAudits")
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayoutContentAudits.addItem(self.verticalSpacer)
+
+        self.labelUrlAudits = QLabel(Audits)
+        self.labelUrlAudits.setObjectName(u"labelUrlAudits")
+        font1 = QFont()
+        font1.setPointSize(13)
+        self.labelUrlAudits.setFont(font1)
+
+        self.verticalLayoutContentAudits.addWidget(self.labelUrlAudits)
+
+        self.lineEditUrlAudits = QLineEdit(Audits)
+        self.lineEditUrlAudits.setObjectName(u"lineEditUrlAudits")
+
+        self.verticalLayoutContentAudits.addWidget(self.lineEditUrlAudits)
+
+        self.labelSelectionUrlAudits = QLabel(Audits)
+        self.labelSelectionUrlAudits.setObjectName(u"labelSelectionUrlAudits")
+        self.labelSelectionUrlAudits.setFont(font1)
+
+        self.verticalLayoutContentAudits.addWidget(self.labelSelectionUrlAudits)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayoutContentAudits.addItem(self.verticalSpacer_2)
+
+
+        self.gridLayout.addLayout(self.verticalLayoutContentAudits, 5, 1, 1, 1)
 
 
         self.gridLayout_4.addLayout(self.gridLayout, 1, 0, 1, 1)
@@ -162,5 +191,7 @@ class Ui_Audits(object):
         self.pushButtonRapportsAudits.setText(QCoreApplication.translate("Audits", u"Rapports", None))
         self.pushButtonAuditsAudits.setText(QCoreApplication.translate("Audits", u"Audits", None))
         self.labelNomAudits.setText(QCoreApplication.translate("Audits", u"Audits", None))
+        self.labelUrlAudits.setText(QCoreApplication.translate("Audits", u"Cr\u00e9er un audit:", None))
+        self.labelSelectionUrlAudits.setText(QCoreApplication.translate("Audits", u"S\u00e9lectionner un audit:", None))
     # retranslateUi
 

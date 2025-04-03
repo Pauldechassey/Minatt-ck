@@ -38,7 +38,7 @@ color: white;
       <widget class="QLabel" name="labelNomAccueil">
        <property name="font">
         <font>
-         <pointsize>13</pointsize>
+         <pointsize>14</pointsize>
          <bold>true</bold>
         </font>
        </property>
