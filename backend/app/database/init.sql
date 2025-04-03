@@ -1,10 +1,10 @@
-PRAGMA foreign_keys = ON;  -- ✅ Enables foreign keys in SQLite
+PRAGMA foreign_keys = ON;
 
 CREATE TABLE User (
-    id_user  INTEGER PRIMARY KEY AUTOINCREMENT,  -- ✅ Use AUTOINCREMENT for IDs
+    id_user INTEGER PRIMARY KEY AUTOINCREMENT,
     nom_user TEXT NOT NULL,
     mdp_user TEXT NOT NULL,
-    role INTEGER NOT NULL  -- ✅ SQLite does not have `Bool`, use `INTEGER` (0 = False, 1 = True)
+    role INTEGER NOT NULL
 );
 
 CREATE TABLE Domaine (
@@ -16,7 +16,7 @@ CREATE TABLE Domaine (
 CREATE TABLE Audit (
     id_audit INTEGER PRIMARY KEY AUTOINCREMENT,
     date DATETIME NOT NULL,
-    etat INTEGER NOT NULL,  -- ✅ Replace `Bool` with `INTEGER`
+    etat INTEGER NOT NULL,
     path_rapport TEXT,
     id_user INTEGER NOT NULL,
     id_domaine INTEGER NOT NULL,
@@ -50,20 +50,18 @@ CREATE TABLE Sous_domaine (
     description_SD TEXT NOT NULL,
     degre INTEGER NOT NULL,
     id_domaine INTEGER NOT NULL,
-    id_SD_Sous_domaine INTEGER,
-    FOREIGN KEY (id_domaine) REFERENCES Domaine (id_domaine) ON DELETE CASCADE,
-    FOREIGN KEY (id_SD_Sous_domaine) REFERENCES Sous_domaine (id_SD) ON DELETE CASCADE
+    FOREIGN KEY (id_domaine) REFERENCES Domaine (id_domaine) ON DELETE CASCADE
 );
 
 CREATE TABLE Attaque (
     id_attaque INTEGER PRIMARY KEY AUTOINCREMENT,
     payload TEXT NOT NULL,
     date_attaque DATETIME NOT NULL,
-    resultat INTEGER NOT NULL,  -- ✅ Replace `Bool` with `INTEGER`
+    resultat INTEGER NOT NULL,
     id_SD INTEGER NOT NULL,
     id_Type INTEGER NOT NULL,
     FOREIGN KEY (id_SD) REFERENCES Sous_domaine (id_SD) ON DELETE CASCADE,
-    FOREIGN KEY (id_Type) REFERENCES Type_attaque  (id_Type) ON DELETE CASCADE
+    FOREIGN KEY (id_Type) REFERENCES Type_attaque (id_Type) ON DELETE CASCADE
 );
 
 CREATE TABLE Faille (
@@ -75,10 +73,9 @@ CREATE TABLE Faille (
     FOREIGN KEY (id_attaque) REFERENCES Attaque (id_attaque) ON DELETE CASCADE
 );
 
---test
 INSERT INTO User (nom_user, mdp_user, role) VALUES
-('admin', 'admin123', 1),  -- Admin (role = 1)
-('alice', 'password1', 0), -- Utilisateur standard (role = 0)
+('admin', 'admin123', 1),
+('alice', 'password1', 0),
 ('bob', 'password2', 0),
 ('charlie', 'password3', 0),
-('eve', 'hacker42', 1); -- Autre admin
+('eve', 'hacker42', 1);
