@@ -9,3 +9,8 @@ class UserSchema(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class LoginRequest(BaseModel):
+    nom_user: str
+    hashed_credentials: str

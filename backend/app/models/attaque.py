@@ -10,8 +10,9 @@ class Attaque(Base):
     payload = Column(String, nullable=False)
     date_attaque = Column(DateTime, nullable=False)
     resultat = Column(Integer, nullable=False)  # 0 = False, 1 = True
-    id_SD = Column(Integer, ForeignKey("sous_domaine.id_SD"), nullable=False)
-    id_Type = Column(Integer, ForeignKey("type_attaque.id_Type"), nullable=False)
 
-    sous_domaine = relationship("SousDomaine", back_populates="attaques")
+    id_SD = Column(Integer, ForeignKey("Sous_domaine.id_SD"), nullable=False)
+    sous_domaine = relationship("SousDomaine", back_populates="attaques")    
+
+    id_Type = Column(Integer, ForeignKey("Type_attaque.id_Type"), nullable=False)
     type_attaque = relationship("Type_attaque")
