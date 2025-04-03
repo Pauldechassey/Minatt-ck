@@ -22,7 +22,7 @@ class UserRepo:
         self.__url = f"{base_url}:{port}/"
 
     def login(self, nom_user: str, hashed_credentials: str):
-        new_url = self.__url + "auth/login"
+        new_url = self.__url + "users/auth/login"
         data = {"nom_user": nom_user, "hashed_credentials": hashed_credentials}
         try:
             response = requests.post(url=new_url, json=data, timeout=30)

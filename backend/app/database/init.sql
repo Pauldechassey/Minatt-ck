@@ -74,8 +74,4 @@ CREATE TABLE Faille (
 );
 
 INSERT INTO User (nom_user, mdp_user, role) VALUES
-('admin', 'admin123', 1),
-('alice', 'password1', 0),
-('bob', 'password2', 0),
-('charlie', 'password3', 0),
-('eve', 'hacker42', 1);
+('admin', '1eb1afa20dc454d6ef3b6dc6abcbd7dca7e519b698fdf073f4625ded09d74807', 1)
