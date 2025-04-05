@@ -1,15 +1,15 @@
 import requests
 from bs4 import BeautifulSoup
 from http.cookies import SimpleCookie
-from app.models.attaque import Attaque
-from app.models.faille import Faille
+from backend.app.models.attaque import Attaque
+from backend.app.models.faille import Faille
 from datetime import datetime
 
 class HeadersCookiesScanner:
     def __init__(self):
         self.resultats = {
             'attaques': [],
-            'faille': []
+            'failles': []
         }
         self.session = requests.Session()
 
@@ -41,14 +41,17 @@ class HeadersCookiesScanner:
         }
         
         for header, valid_values in security_headers.items():
+            id_prov = f"header-{url}-{header}"
             attaque = Attaque(payload=f"Test {header}", date_attaque=datetime.now(), resultat=0, id_Type=4)
+            attaque.id_provisoire = id_prov
+
             if header not in headers:
-                self._log_vulnerability(url, f"Header: {header}", f"Missing security header: {header}")
+                self._log_vulnerability(url, f"Header: {header}", f"Missing security header: {header}", id_prov)
                 attaque.resultat = 1
             elif valid_values is not None:
                 header_value = headers[header].lower()
                 if not any(valid.lower() in header_value for valid in valid_values):
-                    self._log_vulnerability(url, f"Header: {header}", f"Misconfigured security header: {header}={headers[header]}")
+                    self._log_vulnerability(url, f"Header: {header}", f"Misconfigured security header: {header}={headers[header]}", id_prov)
                     attaque.resultat = 1
             self.resultats['attaques'].append(attaque)
         
@@ -78,13 +81,18 @@ class HeadersCookiesScanner:
             if not is_httponly:
                 vulnerabilities.append("non-httponly")
             
+            id_prov = f"cookie-{url}-{cookie_name}"
             attaque = Attaque(payload=f"Test cookie {cookie_name}", date_attaque=datetime.now(), resultat=0, id_Type=4)
+            attaque.id_provisoire = id_prov
+
             if vulnerabilities:
-                self._log_vulnerability(url, f"Cookie: {cookie_name}", f"Cookie issues: {', '.join(vulnerabilities)}")
+                self._log_vulnerability(url, f"Cookie: {cookie_name}", f"Cookie issues: {', '.join(vulnerabilities)}",id_prov)
                 attaque.resultat = 1
             self.resultats['attaques'].append(attaque)
     
-    def _log_vulnerability(self, url, element, proof):
+    def _log_vulnerability(self, url, element, proof, id_prov=None):
         print(f"[VULNÉRABLE] {url} - {element}: {proof}")
         faille = Faille(gravite=6, description=proof, balise=element)
-        self.resultats['faille'].append(faille)
+        if id_prov:
+            faille.id_provisoire = id_prov
+        self.resultats['failles'].append(faille)

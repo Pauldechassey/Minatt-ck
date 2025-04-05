@@ -50,6 +50,8 @@ CREATE TABLE Sous_domaine (
     description_SD TEXT NOT NULL,
     degre INTEGER NOT NULL,
     id_domaine INTEGER NOT NULL,
+    id_SD_Sous_domaine INTEGER,
+    FOREIGN KEY (id_SD_Sous_domaine) REFERENCES Sous_domaine (id_SD) ON DELETE CASCADE,
     FOREIGN KEY (id_domaine) REFERENCES Domaine (id_domaine) ON DELETE CASCADE
 );
 
@@ -74,4 +76,22 @@ CREATE TABLE Faille (
 );
 
 INSERT INTO User (nom_user, mdp_user, role) VALUES
-('admin', '1eb1afa20dc454d6ef3b6dc6abcbd7dca7e519b698fdf073f4625ded09d74807', 1)
+('admin', '1eb1afa20dc454d6ef3b6dc6abcbd7dca7e519b698fdf073f4625ded09d74807', 1);
+
+INSERT INTO Domaine(url_domaine, description_domaine)VALUES
+('http://127.0.0.1:5000', 'Domaine');
+
+INSERT INTO Type_attaque (nom_type, description_type) VALUES
+('sqli', 'Attaque visant à insérer des requêtes SQL malveillantes dans un champ d’entrée pour manipuler la base de données.'),
+('xss', 'Attaque permettant d’injecter du code JavaScript malveillant dans une page web vue par un autre utilisateur.'),
+('csrf', 'Attaque où un utilisateur est forcé d’exécuter des actions non désirées sur un autre site web où il est authentifié.'),
+('headers_cookies', 'Exploitation des en-têtes HTTP ou des cookies pour voler des informations sensibles ou contourner des mécanismes de sécurité.');
+
+INSERT INTO Sous_domaine (url_SD, description_SD, degre, id_domaine, id_SD_Sous_domaine) VALUES
+('http://127.0.0.1:5000', 'Domaine', 1, 1, 1),
+('http://127.0.0.1:5000/login', 'login', 2, 1, 1),
+('http://127.0.0.1:5000/inscription', 'inscription', 2, 1, 1),
+('http://127.0.0.1:5000/recherche', 'recherche', 2, 1, 1),
+('http://127.0.0.1:5000/echo', 'echo', 2, 1, 1),
+('http://127.0.0.1:5000/comments', 'comments', 2, 1, 1);
+

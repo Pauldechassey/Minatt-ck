@@ -2,7 +2,6 @@ from Attaque_sqli import Attaque_sqli
 from Attaque_xss import Attaque_xss
 from Attaque_csrf import Attaque_csrf
 from Attaque_headers_cookies import Attaque_headers_cookies
-from Rapport import generate_security_report
 
 class Attaque:
     def __init__(self):
@@ -41,15 +40,15 @@ class Attaque:
 
 if __name__ == "__main__":
     """
-    pour lancer le serveur :> python test_state/test_vuln.py
+    pour lancer le serveur :> python3 attaque/test_state/test_vuln.py
     -> http://127.0.0.1:5000
 
     """
     urls_test = [
-        # "http://127.0.0.1:5000",
-        # "http://127.0.0.1:5000/echo",
+        #"http://127.0.0.1:5000",
+        "http://127.0.0.1:5000/echo",
         # "http://127.0.0.1:5000/recherche",
-        # "http://127.0.0.1:5000/login",
+        "http://127.0.0.1:5000/login",
         # "http://127.0.0.1:5000/inscription",
         # "http://127.0.0.1:5000/comments",
         # "http://127.0.0.1:5000/profile"
@@ -60,9 +59,11 @@ if __name__ == "__main__":
         print(f"test sur {url}")
         print("-------------------------")
         attaque.resultats_attaques["url"]=url
-        attaque.resultats_attaques["sqli"].append(attaque.attaque_sqli(url))
+        #attaque.resultats_attaques["sqli"].append(attaque.attaque_sqli(url))
         attaque.resultats_attaques["xss"].append(attaque.attaque_xss(url))
-        attaque.resultats_attaques["csrf"].append(attaque.attaque_csrf(url))
-        attaque.resultats_attaques["headers_cookies"].append(attaque.attaque_headers_cookies(url))
+        #attaque.resultats_attaques["csrf"].append(attaque.attaque_csrf(url))
+        #attaque.resultats_attaques["headers_cookies"].append(attaque.attaque_headers_cookies(url))
+    
+    print(attaque.get_resultats())
 
     #rapport=generate_security_report(attaque.get_resultats())

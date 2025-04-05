@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.models.domaine import Domaine
+from backend.app.models.domaine import Domaine
 
 def get_all_domaines(db: Session):
     return db.query(Domaine).all()

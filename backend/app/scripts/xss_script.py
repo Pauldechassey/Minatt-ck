@@ -6,15 +6,15 @@ import re
 import hashlib
 import random
 from urllib.parse import urlparse, urlencode, parse_qs
-from app.models.attaque import Attaque
-from app.models.faille import Faille
+from backend.app.models.attaque import Attaque
+from backend.app.models.faille import Faille
 from datetime import datetime
 
 class XSSScanner:
     def __init__(self):
         self.resultats = {
-            'attaques':[Attaque],
-            'faille' : [Faille|None],
+            'attaques':[],
+            'failles' : [],
         }
 
         self.payloads = [
@@ -68,7 +68,7 @@ class XSSScanner:
         for param in params:
             unique_id = self.generate_unique_id()
             
-            for payload_type, payload_list in [("standard", self.payloads), ("encodé", self.encoded_payloads)]:
+            for payload_list in [("standard", self.payloads), ("encodé", self.encoded_payloads)]:
                 for payload in payload_list:
                     try:
                         marked_payload = payload.replace("1", f"{unique_id}")
@@ -76,12 +76,16 @@ class XSSScanner:
                         
                         response = self.session.get(test_url, headers=self.headers, timeout=10)
                         
+                        id_prov = f"reflected_xss-{url}-{unique_id}"
+
                         attaque = Attaque(
                             payload=marked_payload,
                             date_attaque=datetime.now(),
                             resultat=0, # par défaut
                             id_Type=2,
                         )
+                        attaque.id_provisoire = id_prov
+
                         IsFaille = None
                         
                         if response.status_code == 200 and self.detect_xss_injection(response.text, unique_id):
@@ -93,8 +97,10 @@ class XSSScanner:
                                 description=f"Paramètre {param} vulnérable à XSS Reflected",
                                 balise=param,
                             )
+                            IsFaille.id_provisoire = id_prov
+
                             self.resultats['attaques'].append(attaque)
-                            self.resultats['faille'].append(IsFaille)
+                            self.resultats['failles'].append(IsFaille)
                             return  
                         
                         self.resultats['attaques'].append(attaque)
@@ -135,12 +141,15 @@ class XSSScanner:
                     unique_id = f"{test_session_id}{i}"
                     marked_payload = base_payload.replace("alert(1)", f"alert({unique_id})")
                     
+                    id_prov = f"stored_xss-{url}-{unique_id}"
+
                     attaque = Attaque(
                         payload=marked_payload,
                         date_attaque=datetime.now(),
                         resultat=0, # par défaut
                         id_Type=1,
                     )
+                    attaque.id_provisoire = id_prov 
                     
                     if self.submit_payload(url, param, marked_payload):
                         displayed_urls = self.check_payload_display_in_pages(url, unique_id)
@@ -156,8 +165,10 @@ class XSSScanner:
                                     description=f"Paramètre {param} vulnérable à XSS Stored",
                                     balise=param,
                                 )
+                                IsFaille.id_provisoire = id_prov
+
                                 self.resultats['attaques'].append(attaque)
-                                self.resultats['faille'].append(IsFaille)
+                                self.resultats['failles'].append(IsFaille)
                                 return 
                     
                     self.resultats['attaques'].append(attaque)

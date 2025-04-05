@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import List, Dict
-from app.database import SessionLocal
-from app.services.attaque_service import run_attack_on_urls
-from app.services.sous_domaine_service import get_all_child_urls_recursively
+from backend.app.models.sous_domaine import SousDomaine 
+from backend.app.database import SessionLocal
+from backend.app.services.attaque_service import run_attacks
 from sqlalchemy.orm import Session
 
 router = APIRouter(prefix="/attaque", tags=["Attaque"])
@@ -15,34 +15,49 @@ def get_db():
         db.close()
 
 ##
-def lancer_attaque(url: str, attaque_type: str):
-    urls_cibles = get_all_child_urls_recursively(url)
-    if not urls_cibles:
-        raise HTTPException(status_code=404, detail="Aucune URL trouvée pour cette attaque.")
-    resultats = run_attack_on_urls(urls_cibles, attaque_type)
-    return {"url_cible": url, "resultats": resultats}
+@router.post("/all/", summary="Attaque ALL", status_code=200)
+def attaque_all(SD_initial_id: int, db: Session = Depends(get_db)):
+    if run_attacks(SD_initial_id, ["all"], db):
+        return {"message": "Attaque ALL effectuée avec succès"}
+    else:
+        raise HTTPException(status_code=404, detail="Sous-domaine non trouvé")
 
 ##
-@router.post("/all/", response_model=Dict, summary="Attaque ALL")
-def attaque_all(url: str = Query(..., description="URL cible"), db: Session = Depends(get_db)):
-    return lancer_attaque(url, "all")
+@router.post("/list/", summary="Lister les attaques. ex : [sqli, xss]", status_code=200)
+def attaque_sqli(SD_initial_id: int, db: Session = Depends(get_db), attaque_type: List[str] = Query(...)):
+    if run_attacks(SD_initial_id, attaque_type, db):
+        return {"message": "Attaque SQLi effectuée avec succès"}
+    else:
+        raise HTTPException(status_code=404, detail="Sous-domaine non trouvé")
 
 ##
-@router.post("/sqli/", response_model=Dict, summary="Attaque SQLi")
-def attaque_sqli(url: str = Query(..., description="URL cible"), db: Session = Depends(get_db)):
-    return lancer_attaque(url, "sqli")
+@router.post("/sqli/", summary="Attaque SQLi", status_code=200)
+def attaque_sqli(SD_initial_id: int, db: Session = Depends(get_db)):
+    if run_attacks(SD_initial_id, ["sqli"], db):
+        return {"message": "Attaque SQLi effectuée avec succès"}
+    else:
+        raise HTTPException(status_code=404, detail="Sous-domaine non trouvé")
 
 ##
-@router.post("/xss/", response_model=Dict, summary="Attaque XSS")
-def attaque_xss(url: str = Query(..., description="URL cible"), db: Session = Depends(get_db)):
-    return lancer_attaque(url, "xss")
+@router.post("/xss/", summary="Attaque XSS", status_code=200)
+def attaque_xss(SD_initial_id: int, db: Session = Depends(get_db)):
+    if run_attacks(SD_initial_id, ["xss"], db):
+        return {"message": "Attaque XSS effectuée avec succès"}
+    else:
+        raise HTTPException(status_code=404, detail="Sous-domaine non trouvé")
 
 ##
-@router.post("/csrf/", response_model=Dict, summary="Attaque CSRF")
-def attaque_csrf(url: str = Query(..., description="URL cible"), db: Session = Depends(get_db)):
-    return lancer_attaque(url, "csrf")
+@router.post("/csrf/", summary="Attaque CSRF", status_code=200)
+def attaque_csrf(SD_initial_id: int, db: Session = Depends(get_db)):
+    if run_attacks(SD_initial_id, ["csrf"], db):
+        return {"message": "Attaque CSRF effectuée avec succès"}
+    else:
+        raise HTTPException(status_code=404, detail="Sous-domaine non trouvé")
 
 ##
-@router.post("/headers_cookies/", response_model=Dict, summary="Attaque Header_Cookie")
-def attaque_headers_cookies(url: str = Query(..., description="URL cible"), db: Session = Depends(get_db)):
-    return lancer_attaque(url, "headers_cookies")
+@router.post("/headers_cookies/", summary="Attaque Header_Cookie", status_code=200)
+def attaque_headers_cookies(SD_initial_id: int, db: Session = Depends(get_db)):
+    if run_attacks(SD_initial_id, ["headers_cookies"], db):
+        return {"message": "Attaque Header/Cookie effectuée avec succès"}
+    else:
+        raise HTTPException(status_code=404, detail="Sous-domaine non trouvé")

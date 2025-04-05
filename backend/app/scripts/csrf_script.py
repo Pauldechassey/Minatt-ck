@@ -2,8 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import re
 from urllib.parse import urljoin
-from app.models.attaque import Attaque
-from app.models.faille import Faille
+from backend.app.models.attaque import Attaque
+from backend.app.models.faille import Faille
 from datetime import datetime
 
 
@@ -11,12 +11,11 @@ class CSRFScanner:
     def __init__(self):
         self.resultats = {
             'attaques': [],
-            'faille': []
+            'failles': []
         }
         self.session = requests.Session()
 
     def test_csrf(self, url, timeout=10):
-        vuln = False
         
         try:
             headers = {
@@ -32,7 +31,7 @@ class CSRFScanner:
         has_csrf_token = self._check_page_for_csrf_token(soup)
         self._analyze_forms(soup, url, has_csrf_token)
         
-        return len(self.resultats['faille']) > 0
+        return len(self.resultats['failles']) > 0
     
     def _check_page_for_csrf_token(self, soup):
         meta_csrf = soup.find('meta', attrs={'name': re.compile(r'csrf|xsrf', re.I)})
@@ -70,13 +69,17 @@ class CSRFScanner:
                     has_form_csrf = True
                     break
             
+            id_provisoire = f"csrf-{action_url}-{len(self.resultats['attaques'])}"
+
             attaque = Attaque(
                 payload=f"Test CSRF on {action_url}",
                 date_attaque=datetime.now(),
                 resultat=0,
                 id_Type=3
             )
-            
+            attaque.id_provisoire = id_provisoire
+
+
             if not has_form_csrf and not has_csrf_token:
                 print(f"[VULNÉRABLE] {url} - CSRF: POST method without detectable CSRF protection")
                 attaque.resultat = 1
@@ -85,7 +88,8 @@ class CSRFScanner:
                     description=f"Form without CSRF protection: {action_url}",
                     balise="form"
                 )
-                self.resultats['faille'].append(faille)
+                faille.id_provisoire = id_provisoire
+                self.resultats['failles'].append(faille)
             
             self.resultats['attaques'].append(attaque)
     
