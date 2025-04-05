@@ -26,10 +26,7 @@ class AttaqueScript:
         self.csrf_scanner = CSRFScanner()
         self.headers_cookies_scanner = HeadersCookiesScanner()
 
-    def run_attack(self, sous_domaine: SousDomaine, types_attaques: List[str]) -> Dict[str, List]:
-        #logger.info(f"Démarrage de l'attaque pour le sous-domaine: {sous_domaine.url_SD}")
-        logger.info(f"Types d'attaques demandés: {types_attaques}")
-        
+    def run_attack(self, sous_domaine: SousDomaine, types_attaques: List[str]) -> Dict[str, List]:        
         # Initialisation du dictionnaire de résultats
         self.resultat_attaque = {
             "url": sous_domaine.url_SD,
@@ -39,7 +36,6 @@ class AttaqueScript:
             "headers_cookies": []
         }
         
-        #logger.info(f"Dictionnaire de résultats initialisé pour {sous_domaine.url_SD}")
         
         if types_attaques == ['all']:
             types_attaques = ["sqli", "xss", "csrf", "headers_cookies"]
@@ -52,14 +48,12 @@ class AttaqueScript:
             "headers_cookies": self._run_headers_cookies_scan
         }
         
-        #logger.info(f"Mapping des attaques configuré avec {len(attaques_mapping)} types d'attaques")
         
         for type_attaque in types_attaques:
-            #logger.info(f"Tentative d'exécution de l'attaque: {type_attaque}")
             
             if type_attaque in attaques_mapping:
                 try:
-                    logger.info(f"Démarrage du scan {type_attaque} sur {sous_domaine.url_SD}")
+                    #logger.info(f"Démarrage du scan {type_attaque} sur {sous_domaine.url_SD}")
                     debut_scan = time.time()
                     
                     self.resultat_attaque[type_attaque] = attaques_mapping[type_attaque](sous_domaine.url_SD)
@@ -72,14 +66,14 @@ class AttaqueScript:
                             logger.debug(f"Vulnérabilité {idx+1}: {vuln}")
                     
                 except Exception as e:
-                    #logger.error(f"Erreur lors du scan {type_attaque} : {str(e)}")
+                    logger.error(f"Erreur lors du scan {type_attaque} : {str(e)}")
                     #logger.exception("Détails de l'erreur:")
                     self.resultat_attaque[type_attaque] = []
                     #logger.info(f"Résultat pour {type_attaque} réinitialisé à liste vide suite à l'erreur")
             else:
                 logger.warning(f"Type d'attaque inconnu ignoré: {type_attaque}")
         
-        logger.info(f"Toutes les attaques terminées pour {sous_domaine.url_SD}")
+        #logger.info(f"Toutes les attaques terminées pour {sous_domaine.url_SD}")
     
         return self.resultat_attaque
 

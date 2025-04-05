@@ -9,6 +9,9 @@ from urllib.parse import urlparse, urlencode, parse_qs
 from backend.app.models.attaque import Attaque
 from backend.app.models.faille import Faille
 from datetime import datetime
+import logging
+
+logger = logging.getLogger(__name__)
 
 class XSSScanner:
     def __init__(self):
@@ -40,7 +43,7 @@ class XSSScanner:
         try:
             response = self.session.get(url, headers=self.headers, timeout=10)
             if response.status_code != 200:
-                print(f"[AVERTISSEMENT] L'URL {url} a retourné le code {response.status_code}")
+                logger.warning(f"[AVERTISSEMENT] L'URL {url} a retourné le code {response.status_code}")
                 return
             
             # Découvrir les paramètres dans l'URL et le HTML
@@ -56,9 +59,9 @@ class XSSScanner:
             return self.resultats
                 
         except requests.RequestException as e:
-            print(f"[ERREUR] Problème avec l'URL {url}: {e}")
+            logger.warning(f"[ERREUR] Problème avec l'URL {url}: {e}")
         except Exception as e:
-            print(f"[ERREUR INATTENDUE] {url}: {str(e)}")
+            logger.warning(f"[ERREUR INATTENDUE] {url}: {str(e)}")
         
 
     def test_reflected_xss(self, url, params):
@@ -89,7 +92,6 @@ class XSSScanner:
                         IsFaille = None
                         
                         if response.status_code == 200 and self.detect_xss_injection(response.text, unique_id):
-                            print(f"[VULNÉRABLE] {url} - Paramètre {param} vulnérable à XSS Reflected avec : {marked_payload}")
                             
                             attaque.resultat = 1
                             IsFaille = Faille(
@@ -106,10 +108,10 @@ class XSSScanner:
                         self.resultats['attaques'].append(attaque)
                         
                     except requests.RequestException as e:
-                        print(f"[ERREUR] Test échoué sur {url} param={param}: {e}")
+                        logger.warning(f"[ERREUR] Test échoué sur {url} param={param}: {e}")
                         continue
                     except Exception as e:
-                        print(f"[ERREUR INATTENDUE] {url} param={param}: {e}")
+                        logger.warning(f"[ERREUR INATTENDUE] {url} param={param}: {e}")
                         continue
         
 
@@ -126,13 +128,13 @@ class XSSScanner:
                 if response.status_code == 200:
                     params = self.discover_params_from_html(response.text)
                     if not params:
-                        print(f"[INFO] Aucun paramètre détecté pour {url}")
+                        logger.warning(f"[INFO] Aucun paramètre détecté pour {url}")
                         return results
                 else:
-                    print(f"[ERREUR] Impossible d'accéder à {url} - Code {response.status_code}")
+                    logger.warning(f"[ERREUR] Impossible d'accéder à {url} - Code {response.status_code}")
                     return None
             except requests.RequestException as e:
-                print(f"[ERREUR] Impossible d'accéder à {url} - {str(e)}")
+                logger.warning(f"[ERREUR] Impossible d'accéder à {url} - {str(e)}")
                 return results
                 
         for param in params:
@@ -156,8 +158,6 @@ class XSSScanner:
                         
                         if displayed_urls:
                             for display_url in displayed_urls:
-                                print(f"[VULNÉRABLE] {url} - Paramètre {param} vulnérable à XSS Stored avec {marked_payload}")
-                                print(f"[DÉTAIL] Payload trouvé dans {display_url}")
                                 
                                 attaque.resultat = 1
                                 IsFaille = Faille(
@@ -174,10 +174,10 @@ class XSSScanner:
                     self.resultats['attaques'].append(attaque)
                     
                 except requests.RequestException as e:
-                    print(f"[ERREUR] {url} - {param} - {str(e)}")
+                    logger.warning(f"[ERREUR] {url} - {param} - {str(e)}")
                     continue
                 except Exception as e:
-                    print(f"[ERREUR INATTENDUE] {url} - {param} - {str(e)}")
+                    logger.warning(f"[ERREUR INATTENDUE] {url} - {param} - {str(e)}")
                     continue
         
         
@@ -226,7 +226,7 @@ class XSSScanner:
                     param_matches = re.findall(r'["\']([a-zA-Z0-9_]+)["\'][\s]*[:=]', script.string)
                     params.update(param_matches)
         except Exception as e:
-            print(f"[ERREUR] Échec de l'analyse HTML: {str(e)}")
+            logger.warning(f"[ERREUR] Échec de l'analyse HTML: {str(e)}")
         
         return list(params)
     
@@ -302,7 +302,7 @@ class XSSScanner:
         en utilisant l'identifiant unique pour garantir que c'est bien cette injection spécifique.
         """
         if not unique_id:
-            print("[ERREUR] unique_id doit être fourni pour vérifier l'affichage du payload")
+            logger.warning("[ERREUR] unique_id doit être fourni pour vérifier l'affichage du payload")
             return []
 
         parsed_url = urlparse(base_url)

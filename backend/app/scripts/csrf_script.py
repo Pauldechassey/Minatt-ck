@@ -5,7 +5,9 @@ from urllib.parse import urljoin
 from backend.app.models.attaque import Attaque
 from backend.app.models.faille import Faille
 from datetime import datetime
+import logging
 
+logger = logging.getLogger(__name__)    
 
 class CSRFScanner:
     def __init__(self):
@@ -24,7 +26,7 @@ class CSRFScanner:
             response = self.session.get(url, headers=headers, timeout=timeout, allow_redirects=True)
             response.raise_for_status()
         except requests.RequestException as e:
-            print(f"Error accessing {url}: {e}")
+            logger.warning(f"Error accessing {url}: {e}")
             return False
         
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -81,7 +83,7 @@ class CSRFScanner:
 
 
             if not has_form_csrf and not has_csrf_token:
-                print(f"[VULNÉRABLE] {url} - CSRF: POST method without detectable CSRF protection")
+                logger.warning(f"[VULNÉRABLE] {url} - CSRF: POST method without detectable CSRF protection")
                 attaque.resultat = 1
                 faille = Faille(
                     gravite=6,

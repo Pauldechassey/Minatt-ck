@@ -5,6 +5,10 @@ from backend.app.models.attaque import Attaque
 from backend.app.models.faille import Faille
 from datetime import datetime
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 class HeadersCookiesScanner:
     def __init__(self):
         self.resultats = {
@@ -21,7 +25,7 @@ class HeadersCookiesScanner:
             response = self.session.get(url, headers=headers, timeout=timeout, allow_redirects=True)
             response.raise_for_status()
         except requests.RequestException as e:
-            print(f"[ERREUR] Problème avec l'URL {url}: {e}")
+            logger.warning(f"[ERREUR] Problème avec l'URL {url}: {e}")
             return None
         
         self._analyze_headers(response, url)
@@ -91,7 +95,7 @@ class HeadersCookiesScanner:
             self.resultats['attaques'].append(attaque)
     
     def _log_vulnerability(self, url, element, proof, id_prov=None):
-        print(f"[VULNÉRABLE] {url} - {element}: {proof}")
+        logger.warning(f"[VULNÉRABLE] {url} - {element}: {proof}")
         faille = Faille(gravite=6, description=proof, balise=element)
         if id_prov:
             faille.id_provisoire = id_prov

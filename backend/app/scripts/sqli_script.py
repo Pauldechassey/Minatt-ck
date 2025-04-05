@@ -9,6 +9,10 @@ from backend.app.schemas.type_attaque_enum import TypeAttaque
 from backend.app.models.attaque import Attaque
 from backend.app.models.faille import Faille
 from datetime import datetime
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 
@@ -195,7 +199,6 @@ class SQLIScanner:
 
             IsFaille=None
             if faille:
-                print(f"[VULNÉRABLE] {url} - Champ {input_field['name']} vulnérable ({vuln_description}) avec {payload_attack}")
                 attaque.resultat=1
                 IsFaille=Faille(
                     gravite=self._determine_severity(vuln_description),
@@ -212,7 +215,7 @@ class SQLIScanner:
             return False
         
         except Exception as e:
-            print(f"[ERREUR] Test échoué sur {url} avec {payload_attack}: {str(e)}")
+            logger.warning(f"[ERREUR] Test échoué sur {url} avec {payload_attack}: {str(e)}")
 
     def _determine_severity(self, type_vuln):
         severity_map = {

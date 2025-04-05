@@ -17,7 +17,17 @@ logger = logging.getLogger(__name__)
 
 
 def run_attacks(SD_initial_id: int, attaque_type: List[str], db: Session) -> bool:
-    #logger.info(f"Début de l'attaque {attaque_type} pour le sous-domaine ID {SD_initial_id}")
+    logger.info(""" 
+        
+░▒▓██████████████▓▒░  ░▒▓█▓▒░ ░▒▓███████▓▒░   ░▒▓██████▓▒░  ░▒▓████████▓▒░ ░▒▓████████▓▒░  ░▒▓██████▓▒░  ░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░    ░▒▓█▓▒░        ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░    ░▒▓█▓▒░        ░▒▓█▓▒░     ░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓████████▓▒░    ░▒▓█▓▒░        ░▒▓█▓▒░     ░▒▓█▓▒░        ░▒▓███████▓▒░  
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░    ░▒▓█▓▒░        ░▒▓█▓▒░     ░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░    ░▒▓█▓▒░        ░▒▓█▓▒░     ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░    ░▒▓█▓▒░        ░▒▓█▓▒░      ░▒▓██████▓▒░  ░▒▓█▓▒░░▒▓█▓▒░                                                                                                                                                                                                                                       
+        
+                    """)    
     
     attaque = AttaqueScript()
     SD_initial = get_sous_domaine_by_id(SD_initial_id, db)
@@ -25,10 +35,10 @@ def run_attacks(SD_initial_id: int, attaque_type: List[str], db: Session) -> boo
         logger.error("Sous-domaine initial non trouvé")
         raise HTTPException(status_code=404, detail="Sous-domaine initial non trouvé")
     
-    #logger.info(f"Sous-domaine initial trouvé : {SD_initial.url_SD}")
+    logger.info(f"Sous-domaine initial trouvé : {SD_initial.url_SD}")
     
     SD_cibles_id = get_all_child_ids_recursively(SD_initial, db)
-    #logger.info(f"{len(SD_cibles_id)} sous-domaines cibles trouvés pour l'attaque.")
+    logger.info(f"{len(SD_cibles_id)} sous-domaines cibles trouvés pour l'attaque.")
 
     urls_traitees = 0
 
@@ -38,14 +48,12 @@ def run_attacks(SD_initial_id: int, attaque_type: List[str], db: Session) -> boo
             #logger.warning(f"Sous-domaine cible avec ID {sous_domaine_id} non trouvé.")
             continue
         
-        logger.info(">>==[:::::::::::::::>")
+        
         logger.info(f"Lancement de l'attaque sur : {sous_domaine.url_SD}")
         save_attacks(sous_domaine, attaque.run_attack(sous_domaine, attaque_type), db)
         logger.info(f"Attaque terminée sur : {sous_domaine.url_SD}")
-        logger.info(">>==[:::::::::::::::>")
         urls_traitees += 1
 
-    logger.info(f"{urls_traitees}/{len(SD_cibles_id)} sous-domaines traités.")
     return urls_traitees == len(SD_cibles_id)
 
     
