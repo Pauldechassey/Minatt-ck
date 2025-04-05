@@ -5,10 +5,14 @@ import time
 import random
 import re
 from concurrent.futures import ThreadPoolExecutor
-from  app.schemas.type_attaque_enum import TypeAttaque
-from app.models.attaque import Attaque
-from app.models.faille import Faille
+from backend.app.schemas.type_attaque_enum import TypeAttaque
+from backend.app.models.attaque import Attaque
+from backend.app.models.faille import Faille
 from datetime import datetime
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 
@@ -17,8 +21,8 @@ from datetime import datetime
 class SQLIScanner:
     def __init__(self):
         self.resultats = {
-            'attaques':[Attaque],
-            'faille' : [Faille|None],
+            'attaques':[],
+            'failles' : [],
         }
         self.session = requests.Session()        
         # Listes de payloads et de modèles d'erreurs SQL
@@ -85,7 +89,7 @@ class SQLIScanner:
         else:
             return random.choice(["test123", "testvalue"])
 
-    def test_field(self, url, form_details, input_field, payload):
+    def test_field(self, url, form_details, input_field, payload_attack):
         # Création des données pour le test
         data = {}
         for field in form_details["inputs"]:
@@ -93,7 +97,7 @@ class SQLIScanner:
                 if field["name"] != input_field["name"]:
                     data[field["name"]] = self.get_garbage_value(field["type"], field["name"])
                 else:
-                    data[field["name"]] = payload
+                    data[field["name"]] = payload_attack
         
         # Gestion spéciale pour les formulaires de connexion
         if form_details["is_login_form"]:
@@ -144,7 +148,7 @@ class SQLIScanner:
             # Détection des attaques aveugles basées sur le temps
             if not faille:
                 for pattern in self.blind_sql_patterns:
-                    if pattern.lower() in payload.lower() and temps_reponse > 2:
+                    if pattern.lower() in payload_attack.lower() and temps_reponse > 2:
                         faille = True
                         vuln_description = "Blind SQLi (time-based)"
                         break
@@ -165,7 +169,7 @@ class SQLIScanner:
                 elif len(self.session.cookies.get_dict()) > len(initial_cookies):
                     new_cookies = set(self.session.cookies.get_dict().keys()) - set(initial_cookies.keys())
                     faille = True
-                    vuln_description = f"SQLi bypass authentication (new cookies: {', '.join(new_cookies)})"
+                    vuln_description =" SQLi bypass authentication (new cookies: {', '.join(new_cookies)})"
             
             # Détection des attaques aveugles basées sur le contenu
             if not faille:
@@ -183,33 +187,35 @@ class SQLIScanner:
                 if orig_tables != resp_tables:
                     faille = True
                     vuln_description = "Blind SQLi (structure change)"
-            
 
+            id_prov = f"sqli-{url}-{input_field}"
             attaque = Attaque(
-                    payload=payload,
+                    payload=payload_attack,
                     date_attaque=datetime.now(),
-                    resultat=0, #par défaut
+                    resultat=0,
                     id_Type = 1,
                 )
-            
+            attaque.id_provisoire = id_prov
+
             IsFaille=None
             if faille:
-                print(f"[VULNÉRABLE] {url} - Champ {input_field['name']} vulnérable ({vuln_description}) avec {payload}")
                 attaque.resultat=1
                 IsFaille=Faille(
                     gravite=self._determine_severity(vuln_description),
                     description=vuln_description,
                     balise=input_field["name"],
                 )
+                IsFaille.id_provisoire = id_prov
+
                 self.resultats['attaques'].append(attaque)
-                self.resultats['faille'].append(IsFaille)
+                self.resultats['failles'].append(IsFaille)
                 return True
 
             self.resultats['attaques'].append(attaque)
             return False
         
         except Exception as e:
-            print(f"[ERREUR] Test échoué sur {url} avec {payload}: {str(e)}")
+            logger.warning(f"[ERREUR] Test échoué sur {url} avec {payload_attack}: {str(e)}")
 
     def _determine_severity(self, type_vuln):
         severity_map = {
@@ -228,7 +234,6 @@ class SQLIScanner:
         self.original_content = requests.get(url).text
         
         for input_field in form_details["inputs"]:
-            input_name = input_field["name"]
             input_type = input_field["type"]
             
             if input_type in ["submit", "button", "image", "file", "hidden"]:

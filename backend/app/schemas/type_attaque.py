@@ -3,7 +3,7 @@ from  app.schemas.type_attaque_enum import TypeAttaque
 
 class TypeAttaqueSchema(BaseModel):
     id_Type: int
-    nom_type: TypeAttaque
+    nom_type: str
     description_type: str
 
     class Config:

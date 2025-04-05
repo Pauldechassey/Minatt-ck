@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Text
-from app.database import Base
+from backend.app.database import Base
 
 class Type_attaque(Base):
     __tablename__ = "Type_attaque"

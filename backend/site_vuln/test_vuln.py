@@ -10,7 +10,7 @@ user=""
 # Connexion à la base SQLite (non sécurisée)
 def get_db():
     if 'db' not in g:
-        g.db = sqlite3.connect('database.db', check_same_thread=False)
+        g.db = sqlite3.connect('backend/site_vuln/database.db', check_same_thread=False)
         # Création des tables si elles n'existent pas
         g.db.execute("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT, password TEXT, role TEXT)")
         g.db.execute("CREATE TABLE IF NOT EXISTS comments (id INTEGER PRIMARY KEY, username TEXT, comment TEXT, date TEXT)")

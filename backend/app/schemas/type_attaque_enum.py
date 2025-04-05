@@ -4,4 +4,4 @@ class TypeAttaque(str, Enum):
     SQLI = "sqli"       
     XSS = "xss"         
     CSRF = "csrf"       
-    HEADERS = "headers" 
+    HEADERS = "headers_cookies" 

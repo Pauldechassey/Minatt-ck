@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Text, ForeignKey
 from sqlalchemy.orm import relationship
-from app.database import Base
+from backend.app.database import Base
 
 class Faille(Base):
     __tablename__ = "Faille"

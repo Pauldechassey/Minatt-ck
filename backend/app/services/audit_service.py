@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.models.audit import Audit
+from backend.app.models.audit import Audit
 
 def get_all_audits(db: Session):
     return db.query(Audit).all()
