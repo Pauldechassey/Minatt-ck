@@ -68,52 +68,51 @@ class XSSScanner:
         """
         Teste les vulnérabilités XSS réfléchies sur tous les paramètres et s'arrête dès qu'une faille est détectée.
         """
+        all_payloads = self.payloads + self.encoded_payloads
         for param in params:
             unique_id = self.generate_unique_id()
             
-            for payload_list in [("standard", self.payloads), ("encodé", self.encoded_payloads)]:
-                for payload in payload_list:
-                    try:
-                        marked_payload = payload.replace("1", f"{unique_id}")
-                        test_url = self.construct_url_with_payload(url, param, marked_payload)
-                        
-                        response = self.session.get(test_url, headers=self.headers, timeout=10)
-                        
-                        id_prov = f"reflected_xss-{url}-{unique_id}"
+            for payload in all_payloads:
+                try:
+                    marked_payload = payload.replace("1", f"{unique_id}")
+                    test_url = self.construct_url_with_payload(url, param, marked_payload)
+                    
+                    response = self.session.get(test_url, headers=self.headers, timeout=10)
+                    
+                    id_prov = f"reflected_xss-{url}-{unique_id}"
 
-                        attaque = Attaque(
-                            payload=marked_payload,
-                            date_attaque=datetime.now(),
-                            resultat=0, # par défaut
-                            id_Type=2,
+                    attaque = Attaque(
+                        payload=marked_payload,
+                        date_attaque=datetime.now(),
+                        resultat=0, # par défaut
+                        id_Type=2,
+                    )
+                    attaque.id_provisoire = id_prov
+
+                    IsFaille = None
+                    
+                    if response.status_code == 200 and self.detect_xss_injection(response.text, unique_id):
+                        
+                        attaque.resultat = 1
+                        IsFaille = Faille(
+                            gravite=7,
+                            description=f"Paramètre {param} vulnérable à XSS Reflected",
+                            balise=param,
                         )
-                        attaque.id_provisoire = id_prov
+                        IsFaille.id_provisoire = id_prov
 
-                        IsFaille = None
-                        
-                        if response.status_code == 200 and self.detect_xss_injection(response.text, unique_id):
-                            
-                            attaque.resultat = 1
-                            IsFaille = Faille(
-                                gravite=7,
-                                description=f"Paramètre {param} vulnérable à XSS Reflected",
-                                balise=param,
-                            )
-                            IsFaille.id_provisoire = id_prov
-
-                            self.resultats['attaques'].append(attaque)
-                            self.resultats['failles'].append(IsFaille)
-                            return  
-                        
                         self.resultats['attaques'].append(attaque)
-                        
-                    except requests.RequestException as e:
-                        logger.warning(f"[ERREUR] Test échoué sur {url} param={param}: {e}")
-                        continue
-                    except Exception as e:
-                        logger.warning(f"[ERREUR INATTENDUE] {url} param={param}: {e}")
-                        continue
-        
+                        self.resultats['failles'].append(IsFaille)
+                        return  
+                    
+                    self.resultats['attaques'].append(attaque)
+                    
+                except requests.RequestException as e:
+                    logger.warning(f"[ERREUR] Test échoué sur {url} param={param}: {e}")
+                    continue
+                except Exception as e:
+                    logger.warning(f"[ERREUR INATTENDUE] {url} param={param}: {e}")
+                    continue
 
     def test_stored_xss(self, url, params=None):
         """
