@@ -52,14 +52,8 @@ class AttaqueScript:
         for type_attaque in types_attaques:
             
             if type_attaque in attaques_mapping:
-                try:
-                    #logger.info(f"Démarrage du scan {type_attaque} sur {sous_domaine.url_SD}")
-                    debut_scan = time.time()
-                    
+                try:  
                     self.resultat_attaque[type_attaque] = attaques_mapping[type_attaque](sous_domaine.url_SD)
-                    
-                    duree_scan = time.time() - debut_scan
-                    #logger.info(f"Scan {type_attaque} terminé en {duree_scan:.2f} secondes")
                     
                     if self.resultat_attaque[type_attaque]:
                         for idx, vuln in enumerate(self.resultat_attaque[type_attaque]):

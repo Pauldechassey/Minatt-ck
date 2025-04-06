@@ -35,9 +35,9 @@ def get_all_child_ids_recursively(initial_sous_domaine: SousDomaine, db: Session
         
         ids_to_process = [initial_sous_domaine.id_SD]
         
-        # Compteur de sécurité pour éviter une boucle infinie
+        # Compteur de sécurité pour éviter une boucle infinie -> à enlever après validation des SDs
         safety_counter = 0
-        max_iterations = 10000 # Limite arbitraire pour éviter les boucles infinies
+        max_iterations = 1000
         
         logger.info(f"Début du traitement avec l'ID initial: {initial_sous_domaine.id_SD} => {initial_sous_domaine.url_SD}")
         
@@ -45,11 +45,8 @@ def get_all_child_ids_recursively(initial_sous_domaine: SousDomaine, db: Session
             current_id = ids_to_process.pop(0)
             
             if current_id in processed_ids:
-                #logger.info(f"ID {current_id} déjà traité, on passe")
                 continue
-                
-            #logger.info(f"Traitement de l'ID: {current_id}")
-            
+                            
             # Trouver tous les sous-domaines qui ont ce parent
             children = db.query(SousDomaine.id_SD).filter(
                 SousDomaine.id_SD_Sous_domaine == current_id
@@ -60,16 +57,13 @@ def get_all_child_ids_recursively(initial_sous_domaine: SousDomaine, db: Session
             
             # Ajouter uniquement les nouveaux IDs
             new_child_ids = [id for id in child_ids if id not in all_ids]
-            #logger.info(f"Nouveaux enfants: {new_child_ids}")
             
             all_ids.update(new_child_ids)
             ids_to_process.extend(new_child_ids)
             
             processed_ids.add(current_id)
             safety_counter += 1
-            
-            #logger.info(f"État actuel - IDs à traiter: {ids_to_process}, Total IDs: {len(all_ids)}")
-        
+                    
         if safety_counter >= max_iterations:
             logger.warning(f"Atteinte du nombre maximum d'itérations ({max_iterations}). Possible boucle infinie évitée.")
         

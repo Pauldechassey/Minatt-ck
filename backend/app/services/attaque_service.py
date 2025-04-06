@@ -48,7 +48,6 @@ def run_attacks(SD_initial_id: int, attaque_type: List[str], db: Session) -> boo
             #logger.warning(f"Sous-domaine cible avec ID {sous_domaine_id} non trouvé.")
             continue
         
-        
         logger.info(f"Lancement de l'attaque sur : {sous_domaine.url_SD}")
         save_attacks(sous_domaine, attaque.run_attack(sous_domaine, attaque_type), db)
         logger.info(f"Attaque terminée sur : {sous_domaine.url_SD}")
