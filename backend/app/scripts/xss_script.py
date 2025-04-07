@@ -74,7 +74,7 @@ class XSSScanner:
             
             for payload in all_payloads:
                 try:
-                    marked_payload = payload.replace("1", f"{unique_id}")
+                    marked_payload = payload.replace("1", f'"{unique_id}"')
                     test_url = self.construct_url_with_payload(url, param, marked_payload)
                     
                     response = self.session.get(test_url, headers=self.headers, timeout=10)
@@ -140,8 +140,7 @@ class XSSScanner:
             for i, base_payload in enumerate(self.payloads):
                 try:
                     unique_id = f"{test_session_id}{i}"
-                    marked_payload = base_payload.replace("alert(1)", f"alert({unique_id})")
-                    
+                    marked_payload = base_payload.replace("alert(1)", f'alert("{unique_id}")')                 
                     id_prov = f"stored_xss-{url}-{unique_id}"
 
                     attaque = Attaque(

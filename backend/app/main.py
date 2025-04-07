@@ -23,4 +23,4 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # uvicorn backend.app.main:app --reload    -> to run the backend
-# python3 attaque/test_state/test_vuln.py  -> to run the website_test
+# python3 backend/site_vuln/test_vuln.py  -> to run the website_test
