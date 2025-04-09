@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 
 
-def run_attacks(SD_initial_id: int, attaque_type: List[str], db: Session) -> bool:
+def run_attacks(SD_initial_id: int, attaque_type: List[str], db: Session, single: bool = False) -> bool:
     logger.info(""" 
         
 ░▒▓██████████████▓▒░  ░▒▓█▓▒░ ░▒▓███████▓▒░   ░▒▓██████▓▒░  ░▒▓████████▓▒░ ░▒▓████████▓▒░  ░▒▓██████▓▒░  ░▒▓█▓▒░░▒▓█▓▒░ 
@@ -37,8 +37,16 @@ def run_attacks(SD_initial_id: int, attaque_type: List[str], db: Session) -> boo
     
     logger.info(f"Sous-domaine initial trouvé : {SD_initial.url_SD}")
     
-    SD_cibles_id = get_all_child_ids_recursively(SD_initial, db)
-    logger.info(f"{len(SD_cibles_id)} sous-domaines cibles trouvés pour l'attaque.")
+    SD_cibles_id = (
+        get_all_child_ids_recursively(SD_initial, db)
+        if not single else
+        [SD_initial_id]
+    )
+
+    if single:
+        logger.info(f"Attaque sur le sous-domaine initial uniquement : {SD_initial.url_SD}")
+    else:
+        logger.info(f"{len(SD_cibles_id)} sous-domaines cibles trouvés pour l'attaque.")
 
     urls_traitees = 0
 
