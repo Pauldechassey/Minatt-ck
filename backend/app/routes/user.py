@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from backend.app.schemas.user import UserSchema, LoginRequest
 from backend.app.services.user_service import get_all_users, get_user_by_id, connect_user, unconnect_user
 from backend.app.database import SessionLocal
-import app.globals as globals
+import backend.app.globals as globals
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
