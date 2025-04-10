@@ -1,6 +1,10 @@
 import sys
+from model import UserModel
 from PySide6.QtWidgets import QApplication
 from windows.MainWindow import MainWindow
+
+# Definition des variables globales du projet
+user_connected = -1
 
 
 def main():

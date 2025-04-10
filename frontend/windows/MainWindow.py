@@ -16,6 +16,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+
         self.setStyleSheet("background-color: #121212; color: white;")
         self.setMinimumSize(800, 600)  # Taille minimale pour éviter une fenêtre trop petite
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)

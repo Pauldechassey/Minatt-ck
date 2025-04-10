@@ -1,10 +1,14 @@
-from PySide6.QtWidgets import QMessageBox, QWidget
+from PySide6.QtWidgets import QMessageBox, QStackedWidget, QWidget
 from ui.ui_audits import Ui_Audits
+from repository.UserRepo import UserRepo
 
 
 class AuditsWindow(QWidget, Ui_Audits):
     def __init__(self, main_window, parent=None):
         super().__init__(parent)
+
+        self.userRepo = UserRepo()
+
         self.ui = Ui_Audits()
         self.ui.setupUi(self)
         self.main_window = main_window  # Stockez la référence à MainWindow
@@ -27,13 +31,17 @@ class AuditsWindow(QWidget, Ui_Audits):
         msg.setText("Voulez-vous vraiment vous déconnecter ?")
         msg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Cancel)
         msg.setIcon(QMessageBox.Icon.Question)
-
         result = msg.exec()
-
         if result == QMessageBox.StandardButton.Yes:
-            self.main_window.loginPage.ui.lineEditUsernameLogin.clear()
-            self.main_window.loginPage.ui.lineEditPasswordLogin.clear()
-            self.main_window.mainStackedWidget.setCurrentIndex(0)
+            if self.userRepo.logout():
+                parent = self.parentWidget()
+                self.main_window.loginPage.ui.lineEditUsernameLogin.clear()
+                self.main_window.loginPage.ui.lineEditPasswordLogin.clear()
+                self.main_window.mainStackedWidget.setCurrentIndex(0)
+                if isinstance(parent, QStackedWidget):
+                    parent.setCurrentIndex(0)
+            else:
+                QMessageBox.warning(self, "Error", "Deconnexion échoué")
 
     # Changement de page
     def goToAccueil(self):

@@ -1,23 +1,11 @@
 class User:
-    def __init__(self, name: str, password: str, role: str):
-        self._name = name
-        self._password = password
-        self._role = role
-
-    def getName(self) -> str:
-        return self.__name
-
-    def getRole(self) -> str:
-        return self.__role
-
-    def setName(self, name: str):
-        self.__name = name
-
-    def setRole(self, role: str):
-        self.__role = role
+    def __init__(self, id: int, name: str, role: str):
+        self.id = id
+        self.name = name
+        self.role = role
 
     def __str__(self) -> str:
-        return f"User(name={self._name}, role={self._role})"
+        return f"User(name={self.name}, role={self.role})"
 
     def __repr__(self) -> str:
-        return f"User('{self._name}', '********', '{self._role}')"
+        return f"User('{self.name}', '********', '{self.role}')"
