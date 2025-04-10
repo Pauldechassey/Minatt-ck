@@ -14,7 +14,7 @@ class AttaquesRepo:
         base_url = os.getenv("BASE_URL")
         port = os.getenv("PORT")
         if not base_url or not port:
-            raise ValueError("AttackRepo: BASE_URL or PORT not set in .env")
+            raise ValueError("AttaquesRepo: BASE_URL or PORT not set in .env")
         self.base_url = f"{base_url}:{port}/attaque"
 
     def send_attacks_recursive(self, sd_initial_id: int, attack_list: list[str]):

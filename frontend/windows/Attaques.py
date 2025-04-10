@@ -70,6 +70,8 @@ class AttaquesWindow(QWidget, Ui_Attaques):
             selected.append("xss")
         if self.ui.checkBoxCSRF.isChecked():
             selected.append("csrf")
+        if self.ui.checkBoxHEADERSCOOKIES.isChecked():
+            selected.append("headers_cookies")
         return selected
 
 

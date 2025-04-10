@@ -123,9 +123,21 @@ class Ui_Attaques(object):
 
         self.gridLayoutContentAttaques = QGridLayout()
         self.gridLayoutContentAttaques.setObjectName(u"gridLayoutContentAttaques")
-        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.gridLayoutContentAttaques.addItem(self.verticalSpacer_3, 11, 0, 1, 1)
+        self.gridLayoutContentAttaques.addItem(self.verticalSpacer, 1, 0, 1, 1)
+
+        self.labelUrlAttaques = QLabel(Attaques)
+        self.labelUrlAttaques.setObjectName(u"labelUrlAttaques")
+        font = QFont()
+        font.setPointSize(13)
+        self.labelUrlAttaques.setFont(font)
+
+        self.gridLayoutContentAttaques.addWidget(self.labelUrlAttaques, 8, 0, 1, 1)
+
+        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayoutContentAttaques.addItem(self.verticalSpacer_3, 12, 0, 1, 1)
 
         self.checkBoxSQLI = QCheckBox(Attaques)
         self.checkBoxSQLI.setObjectName(u"checkBoxSQLI")
@@ -148,26 +160,25 @@ class Ui_Attaques(object):
 
         self.gridLayoutContentAttaques.addWidget(self.checkBoxSQLI, 3, 0, 1, 1)
 
-        self.checkBoxXSS = QCheckBox(Attaques)
-        self.checkBoxXSS.setObjectName(u"checkBoxXSS")
-        self.checkBoxXSS.setStyleSheet(u"QCheckBox {\n"
-"    color: white;\n"
-"    font-size: 14px;\n"
-"}\n"
-"\n"
-"QCheckBox::indicator {\n"
-"    width: 16px;\n"
-"    height: 16px;\n"
-"    border-radius: 8px;\n"
-"    border: 2px solid #00FF00; \n"
-"    background: black;\n"
-"}\n"
-"\n"
-"QCheckBox::indicator:checked {\n"
-"    background: #00FF00; \n"
-"}")
+        self.labelNomAttaques = QLabel(Attaques)
+        self.labelNomAttaques.setObjectName(u"labelNomAttaques")
+        font1 = QFont()
+        font1.setPointSize(15)
+        font1.setBold(True)
+        self.labelNomAttaques.setFont(font1)
 
-        self.gridLayoutContentAttaques.addWidget(self.checkBoxXSS, 5, 0, 1, 1)
+        self.gridLayoutContentAttaques.addWidget(self.labelNomAttaques, 0, 0, 1, 1)
+
+        self.labelChoixAttaques = QLabel(Attaques)
+        self.labelChoixAttaques.setObjectName(u"labelChoixAttaques")
+        self.labelChoixAttaques.setFont(font)
+
+        self.gridLayoutContentAttaques.addWidget(self.labelChoixAttaques, 2, 0, 1, 1)
+
+        self.lineEditUrlAttaques = QLineEdit(Attaques)
+        self.lineEditUrlAttaques.setObjectName(u"lineEditUrlAttaques")
+
+        self.gridLayoutContentAttaques.addWidget(self.lineEditUrlAttaques, 9, 0, 1, 1)
 
         self.checkBoxCSRF = QCheckBox(Attaques)
         self.checkBoxCSRF.setObjectName(u"checkBoxCSRF")
@@ -190,6 +201,31 @@ class Ui_Attaques(object):
 
         self.gridLayoutContentAttaques.addWidget(self.checkBoxCSRF, 4, 0, 1, 1)
 
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.gridLayoutContentAttaques.addItem(self.verticalSpacer_2, 7, 0, 1, 1)
+
+        self.checkBoxXSS = QCheckBox(Attaques)
+        self.checkBoxXSS.setObjectName(u"checkBoxXSS")
+        self.checkBoxXSS.setStyleSheet(u"QCheckBox {\n"
+"    color: white;\n"
+"    font-size: 14px;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator {\n"
+"    width: 16px;\n"
+"    height: 16px;\n"
+"    border-radius: 8px;\n"
+"    border: 2px solid #00FF00; \n"
+"    background: black;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:checked {\n"
+"    background: #00FF00; \n"
+"}")
+
+        self.gridLayoutContentAttaques.addWidget(self.checkBoxXSS, 5, 0, 1, 1)
+
         self.pushButtonLancerAttaques = QPushButton(Attaques)
         self.pushButtonLancerAttaques.setObjectName(u"pushButtonLancerAttaques")
         self.pushButtonLancerAttaques.setStyleSheet(u"QPushButton {\n"
@@ -203,44 +239,28 @@ class Ui_Attaques(object):
 "    background-color: #009624; / survol */\n"
 "}")
 
-        self.gridLayoutContentAttaques.addWidget(self.pushButtonLancerAttaques, 10, 0, 1, 1)
+        self.gridLayoutContentAttaques.addWidget(self.pushButtonLancerAttaques, 11, 0, 1, 1)
 
-        self.lineEditUrlAttaques = QLineEdit(Attaques)
-        self.lineEditUrlAttaques.setObjectName(u"lineEditUrlAttaques")
+        self.checkBoxHEADERSCOOKIES = QCheckBox(Attaques)
+        self.checkBoxHEADERSCOOKIES.setObjectName(u"checkBoxHEADERSCOOKIES")
+        self.checkBoxHEADERSCOOKIES.setStyleSheet(u"QCheckBox {\n"
+"    color: white;\n"
+"    font-size: 14px;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator {\n"
+"    width: 16px;\n"
+"    height: 16px;\n"
+"    border-radius: 8px;\n"
+"    border: 2px solid #00FF00; \n"
+"    background: black;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:checked {\n"
+"    background: #00FF00; \n"
+"}")
 
-        self.gridLayoutContentAttaques.addWidget(self.lineEditUrlAttaques, 8, 0, 1, 1)
-
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayoutContentAttaques.addItem(self.verticalSpacer, 1, 0, 1, 1)
-
-        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
-
-        self.gridLayoutContentAttaques.addItem(self.verticalSpacer_2, 6, 0, 1, 1)
-
-        self.labelChoixAttaques = QLabel(Attaques)
-        self.labelChoixAttaques.setObjectName(u"labelChoixAttaques")
-        font = QFont()
-        font.setPointSize(13)
-        self.labelChoixAttaques.setFont(font)
-
-        self.gridLayoutContentAttaques.addWidget(self.labelChoixAttaques, 2, 0, 1, 1)
-
-        self.labelUrlAttaques = QLabel(Attaques)
-        self.labelUrlAttaques.setObjectName(u"labelUrlAttaques")
-        self.labelUrlAttaques.setFont(font)
-
-        self.gridLayoutContentAttaques.addWidget(self.labelUrlAttaques, 7, 0, 1, 1)
-
-        self.labelNomAttaques = QLabel(Attaques)
-        self.labelNomAttaques.setObjectName(u"labelNomAttaques")
-        font1 = QFont()
-        font1.setPointSize(15)
-        font1.setBold(True)
-        self.labelNomAttaques.setFont(font1)
-        self.labelNomAttaques.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.gridLayoutContentAttaques.addWidget(self.labelNomAttaques, 0, 0, 1, 1)
+        self.gridLayoutContentAttaques.addWidget(self.checkBoxHEADERSCOOKIES, 6, 0, 1, 1)
 
 
         self.gridLayout.addLayout(self.gridLayoutContentAttaques, 1, 0, 1, 1)
@@ -259,12 +279,13 @@ class Ui_Attaques(object):
         self.pushButtonRapportsAttaques.setText(QCoreApplication.translate("Attaques", u"Rapports", None))
         self.pushButtonCartographieAttaques.setText(QCoreApplication.translate("Attaques", u"Cartographie", None))
         self.pushButtonDeconnexionAttaques.setText("")
-        self.checkBoxSQLI.setText(QCoreApplication.translate("Attaques", u"SQLI", None))
-        self.checkBoxXSS.setText(QCoreApplication.translate("Attaques", u"CheckBoxXSS", None))
-        self.checkBoxCSRF.setText(QCoreApplication.translate("Attaques", u"CSRF", None))
-        self.pushButtonLancerAttaques.setText(QCoreApplication.translate("Attaques", u"PushButton", None))
-        self.labelChoixAttaques.setText(QCoreApplication.translate("Attaques", u"Choisissez votre attaque:", None))
         self.labelUrlAttaques.setText(QCoreApplication.translate("Attaques", u"Rentrez l'URL:", None))
+        self.checkBoxSQLI.setText(QCoreApplication.translate("Attaques", u"SQLI", None))
         self.labelNomAttaques.setText(QCoreApplication.translate("Attaques", u"Attaques", None))
+        self.labelChoixAttaques.setText(QCoreApplication.translate("Attaques", u"Choisissez votre attaque:", None))
+        self.checkBoxCSRF.setText(QCoreApplication.translate("Attaques", u"CSRF", None))
+        self.checkBoxXSS.setText(QCoreApplication.translate("Attaques", u"XSS", None))
+        self.pushButtonLancerAttaques.setText(QCoreApplication.translate("Attaques", u"PushButton", None))
+        self.checkBoxHEADERSCOOKIES.setText(QCoreApplication.translate("Attaques", u"Headers & Cookies", None))
     # retranslateUi
 
