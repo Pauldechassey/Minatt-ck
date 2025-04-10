@@ -23,7 +23,7 @@ class AuditRepo:
         data = {"url_domaine": url_domaine}
         try:
             response = requests.post(url=new_url, json=data, timeout=30)
-            if response.status_code == 200:
+            if response.status_code == 201:
                 print("AuditRepo [SUCCESS]: audit creation successful")
                 return True
             print("AuditRepo [FAILED]: audit creation failed")
