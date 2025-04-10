@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from backend.app.schemas.user import UserSchema, LoginRequest
-from backend.app.services.user_service import get_all_users, get_user_by_id, connect_user
+from backend.app.services.user_service import get_all_users, get_user_by_id, connect_user, unconnect_user
 from backend.app.database import SessionLocal
 import app.globals as globals
 
@@ -37,4 +37,11 @@ def login(json_data: LoginRequest, db: Session = Depends(get_db)):
     else:   
         raise HTTPException(status_code=401, detail="Nom d'utilisateur ou mot de passe incorrect")
         
-    
+@router.post("/auth/logout", status_code=200)
+def logout():
+    globals.CONNECTED_USER = unconnect_user()
+    if globals.CONNECTED_USER is not None: 
+        raise HTTPException(status_code=401, detail="Déconnexion avortée")
+    else:   
+        return {"message": "Déconnexion réussie"}        
+        
