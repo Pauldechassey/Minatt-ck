@@ -1,3 +1,4 @@
+from typing import List
 from pydantic import BaseModel
 from  app.schemas.type_attaque_enum import TypeAttaque
 
@@ -8,3 +9,6 @@ class TypeAttaqueSchema(BaseModel):
 
     class Config:
         orm_mode = True
+
+class TypeAttaqueResquest(BaseModel):
+    attaque_type : List[str]
