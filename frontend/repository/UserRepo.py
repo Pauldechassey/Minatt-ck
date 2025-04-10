@@ -26,7 +26,6 @@ class UserRepo:
         data = {"nom_user": nom_user, "hashed_credentials": hashed_credentials}
         try:
             response = requests.post(url=new_url, json=data, timeout=30)
-            mes_couilles = response.json
             if response.status_code == 200:
                 print("UserRepo [SUCCESS]: login successful")
                 return True
