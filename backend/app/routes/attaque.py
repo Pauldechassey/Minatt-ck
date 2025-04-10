@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import List, Dict
 from backend.app.models.sous_domaine import SousDomaine 
 from backend.app.database import SessionLocal
+from backend.app.schemas.type_attaque import TypeAttaqueResquest
 from backend.app.services.attaque_service import run_attacks
 from sqlalchemy.orm import Session
 
@@ -24,16 +25,16 @@ def attaque_all(SD_initial_id: int, db: Session = Depends(get_db)):
 
 ##
 @router.post("/recursive/list/", summary="Lister les attaques. ex : [sqli, xss] pour les enfants", status_code=200)
-def attaque_sqli(SD_initial_id: int, db: Session = Depends(get_db), attaque_type: List[str] = Query(...)):
-    if run_attacks(SD_initial_id, attaque_type, db): #single = false
+def attaque_sqli(SD_initial_id: int, type : TypeAttaqueResquest, db: Session = Depends(get_db)):
+    if run_attacks(SD_initial_id, type.attaque_type, db): #single = false
         return {"message": "Attaque SQLi effectuée avec succès"}
     else:
         raise HTTPException(status_code=404, detail="Sous-domaine non trouvé")
 
 ##
 @router.post("/single/list/", summary="Lister les attaques. ex : [sqli, xss] pour UNE url", status_code=200)
-def attaque_sqli(SD_initial_id: int, db: Session = Depends(get_db), attaque_type: List[str] = Query(...)):
-    if run_attacks(SD_initial_id, attaque_type, db, True): #single = true
+def attaque_sqli(SD_initial_id: int, type : TypeAttaqueResquest, db: Session = Depends(get_db)):
+    if run_attacks(SD_initial_id, type.attaque_type, db, True): #single = true
         return {"message": "Attaque SQLi effectuée avec succès"}
     else:
         raise HTTPException(status_code=404, detail="Sous-domaine non trouvé")

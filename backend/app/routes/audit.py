@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Body, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
-from backend.app.schemas.audit import AuditSchema
+from backend.app.schemas.audit import AuditSchema, UrlRequest
 from backend.app.services.audit_service import create_new_audit, get_all_audits, get_audit_by_id
 from backend.app.database import SessionLocal
 
@@ -25,9 +25,9 @@ def read_audit(audit_id: int, db: Session = Depends(get_db)):
     return audit
 
 @router.post("/new", status_code=201)
-def new_audit(url : str = Query(...), db: Session = Depends(get_db)):
+def new_audit(url : UrlRequest, db: Session = Depends(get_db)):
     try:
-        if create_new_audit(url, db):
+        if create_new_audit(url.url_domaine, db):
             return {"message": "Audit créé avec succès"}  
     except HTTPException as http_exc:
         raise http_exc
