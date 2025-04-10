@@ -11,6 +11,9 @@ def get_all_sous_domaines(db: Session):
 
 def get_sous_domaine_by_id(sous_domaine_id: int, db: Session):
     return db.query(SousDomaine).filter(SousDomaine.id_SD == sous_domaine_id).first()
+def get_sous_domaine_by_url(sous_domaine_url: str, db: Session):
+    return db.query(SousDomaine).filter(SousDomaine.url_SD == sous_domaine_url).first()
+    
 
 def get_sous_domaines_by_domaine(domaine_id: int, db: Session):
     return db.query(SousDomaine).filter(SousDomaine.id_domaine == domaine_id).all()
