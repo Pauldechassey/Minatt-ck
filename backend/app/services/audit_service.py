@@ -17,7 +17,7 @@ def create_new_audit(url_domaine : str, db: Session):
         new_audit = Audit(
             date=datetime.now(),
             etat=0, 
-            rapport="",
+            path_rapport="",
             id_user=globals.CONNECTED_USER.id_user, 
             id_domaine=id_domaine
         )
