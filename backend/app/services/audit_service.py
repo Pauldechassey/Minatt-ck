@@ -1,4 +1,5 @@
 import datetime
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from backend.app.models.audit import Audit
 from backend.app.services.domaine_service import create_empty_domaine
@@ -10,9 +11,9 @@ def get_all_audits(db: Session):
 def get_audit_by_id(audit_id: int, db: Session):
     return db.query(Audit).filter(Audit.id_audit == audit_id).first()
 
-def create_new_audit(db: Session):
-    id_domaine = create_empty_domaine(db)
+def create_new_audit(url_domaine : str, db: Session):
     if globals.CONNECTED_USER is not None:
+        id_domaine = create_empty_domaine(url_domaine, db)
         new_audit = Audit(
             date=datetime.now(),
             etat=0, 
@@ -29,4 +30,5 @@ def create_new_audit(db: Session):
 
         return True
     else:
-        return False
+        raise HTTPException(status_code=404, detail=f"Utilisateur non connecté")
+        
