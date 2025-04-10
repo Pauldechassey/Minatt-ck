@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QWidget, QStackedWidget, QMessageBox, QLineEdit
 from ui.ui_attaques import Ui_Attaques
+from repository.AttaquesRepo import AttaquesRepo 
 
 
 class AttaquesWindow(QWidget, Ui_Attaques):
@@ -41,3 +42,36 @@ class AttaquesWindow(QWidget, Ui_Attaques):
 
     def goToRapports(self):
         self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.rapportsPage))
+
+    def send_attacks(self, recursive=True):
+        selected_attacks = self.get_selected_attacks()
+        if not selected_attacks:
+            QMessageBox.warning(self, "Aucune sélection", "Veuillez sélectionner au moins une attaque.")
+            return
+
+        sd_initial_id = self.main_window.current_sd_id  
+
+        repo = AttaquesRepo()
+        if recursive:
+            result = repo.send_attacks_recursive(sd_initial_id, selected_attacks)
+        else:
+            result = repo.send_attacks_single(sd_initial_id, selected_attacks)
+
+        if result:
+            QMessageBox.information(self, "Succès", result.get("message", "Attaque envoyée."))
+        else:
+            QMessageBox.critical(self, "Erreur", "Une erreur est survenue lors de l'envoi des attaques.")
+
+    def get_selected_attacks(self) -> list[str]:
+        selected = []
+        if self.ui.checkBoxSQLI.isChecked():
+            selected.append("sqli")
+        if self.ui.checkBoxXSS.isChecked():
+            selected.append("xss")
+        if self.ui.checkBoxCSRF.isChecked():
+            selected.append("csrf")
+        if self.ui.checkBoxHEADERSCOOKIES.isChecked():
+            selected.append("headers_cookies")
+        return selected
+
+
