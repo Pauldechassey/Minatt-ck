@@ -24,7 +24,7 @@ def read_audit(audit_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Audit not found")
     return audit
 
-@router.post("/new", status_code=200)
+@router.post("/new", status_code=201)
 def new_audit(url : str = Query(...), db: Session = Depends(get_db)):
     try:
         if create_new_audit(url, db):
