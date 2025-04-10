@@ -15,33 +15,21 @@ class AuditRepo:
         base_url = os.getenv("BASE_URL")
         port = os.getenv("PORT")
         if not base_url or not port:
-            raise ValueError("UserRepo: BASE_URL or PORT environment variables not set")
+            raise ValueError("AuditRepo: BASE_URL or PORT environment variables not set")
         self.__url = f"{base_url}:{port}/"
 
-    def login(self, nom_user: str, hashed_credentials: str):
-        new_url = self.__url + "users/auth/login"
-        data = {"nom_user": nom_user, "hashed_credentials": hashed_credentials}
+    def createAudit(self, url_domaine: str):
+        new_url = self.__url + "audits/new"
+        data = {"url_domaine": url_domaine}
         try:
             response = requests.post(url=new_url, json=data, timeout=30)
-            mes_couilles = response.json
-            if response.status_code == 200:
-                print("UserRepo [SUCCESS]: login successful")
+            if response.status_code == 201:
+                print("AuditRepo [SUCCESS]: audit creation successful")
                 return True
-            print("UserRepo [FAILED]: login failed")
+            print("AuditRepo [FAILED]: audit creation failed")
             return False
         except requests.exceptions.Timeout:
-            print(f"UserRepo [TIMEOUT]: request timed out")
+            print("AuditRepo [TIMEOUT]: request timed out")
         except requests.exceptions.RequestException as e:
-            print(f"UserRepo [ERROR]: {e}")
+            print(f"AuditRepo [ERROR]: {e}")
         return False
-
-    def sendAuditUrl(self, audit_url: str):
-        new_url = self.__url + "audit"
-        data = {"audit_url": audit_url}
-        try:
-            response = requests.post(url=new_url, data=data, timeout=30)
-            return response.status_code
-        except requests.exceptions.Timeout:
-            print("AuditRepo: request timed out")
-        except requests.exceptions.RequestException as e:
-            print(f"Error creating an audit: {e}")
