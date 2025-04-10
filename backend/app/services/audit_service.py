@@ -15,7 +15,7 @@ def create_new_audit(db: Session):
     if globals.CONNECTED_USER is not None:
         new_audit = Audit(
             date=datetime.now(),
-            etat=False, 
+            etat=0, 
             rapport="",
             id_user=globals.CONNECTED_USER.id_user, 
             id_domaine=id_domaine

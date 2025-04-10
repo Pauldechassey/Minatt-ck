@@ -8,7 +8,7 @@ def get_domaine_by_id(domaine_id: int, db: Session):
     return db.query(Domaine).filter(Domaine.id_domaine == domaine_id).first()
 
 def create_empty_domaine(db: Session):
-    new_domaine = Domaine(description_domaine="")
+    new_domaine = Domaine(url_domaine = "Initialisation", description_domaine="Initialisation")
     db.add(new_domaine)
     db.commit()
     db.refresh(new_domaine)
