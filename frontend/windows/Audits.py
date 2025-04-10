@@ -27,11 +27,13 @@ class AuditsWindow(QWidget, Ui_Audits):
         self.ui.pushButtonCartographieAudits.clicked.connect(self.goToCartographie)
 
         # Connexion des boutons d'Audits
-        self.ui.pushButtonAuditsAudits.clicked.connect(self.createAudit)
+        self.ui.pushButtonCreerAudits.clicked.connect(self.createAudit)
 
     # Creation d'un audit
     def createAudit(self):
-        if self.auditRepo.createAudit(self.ui.lineEditUrlAudits.text()):
+        url = self.ui.lineEditUrlAudits.text()
+        print(url)
+        if self.auditRepo.createAudit(url):
             QMessageBox.warning(self, "Error", "Création réussi")
         else:
             QMessageBox.warning(self, "Error", "Création ECHOUÉ")
