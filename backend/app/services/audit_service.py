@@ -30,5 +30,5 @@ def create_new_audit(url_domaine : str, db: Session):
 
         return True
     else:
-        raise HTTPException(status_code=404, detail=f"Utilisateur non connecté")
+        raise HTTPException(status_code=500, detail=f"Utilisateur non connecté")
         

@@ -29,5 +29,7 @@ def new_audit(url : str = Query(...), db: Session = Depends(get_db)):
     try:
         if create_new_audit(url, db):
             return {"message": "Audit créé avec succès"}  
+    except HTTPException as http_exc:
+        raise http_exc
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erreur lors de la création de l'audit: {str(e)}")
