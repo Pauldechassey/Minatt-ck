@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from backend.app.schemas.user import UserSchema, LoginRequest
-from backend.app.services.user_service import get_all_users, get_user_by_id, get_connection
+from backend.app.services.user_service import get_all_users, get_user_by_id, connect_user
 from backend.app.database import SessionLocal
+import app.globals as globals
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
@@ -30,6 +31,10 @@ def read_user(user_id: int, db: Session = Depends(get_db)) -> UserSchema:
 
 @router.post("/auth/login", status_code=200)
 def login(json_data: LoginRequest, db: Session = Depends(get_db)):
-    if get_connection(json_data.model_dump(), db):
+    globals.CONNECTED_USER = connect_user(json_data.model_dump(), db)
+    if globals.CONNECTED_USER is not None: 
         return {"message": "Connexion réussie"}
-    raise HTTPException(status_code=401, detail="Identifiants incorrects")
+    else:   
+        raise HTTPException(status_code=401, detail="Nom d'utilisateur ou mot de passe incorrect")
+        
+    

@@ -11,12 +11,19 @@ def get_mdp_by_nom(nom_user: str, db: Session) -> str | None:
     result = db.query(User.mdp_user).filter(User.nom_user == nom_user).first()
     return result[0] if result else None
 
-def get_connection(data: dict, db: Session) -> bool:
+def connect_user(data: dict, db: Session) -> User | None:
     nom_user = data.get("nom_user")
     hashed_credentials = data.get("hashed_credentials")
     
     if not nom_user or not hashed_credentials:
-        return False
+        return None
     
-    hash_saved = get_mdp_by_nom(nom_user, db)
-    return hash_saved is not None and hashed_credentials == hash_saved
+    user = db.query(User).filter(User.nom_user == nom_user).first()
+    
+    if user and hashed_credentials == user.mdp_user:
+        return user
+    
+    return None
+
+def unconnect_user() -> None:
+    return None
