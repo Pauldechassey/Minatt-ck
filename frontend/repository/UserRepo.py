@@ -1,9 +1,8 @@
-import _hashlib
 import os
 import requests
-from dotenv import load_dotenv
+from frontend.utils.env import get_backend_url, get_backend_port
 
-load_dotenv()
+BACKEND_URL = f"{get_backend_url()}:{get_backend_port()}"
 
 
 class UserRepo:
@@ -19,7 +18,7 @@ class UserRepo:
         port = os.getenv("PORT")
         if not base_url or not port:
             raise ValueError("UserRepo: BASE_URL or PORT environment variables not set")
-        self.__url = f"{base_url}:{port}/"
+        self.__url = f"{BACKEND_URL}/"
 
     def login(self, nom_user: str, hashed_credentials: str):
         new_url = self.__url + "users/auth/login"

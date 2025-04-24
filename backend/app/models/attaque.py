@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
-from backend.app.models.type_attaque import Type_attaque
-from backend.app.database import Base
+from app.models.type_attaque import Type_attaque
+from app.database import Base
 
 class Attaque(Base):
     __tablename__ = "Attaque"

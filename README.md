@@ -29,6 +29,13 @@ minattack_env\Scripts\activate
 ```
 pip install -r requirements.txt
 ```
+---
+## ▶️️ **Lancement du backend**
+
+### Depuis le repertoire *Backend* le terminal :
+`uvicorn app.main:app --reload`
+
+### Depuis le script python *backend/backend_launcher.py*
 
 ---
 ## 🔧 **Updating Dependencies**

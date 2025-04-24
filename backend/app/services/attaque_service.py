@@ -1,15 +1,15 @@
 from http.client import HTTPException
 from typing import List, Dict
-from backend.app.scripts.attaque_script import AttaqueScript
-from backend.app.models.sous_domaine import SousDomaine
+from app.scripts.attaque_script import AttaqueScript
+from app.models.sous_domaine import SousDomaine
 import sys
 import os
-from backend.app.services.sous_domaine_service import get_all_child_ids_recursively, get_sous_domaine_by_id
+from app.services.sous_domaine_service import get_all_child_ids_recursively, get_sous_domaine_by_id
 from sqlalchemy.orm import Session
-from backend.app.models.attaque import Attaque
-from backend.app.models.faille import Faille
+from app.models.attaque import Attaque
+from app.models.faille import Faille
 from datetime import datetime
-from backend.app.models.type_attaque import Type_attaque
+from app.models.type_attaque import Type_attaque
 import logging
 
 logger = logging.getLogger(__name__)

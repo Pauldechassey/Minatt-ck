@@ -1,8 +1,8 @@
-import requests
 import os
-import dotenv
+import requests
+from frontend.utils.env import get_backend_url, get_backend_port
 
-dotenv.load_dotenv()
+BACKEND_URL = f"{get_backend_url()}:{get_backend_port()}"
 
 class AttaquesRepo:
     def __new__(cls):
@@ -15,7 +15,7 @@ class AttaquesRepo:
         port = os.getenv("PORT")
         if not base_url or not port:
             raise ValueError("AttaquesRepo: BASE_URL or PORT not set in .env")
-        self.base_url = f"{base_url}:{port}/attaque"
+        self.base_url = f"{BACKEND_URL}/attaque"
 
     def send_attacks_recursive(self, sd_initial_id: int, attack_list: list[str]):
         url = f"{self.base_url}/recursive/list/"

@@ -1,9 +1,9 @@
 from datetime import datetime
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
-from backend.app.models.audit import Audit
-from backend.app.services.domaine_service import create_empty_domaine
-import backend.app.globals as globals
+from app.models.audit import Audit
+from app.services.domaine_service import create_empty_domaine
+import app.globals as globals
 
 def get_all_audits(db: Session):
     return db.query(Audit).all()

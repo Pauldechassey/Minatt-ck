@@ -1,8 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 from http.cookies import SimpleCookie
-from backend.app.models.attaque import Attaque
-from backend.app.models.faille import Faille
+from app.models.attaque import Attaque
+from app.models.faille import Faille
 from datetime import datetime
 import re
 import logging

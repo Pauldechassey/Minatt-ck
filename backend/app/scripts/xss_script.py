@@ -6,8 +6,8 @@ import re
 import hashlib
 import random
 from urllib.parse import urlparse, urlencode, parse_qs
-from backend.app.models.attaque import Attaque
-from backend.app.models.faille import Faille
+from app.models.attaque import Attaque
+from app.models.faille import Faille
 from datetime import datetime
 import logging
 

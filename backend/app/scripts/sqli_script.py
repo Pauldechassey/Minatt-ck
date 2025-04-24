@@ -5,9 +5,9 @@ import time
 import random
 import re
 from concurrent.futures import ThreadPoolExecutor
-from backend.app.schemas.type_attaque_enum import TypeAttaque
-from backend.app.models.attaque import Attaque
-from backend.app.models.faille import Faille
+from app.schemas.type_attaque_enum import TypeAttaque
+from app.models.attaque import Attaque
+from app.models.faille import Faille
 from datetime import datetime
 import logging
 

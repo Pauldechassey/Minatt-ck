@@ -1,7 +1,10 @@
 from fastapi import FastAPI
-from .routes import user, audit, domaine, attaque, sous_domaine
+from app.routes import user, audit, domaine, attaque, sous_domaine
+from app.database import init_db
 
 app = FastAPI()
+
+init_db(force=False)
 
 app.include_router(user.router)
 app.include_router(audit.router)
@@ -31,5 +34,3 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-# uvicorn backend.app.main:app --reload    -> to run the backend
-# python3 backend/site_vuln/test_vuln.py  -> to run the website_test

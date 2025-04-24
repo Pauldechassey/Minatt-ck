@@ -1,7 +1,7 @@
 from typing import List
 from sqlalchemy import select, union_all
 from sqlalchemy.orm import Session
-from backend.app.models.sous_domaine import SousDomaine
+from app.models.sous_domaine import SousDomaine
 import logging
 
 logger = logging.getLogger(__name__)

@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from backend.app.schemas.domaine import DomaineSchema
-from backend.app.services.domaine_service import get_all_domaines, get_domaine_by_id
-from backend.app.database import SessionLocal
+from app.schemas.domaine import DomaineSchema
+from app.services.domaine_service import get_all_domaines, get_domaine_by_id
+from app.database import SessionLocal
 
 router = APIRouter(prefix="/domaines", tags=["Domaines"])
 

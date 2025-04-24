@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Body, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
-from backend.app.schemas.audit import AuditSchema, UrlRequest
-from backend.app.services.audit_service import create_new_audit, get_all_audits, get_audit_by_id
-from backend.app.database import SessionLocal
+from app.schemas.audit import AuditSchema, UrlRequest
+from app.services.audit_service import create_new_audit, get_all_audits, get_audit_by_id
+from app.database import SessionLocal
 
 router = APIRouter(prefix="/audits", tags=["Audits"])
 

@@ -1,9 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException, Query
-from typing import List, Dict
-from backend.app.models.sous_domaine import SousDomaine 
-from backend.app.database import SessionLocal
-from backend.app.schemas.type_attaque import TypeAttaqueResquest
-from backend.app.services.attaque_service import run_attacks
+from fastapi import APIRouter, Depends, HTTPException
+from app.database import SessionLocal
+from app.schemas.type_attaque import TypeAttaqueResquest
+from app.services.attaque_service import run_attacks
 from sqlalchemy.orm import Session
 
 router = APIRouter(prefix="/attaque", tags=["Attaque"])
