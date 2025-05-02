@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 from app.routes import user, audit, domaine, attaque, sous_domaine
 from app.database import init_db
+from app.utils.env import load_env
 
 app = FastAPI()
 
 init_db(force=False)
-
+load_env()
 app.include_router(user.router)
 app.include_router(audit.router)
 app.include_router(domaine.router)

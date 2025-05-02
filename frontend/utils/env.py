@@ -14,14 +14,15 @@ def get_path(relative_path: str) -> str:
 def load_env():
     dotenv_path = get_path(".env")
     if os.path.exists(dotenv_path):
-        load_dotenv(dotenv_path=dotenv_path)
+        load_dotenv(dotenv_path=dotenv_path, override=False)
     else:
         print(f"[WARNING] .env not found at: {dotenv_path}")
 
-def get_backend_port(default = 8000) -> int:
-    load_env()
-    return os.getenv("PORT", default)
+def get_backend_port(default = 8000) -> str:
+    return os.getenv("BACKEND_PORT", default)
 
-def get_backend_url(default = "http://127.0.0.1") -> str:
-    load_env()
-    return os.getenv("BASE_URL", default)
+def get_backend_host(default = "http://127.0.0.1") -> str:
+    return os.getenv("HOST", default)
+
+def set_dynamic_backend_port(port: int):
+    os.environ["BACKEND_PORT"] = str(port)

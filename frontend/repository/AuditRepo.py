@@ -1,8 +1,7 @@
 import os
 import requests
-from frontend.utils.env import get_backend_url, get_backend_port
+from frontend.utils.env import get_backend_host, get_backend_port
 
-BACKEND_URL = f"{get_backend_url()}:{get_backend_port()}"
 
 
 class AuditRepo:
@@ -14,11 +13,7 @@ class AuditRepo:
         return cls._instance
 
     def __init__(self):
-        base_url = os.getenv("BASE_URL")
-        port = os.getenv("PORT")
-        if not base_url or not port:
-            raise ValueError("AuditRepo: BASE_URL or PORT environment variables not set")
-        self.__url = f"{BACKEND_URL}/"
+        self.__url = f"{get_backend_host()}:{get_backend_port()}/"
 
     def createAudit(self, url_domaine: str):
         new_url = self.__url + "audits/new"

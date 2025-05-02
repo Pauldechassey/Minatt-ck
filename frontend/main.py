@@ -1,18 +1,27 @@
 import sys
+import os
 import subprocess
 import time
 from PySide6.QtWidgets import QApplication
 from windows.MainWindow import MainWindow
-from frontend.utils.env import load_env, get_path, get_backend_url, get_backend_port
+from frontend.utils.env import load_env, get_path, set_dynamic_backend_port
+from frontend.utils.port_handler import find_available_port
 
 def main():
+
+
+    backend_port = find_available_port()
+    set_dynamic_backend_port(backend_port)
+
+    print(f"Backend running on port: {backend_port}")
+
     load_env()
 
-    backend_path = get_path("backend/backend_launcher.py")
+    backend_launcher_path = get_path("backend/backend_launcher.py")
     root_dir = get_path(".")
 
     backend_process = subprocess.Popen(
-        [sys.executable, backend_path, str(get_backend_port())],
+        [sys.executable, backend_launcher_path, str(backend_port)],
         cwd=root_dir
     )
 

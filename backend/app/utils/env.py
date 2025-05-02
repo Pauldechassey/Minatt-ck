@@ -19,5 +19,4 @@ def load_env():
         print(f"[WARNING] .env not found at: {dotenv_path}")
 
 def get_env(default="dev") -> str:
-    load_env()
     return os.getenv("ENV", default)
