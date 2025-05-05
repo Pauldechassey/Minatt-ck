@@ -1,0 +1,8 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/">
+        <file>images/deconnexion.png</file>
+        <file>images/logo.png</file>
+        <file>images/icon_app.png</file>
+    </qresource>
+</RCC>

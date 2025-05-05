@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
+from typing import List
 
 
 class AttaqueSchema(BaseModel):
@@ -12,3 +13,7 @@ class AttaqueSchema(BaseModel):
 
     class Config:
         orm_mode = True
+
+class AttackRequest(BaseModel):
+    SD_initial_id: int
+    attaque_type: List[str]

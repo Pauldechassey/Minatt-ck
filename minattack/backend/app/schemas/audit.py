@@ -15,5 +15,10 @@ class AuditSchema(BaseModel):
         orm_mode = True
 
 
+class AuditStateUpdateSchema(BaseModel):
+    id_audit: int
+    new_state: int
+
+
 class UrlRequest(BaseModel):
     url_domaine: str

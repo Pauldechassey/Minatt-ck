@@ -1,16 +1,14 @@
-from PySide6.QtWidgets import QWidget, QStackedWidget, QMessageBox, QLineEdit
-from minattack.frontend.repository.UserRepo import UserRepo
+from PySide6.QtWidgets import QWidget, QStackedWidget, QMessageBox
 from minattack.frontend.ui.ui_login import Ui_Login
 from hashlib import sha256
 
 
 class LoginWindow(QWidget, Ui_Login):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, main_window, parent=None):
+        super().__init__(parent)
         self.ui = Ui_Login()
         self.ui.setupUi(self)
-
-        self.userRepo = UserRepo()
+        self.main_window = main_window
 
         # Connexion du bouton login
         self.ui.buttonLogin.clicked.connect(self.check_credentials)
@@ -20,19 +18,13 @@ class LoginWindow(QWidget, Ui_Login):
             self.check_credentials
         )  # Appuie sur "Entrée" pour se connecter
 
-    # def check_credentials(self):
-    #     if self.ui.lineEditUsernameLogin.text() == "admin" and self.ui.lineEditPasswordLogin.text() == "admin":
-    #         parent = self.parentWidget()
-    #         if isinstance(parent, QStackedWidget):
-    #             parent.setCurrentIndex(1)
-    #     else:
-    #         QMessageBox.warning(self, "Error", "Invalid credentials")
-
     def check_credentials(self):
         user = self.ui.lineEditUsernameLogin.text()
         password = self.ui.lineEditPasswordLogin.text()
         hashed_credentials = sha256((user + password).encode())
-        if self.userRepo.login(user, hashed_credentials.hexdigest()):
+        if self.main_window.userRepo.login(
+            user, hashed_credentials.hexdigest()
+        ):
             parent = self.parentWidget()
             if isinstance(parent, QStackedWidget):
                 parent.setCurrentIndex(1)

@@ -18,9 +18,7 @@ from minattack.backend.app.models.type_attaque import Type_attaque
 logger = logging.getLogger(__name__)
 
 
-def run_attacks(
-    SD_initial_id: int, attaque_type: List[str], db: Session, single: bool = False
-) -> bool:
+def run_attacks(SD_initial_id: int, attaque_type: List[str], db: Session, single: bool = False) -> bool:
 
     attaque = AttaqueScript()
     SD_initial = get_sous_domaine_by_id(SD_initial_id, db)
@@ -30,14 +28,10 @@ def run_attacks(
 
     logger.info(f"Sous-domaine initial trouvé : {SD_initial.url_SD}")
 
-    SD_cibles_id = (
-        get_all_child_ids_recursively(SD_initial, db) if not single else [SD_initial_id]
-    )
+    SD_cibles_id = get_all_child_ids_recursively(SD_initial, db) if not single else [SD_initial_id]
 
     if single:
-        logger.info(
-            f"Attaque sur le sous-domaine initial uniquement : {SD_initial.url_SD}"
-        )
+        logger.info(f"Attaque sur le sous-domaine initial uniquement : {SD_initial.url_SD}")
     else:
         logger.info(f"{len(SD_cibles_id)} sous-domaines cibles trouvés pour l'attaque.")
 
@@ -90,21 +84,9 @@ def save_attacks(SD_cible: SousDomaine, resultats: Dict[str, List], db: Session)
                 # logger.info(f"Traitement de l'attaque: {attaque_data}")
 
                 nouvelle_attaque = Attaque(
-                    payload=(
-                        attaque_data.payload
-                        if hasattr(attaque_data, "payload")
-                        else str(attaque_data)
-                    ),
-                    date_attaque=(
-                        attaque_data.date_attaque
-                        if hasattr(attaque_data, "date_attaque")
-                        else datetime.now()
-                    ),
-                    resultat=(
-                        attaque_data.resultat
-                        if hasattr(attaque_data, "resultat")
-                        else None
-                    ),
+                    payload=(attaque_data.payload if hasattr(attaque_data, "payload") else str(attaque_data)),
+                    date_attaque=(attaque_data.date_attaque if hasattr(attaque_data, "date_attaque") else datetime.now()),
+                    resultat=(attaque_data.resultat if hasattr(attaque_data, "resultat") else None),
                     id_SD=SD_cible.id_SD,
                     id_Type=type_obj.id_Type,
                 )
@@ -113,15 +95,10 @@ def save_attacks(SD_cible: SousDomaine, resultats: Dict[str, List], db: Session)
                 db.flush()
 
                 if hasattr(attaque_data, "id_provisoire"):
-                    attaque_mapping[attaque_data.id_provisoire] = (
-                        nouvelle_attaque.id_attaque
-                    )
+                    attaque_mapping[attaque_data.id_provisoire] = nouvelle_attaque.id_attaque
 
             for faille_data in failles:
-                if (
-                    hasattr(faille_data, "id_provisoire")
-                    and faille_data.id_provisoire in attaque_mapping
-                ):
+                if hasattr(faille_data, "id_provisoire") and faille_data.id_provisoire in attaque_mapping:
                     # logger.info(f"Traitement de la faille liée à l'attaque {faille_data.id_provisoire}")
 
                     nouvelle_faille = Faille(

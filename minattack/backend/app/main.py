@@ -25,6 +25,7 @@ app.include_router(rapport.router)
 app.include_router(cartographie.router) 
 
 
+
 @app.get("/")
 def root():
     return """ 
