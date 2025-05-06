@@ -1,5 +1,5 @@
 import requests
-from frontend.utils.env import get_backend_host, get_backend_port
+from utils.env import get_backend_host, get_backend_port
 
 
 

@@ -4,8 +4,8 @@ import subprocess
 import time
 from PySide6.QtWidgets import QApplication
 from windows.MainWindow import MainWindow
-from frontend.utils.env import load_env, get_path, set_dynamic_backend_port
-from frontend.utils.port_handler import find_available_port
+from utils.env import load_env, get_path, set_dynamic_backend_port
+from utils.port_handler import find_available_port
 
 def main():
 
