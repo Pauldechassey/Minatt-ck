@@ -54,8 +54,8 @@ Thumbs.db
 # -----------------------
 minattack/backend/__pycache__/
 minattack/backend/venv/
-backend/db/*.sqlite3
-backend/db/*.sqlite
+minattack/backend/db/*.sqlite3
+minattack/backend/db/*.sqlite
 
 # -----------------------
 # 🎨 Frontend (PySide6)
