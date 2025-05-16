@@ -14,5 +14,6 @@ class AuditSchema(BaseModel):
     class Config:
         orm_mode = True
 
+
 class UrlRequest(BaseModel):
     url_domaine: str

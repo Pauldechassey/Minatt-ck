@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, ForeignKey
 from minattack.backend.app.database import Base
 
+
 class Utiliser(Base):
     __tablename__ = "Utiliser"
 

@@ -1,7 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from minattack.backend.app.schemas.user import UserSchema, LoginRequest
-from minattack.backend.app.services.user_service import get_all_users, get_user_by_id, connect_user, unconnect_user
+from minattack.backend.app.services.user_service import (
+    get_all_users,
+    get_user_by_id,
+    connect_user,
+    unconnect_user,
+)
 from minattack.backend.app.database import SessionLocal
 import minattack.backend.app.globals as globals
 
@@ -32,16 +37,18 @@ def read_user(user_id: int, db: Session = Depends(get_db)) -> UserSchema:
 @router.post("/auth/login", status_code=200)
 def login(json_data: LoginRequest, db: Session = Depends(get_db)):
     globals.CONNECTED_USER = connect_user(json_data.model_dump(), db)
-    if globals.CONNECTED_USER is not None: 
+    if globals.CONNECTED_USER is not None:
         return {"message": "Connexion réussie"}
-    else:   
-        raise HTTPException(status_code=401, detail="Nom d'utilisateur ou mot de passe incorrect")
-        
+    else:
+        raise HTTPException(
+            status_code=401, detail="Nom d'utilisateur ou mot de passe incorrect"
+        )
+
+
 @router.post("/auth/logout", status_code=200)
 def logout():
     globals.CONNECTED_USER = unconnect_user()
-    if globals.CONNECTED_USER is not None: 
+    if globals.CONNECTED_USER is not None:
         raise HTTPException(status_code=401, detail="Déconnexion avortée")
-    else:   
-        return {"message": "Déconnexion réussie"}        
-        
+    else:
+        return {"message": "Déconnexion réussie"}

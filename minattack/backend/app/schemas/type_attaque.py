@@ -1,6 +1,7 @@
 from typing import List
 from pydantic import BaseModel
 
+
 class TypeAttaqueSchema(BaseModel):
     id_Type: int
     nom_type: str
@@ -9,5 +10,6 @@ class TypeAttaqueSchema(BaseModel):
     class Config:
         orm_mode = True
 
+
 class TypeAttaqueResquest(BaseModel):
-    attaque_type : List[str]
+    attaque_type: List[str]

@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QWidget, QStackedWidget, QMessageBox, QLineEdit
 from minattack.frontend.ui.ui_attaques import Ui_Attaques
-from minattack.frontend.repository.AttaquesRepo import AttaquesRepo 
+from minattack.frontend.repository.AttaquesRepo import AttaquesRepo
 
 
 class AttaquesWindow(QWidget, Ui_Attaques):
@@ -21,7 +21,9 @@ class AttaquesWindow(QWidget, Ui_Attaques):
         msg = QMessageBox(self)
         msg.setWindowTitle("Déconnexion")
         msg.setText("Voulez-vous vraiment vous déconnecter ?")
-        msg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Cancel)
+        msg.setStandardButtons(
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Cancel
+        )
         msg.setIcon(QMessageBox.Icon.Question)
 
         result = msg.exec()
@@ -32,24 +34,36 @@ class AttaquesWindow(QWidget, Ui_Attaques):
             self.main_window.mainStackedWidget.setCurrentIndex(0)
 
     def goToAccueil(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.accueilPage))
+        self.main_window.mainStackedWidget.setCurrentIndex(
+            self.main_window.mainStackedWidget.indexOf(self.main_window.accueilPage)
+        )
 
     def goToAudits(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.auditsPage))
+        self.main_window.mainStackedWidget.setCurrentIndex(
+            self.main_window.mainStackedWidget.indexOf(self.main_window.auditsPage)
+        )
 
     def goToCartographie(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.cartographiePage))
+        self.main_window.mainStackedWidget.setCurrentIndex(
+            self.main_window.mainStackedWidget.indexOf(
+                self.main_window.cartographiePage
+            )
+        )
 
     def goToRapports(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.rapportsPage))
+        self.main_window.mainStackedWidget.setCurrentIndex(
+            self.main_window.mainStackedWidget.indexOf(self.main_window.rapportsPage)
+        )
 
     def send_attacks(self, recursive=True):
         selected_attacks = self.get_selected_attacks()
         if not selected_attacks:
-            QMessageBox.warning(self, "Aucune sélection", "Veuillez sélectionner au moins une attaque.")
+            QMessageBox.warning(
+                self, "Aucune sélection", "Veuillez sélectionner au moins une attaque."
+            )
             return
 
-        sd_initial_id = self.main_window.current_sd_id  
+        sd_initial_id = self.main_window.current_sd_id
 
         repo = AttaquesRepo()
         if recursive:
@@ -58,9 +72,13 @@ class AttaquesWindow(QWidget, Ui_Attaques):
             result = repo.send_attacks_single(sd_initial_id, selected_attacks)
 
         if result:
-            QMessageBox.information(self, "Succès", result.get("message", "Attaque envoyée."))
+            QMessageBox.information(
+                self, "Succès", result.get("message", "Attaque envoyée.")
+            )
         else:
-            QMessageBox.critical(self, "Erreur", "Une erreur est survenue lors de l'envoi des attaques.")
+            QMessageBox.critical(
+                self, "Erreur", "Une erreur est survenue lors de l'envoi des attaques."
+            )
 
     def get_selected_attacks(self) -> list[str]:
         selected = []
@@ -73,5 +91,3 @@ class AttaquesWindow(QWidget, Ui_Attaques):
         if self.ui.checkBoxHEADERSCOOKIES.isChecked():
             selected.append("headers_cookies")
         return selected
-
-

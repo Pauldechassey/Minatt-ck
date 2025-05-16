@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Text
 from minattack.backend.app.database import Base
 
+
 class Type_attaque(Base):
     __tablename__ = "Type_attaque"
 

@@ -13,7 +13,9 @@ DUMP_SQL_PATH = get_path("minattack/backend/app/database/data_dump.sql")
 
 SQLALCHEMY_DATABASE_URL = f"sqlite:///{DB_FILE}"
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+)
 
 # Create session factory
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -50,7 +52,6 @@ def init_db(force=False):
 
         print(f"Loading SQL from: {SCHEMA_SQL_PATH} and {INIT_SQL_PATH}")
 
-
         if os.path.exists(SCHEMA_SQL_PATH) and os.path.exists(INIT_SQL_PATH):
             with open(SCHEMA_SQL_PATH, "r") as f:
                 sql_schema_script = f.read()
@@ -58,12 +59,14 @@ def init_db(force=False):
             with open(INIT_SQL_PATH, "r") as f:
                 init_sql_script = f.read()
                 cursor.executescript(init_sql_script)
-            if get_env("dev")=="dev" and os.path.exists(DUMP_SQL_PATH):
+            if get_env("dev") == "dev" and os.path.exists(DUMP_SQL_PATH):
                 with open(DUMP_SQL_PATH, "r") as f:
                     sql_dump_script = f.read()
                     cursor.executescript(sql_dump_script)
         else:
-            print("Warning: schema.sql and init.sql not found. Skipping SQL script execution.")
+            print(
+                "Warning: schema.sql and init.sql not found. Skipping SQL script execution."
+            )
 
         conn.commit()
         conn.close()

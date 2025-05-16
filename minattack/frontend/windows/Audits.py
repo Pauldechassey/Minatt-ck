@@ -43,7 +43,9 @@ class AuditsWindow(QWidget, Ui_Audits):
         msg = QMessageBox(self)
         msg.setWindowTitle("Déconnexion")
         msg.setText("Voulez-vous vraiment vous déconnecter ?")
-        msg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Cancel)
+        msg.setStandardButtons(
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Cancel
+        )
         msg.setIcon(QMessageBox.Icon.Question)
         result = msg.exec()
         if result == QMessageBox.StandardButton.Yes:
@@ -59,13 +61,23 @@ class AuditsWindow(QWidget, Ui_Audits):
 
     # Changement de page
     def goToAccueil(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.accueilPage))
+        self.main_window.mainStackedWidget.setCurrentIndex(
+            self.main_window.mainStackedWidget.indexOf(self.main_window.accueilPage)
+        )
 
     def goToAttaques(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.attaquesPage))
+        self.main_window.mainStackedWidget.setCurrentIndex(
+            self.main_window.mainStackedWidget.indexOf(self.main_window.attaquesPage)
+        )
 
     def goToRapports(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.rapportsPage))
+        self.main_window.mainStackedWidget.setCurrentIndex(
+            self.main_window.mainStackedWidget.indexOf(self.main_window.rapportsPage)
+        )
 
     def goToCartographie(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(self.main_window.mainStackedWidget.indexOf(self.main_window.cartographiePage))
+        self.main_window.mainStackedWidget.setCurrentIndex(
+            self.main_window.mainStackedWidget.indexOf(
+                self.main_window.cartographiePage
+            )
+        )
