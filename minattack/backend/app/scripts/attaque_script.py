@@ -8,7 +8,7 @@ from minattack.backend.app.models.sous_domaine import SousDomaine
 import logging
 import time
 
-logger= logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 class AttaqueScript:
@@ -18,57 +18,59 @@ class AttaqueScript:
             "sqli": [],
             "xss": [],
             "csrf": [],
-            "headers_cookies": []
+            "headers_cookies": [],
         }
-        
+
         self.sqli_scanner = SQLIScanner()
         self.xss_scanner = XSSScanner()
         self.csrf_scanner = CSRFScanner()
         self.headers_cookies_scanner = HeadersCookiesScanner()
 
-    def run_attack(self, sous_domaine: SousDomaine, types_attaques: List[str]) -> Dict[str, List]:        
+    def run_attack(
+        self, sous_domaine: SousDomaine, types_attaques: List[str]
+    ) -> Dict[str, List]:
         # Initialisation du dictionnaire de résultats
         self.resultat_attaque = {
             "url": sous_domaine.url_SD,
             "sqli": [],
             "xss": [],
             "csrf": [],
-            "headers_cookies": []
+            "headers_cookies": [],
         }
-        
-        
-        if types_attaques == ['all']:
+
+        if types_attaques == ["all"]:
             types_attaques = ["sqli", "xss", "csrf", "headers_cookies"]
-            #logger.info("Option 'all' détectée - Exécution de toutes les attaques disponibles")
-        
+            # logger.info("Option 'all' détectée - Exécution de toutes les attaques disponibles")
+
         attaques_mapping = {
             "sqli": self._run_sqli_scan,
             "xss": self._run_xss_scan,
             "csrf": self._run_csrf_scan,
-            "headers_cookies": self._run_headers_cookies_scan
+            "headers_cookies": self._run_headers_cookies_scan,
         }
-        
-        
+
         for type_attaque in types_attaques:
-            
+
             if type_attaque in attaques_mapping:
-                try:  
-                    self.resultat_attaque[type_attaque] = attaques_mapping[type_attaque](sous_domaine.url_SD)
-                    
+                try:
+                    self.resultat_attaque[type_attaque] = attaques_mapping[
+                        type_attaque
+                    ](sous_domaine.url_SD)
+
                     if self.resultat_attaque[type_attaque]:
                         for idx, vuln in enumerate(self.resultat_attaque[type_attaque]):
                             logger.debug(f"Vulnérabilité {idx+1}: {vuln}")
-                    
+
                 except Exception as e:
                     logger.error(f"Erreur lors du scan {type_attaque} : {str(e)}")
-                    #logger.exception("Détails de l'erreur:")
+                    # logger.exception("Détails de l'erreur:")
                     self.resultat_attaque[type_attaque] = []
-                    #logger.info(f"Résultat pour {type_attaque} réinitialisé à liste vide suite à l'erreur")
+                    # logger.info(f"Résultat pour {type_attaque} réinitialisé à liste vide suite à l'erreur")
             else:
                 logger.warning(f"Type d'attaque inconnu ignoré: {type_attaque}")
-        
-        #logger.info(f"Toutes les attaques terminées pour {sous_domaine.url_SD}")
-    
+
+        # logger.info(f"Toutes les attaques terminées pour {sous_domaine.url_SD}")
+
         return self.resultat_attaque
 
     def _run_sqli_scan(self, url: str) -> List:
@@ -103,7 +105,5 @@ class AttaqueScript:
             print(f"Erreur de scan des en-têtes et cookies : {e}")
             return []
 
-
     def get_attack_results(self):
         return self.resultats_attaques
-

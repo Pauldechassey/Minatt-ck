@@ -2,7 +2,6 @@ import requests
 from minattack.shared.env import get_backend_host, get_backend_port
 
 
-
 class UserRepo:
     _instance = None
 

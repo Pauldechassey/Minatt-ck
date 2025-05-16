@@ -11,11 +11,12 @@ from minattack.backend.app.models.faille import Faille
 from typing import Dict, List
 from datetime import datetime
 from io import BytesIO
-from rapport_service import generer_rapport
+from minattack.backend.app.scripts.rapport_script import generer_rapport
+
 
 def get_audit_data(db: Session, audit_id: int) -> Dict:
     """Récupère toutes les données nécessaires pour le rapport"""
-    
+
     # Vérification/récupération audit et domaine
     audit = db.query(Audit).filter(Audit.id_audit == audit_id).first()
     if not audit:
@@ -23,51 +24,61 @@ def get_audit_data(db: Session, audit_id: int) -> Dict:
 
     domaine = db.query(Domaine).filter(Domaine.id_domaine == audit.id_domaine).first()
     if not domaine:
-        raise HTTPException(status_code=404, detail=f"Domaine {audit.id_domaine} non trouvé")
+        raise HTTPException(
+            status_code=404, detail=f"Domaine {audit.id_domaine} non trouvé"
+        )
 
     # Statistiques globales
     stats = {
         "total_sous_domaines": db.query(SousDomaine)
-            .filter(SousDomaine.id_domaine == domaine.id_domaine)
-            .count(),
+        .filter(SousDomaine.id_domaine == domaine.id_domaine)
+        .count(),
         "total_attaques": db.query(Attaque)
-            .join(SousDomaine)
-            .filter(SousDomaine.id_domaine == domaine.id_domaine)
-            .count(),
+        .join(SousDomaine)
+        .filter(SousDomaine.id_domaine == domaine.id_domaine)
+        .count(),
         "total_failles": db.query(Faille)
-            .join(Attaque)
-            .join(SousDomaine)
-            .filter(SousDomaine.id_domaine == domaine.id_domaine)
-            .count()
+        .join(Attaque)
+        .join(SousDomaine)
+        .filter(SousDomaine.id_domaine == domaine.id_domaine)
+        .count(),
     }
 
     # Récupération des URLs vulnérables avec détails
-    vulnerable_urls = db.query(
-        SousDomaine.url_SD,
-        SousDomaine.description_SD,
-        Type_attaque.nom_type,
-        Attaque.payload,
-        Attaque.date_attaque,
-        Faille.balise,
-        Faille.description,
-        Faille.gravite
-    ).join(Attaque
-    ).join(Type_attaque, Attaque.id_Type == Type_attaque.id_Type
-    ).join(Faille
-    ).filter(SousDomaine.id_domaine == domaine.id_domaine
-    ).order_by(SousDomaine.url_SD, Type_attaque.nom_type).all()
+    vulnerable_urls = (
+        db.query(
+            SousDomaine.url_SD,
+            SousDomaine.description_SD,
+            Type_attaque.nom_type,
+            Attaque.payload,
+            Attaque.date_attaque,
+            Faille.balise,
+            Faille.description,
+            Faille.gravite,
+        )
+        .join(Attaque)
+        .join(Type_attaque, Attaque.id_Type == Type_attaque.id_Type)
+        .join(Faille)
+        .filter(SousDomaine.id_domaine == domaine.id_domaine)
+        .order_by(SousDomaine.url_SD, Type_attaque.nom_type)
+        .all()
+    )
 
     # Toutes les URLs testées avec leur statut
-    all_urls = db.query(
-        SousDomaine.url_SD,
-        SousDomaine.description_SD,
-        func.count(distinct(Attaque.id_attaque)).label('nb_attaques'),
-        func.count(distinct(Faille.id_faille)).label('nb_failles')
-    ).outerjoin(Attaque
-    ).outerjoin(Faille
-    ).filter(SousDomaine.id_domaine == domaine.id_domaine
-    ).group_by(SousDomaine.url_SD, SousDomaine.description_SD
-    ).order_by(SousDomaine.url_SD).all()
+    all_urls = (
+        db.query(
+            SousDomaine.url_SD,
+            SousDomaine.description_SD,
+            func.count(distinct(Attaque.id_attaque)).label("nb_attaques"),
+            func.count(distinct(Faille.id_faille)).label("nb_failles"),
+        )
+        .outerjoin(Attaque)
+        .outerjoin(Faille)
+        .filter(SousDomaine.id_domaine == domaine.id_domaine)
+        .group_by(SousDomaine.url_SD, SousDomaine.description_SD)
+        .order_by(SousDomaine.url_SD)
+        .all()
+    )
 
     return {
         "audit_info": {
@@ -86,8 +97,9 @@ def get_audit_data(db: Session, audit_id: int) -> Dict:
                 "date_attaque": date_attaque,
                 "balise": balise,
                 "description_faille": faille_desc,
-                "gravite": gravite
-            } for url, desc, type_attaque, payload, date_attaque, balise, faille_desc, gravite in vulnerable_urls
+                "gravite": gravite,
+            }
+            for url, desc, type_attaque, payload, date_attaque, balise, faille_desc, gravite in vulnerable_urls
         ],
         "all_urls": [
             {
@@ -95,30 +107,40 @@ def get_audit_data(db: Session, audit_id: int) -> Dict:
                 "description": desc,
                 "nb_attaques": nb_attaques,
                 "nb_failles": nb_failles,
-                "is_vulnerable": nb_failles > 0
-            } for url, desc, nb_attaques, nb_failles in all_urls
-        ]
+                "is_vulnerable": nb_failles > 0,
+            }
+            for url, desc, nb_attaques, nb_failles in all_urls
+        ],
     }
 
-def rapport(audit_id: int, db: Session) -> Dict:
+
+def rapport(audit_id: int, db: Session) -> bytes:
     """Service principal de génération de rapport"""
     try:
         # Récupérer les données
         data = get_audit_data(db, audit_id)
-        
-        # Générer le PDF
-        pdf_result = generer_rapport(data)
-        
-        return {
-            "status": "success",
-            "message": "Rapport généré avec succès",
-        }
-        
+
+        # Générer et retourner le PDF directement
+        return generer_rapport(data)
+
     except HTTPException as he:
         raise he
     except Exception as e:
         raise HTTPException(
-            status_code=500,
-            detail=f"Erreur lors de la génération du rapport: {str(e)}"
+            status_code=500, detail=f"Erreur lors de la génération du rapport: {str(e)}"
         )
 
+def path_file(id_audit: int, db: Session) -> str:
+    """Génère le chemin de téléchargement du rapport PDF"""
+    audit = db.query(Audit).filter(Audit.id_audit == id_audit).first()
+    if not audit:
+        raise HTTPException(status_code=404, detail="Audit non trouvé")
+        
+    domaine = db.query(Domaine).filter(Domaine.id_domaine == audit.id_domaine).first()
+    if not domaine:
+        raise HTTPException(status_code=404, detail="Domaine non trouvé")
+    
+    # Construire le nom du fichier comme dans rapport_script.py
+    date_str = audit.date.strftime("%d/%m/%Y")
+    domaine_name = domaine.url_domaine.replace(".", "_").replace("://", "_")
+    return f"rapport_audit_{id_audit}_{domaine_name}_{date_str}.pdf"

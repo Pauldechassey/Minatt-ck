@@ -16,7 +16,9 @@ class LoginWindow(QWidget, Ui_Login):
         self.ui.buttonLogin.clicked.connect(self.check_credentials)
 
         # Connexion de la touche Entrée
-        self.ui.lineEditPasswordLogin.returnPressed.connect(self.check_credentials)  # Appuie sur "Entrée" pour se connecter
+        self.ui.lineEditPasswordLogin.returnPressed.connect(
+            self.check_credentials
+        )  # Appuie sur "Entrée" pour se connecter
 
     # def check_credentials(self):
     #     if self.ui.lineEditUsernameLogin.text() == "admin" and self.ui.lineEditPasswordLogin.text() == "admin":

@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String
 from minattack.backend.app.database import Base
 
+
 class Technologie(Base):
     __tablename__ = "Technologie"
 

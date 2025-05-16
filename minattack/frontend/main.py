@@ -8,6 +8,7 @@ from minattack.frontend.windows.MainWindow import MainWindow
 from minattack.frontend.utils.port_handler import find_available_port
 from minattack.shared.env import load_env, set_dynamic_backend_port
 
+
 def main():
     backend_port = find_available_port()
     set_dynamic_backend_port(backend_port)
@@ -29,6 +30,7 @@ def main():
 
     backend_process.terminate()
     sys.exit(exit_code)
+
 
 if __name__ == "__main__":
     main()
