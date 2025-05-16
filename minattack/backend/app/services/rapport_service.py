@@ -1,4 +1,5 @@
 from fastapi import HTTPException
+import logging
 from sqlalchemy.orm import Session
 from sqlalchemy import func, distinct
 from minattack.backend.app.models.audit import Audit
@@ -12,7 +13,6 @@ from typing import Dict, List
 from datetime import datetime
 from io import BytesIO
 from minattack.backend.app.scripts.rapport_script import generer_rapport
-
 
 def get_audit_data(db: Session, audit_id: int) -> Dict:
     """Récupère toutes les données nécessaires pour le rapport"""
@@ -34,12 +34,14 @@ def get_audit_data(db: Session, audit_id: int) -> Dict:
         .filter(SousDomaine.id_domaine == domaine.id_domaine)
         .count(),
         "total_attaques": db.query(Attaque)
-        .join(SousDomaine)
+        .select_from(Attaque)
+        .join(SousDomaine, Attaque.id_SD == SousDomaine.id_SD)
         .filter(SousDomaine.id_domaine == domaine.id_domaine)
         .count(),
         "total_failles": db.query(Faille)
-        .join(Attaque)
-        .join(SousDomaine)
+        .select_from(Faille)
+        .join(Attaque, Faille.id_attaque == Attaque.id_attaque)
+        .join(SousDomaine, Attaque.id_SD == SousDomaine.id_SD)
         .filter(SousDomaine.id_domaine == domaine.id_domaine)
         .count(),
     }
@@ -56,9 +58,10 @@ def get_audit_data(db: Session, audit_id: int) -> Dict:
             Faille.description,
             Faille.gravite,
         )
-        .join(Attaque)
+        .select_from(SousDomaine)
+        .join(Attaque, SousDomaine.id_SD == Attaque.id_SD)
         .join(Type_attaque, Attaque.id_Type == Type_attaque.id_Type)
-        .join(Faille)
+        .join(Faille, Attaque.id_attaque == Faille.id_attaque)
         .filter(SousDomaine.id_domaine == domaine.id_domaine)
         .order_by(SousDomaine.url_SD, Type_attaque.nom_type)
         .all()
@@ -72,14 +75,14 @@ def get_audit_data(db: Session, audit_id: int) -> Dict:
             func.count(distinct(Attaque.id_attaque)).label("nb_attaques"),
             func.count(distinct(Faille.id_faille)).label("nb_failles"),
         )
-        .outerjoin(Attaque)
-        .outerjoin(Faille)
+        .select_from(SousDomaine)
+        .outerjoin(Attaque, SousDomaine.id_SD == Attaque.id_SD)
+        .outerjoin(Faille, Attaque.id_attaque == Faille.id_attaque)
         .filter(SousDomaine.id_domaine == domaine.id_domaine)
         .group_by(SousDomaine.url_SD, SousDomaine.description_SD)
         .order_by(SousDomaine.url_SD)
         .all()
     )
-
     return {
         "audit_info": {
             "id": audit_id,
@@ -117,10 +120,7 @@ def get_audit_data(db: Session, audit_id: int) -> Dict:
 def rapport(audit_id: int, db: Session) -> bytes:
     """Service principal de génération de rapport"""
     try:
-        # Récupérer les données
         data = get_audit_data(db, audit_id)
-
-        # Générer et retourner le PDF directement
         return generer_rapport(data)
 
     except HTTPException as he:
@@ -139,8 +139,10 @@ def path_file(id_audit: int, db: Session) -> str:
     domaine = db.query(Domaine).filter(Domaine.id_domaine == audit.id_domaine).first()
     if not domaine:
         raise HTTPException(status_code=404, detail="Domaine non trouvé")
+        
+    domaine_name = domaine.url_domaine
+    domaine_name = domaine_name.replace("http://", "").replace("https://", "")
+    domaine_name = domaine_name.replace(".", "-").replace(":", "-").replace("/", "-")
     
-    # Construire le nom du fichier comme dans rapport_script.py
-    date_str = audit.date.strftime("%d/%m/%Y")
-    domaine_name = domaine.url_domaine.replace(".", "_").replace("://", "_")
-    return f"rapport_audit_{id_audit}_{domaine_name}_{date_str}.pdf"
+    return f"rapport-audit_id-{id_audit}_{domaine_name}.pdf"
+    

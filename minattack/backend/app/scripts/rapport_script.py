@@ -23,13 +23,15 @@ from reportlab.platypus.flowables import Flowable
 from io import BytesIO
 import os.path
 
+"""
 REPORT_DIR = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "res", "rapports"
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "res"
 )
+
 
 # Création du répertoire s'il n'existe pas
 os.makedirs(REPORT_DIR, exist_ok=True)
-
+"""
 
 class HorizontalLine(Flowable):
     """Classe personnalisée pour dessiner une ligne horizontale."""
@@ -60,19 +62,23 @@ def generer_rapport(data: Dict) -> bytes:
         buffer = BytesIO()
 
         # Information d'audit
-        audit_id = data["audit_id"]
         audit_info = data["audit_info"]
+        id_audit = audit_info["id"] 
         stats = data["statistics"]
         vulnerable_urls = data["vulnerable_urls"]
         all_urls = data["all_urls"]
 
         # Création du nom de fichier
-        date_str = audit_info["date"].strftime("%d/%m/%Y")
-        domaine_name = (
-            audit_info["domaine_principal"].replace(".", "_").replace("://", "_")
-        )
-        filename = f"rapport_audit_{audit_id}_{domaine_name}_{date_str}.pdf"
+        domaine_name = audit_info["domaine_principal"]
+        # supp http:// & https://
+        domaine_name = domaine_name.replace("http://", "").replace("https://", "")
+        # supp carracteres spéciaux
+        domaine_name = domaine_name.replace(".", "-").replace(":", "-").replace("/", "-")
+
+        """
+        filename = f"rapport-audit_id-{id_audit}_{domaine_name}.pdf"
         filepath = os.path.join(REPORT_DIR, filename)
+        """
 
         # Créer le document
         doc = SimpleDocTemplate(
@@ -84,6 +90,7 @@ def generer_rapport(data: Dict) -> bytes:
             bottomMargin=72,
             title=f"Rapport d'audit - {audit_info['domaine_principal']}",
         )
+
 
         # Styles
         styles = getSampleStyleSheet()
@@ -208,7 +215,6 @@ def generer_rapport(data: Dict) -> bytes:
             # Données du tableau
             for url in all_urls:
                 status = "Vulnérable" if url["is_vulnerable"] else "Sécurisé"
-                status_color = colors.red if url["is_vulnerable"] else colors.green
 
                 url_data.append(
                     [
@@ -341,21 +347,18 @@ def generer_rapport(data: Dict) -> bytes:
 
         elements.append(PageBreak())
 
-        # Construire le PDF
         doc.build(elements)
 
-        # Récupérer le contenu du buffer
         pdf_content = buffer.getvalue()
         buffer.close()
 
+        """
         # Sauvegarder une copie du PDF dans le répertoire des rapports
         with open(filepath, "wb") as f:
             f.write(pdf_content)
+        logger.info(f"PDF sauvegardé sous: {filepath}")
+        """
 
         return pdf_content
     except Exception as e:
         raise Exception(f"Erreur lors de la génération du rapport: {str(e)}")
-
-def get_rapport_dir() -> str:
-    """Retourne le chemin du répertoire des rapports."""
-    return REPORT_DIR
