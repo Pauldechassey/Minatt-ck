@@ -9,6 +9,7 @@ class SousDomaine(Base):
     id_SD = Column(Integer, primary_key=True, autoincrement=True)
     url_SD = Column(String(50), nullable=True)
     description_SD = Column(String(255), nullable=True)
+    degre = Column(Integer, nullable=True)
     id_domaine = Column(Integer, nullable=False)
     id_SD_Sous_domaine = Column(Integer, nullable=True)
 

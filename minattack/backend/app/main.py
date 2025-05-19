@@ -6,6 +6,7 @@ from minattack.backend.app.routes import (
     domaine,
     attaque,
     sous_domaine,
+    cartographie,
 )
 from minattack.backend.app.database import init_db
 from minattack.shared.env import load_env
@@ -21,6 +22,7 @@ app.include_router(domaine.router)
 app.include_router(attaque.router)
 app.include_router(sous_domaine.router)
 app.include_router(rapport.router)
+app.include_router(cartographie.router) 
 
 
 @app.get("/")
