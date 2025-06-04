@@ -74,3 +74,11 @@ CREATE TABLE Faille (
     id_attaque INTEGER NOT NULL UNIQUE,
     FOREIGN KEY (id_attaque) REFERENCES Attaque (id_attaque) ON DELETE CASCADE
 );
+
+CREATE TABLE Vecteur (
+    id_vecteur INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_SD INTEGER NOT NULL,
+    vecteur TEXT NOT NULL, -- Stocké sous forme JSON ou CSV (ex: "0.1,0.2,0.3,...")
+    cluster INTEGER,
+    FOREIGN KEY (id_SD) REFERENCES Sous_domaine(id_SD) ON DELETE CASCADE
+);

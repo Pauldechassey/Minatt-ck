@@ -3,11 +3,14 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse, unquote
 import re
 from collections import deque
+import json
 
 from minattack.backend.app.models.domaine import Domaine
 from minattack.backend.app.models.sous_domaine import SousDomaine
 from minattack.backend.app.models.technologie import Technologie
 from minattack.backend.app.models.utiliser import Utiliser
+from minattack.backend.app.models.vecteur import Vecteur
+from minattack.backend.app.scripts.init_vector_script import InitVector
 
 import logging
 
@@ -22,10 +25,12 @@ class WebCrawler:
         self.id_domaine = id_domaine  # Ajouter l'ID du domaine principal
         self.sous_domaines = []
         self.technologies = []
+        self.vecteurs = []  # Nouvelle liste pour stocker les vecteurs
         self.relations_utiliser = []  # Pour stocker les relations entre domaines et technologies
         self.visited_urls = set()
         self.discovered_urls = set()
         self.url_to_sd_id = {}  # Dictionnaire pour mapper les URLs aux IDs de sous-domaines
+        self.url_to_content = {}  # Dictionnaire pour stocker le contenu HTML de chaque URL
 
     def is_internal_link(self, url):
         """Vérifie si l'URL est interne au domaine."""
@@ -86,7 +91,7 @@ class WebCrawler:
                     links.add(normalized_url)
                     self.discovered_urls.add(normalized_url)
             except Exception as e:
-                print(f"Error extracting link: {e}")
+                logger.error(f"Error extracting link: {e}")
         return links
 
     def extract_technologies(self, soup, response=None):
@@ -173,6 +178,36 @@ class WebCrawler:
 
         return techs
 
+    def generate_vector_for_url(self, url, html_content):
+        """Génère un vecteur pour une URL donnée en utilisant InitVector."""
+        try:
+            logger.info(f"Génération du vecteur pour: {url}")
+            
+            # Créer une instance d'InitVector avec le contenu HTML
+            vector_generator = InitVector(html_content)
+            
+            # Obtenir le vecteur binaire
+            vector_array = vector_generator.get_vector()
+            
+            # Convertir en JSON pour le stockage
+            vector_json = json.dumps(vector_array.tolist())
+            
+            # Créer l'objet Vecteur (l'ID du sous-domaine sera mis à jour plus tard)
+            vecteur = Vecteur(
+                vecteur=vector_json,
+                cluster=None,  # Sera assigné lors du clustering
+                id_SD=None  # Sera mis à jour avec l'ID du sous-domaine
+            )
+            
+            logger.info(f"Vecteur généré avec succès pour {url}. Features actives: {len(vector_generator.get_active_features())}")
+            logger.debug(f"Score pondéré du vecteur: {vector_generator.calculate_weighted_score():.2f}")
+            
+            return vecteur, vector_generator.get_active_features()
+            
+        except Exception as e:
+            logger.error(f"Erreur lors de la génération du vecteur pour {url}: {e}")
+            return None, {}
+
     def crawl_bfs(self):
         """Méthode de crawling utilisant BFS (Breadth-First Search)."""
         # Initialisation avec l'URL de base
@@ -214,6 +249,9 @@ class WebCrawler:
                     
                 soup = BeautifulSoup(response.text, 'html.parser')
                 
+                # Stocker le contenu HTML pour la génération de vecteur
+                self.url_to_content[normalized_url] = response.text
+                
                 # Trouver l'ID parent (pour le stockage en BDD)
                 parent_id = None
                 if parent_url:
@@ -224,7 +262,7 @@ class WebCrawler:
                             break
                 
                 # Ne pas recréer de sous-domaine pour l'URL racine qui est déjà créée
-                sd_id = None
+                sd_index = None
                 if normalized_url != normalized_base_url:
                     # Création du SousDomaine
                     sous_domaine = SousDomaine(
@@ -238,8 +276,20 @@ class WebCrawler:
                     # Ajouter uniquement s'il n'existe pas déjà
                     if not any(sd.url_SD == sous_domaine.url_SD for sd in self.sous_domaines):
                         self.sous_domaines.append(sous_domaine)
-                        sd_id = sous_domaine.id_SD  # À utiliser après le flush en BDD
-                        self.url_to_sd_id[normalized_url] = len(self.sous_domaines) - 1  # Index dans la liste
+                        sd_index = len(self.sous_domaines) - 1  # Index dans la liste
+                        self.url_to_sd_id[normalized_url] = sd_index
+                else:
+                    # Pour l'URL racine, utiliser l'index 0
+                    sd_index = 0
+                    self.url_to_sd_id[normalized_url] = sd_index
+                
+                # Génération du vecteur pour cette URL
+                vecteur, active_features = self.generate_vector_for_url(normalized_url, response.text)
+                if vecteur:
+                    # Associer le vecteur à l'index du sous-domaine (sera mis à jour avec l'ID réel plus tard)
+                    vecteur.sd_index = sd_index  # Attribut temporaire pour le mapping
+                    self.vecteurs.append(vecteur)
+                    logger.info(f"Vecteur créé pour {normalized_url}. Features actives: {list(active_features.keys())}")
                 
                 # Extraction des technologies
                 site_technologies = self.extract_technologies(soup, response)
@@ -275,6 +325,7 @@ class WebCrawler:
             "domaine": self.domaine_model,
             "sous_domaines": self.sous_domaines,
             "technologies": self.technologies,
+            "vecteurs": self.vecteurs,
             "relations_utiliser": self.relations_utiliser
         }
 
@@ -309,7 +360,12 @@ def main():
         for sd in sorted(rapport["sous_domaines"], key=lambda x: x.degre):
             print(sd)
 
+        print("\n--- Vecteurs Générés ---")
+        for i, vecteur in enumerate(rapport["vecteurs"]):
+            print(f"Vecteur {i+1}: {len(json.loads(vecteur.vecteur))} dimensions")
+
         print(f"\nTotal de sous-domaines découverts : {len(rapport['sous_domaines'])}")
+        print(f"Total de vecteurs générés : {len(rapport['vecteurs'])}")
 
     except ValueError:
         print("Profondeur invalide. Utilisez un nombre entier.")
