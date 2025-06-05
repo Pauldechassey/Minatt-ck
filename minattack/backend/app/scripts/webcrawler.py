@@ -31,6 +31,11 @@ class WebCrawler:
         self.discovered_urls = set()
         self.url_to_sd_id = {}  # Dictionnaire pour mapper les URLs aux IDs de sous-domaines
         self.url_to_content = {}  # Dictionnaire pour stocker le contenu HTML de chaque URL
+        self.parent_child_map = {}  # {child_url: parent_url}
+
+    def get_parent_url(self, child_url):
+        """Récupère l'URL du parent d'un sous-domaine donné."""
+        return self.parent_child_map.get(child_url)
 
     def is_internal_link(self, url):
         """Vérifie si l'URL est interne au domaine."""
@@ -209,7 +214,7 @@ class WebCrawler:
             return None, {}
 
     def crawl_bfs(self):
-        """Méthode de crawling utilisant BFS (Breadth-First Search)."""
+        """Méthode de crawling utilisant BFS (Breadth-First Search) avec tracking des relations parent-enfant."""
         # Initialisation avec l'URL de base
         queue = deque([(self.base_url, 0, None)])  # (url, depth, parent_url)
         
@@ -217,15 +222,16 @@ class WebCrawler:
         normalized_base_url = self.normalize_url(self.base_url)
         root_sous_domaine = SousDomaine(
             url_SD=normalized_base_url,
-            description_SD="Domaine racine",  # Description par défaut
+            description_SD="Domaine racine",
             degre=0,
-            id_domaine=self.id_domaine,  # Lien vers le domaine principal
+            id_domaine=self.id_domaine,
             id_SD_Sous_domaine=None  # Pas de parent pour la racine
         )
         
         # Ajouter le sous-domaine racine à la liste
         self.sous_domaines.append(root_sous_domaine)
         self.visited_urls.add(normalized_base_url)
+        self.url_to_sd_id[normalized_base_url] = 0  # Index 0 pour la racine
         
         # Traiter la file d'attente BFS
         while queue:
@@ -237,7 +243,9 @@ class WebCrawler:
                 
             try:
                 normalized_url = self.normalize_url(current_url)
-                logger.info(f"Crawling: {normalized_url} at depth {depth}")
+                normalized_parent = self.normalize_url(parent_url) if parent_url else None
+                
+                logger.info(f"Crawling: {normalized_url} at depth {depth} (parent: {normalized_parent})")
                 
                 response = requests.get(normalized_url,
                                         headers={'User-Agent': 'Mozilla/5.0'},
@@ -252,25 +260,21 @@ class WebCrawler:
                 # Stocker le contenu HTML pour la génération de vecteur
                 self.url_to_content[normalized_url] = response.text
                 
-                # Trouver l'ID parent (pour le stockage en BDD)
-                parent_id = None
-                if parent_url:
-                    parent_normalized = self.normalize_url(parent_url)
-                    for sd in self.sous_domaines:
-                        if sd.url_SD == parent_normalized:
-                            parent_id = sd.id_SD
-                            break
-                
                 # Ne pas recréer de sous-domaine pour l'URL racine qui est déjà créée
                 sd_index = None
                 if normalized_url != normalized_base_url:
+                    # Enregistrer la relation parent-enfant
+                    if normalized_parent:
+                        self.parent_child_map[normalized_url] = normalized_parent
+                        logger.debug(f"Relation parent-enfant enregistrée: {normalized_url} -> {normalized_parent}")
+                    
                     # Création du SousDomaine
                     sous_domaine = SousDomaine(
                         url_SD=normalized_url,
-                        description_SD=f"Sous-domaine de profondeur {depth}",  # Description par défaut
+                        description_SD=f"Sous-domaine de profondeur {depth}",
                         degre=depth,
-                        id_domaine=self.id_domaine,  # Lien vers le domaine principal
-                        id_SD_Sous_domaine=parent_id  # ID du parent
+                        id_domaine=self.id_domaine,
+                        id_SD_Sous_domaine=None  # Sera mis à jour lors de la sauvegarde
                     )
                     
                     # Ajouter uniquement s'il n'existe pas déjà
@@ -281,7 +285,6 @@ class WebCrawler:
                 else:
                     # Pour l'URL racine, utiliser l'index 0
                     sd_index = 0
-                    self.url_to_sd_id[normalized_url] = sd_index
                 
                 # Génération du vecteur pour cette URL
                 vecteur, active_features = self.generate_vector_for_url(normalized_url, response.text)
@@ -311,13 +314,38 @@ class WebCrawler:
                 # Ajouter les nouveaux liens à la file d'attente pour le prochain niveau
                 for link in links:
                     if link not in self.visited_urls:
-                        queue.append((link, depth + 1, normalized_url))
+                        queue.append((link, depth + 1, normalized_url))  # normalized_url devient le parent
                         self.visited_urls.add(link)  # Marquer comme visité immédiatement pour éviter les doublons dans la file
                 
             except requests.RequestException as e:
                 logger.error(f"Erreur de crawl pour {current_url}: {e}")
             except Exception as e:
                 logger.error(f"Erreur inattendue lors du crawl de {current_url}: {e}")
+
+    def get_hierarchy_info(self):
+        """Retourne des informations sur la hiérarchie découverte."""
+        hierarchy = {}
+        for child_url, parent_url in self.parent_child_map.items():
+            if parent_url not in hierarchy:
+                hierarchy[parent_url] = []
+            hierarchy[parent_url].append(child_url)
+        return hierarchy
+
+    def print_hierarchy(self):
+        """Affiche la hiérarchie des sous-domaines de manière lisible."""
+        def print_node(url, level=0):
+            indent = "  " * level
+            print(f"{indent}- {url}")
+            
+            # Trouver les enfants
+            children = [child for child, parent in self.parent_child_map.items() if parent == url]
+            for child in children:
+                print_node(child, level + 1)
+        
+        print("\n=== HIÉRARCHIE DES SOUS-DOMAINES ===")
+        # Commencer par la racine
+        root_url = self.normalize_url(self.base_url)
+        print_node(root_url)
 
     def get_report(self):
         """Génère un rapport du crawling."""
@@ -326,7 +354,8 @@ class WebCrawler:
             "sous_domaines": self.sous_domaines,
             "technologies": self.technologies,
             "vecteurs": self.vecteurs,
-            "relations_utiliser": self.relations_utiliser
+            "relations_utiliser": self.relations_utiliser,
+            "hierarchy": self.get_hierarchy_info()
         }
 
 
@@ -346,6 +375,9 @@ def main():
         crawler = WebCrawler(base_url, max_depth=max_depth, id_domaine=1)
         crawler.crawl_bfs()  # Utiliser BFS au lieu de la méthode récursive
 
+        # Afficher la hiérarchie
+        crawler.print_hierarchy()
+
         # Générer et afficher le rapport
         rapport = crawler.get_report()
 
@@ -358,7 +390,7 @@ def main():
 
         print("\n--- Sous-Domaines ---")
         for sd in sorted(rapport["sous_domaines"], key=lambda x: x.degre):
-            print(sd)
+            print(f"Degré {sd.degre}: {sd.url_SD}")
 
         print("\n--- Vecteurs Générés ---")
         for i, vecteur in enumerate(rapport["vecteurs"]):
@@ -366,6 +398,7 @@ def main():
 
         print(f"\nTotal de sous-domaines découverts : {len(rapport['sous_domaines'])}")
         print(f"Total de vecteurs générés : {len(rapport['vecteurs'])}")
+        print(f"Relations parent-enfant : {len(crawler.parent_child_map)}")
 
     except ValueError:
         print("Profondeur invalide. Utilisez un nombre entier.")

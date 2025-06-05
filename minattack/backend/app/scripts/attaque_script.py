@@ -30,7 +30,7 @@ class AttaqueScript:
         self, sous_domaine: SousDomaine, types_attaques: List[str]
     ) -> Dict[str, List]:
         # Initialisation du dictionnaire de résultats
-        self.resultat_attaque = {
+        self.resultats_attaque = {
             "url": sous_domaine.url_SD,
             "sqli": [],
             "xss": [],
@@ -53,25 +53,25 @@ class AttaqueScript:
 
             if type_attaque in attaques_mapping:
                 try:
-                    self.resultat_attaque[type_attaque] = attaques_mapping[
+                    self.resultats_attaque[type_attaque] = attaques_mapping[
                         type_attaque
                     ](sous_domaine.url_SD)
 
-                    if self.resultat_attaque[type_attaque]:
-                        for idx, vuln in enumerate(self.resultat_attaque[type_attaque]):
+                    if self.resultats_attaque[type_attaque]:
+                        for idx, vuln in enumerate(self.resultats_attaque[type_attaque]):
                             logger.debug(f"Vulnérabilité {idx+1}: {vuln}")
 
                 except Exception as e:
                     logger.error(f"Erreur lors du scan {type_attaque} : {str(e)}")
                     # logger.exception("Détails de l'erreur:")
-                    self.resultat_attaque[type_attaque] = []
+                    self.resultats_attaque[type_attaque] = []
                     # logger.info(f"Résultat pour {type_attaque} réinitialisé à liste vide suite à l'erreur")
             else:
                 logger.warning(f"Type d'attaque inconnu ignoré: {type_attaque}")
 
         # logger.info(f"Toutes les attaques terminées pour {sous_domaine.url_SD}")
 
-        return self.resultat_attaque
+        return self.resultats_attaque
 
     def _run_sqli_scan(self, url: str) -> List:
         try:

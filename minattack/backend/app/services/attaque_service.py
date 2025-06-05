@@ -4,16 +4,21 @@ from datetime import datetime
 from sqlalchemy.orm import Session
 import logging
 
+from minattack.backend.app.scripts.classification_DBSCAN_script import classification_DBSCAN
 from minattack.backend.app.scripts.attaque_script import AttaqueScript
 from minattack.backend.app.models.sous_domaine import SousDomaine
+from minattack.backend.app.services.cluster_service import get_vectors_from_sd_initial, validate_vectors
+from minattack.backend.app.services.embedder_service import Embedder
 from minattack.backend.app.services.sous_domaine_service import (
     get_all_child_ids_recursively,
     get_sous_domaine_by_id,
+    get_sous_domaines_by_domaine,
 )
 from minattack.backend.app.models.attaque import Attaque
 from minattack.backend.app.models.faille import Faille
 from minattack.backend.app.models.type_attaque import Type_attaque
-
+from sklearn.metrics.pairwise import euclidean_distances
+import numpy as np
 
 logger = logging.getLogger(__name__)
 
@@ -55,6 +60,158 @@ def run_attacks(
         urls_traitees += 1
 
     return urls_traitees == len(SD_cibles_id)
+
+
+def run_cluster_attacks(SD_initial_id: int, attaque_type: List[str], db: Session) -> bool:
+    """
+    Lance des attaques basées sur le clustering des sous-domaines.
+    
+    Args:
+        SD_initial_id: ID du sous-domaine initial
+        attaque_type: Types d'attaques à lancer
+        db: Session de base de données
+        use_hierarchy: Si True, utilise la hiérarchie, sinon utilise le domaine complet
+        
+    Returns:
+        bool: True si toutes les attaques ont réussi
+    """
+    logger.info(f"Début du clustering pour SD_initial_id: {SD_initial_id}")
+    
+    # Récupération des vecteurs
+    
+    ids, vectors = get_vectors_from_sd_initial(db, sd_initial_id=SD_initial_id)
+
+    if len(ids)<15:
+        logger.warning(f"Nombre de sous-domaines ({len(ids)}) trop faible pour le clustering, utilisation de l'attaque directe")
+        return run_attacks(SD_initial_id, attaque_type, db, False)
+
+    if not ids or not vectors:
+        logger.error("Aucun vecteur récupéré")
+        return False
+    
+    # Validation des vecteurs
+    if not validate_vectors(vectors):
+        logger.error("Vecteurs invalides")
+        return False
+    
+    if any(v is None for v in vectors):
+        logger.error("Certains vecteurs sont vides ou non valides.")
+        return False
+
+    logger.info(f"Nombre de vecteurs récupérés: {len(vectors)}")
+
+    # Embedding
+    try:
+        embedder = Embedder(vectors)
+        embedded_vectors = [embedder.embed(v) for v in vectors]
+        logger.info(f"Embedding terminé: {len(embedded_vectors)} vecteurs embeddés")
+    except Exception as e:
+        logger.error(f"Erreur lors de l'embedding: {e}")
+        return False
+
+    # Clustering
+    try:
+        labels = classification_DBSCAN(embedded_vectors, save_plot=False)
+        if labels is None or len(labels) == 0:
+            logger.error("Échec du clustering DBSCAN")
+            return False
+        
+        logger.info(f"Clustering terminé: {len(set(labels))} clusters trouvés")
+    except Exception as e:
+        logger.error(f"Erreur lors du clustering: {e}")
+        return False
+    
+    cluster_dict = {}  # cluster_id -> list of (id_SD, vector_embedded)
+    outsider_ids = []  # Pour les sous-domaines qui ne sont pas dans un cluster
+
+    for id_sd, label, vec in zip(ids, labels, embedded_vectors):
+        if label == -1:
+            outsider_ids.append(id_sd)
+            logger.info(f"Sous-domaine {id_sd} considéré comme outsider (label -1)")
+        else:
+            cluster_dict.setdefault(label, []).append((id_sd, vec))
+
+    # Vérification de cohérence
+    total_processed = sum(len(sd_list) for sd_list in cluster_dict.values()) + len(outsider_ids)
+    if total_processed != len(ids):
+        logger.error(f"Erreur dans la classification des clusters : {total_processed} != {len(ids)}")
+        raise HTTPException(status_code=500, detail="Erreur dans la classification des clusters")
+
+    logger.info(f"Répartition des clusters:")
+    logger.info(f"  - Nombre de clusters: {len(cluster_dict)}")
+    logger.info(f"  - Outsiders: {len(outsider_ids)}")
+    for cluster_id, sd_list in cluster_dict.items():
+        if cluster_id != -1:  # Ignorer les outsiders déjà comptés
+            logger.info(f"  - Cluster {cluster_id}: {len(sd_list)} sous-domaines")
+
+    urls_traitees = 0
+    attack_cluster = AttaqueScript()
+    
+    # Lancer attaque sur chaque centre de cluster
+    for cluster_id, sd_list in cluster_dict.items():
+        if not sd_list or cluster_id == -1:  # Ignorer les clusters vides et les outsiders
+            continue
+            
+        logger.info(f"Traitement du cluster {cluster_id} avec {len(sd_list)} sous-domaines")
+        
+        # Calcul du centre géométrique
+        center_vector = np.mean([vec for _, vec in sd_list], axis=0)
+
+        # Trouver le sous-domaine le plus proche du centre
+        min_dist = float("inf")
+        center_sd_id = None
+        for sd_id, vec in sd_list:
+            dist = np.linalg.norm(center_vector - vec)
+            if dist < min_dist:
+                min_dist = dist
+                center_sd_id = sd_id
+                
+        logger.info(f"Centre du cluster {cluster_id} trouvé : ID {center_sd_id} (distance: {min_dist:.4f})")
+
+        # Attaquer le centre du cluster
+        sous_domaine = get_sous_domaine_by_id(center_sd_id, db)
+        if not sous_domaine:
+            logger.warning(f"Sous-domaine centre {center_sd_id} non trouvé")
+            continue
+
+        logger.info(f"Lancement de l'attaque sur le centre du cluster {cluster_id} -- sous-domaine : {sous_domaine.url_SD}")
+        
+        try:
+            result_cluster = attack_cluster.run_attack(sous_domaine, attaque_type)
+            save_attacks(sous_domaine, result_cluster, db)
+            urls_traitees += 1
+            
+            # Appliquer le résultat aux autres membres du cluster
+            for id_sd, _ in sd_list:
+                if id_sd != center_sd_id:
+                    sd = get_sous_domaine_by_id(id_sd, db)
+                    if sd:
+                        logger.info(f"Application des résultats du centre au sous-domaine {sd.url_SD}")
+                        save_attacks(sd, result_cluster, db)
+                        urls_traitees += 1
+                        
+        except Exception as e:
+            logger.error(f"Erreur lors de l'attaque du cluster {cluster_id}: {e}")
+            continue
+
+    # Traiter les outsiders individuellement
+    logger.info(f"Traitement de {len(outsider_ids)} outsiders")
+    for outsider_id in outsider_ids:
+        sous_domaine = get_sous_domaine_by_id(outsider_id, db)
+        if not sous_domaine:
+            logger.warning(f"Sous-domaine outsider {outsider_id} non trouvé")
+            continue
+
+        logger.info(f"Lancement de l'attaque sur l'outsider : {sous_domaine.url_SD}")
+        try:
+            save_attacks(sous_domaine, attack_cluster.run_attack(sous_domaine, attaque_type), db)
+            urls_traitees += 1
+        except Exception as e:
+            logger.error(f"Erreur lors de l'attaque de l'outsider {outsider_id}: {e}")
+            continue
+    
+    logger.info(f"Attaques terminées: {urls_traitees}/{len(ids)} sous-domaines traités")
+    return urls_traitees == len(ids)
 
 
 def save_attacks(SD_cible: SousDomaine, resultats: Dict[str, List], db: Session):
@@ -148,6 +305,5 @@ def save_attacks(SD_cible: SousDomaine, resultats: Dict[str, List], db: Session)
         raise
 
     finally:
-        # S'assurer que toutes les modifications sont bien enregistrées
         db.commit()
         # logger.info("Fin de la sauvegarde des attaques")

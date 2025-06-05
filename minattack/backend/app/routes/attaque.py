@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from minattack.backend.app.database import SessionLocal
+from minattack.backend.app.globals import CURRENT_AUDIT
 from minattack.backend.app.schemas.type_attaque import TypeAttaqueResquest
-from minattack.backend.app.services.attaque_service import run_attacks
+from minattack.backend.app.services.attaque_service import run_attacks, run_cluster_attacks
 from sqlalchemy.orm import Session
 
 router = APIRouter(prefix="/attaque", tags=["Attaque"])
@@ -15,13 +16,13 @@ def get_db():
         db.close()
 
 
-##
-@router.post("/all/", summary="Attaque ALL", status_code=200)
-def attaque_all(SD_initial_id: int, db: Session = Depends(get_db)):
-    if run_attacks(SD_initial_id, ["all"], db):
-        return {"message": "Attaque ALL effectuée avec succès"}
+
+@router.post("/cluster/list/", summary="Attaque sur les centres de clusters : Lister les attaques '[sqli, xss, ...]'  et fournir l'id de l'audit en question", status_code=200)  
+def attaque_all_cluster(SD_initial_id: int, type: TypeAttaqueResquest,   db: Session = Depends(get_db)):
+    if run_cluster_attacks(SD_initial_id, type.attaque_type, db):
+        return {"message": "Attaque ALL sur les centres de clusters effectuée avec succès"}  
     else:
-        raise HTTPException(status_code=404, detail="Sous-domaine non trouvé")
+        raise HTTPException(status_code=404, detail="Audit non trouvé ou pas de sous-domaines associés")
 
 
 ##
@@ -30,11 +31,11 @@ def attaque_all(SD_initial_id: int, db: Session = Depends(get_db)):
     summary="Lister les attaques. ex : [sqli, xss] pour les enfants",
     status_code=200,
 )
-def attaque_sqli(
+def attaque(
     SD_initial_id: int, type: TypeAttaqueResquest, db: Session = Depends(get_db)
 ):
     if run_attacks(SD_initial_id, type.attaque_type, db):  # single = false
-        return {"message": "Attaque SQLi effectuée avec succès"}
+        return {"message": "Attaques effectuées avec succès"}
     else:
         raise HTTPException(status_code=404, detail="Sous-domaine non trouvé")
 
@@ -45,10 +46,10 @@ def attaque_sqli(
     summary="Lister les attaques. ex : [sqli, xss] pour UNE url",
     status_code=200,
 )
-def attaque_sqli(
+def attaque(
     SD_initial_id: int, type: TypeAttaqueResquest, db: Session = Depends(get_db)
 ):
     if run_attacks(SD_initial_id, type.attaque_type, db, True):  # single = true
-        return {"message": "Attaque SQLi effectuée avec succès"}
+        return {"message": "Attaque effectuée avec succès"}
     else:
         raise HTTPException(status_code=404, detail="Sous-domaine non trouvé")

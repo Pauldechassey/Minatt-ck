@@ -11,4 +11,3 @@ class Vecteur(Base):
     cluster = Column(Integer, nullable=True)  # Cluster ID, peut être NULL si non assigné
 
     id_SD = Column(Integer, ForeignKey("Sous_domaine.id_SD"), nullable=False)
-    sous_domaine = relationship("SousDomaine", back_populates="vecteur")

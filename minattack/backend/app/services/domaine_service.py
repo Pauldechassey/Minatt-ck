@@ -1,10 +1,13 @@
 from sqlalchemy.orm import Session
 from minattack.backend.app.models.domaine import Domaine
+from minattack.backend.app.models.audit import Audit
 
 
 def get_all_domaines(db: Session):
     return db.query(Domaine).all()
 
+def get_domaine_by_id_audit(audit_id: int, db: Session):
+    return db.query(Domaine).join(Audit).filter(Audit.id_audit == audit_id).first()
 
 def get_domaine_by_id(domaine_id: int, db: Session):
     return db.query(Domaine).filter(Domaine.id_domaine == domaine_id).first()

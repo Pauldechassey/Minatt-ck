@@ -23,7 +23,7 @@ class InitVector:
         
         # === 1. EMPREINTE TECHNOLOGIQUE (25 dimensions) ===
         
-        # CMS et frameworks (10)
+        # CMS et frameworks (10) - Poids moyen car indicatif de la stack
         cms_frameworks = [
             "wordpress", "drupal", "joomla", "magento", "shopify", 
             "wix", "ghost", "prestashop", "typo3", "sharepoint"
@@ -31,13 +31,13 @@ class InitVector:
         for cms in cms_frameworks:
             structure[f"cms_{cms}"] = {
                 "index": current_index,
-                "category": "cms_frameworks", 
-                "weight": 2.0 if cms in ["wordpress", "drupal", "joomla", "magento"] else 1.0,
-                "description": f"Site utilise {cms.capitalize()}"
+                "category": "cms_frameworks",
+                "description": f"Site utilise {cms.capitalize()}",
+                "weight": 2.0  # Poids moyen - indique la technologie
             }
             current_index += 1
         
-        # Frameworks web principaux (10)
+        # Frameworks web principaux (10) - Poids moyen
         web_frameworks = [
             "php", "aspnet", "java", "nodejs", "rails", 
             "django", "laravel", "express", "react", "angular"
@@ -46,154 +46,154 @@ class InitVector:
             structure[f"framework_{framework}"] = {
                 "index": current_index,
                 "category": "web_frameworks",
-                "weight": 1.0,
-                "description": f"Site utilise {framework.upper()}"
+                "description": f"Site utilise {framework.upper()}",
+                "weight": 2.0  # Poids moyen
             }
             current_index += 1
         
-        # Architecture (5)
+        # Architecture (5) - Poids élevé car impact sur la surface d'attaque
         architecture_features = [
-            ("spa", "Single Page Application"),
-            ("ssr", "Server-side Rendering"), 
-            ("api_rest", "APIs REST publiques"),
-            ("api_graphql", "APIs GraphQL publiques"),
-            ("websockets", "WebSockets actifs")
+            ("spa", "Single Page Application", 3.0),
+            ("ssr", "Server-side Rendering", 2.5), 
+            ("api_rest", "APIs REST publiques", 4.0),  # Très important pour les tests
+            ("api_graphql", "APIs GraphQL publiques", 4.0),
+            ("websockets", "WebSockets actifs", 3.5)
         ]
-        for feature, desc in architecture_features:
+        for feature, desc, weight in architecture_features:
             structure[f"arch_{feature}"] = {
                 "index": current_index,
                 "category": "architecture",
-                "weight": 1.5 if "api" in feature else 1.0,
-                "description": desc
+                "description": desc,
+                "weight": weight
             }
             current_index += 1
         
         # === 2. PROFIL DE VULNÉRABILITÉ (40 dimensions) ===
         
-        # Gestion d'authentification (10)
+        # Gestion d'authentification (10) - Poids élevé car zone critique
         auth_features = [
-            ("login_traditional", "Login traditionnel (username/password)", 2.0),
-            ("oauth", "OAuth implémenté", -0.5),
-            ("jwt", "JWT utilisé", 1.0),
-            ("session_cookies", "Session cookies", 1.0),
-            ("saml_sso", "SAML/SSO implémentés", -0.5),
-            ("has_2fa", "2FA disponible", -2.0),
-            ("password_reset", "Réinitialisation de mot de passe", 2.0),
-            ("user_registration", "Enregistrement d'utilisateurs", 1.5),
-            ("role_access_control", "Contrôle d'accès par rôles", -0.5),
-            ("auto_logout", "Auto-logout implémenté", -0.5)
+            ("login_traditional", "Login traditionnel (username/password)", 4.0),
+            ("oauth", "OAuth implémenté", 3.0),
+            ("jwt", "JWT utilisé", 3.5),
+            ("session_cookies", "Session cookies", 3.0),
+            ("saml_sso", "SAML/SSO implémentés", 2.5),
+            ("has_2fa", "2FA disponible", -2.0),  # Négatif = réduit le risque
+            ("password_reset", "Réinitialisation de mot de passe", 4.5),  # Zone très sensible
+            ("user_registration", "Enregistrement d'utilisateurs", 4.0),
+            ("role_access_control", "Contrôle d'accès par rôles", 3.5),
+            ("auto_logout", "Auto-logout implémenté", -1.0)  # Améliore la sécurité
         ]
         for feature, desc, weight in auth_features:
             structure[f"auth_{feature}"] = {
                 "index": current_index,
                 "category": "authentication",
-                "weight": weight,
-                "description": desc
+                "description": desc,
+                "weight": weight
             }
             current_index += 1
         
-        # Traitement des entrées (15)
+        # Traitement des entrées (15) - Poids très élevé car vecteurs d'attaque principaux
         input_features = [
-            ("complex_forms", "Formulaires complexes (>5 champs)", 2.0),
-            ("file_upload", "Upload de fichiers", 3.0),
-            ("text_search", "Recherche texte intégral", 2.0),
-            ("multiple_get_params", "Paramètres GET multiples", 1.5),
-            ("url_state", "États persistés en URL", 1.5),
-            ("json_input", "Entrées JSON acceptées", 2.0),
-            ("xml_input", "Entrées XML acceptées", 2.0),
-            ("api_keys_in_params", "API keys en paramètres", 3.0),
-            ("rich_text_html", "Champs de texte riches/HTML", 3.0),
-            ("external_iframes", "iFrames de tierces parties", 2.0),
-            ("custom_redirects", "Redirections personnalisables", 3.0),
-            ("data_import", "Importation de données", 2.5),
-            ("data_export", "Exportation de données", 2.0),
-            ("date_number_parsing", "Parsing de dates/nombres", 1.5),
-            ("custom_session_mgmt", "Gestion de sessions personnalisée", 2.5)
+            ("complex_forms", "Formulaires complexes (>5 champs)", 4.0),
+            ("file_upload", "Upload de fichiers", 5.0),  # Très critique
+            ("text_search", "Recherche texte intégral", 4.5),
+            ("multiple_get_params", "Paramètres GET multiples", 4.0),
+            ("url_state", "États persistés en URL", 3.5),
+            ("json_input", "Entrées JSON acceptées", 4.0),
+            ("xml_input", "Entrées XML acceptées", 4.5),  # XXE risks
+            ("api_keys_in_params", "API keys en paramètres", 5.0),  # Très critique
+            ("rich_text_html", "Champs de texte riches/HTML", 5.0),  # XSS principal
+            ("external_iframes", "iFrames de tierces parties", 3.5),
+            ("custom_redirects", "Redirections personnalisables", 4.5),  # Open redirect
+            ("data_import", "Importation de données", 4.5),
+            ("data_export", "Exportation de données", 4.0),
+            ("date_number_parsing", "Parsing de dates/nombres", 3.0),
+            ("custom_session_mgmt", "Gestion de sessions personnalisée", 4.5)
         ]
         for feature, desc, weight in input_features:
             structure[f"input_{feature}"] = {
                 "index": current_index,
                 "category": "input_processing",
-                "weight": weight,
-                "description": desc
+                "description": desc,
+                "weight": weight
             }
             current_index += 1
         
-        # Stockage et accès aux données (15)
+        # Stockage et accès aux données (15) - Poids élevé selon la sensibilité
         data_features = [
-            ("sql_database", "Base de données SQL", 1.5),
-            ("nosql_database", "NoSQL database", 1.0),
-            ("file_access", "Accès à des fichiers", 2.0),
-            ("client_cache", "Cache client (localStorage)", 1.0),
-            ("external_api_calls", "API externes appelées côté serveur", 1.5),
-            ("pii_visible", "Données sensibles visibles (PII)", 3.0),
-            ("financial_data", "Information financière", 3.0),
-            ("health_data", "Données de santé", 3.0),
-            ("multi_step_workflow", "Workflow multi-étapes", 2.0),
-            ("transactional_state", "États transactionnels", 2.0),
-            ("cors_active", "Partage de ressources (CORS active)", 1.5),
-            ("user_generated_content", "Contenus générés par utilisateurs", 2.5),
-            ("comment_system", "Système de commentaires", 2.0),
-            ("direct_file_download", "Téléchargement direct de fichiers", 2.0),
-            ("internal_messaging", "Système de messagerie interne", 2.0)
+            ("sql_database", "Base de données SQL", 4.0),  # SQL injection
+            ("nosql_database", "NoSQL database", 3.5),
+            ("file_access", "Accès à des fichiers", 4.5),  # Path traversal
+            ("client_cache", "Cache client (localStorage)", 3.0),
+            ("external_api_calls", "API externes appelées côté serveur", 3.5),
+            ("pii_visible", "Données sensibles visibles (PII)", 5.0),  # Très critique
+            ("financial_data", "Information financière", 5.0),  # Très critique
+            ("health_data", "Données de santé", 5.0),  # Très critique
+            ("multi_step_workflow", "Workflow multi-étapes", 3.5),
+            ("transactional_state", "États transactionnels", 4.0),
+            ("cors_active", "Partage de ressources (CORS active)", 3.5),
+            ("user_generated_content", "Contenus générés par utilisateurs", 4.5),
+            ("comment_system", "Système de commentaires", 4.0),
+            ("direct_file_download", "Téléchargement direct de fichiers", 4.0),
+            ("internal_messaging", "Système de messagerie interne", 4.0)
         ]
         for feature, desc, weight in data_features:
             structure[f"data_{feature}"] = {
                 "index": current_index,
                 "category": "data_storage",
-                "weight": weight,
-                "description": desc
+                "description": desc,
+                "weight": weight
             }
             current_index += 1
         
-        # === 3. INDICATEURS DE DÉFENSES (15 dimensions) ===
+        # === 3. INDICATEURS DE DÉFENSES (15 dimensions) - Poids négatifs car réduisent le risque ===
         
         defense_features = [
-            ("waf_detected", "WAF détecté", -2.0),
-            ("csp_strict", "CSP strict implémenté", -1.5),
+            ("waf_detected", "WAF détecté", -3.0),
+            ("csp_strict", "CSP strict implémenté", -2.5),
             ("rate_limiting", "Rate limiting observé", -2.0),
-            ("captcha", "CAPTCHA/reCAPTCHA", -1.0),
-            ("sri", "SRI (Subresource Integrity)", -0.5),
-            ("hsts", "HTTPS strict (HSTS)", -1.0),
+            ("captcha", "CAPTCHA/reCAPTCHA", -1.5),
+            ("sri", "SRI (Subresource Integrity)", -1.0),
+            ("hsts", "HTTPS strict (HSTS)", -1.5),
             ("secure_cookies", "Cookies avec flags de sécurité", -1.0),
             ("csrf_tokens", "Anti-CSRF tokens", -2.0),
-            ("server_validation", "Validation côté serveur forte", -1.5),
-            ("security_headers", "En-têtes de sécurité complets", -1.0),
-            ("secure_cdn", "Cloudflare ou autre CDN sécurisé", -1.0),
-            ("ddos_protection", "Protection DDoS", -0.5),
+            ("server_validation", "Validation côté serveur forte", -2.5),
+            ("security_headers", "En-têtes de sécurité complets", -2.0),
+            ("secure_cdn", "Cloudflare ou autre CDN sécurisé", -1.5),
+            ("ddos_protection", "Protection DDoS", -1.0),
             ("js_obfuscation", "Obfuscation JavaScript", -0.5),
-            ("input_filtering", "Filtrage d'entrées visible", -1.0),
-            ("honeypots", "Honeypots/détection de bots", -1.0)
+            ("input_filtering", "Filtrage d'entrées visible", -2.0),
+            ("honeypots", "Honeypots/détection de bots", -1.5)
         ]
         for feature, desc, weight in defense_features:
             structure[f"defense_{feature}"] = {
                 "index": current_index,
                 "category": "defenses",
-                "weight": weight,
-                "description": desc
+                "description": desc,
+                "weight": weight
             }
             current_index += 1
         
         # === 4. SPÉCIFICITÉS IMPACTANT LE TESTING (10 dimensions) ===
         
         testing_features = [
-            ("api_quota", "APIs avec quota limité", 1.0),
-            ("paywall", "Fonctionnalités paywall/premium", 1.0),
-            ("mfa_required", "Authentification multi-facteurs requise", -1.0),
-            ("geo_restriction", "Géo-restriction", 0.5),
-            ("phone_validation", "Validation téléphonique requise", 0.5),
-            ("async_states", "États asynchrones (polling/websockets)", 1.5),
-            ("complex_workflow", "Workflow complexe avec état", 2.0),
-            ("microservices", "Architecture microservices exposée", 1.5),
-            ("dynamic_state", "Site dynamique à état (non-idempotent)", 1.5),
-            ("client_cert_auth", "Authentification par certificat client", -0.5)
+            ("api_quota", "APIs avec quota limité", 2.0),  # Complique les tests
+            ("paywall", "Fonctionnalités paywall/premium", 2.5),
+            ("mfa_required", "Authentification multi-facteurs requise", 1.5),
+            ("geo_restriction", "Géo-restriction", 2.0),
+            ("phone_validation", "Validation téléphonique requise", 2.0),
+            ("async_states", "États asynchrones (polling/websockets)", 3.0),
+            ("complex_workflow", "Workflow complexe avec état", 3.5),
+            ("microservices", "Architecture microservices exposée", 3.0),
+            ("dynamic_state", "Site dynamique à état (non-idempotent)", 3.5),
+            ("client_cert_auth", "Authentification par certificat client", 1.5)
         ]
         for feature, desc, weight in testing_features:
             structure[f"testing_{feature}"] = {
                 "index": current_index,
                 "category": "testing_specifics",
-                "weight": weight,
-                "description": desc
+                "description": desc,
+                "weight": weight
             }
             current_index += 1
         
@@ -426,6 +426,10 @@ class InitVector:
                 active_features[feature_name] = info
         return active_features
     
+    def get_feature_count(self) -> int:
+        """Retourne le nombre de features actives"""
+        return int(np.sum(self.binary_vector))
+    
     def calculate_weighted_score(self) -> float:
         """Calcule le score pondéré du vecteur"""
         total_score = 0.0
@@ -436,21 +440,27 @@ class InitVector:
                 total_score += weight
         return total_score
     
-    def print_analysis(self):
-        """Affiche l'analyse du site"""
-        active_features = self.get_active_features()
-        score = self.calculate_weighted_score()
+    def get_risk_assessment(self) -> Dict[str, Any]:
+        """Retourne une évaluation du niveau de risque"""
+        weighted_score = self.calculate_weighted_score()
+        active_count = self.get_feature_count()
         
-        print(f"🔍 ANALYSE DU SITE WEB")
-        print(f"=" * 50)
-        print(f"📊 Features détectées: {len(active_features)}/{self.vector_size}")
-        print(f"⚖️  Score pondéré: {score:.2f}")
-        print(f"\n🎯 FEATURES ACTIVES:")
+        # Classification du risque basée sur le score pondéré
+        if weighted_score <= 0:
+            risk_level = "TRÈS FAIBLE"
+        elif weighted_score <= 10:
+            risk_level = "FAIBLE"
+        elif weighted_score <= 25:
+            risk_level = "MOYEN"
+        elif weighted_score <= 50:
+            risk_level = "ÉLEVÉ"
+        else:
+            risk_level = "TRÈS ÉLEVÉ"
         
-        for feature_name, info in active_features.items():
-            weight = info["weight"]
-            desc = info["description"]
-            category = info["category"]
-            sign = "+" if weight >= 0 else ""
-            print(f"   [{category}] {feature_name}: {sign}{weight} - {desc}")
-
+        return {
+            "weighted_score": weighted_score,
+            "active_features": active_count,
+            "total_features": len(self.vector_structure),
+            "risk_level": risk_level,
+            "coverage": (active_count / len(self.vector_structure)) * 100
+        }
