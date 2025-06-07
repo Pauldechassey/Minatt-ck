@@ -111,7 +111,7 @@ def run_cluster_attacks(SD_initial_id: int, attaque_type: List[str], db: Session
 
     # Clustering
     try:
-        labels = classification_DBSCAN(embedded_vectors, save_plot=False)
+        labels = classification_DBSCAN(embedded_vectors, save_plot=True)
         if labels is None or len(labels) == 0:
             logger.error("Échec du clustering DBSCAN")
             return False
