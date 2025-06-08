@@ -5,6 +5,7 @@ from minattack.backend.app.schemas.type_attaque import TypeAttaqueResquest
 from minattack.backend.app.services.attaque_service import run_attacks, run_cluster_attacks
 from sqlalchemy.orm import Session
 
+
 router = APIRouter(prefix="/attaque", tags=["Attaque"])
 
 
@@ -52,4 +53,5 @@ def attaque(
     if run_attacks(SD_initial_id, type.attaque_type, db, True):  # single = true
         return {"message": "Attaque effectuée avec succès"}
     else:
+        print(f"[ERROR] Attack launch failed")
         raise HTTPException(status_code=404, detail="Sous-domaine non trouvé")

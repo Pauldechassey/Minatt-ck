@@ -1,5 +1,13 @@
-from PySide6.QtWidgets import QWidget, QStackedWidget, QMessageBox, QLineEdit
+from PySide6.QtWidgets import (
+    QWidget,
+    QStackedWidget,
+    QMessageBox,
+    QLineEdit,
+    QMainWindow,
+)
 from minattack.frontend.ui.ui_rapports import Ui_Rapports
+from PySide6.QtGui import QIcon, QPixmap
+from minattack.frontend.resources import resources_rc
 
 
 class RapportsWindow(QWidget, Ui_Rapports):
@@ -9,47 +17,23 @@ class RapportsWindow(QWidget, Ui_Rapports):
         self.ui.setupUi(self)
         self.main_window = main_window  # Stockez la référence à MainWindow
 
-        # Connexion des boutons
-        self.ui.pushButtonDeconnexionRapports.clicked.connect(self.logout)
-        self.ui.pushButtonHomeRapports.clicked.connect(self.goToAccueil)
-        self.ui.pushButtonAuditsRapports.clicked.connect(self.goToAudits)
-        self.ui.pushButtonAttaquesRapports.clicked.connect(self.goToAttaques)
-        self.ui.pushButtonCartographieRapports.clicked.connect(self.goToCartographie)
-
-    def logout(self):
-        msg = QMessageBox(self)
-        msg.setWindowTitle("Déconnexion")
-        msg.setText("Voulez-vous vraiment vous déconnecter ?")
-        msg.setStandardButtons(
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Cancel
+        # Initialising decorative element
+        self.ui.pushButtonDeconnexionRapports.setIcon(
+            QIcon(":/images/deconnexion.png")
         )
-        msg.setIcon(QMessageBox.Icon.Question)
+        pixmap = QPixmap(":/images/logo.png")
+        self.ui.labelLogo.setPixmap(pixmap)
 
-        result = msg.exec()
-
-        if result == QMessageBox.StandardButton.Yes:
-            self.main_window.loginPage.ui.lineEditUsernameLogin.clear()
-            self.main_window.loginPage.ui.lineEditPasswordLogin.clear()
-            self.main_window.mainStackedWidget.setCurrentIndex(0)
-
-    def goToAccueil(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(
-            self.main_window.mainStackedWidget.indexOf(self.main_window.accueilPage)
+        # Connecting menu buttons
+        self.ui.pushButtonDeconnexionRapports.clicked.connect(
+            self.main_window.logout
         )
-
-    def goToAudits(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(
-            self.main_window.mainStackedWidget.indexOf(self.main_window.auditsPage)
+        self.ui.pushButtonAccueilRapports.clicked.connect(
+            self.main_window.goToAccueil
         )
-
-    def goToAttaques(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(
-            self.main_window.mainStackedWidget.indexOf(self.main_window.attaquesPage)
-        )
-
-    def goToCartographie(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(
-            self.main_window.mainStackedWidget.indexOf(
-                self.main_window.cartographiePage
-            )
-        )
+        # self.ui.pushButtonActualiteAuditsCreate.clicked.connect(
+        #     self.goToAttaques
+        # )
+        # self.ui.pushButtonDocumentationAuditsCreate.clicked.connect(
+        #     self.goToRapports
+        # )

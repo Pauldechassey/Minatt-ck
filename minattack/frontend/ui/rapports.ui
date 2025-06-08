@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>700</height>
+    <width>1400</width>
+    <height>900</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,103 +21,24 @@ color: white;
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayoutMenuRapports">
-     <item row="0" column="4">
-      <widget class="QPushButton" name="pushButtonRapportsRapports">
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    padding: 8px;
-}
-QPushButton:hover {
-    background-color: #009624; / survol */
-}</string>
-       </property>
-       <property name="text">
-        <string>Rapports</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="7">
+     <item row="0" column="6">
       <widget class="QPushButton" name="pushButtonDeconnexionRapports">
        <property name="text">
         <string/>
        </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../resources/images/deconnexion.png</normaloff>../resources/images/deconnexion.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
+       </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QPushButton" name="pushButtonHomeRapports">
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    padding: 8px;
-}
-QPushButton:hover {
-    background-color: #009624; / survol */
-}</string>
-       </property>
-       <property name="text">
-        <string>Home</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="3">
-      <widget class="QPushButton" name="pushButtonAttaquesRapports">
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    padding: 8px;
-}
-QPushButton:hover {
-    background-color: #009624; / survol */
-}</string>
-       </property>
-       <property name="text">
-        <string>Attaques</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="6">
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Orientation::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="0" column="5">
-      <widget class="QPushButton" name="pushButtonCartographieRapports">
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    padding: 8px;
-}
-QPushButton:hover {
-    background-color: #009624; / survol */
-}</string>
-       </property>
-       <property name="text">
-        <string>Cartographie</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
       <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Orientation::Horizontal</enum>
@@ -130,22 +51,119 @@ QPushButton:hover {
        </property>
       </spacer>
      </item>
-     <item row="0" column="2">
-      <widget class="QPushButton" name="pushButtonAuditsRapports">
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelLogo">
+       <property name="minimumSize">
+        <size>
+         <width>65</width>
+         <height>42</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>65</width>
+         <height>42</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap>../resources/images/logo.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="5">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="3">
+      <widget class="QPushButton" name="pushButtonActualiteRapports">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
     background-color: #00C853; /* Vert */
     color: white;
     font-weight: bold;
     border-radius: 5px;
-    padding: 8px;
+    padding: 10px;
 }
 QPushButton:hover {
     background-color: #009624; / survol */
 }</string>
        </property>
        <property name="text">
-        <string>Audits</string>
+        <string>Actualité</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="4">
+      <widget class="QPushButton" name="pushButtonDocumentationRapports">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #00C853; /* Vert */
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px;
+}
+QPushButton:hover {
+    background-color: #009624; / survol */
+}</string>
+       </property>
+       <property name="text">
+        <string>Documentation</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QPushButton" name="pushButtonAccueilRapports">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #00C853; /* Vert */
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px;
+}
+QPushButton:hover {
+    background-color: #009624; / survol */
+}</string>
+       </property>
+       <property name="text">
+        <string>Accueil</string>
        </property>
       </widget>
      </item>
@@ -176,9 +194,6 @@ QPushButton:hover {
        </property>
        <property name="text">
         <string>Rapports</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignCenter</set>
        </property>
       </widget>
      </item>

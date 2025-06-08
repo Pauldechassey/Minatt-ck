@@ -1,5 +1,9 @@
-from PySide6.QtWidgets import QWidget, QStackedWidget, QMessageBox
+from PySide6.QtWidgets import QWidget, QMessageBox
 from minattack.frontend.ui.ui_cartographie import Ui_Cartographie
+
+from PySide6.QtGui import QIcon, QPixmap
+
+import minattack.frontend.utils.settings as settings
 
 
 class CartographieWindow(QWidget, Ui_Cartographie):
@@ -9,45 +13,71 @@ class CartographieWindow(QWidget, Ui_Cartographie):
         self.ui.setupUi(self)
         self.main_window = main_window  # Stockez la référence à MainWindow
 
-        # Connexion des boutons
-        self.ui.pushButtonDeconnexionCartographie.clicked.connect(self.logout)
-        self.ui.pushButtonHomeCartographie.clicked.connect(self.goToAccueil)
-        self.ui.pushButtonAuditsCartographie.clicked.connect(self.goToAudits)
-        self.ui.pushButtonAttaquesCartographie.clicked.connect(self.goToAttaques)
-        self.ui.pushButtonRapportsCartographie.clicked.connect(self.goToRapports)
-
-    def logout(self):
-        msg = QMessageBox(self)
-        msg.setWindowTitle("Déconnexion")
-        msg.setText("Voulez-vous vraiment vous déconnecter ?")
-        msg.setStandardButtons(
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Cancel
+        # Initialising decorative element
+        self.ui.pushButtonDeconnexionCartographie.setIcon(
+            QIcon(":/images/deconnexion.png")
         )
-        msg.setIcon(QMessageBox.Icon.Question)
+        pixmap = QPixmap(":/images/logo.png")
+        self.ui.labelLogo.setPixmap(pixmap)
 
-        result = msg.exec()
+        # Connecting menu buttons
+        self.ui.pushButtonDeconnexionCartographie.clicked.connect(
+            self.main_window.logout
+        )
+        self.ui.pushButtonAccueilCartographie.clicked.connect(
+            self.main_window.goToAccueil
+        )
+        # self.ui.pushButtonActualiteAuditsCreate.clicked.connect(
+        #     self.goToAttaques
+        # )
+        # self.ui.pushButtonDocumentationAuditsCreate.clicked.connect(
+        #     self.goToRapports
+        # )
 
-        if result == QMessageBox.StandardButton.Yes:
-            self.main_window.loginPage.ui.lineEditUsernameLogin.clear()
-            self.main_window.loginPage.ui.lineEditPasswordLogin.clear()
-            self.main_window.mainStackedWidget.setCurrentIndex(0)
-
-    def goToAccueil(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(
-            self.main_window.mainStackedWidget.indexOf(self.main_window.accueilPage)
+        # Connecting page elemets
+        self.ui.pushButtonLancerCartographie.clicked.connect(
+            self.lancementCarto
         )
 
-    def goToAudits(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(
-            self.main_window.mainStackedWidget.indexOf(self.main_window.auditsPage)
-        )
-
-    def goToAttaques(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(
-            self.main_window.mainStackedWidget.indexOf(self.main_window.attaquesPage)
-        )
-
-    def goToRapports(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(
-            self.main_window.mainStackedWidget.indexOf(self.main_window.rapportsPage)
-        )
+    def lancementCarto(self):
+        if settings.SELECTED_AUDIT_STATE > 0:
+            QMessageBox.warning(
+                self,
+                "Attention",
+                "La cartographie a déjà été effectuée pour cet audit",
+            )
+            return
+        elif settings.SELECTED_AUDIT_STATE < 0:
+            QMessageBox.warning(
+                self,
+                "Attention",
+                "Etat de l'audit invalide",
+            )
+            return
+        print()
+        if self.main_window.cartoRepo.runCarto(settings.SELECTED_AUDIT_ID):
+            settings.SELECTED_AUDIT_STATE = settings.SELECTED_AUDIT_STATE + 1
+            if self.main_window.auditRepo.updateAuditState(
+                settings.SELECTED_AUDIT_ID, settings.SELECTED_AUDIT_STATE
+            ):
+                QMessageBox.information(
+                    self,
+                    "Succès",
+                    "Cartographie réalisée avec succès",
+                    QMessageBox.StandardButton.Cancel,
+                )
+                self.main_window.auditsSelectPage.populateComboBox()
+                self.main_window.mainStackedWidget.setCurrentIndex(
+                    self.main_window.mainStackedWidget.indexOf(
+                        self.main_window.attaquesPage
+                    )
+                )
+            else:
+                QMessageBox.warning(
+                    self,
+                    "Attention",
+                    "Cartographie réussie mais erreur lors de la mise à jour de l'état",
+                )
+        else:
+            settings.SELECTED_AUDIT_STATE = settings.SELECTED_AUDIT_STATE - 1
+            QMessageBox.critical(self, "Erreur", "La cartographie a échoué")

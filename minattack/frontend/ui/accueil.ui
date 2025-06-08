@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>700</height>
+    <width>1400</width>
+    <height>900</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,9 +19,52 @@ color: white;
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="2" column="0">
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="2" column="0">
+   <property name="leftMargin">
+    <number>10</number>
+   </property>
+   <property name="topMargin">
+    <number>10</number>
+   </property>
+   <property name="rightMargin">
+    <number>10</number>
+   </property>
+   <property name="bottomMargin">
+    <number>10</number>
+   </property>
+   <item row="3" column="0">
+    <layout class="QGridLayout" name="infoLayout">
+     <item row="3" column="0">
+      <widget class="QLabel" name="labelLogo">
+       <property name="minimumSize">
+        <size>
+         <width>380</width>
+         <height>242</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>350</width>
+         <height>242</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap>../resources/images/logo.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
       <spacer name="verticalSpacer">
        <property name="orientation">
         <enum>Qt::Orientation::Vertical</enum>
@@ -34,25 +77,42 @@ color: white;
        </property>
       </spacer>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="labelNomAccueil">
+     <item row="3" column="1">
+      <widget class="QLabel" name="presentationLabel">
        <property name="font">
         <font>
+         <family>JetBrainsMono Nerd Font</family>
          <pointsize>14</pointsize>
-         <bold>true</bold>
+         <bold>false</bold>
         </font>
        </property>
        <property name="text">
-        <string>Accueil</string>
+        <string>&lt;html&gt;
+&lt;body&gt;
+&lt;span style=&quot;font-weight: bold; font-size:20pt;&quot;&gt;
+&lt;p&gt;
+Bienvenue sur &lt;span style=&quot;color:#00FFAA;&quot;&gt;Minattack&lt;/span&gt;
+&lt;/p&gt;
+&lt;/span&gt;
+&lt;p&gt;
+Auditer votre site web !
+  &lt;ul&gt;
+    &lt;li&gt;Lancer des attaques ciblées (SQLi, CSRF...)&lt;/li&gt;
+    &lt;li&gt;Générer des rapports détaillés&lt;/li&gt;
+    &lt;li&gt;Visualiser la cartographie des ressources&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</string>
        </property>
-       <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignCenter</set>
+       <property name="margin">
+        <number>30</number>
        </property>
       </widget>
      </item>
     </layout>
    </item>
-   <item row="0" column="0">
+   <item row="1" column="0">
     <layout class="QHBoxLayout" name="menuAccueil">
      <item>
       <spacer name="horizontalSpacer">
@@ -68,7 +128,14 @@ color: white;
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButtonHomeAccueil">
+      <widget class="QPushButton" name="pushButtonAccueilAccueil">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
     background-color: #00C853; /* Vert */
@@ -82,12 +149,19 @@ QPushButton:hover {
 }</string>
        </property>
        <property name="text">
-        <string>Home</string>
+        <string>Accueil</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButtonAuditsAccueil">
+      <widget class="QPushButton" name="pushButtonActualiteAccueil">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
     background-color: #00C853; /* Vert */
@@ -101,12 +175,19 @@ QPushButton:hover {
 }</string>
        </property>
        <property name="text">
-        <string>Audits</string>
+        <string>Actualité</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButtonAttaquesAccueil">
+      <widget class="QPushButton" name="pushButtonDocumentationAccueil">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
     background-color: #00C853; /* Vert */
@@ -120,45 +201,7 @@ QPushButton:hover {
 }</string>
        </property>
        <property name="text">
-        <string>Attaques</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButtonRapportsAccueil">
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    padding: 8px;
-}
-QPushButton:hover {
-    background-color: #009624; / survol */
-}</string>
-       </property>
-       <property name="text">
-        <string>Rapports</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButtonCartographieAccueil">
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    padding: 8px;
-}
-QPushButton:hover {
-    background-color: #009624; / survol */
-}</string>
-       </property>
-       <property name="text">
-        <string>Cartographie</string>
+        <string>Documentation</string>
        </property>
       </widget>
      </item>
@@ -180,7 +223,121 @@ QPushButton:hover {
        <property name="text">
         <string/>
        </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../resources/images/deconnexion.png</normaloff>../resources/images/deconnexion.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
+       </property>
       </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="4" column="0">
+    <layout class="QVBoxLayout" name="auditSelectLayout">
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::Minimum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>70</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonCreateAudit">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>14</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #00C853; /* Vert */
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px;
+}
+QPushButton:hover {
+    background-color: #009624; / survol */
+}</string>
+       </property>
+       <property name="text">
+        <string>Créer un audit</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::Minimum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonSelectAudit">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>14</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #00C853; /* Vert */
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px;
+}
+QPushButton:hover {
+    background-color: #009624; / survol */
+}</string>
+       </property>
+       <property name="text">
+        <string>Sélectionner un audit</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>

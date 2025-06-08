@@ -8,73 +8,38 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import (
-    QCoreApplication,
-    QDate,
-    QDateTime,
-    QLocale,
-    QMetaObject,
-    QObject,
-    QPoint,
-    QRect,
-    QSize,
-    QTime,
-    QUrl,
-    Qt,
-)
-from PySide6.QtGui import (
-    QBrush,
-    QColor,
-    QConicalGradient,
-    QCursor,
-    QFont,
-    QFontDatabase,
-    QGradient,
-    QIcon,
-    QImage,
-    QKeySequence,
-    QLinearGradient,
-    QPainter,
-    QPalette,
-    QPixmap,
-    QRadialGradient,
-    QTransform,
-)
-from PySide6.QtWidgets import (
-    QApplication,
-    QGridLayout,
-    QMainWindow,
-    QSizePolicy,
-    QStackedWidget,
-    QWidget,
-)
-
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QMainWindow, QSizePolicy,
+    QStackedWidget, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
-            MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1000, 700)
-        sizePolicy = QSizePolicy(
-            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding
-        )
+            MainWindow.setObjectName(u"MainWindow")
+        MainWindow.resize(1400, 900)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
+        icon = QIcon()
+        icon.addFile(u"../resources/images/icon_app.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        MainWindow.setWindowIcon(icon)
         self.centralwidget = QWidget(MainWindow)
-        self.centralwidget.setObjectName("centralwidget")
-        sizePolicy.setHeightForWidth(
-            self.centralwidget.sizePolicy().hasHeightForWidth()
-        )
+        self.centralwidget.setObjectName(u"centralwidget")
+        sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
         self.centralwidget.setSizePolicy(sizePolicy)
         self.gridLayout = QGridLayout(self.centralwidget)
-        self.gridLayout.setObjectName("gridLayout")
+        self.gridLayout.setObjectName(u"gridLayout")
         self.mainStackedWidget = QStackedWidget(self.centralwidget)
-        self.mainStackedWidget.setObjectName("mainStackedWidget")
-        sizePolicy.setHeightForWidth(
-            self.mainStackedWidget.sizePolicy().hasHeightForWidth()
-        )
+        self.mainStackedWidget.setObjectName(u"mainStackedWidget")
+        sizePolicy.setHeightForWidth(self.mainStackedWidget.sizePolicy().hasHeightForWidth())
         self.mainStackedWidget.setSizePolicy(sizePolicy)
 
         self.gridLayout.addWidget(self.mainStackedWidget, 0, 0, 1, 1)
@@ -85,13 +50,11 @@ class Ui_MainWindow(object):
 
         self.mainStackedWidget.setCurrentIndex(-1)
 
-        QMetaObject.connectSlotsByName(MainWindow)
 
+        QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(
-            QCoreApplication.translate("MainWindow", "MainWindow", None)
-        )
-
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Minattack - Web Tool", None))
     # retranslateUi
+

@@ -8,150 +8,135 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import (
-    QCoreApplication,
-    QDate,
-    QDateTime,
-    QLocale,
-    QMetaObject,
-    QObject,
-    QPoint,
-    QRect,
-    QSize,
-    QTime,
-    QUrl,
-    Qt,
-)
-from PySide6.QtGui import (
-    QBrush,
-    QColor,
-    QConicalGradient,
-    QCursor,
-    QFont,
-    QFontDatabase,
-    QGradient,
-    QIcon,
-    QImage,
-    QKeySequence,
-    QLinearGradient,
-    QPainter,
-    QPalette,
-    QPixmap,
-    QRadialGradient,
-    QTransform,
-)
-from PySide6.QtWidgets import (
-    QApplication,
-    QGridLayout,
-    QLabel,
-    QLayout,
-    QLineEdit,
-    QPushButton,
-    QSizePolicy,
-    QSpacerItem,
-    QVBoxLayout,
-    QWidget,
-)
-
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QLabel, QLayout,
+    QLineEdit, QPushButton, QSizePolicy, QSpacerItem,
+    QVBoxLayout, QWidget)
 
 class Ui_Login(object):
     def setupUi(self, Login):
         if not Login.objectName():
-            Login.setObjectName("Login")
-        Login.resize(1000, 700)
+            Login.setObjectName(u"Login")
+        Login.resize(1400, 900)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(Login.sizePolicy().hasHeightForWidth())
         Login.setSizePolicy(sizePolicy)
-        Login.setStyleSheet("background-color: rgb(18, 18, 18);\n" "color:white")
+        Login.setStyleSheet(u"background-color: rgb(18, 18, 18);\n"
+"color:white")
         self.gridLayout = QGridLayout(Login)
-        self.gridLayout.setObjectName("gridLayout")
+        self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayoutLogin = QGridLayout()
-        self.gridLayoutLogin.setObjectName("gridLayoutLogin")
-        self.gridLayoutLogin.setSizeConstraint(QLayout.SizeConstraint.SetMaximumSize)
+        self.gridLayoutLogin.setObjectName(u"gridLayoutLogin")
+        self.gridLayoutLogin.setSizeConstraint(QLayout.SizeConstraint.SetDefaultConstraint)
         self.verticalLayoutLogin = QVBoxLayout()
-        self.verticalLayoutLogin.setObjectName("verticalLayoutLogin")
+        self.verticalLayoutLogin.setObjectName(u"verticalLayoutLogin")
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayoutLogin.addItem(self.verticalSpacer)
+
+        self.horizontalSpacer_3 = QSpacerItem(550, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.verticalLayoutLogin.addItem(self.horizontalSpacer_3)
+
         self.labelUsernameLogin = QLabel(Login)
-        self.labelUsernameLogin.setObjectName("labelUsernameLogin")
+        self.labelUsernameLogin.setObjectName(u"labelUsernameLogin")
+        font = QFont()
+        font.setFamilies([u"JetBrainsMono Nerd Font"])
+        font.setPointSize(14)
+        self.labelUsernameLogin.setFont(font)
 
         self.verticalLayoutLogin.addWidget(self.labelUsernameLogin)
 
         self.lineEditUsernameLogin = QLineEdit(Login)
-        self.lineEditUsernameLogin.setObjectName("lineEditUsernameLogin")
+        self.lineEditUsernameLogin.setObjectName(u"lineEditUsernameLogin")
+        font1 = QFont()
+        font1.setFamilies([u"JetBrainsMonoNL Nerd Font"])
+        font1.setPointSize(14)
+        self.lineEditUsernameLogin.setFont(font1)
+        self.lineEditUsernameLogin.setStyleSheet(u"QLineEdit {\n"
+"border: 1px solid #ffffff;\n"
+"border-radius: 4px;  \n"
+"}")
 
         self.verticalLayoutLogin.addWidget(self.lineEditUsernameLogin)
 
         self.labelPasswordLogin = QLabel(Login)
-        self.labelPasswordLogin.setObjectName("labelPasswordLogin")
+        self.labelPasswordLogin.setObjectName(u"labelPasswordLogin")
+        self.labelPasswordLogin.setFont(font1)
 
         self.verticalLayoutLogin.addWidget(self.labelPasswordLogin)
 
         self.lineEditPasswordLogin = QLineEdit(Login)
-        self.lineEditPasswordLogin.setObjectName("lineEditPasswordLogin")
+        self.lineEditPasswordLogin.setObjectName(u"lineEditPasswordLogin")
+        self.lineEditPasswordLogin.setFont(font)
+        self.lineEditPasswordLogin.setStyleSheet(u"QLineEdit {\n"
+"border: 1px solid #ffffff;\n"
+"border-radius: 4px;  \n"
+"}")
         self.lineEditPasswordLogin.setEchoMode(QLineEdit.EchoMode.Password)
 
         self.verticalLayoutLogin.addWidget(self.lineEditPasswordLogin)
 
+        self.verticalSpacer_3 = QSpacerItem(20, 10, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+
+        self.verticalLayoutLogin.addItem(self.verticalSpacer_3)
+
         self.buttonLogin = QPushButton(Login)
-        self.buttonLogin.setObjectName("buttonLogin")
-        self.buttonLogin.setStyleSheet(
-            "QPushButton {\n"
-            "    background-color: #00C853; /* Vert */\n"
-            "    color: white;\n"
-            "    font-weight: bold;\n"
-            "    border-radius: 10px;\n"
-            "    padding: 8px;\n"
-            "}\n"
-            "QPushButton:hover {\n"
-            "    background-color: #009624; / survol */\n"
-            "}"
-        )
+        self.buttonLogin.setObjectName(u"buttonLogin")
+        font2 = QFont()
+        font2.setFamilies([u"JetBrainsMonoNL Nerd Font"])
+        font2.setPointSize(14)
+        font2.setBold(True)
+        self.buttonLogin.setFont(font2)
+        self.buttonLogin.setStyleSheet(u"QPushButton {\n"
+"    background-color: #00C853; /* Vert */\n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #009624; / survol */\n"
+"}")
 
         self.verticalLayoutLogin.addWidget(self.buttonLogin)
 
-        self.gridLayoutLogin.addLayout(self.verticalLayoutLogin, 1, 1, 1, 1)
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.horizontalSpacerRightLogin = QSpacerItem(
-            40, 20, QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Minimum
-        )
+        self.verticalLayoutLogin.addItem(self.verticalSpacer_2)
 
-        self.gridLayoutLogin.addItem(self.horizontalSpacerRightLogin, 1, 2, 1, 1)
 
-        self.horizontalSpacerLeftLogin = QSpacerItem(
-            40, 20, QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Minimum
-        )
+        self.gridLayoutLogin.addLayout(self.verticalLayoutLogin, 0, 0, 1, 1)
 
-        self.gridLayoutLogin.addItem(self.horizontalSpacerLeftLogin, 1, 0, 1, 1)
 
-        self.verticalSpacerBottomLogin = QSpacerItem(
-            20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.MinimumExpanding
-        )
+        self.gridLayout.addLayout(self.gridLayoutLogin, 0, 1, 1, 1)
 
-        self.gridLayoutLogin.addItem(self.verticalSpacerBottomLogin, 2, 1, 1, 1)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.verticalSpacerTopLogin = QSpacerItem(
-            20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.MinimumExpanding
-        )
+        self.gridLayout.addItem(self.horizontalSpacer, 0, 0, 1, 1)
 
-        self.gridLayoutLogin.addItem(self.verticalSpacerTopLogin, 0, 1, 1, 1)
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.gridLayout.addLayout(self.gridLayoutLogin, 0, 0, 1, 1)
+        self.gridLayout.addItem(self.horizontalSpacer_2, 0, 2, 1, 1)
+
 
         self.retranslateUi(Login)
 
         QMetaObject.connectSlotsByName(Login)
-
     # setupUi
 
     def retranslateUi(self, Login):
-        Login.setWindowTitle(QCoreApplication.translate("Login", "Login", None))
-        self.labelUsernameLogin.setText(
-            QCoreApplication.translate("Login", "Username:", None)
-        )
-        self.labelPasswordLogin.setText(
-            QCoreApplication.translate("Login", "Password:", None)
-        )
-        self.buttonLogin.setText(QCoreApplication.translate("Login", "Login", None))
-
+        Login.setWindowTitle(QCoreApplication.translate("Login", u"Login", None))
+        self.labelUsernameLogin.setText(QCoreApplication.translate("Login", u"Username:", None))
+        self.labelPasswordLogin.setText(QCoreApplication.translate("Login", u"Password:", None))
+        self.buttonLogin.setText(QCoreApplication.translate("Login", u"Login", None))
     # retranslateUi
+
