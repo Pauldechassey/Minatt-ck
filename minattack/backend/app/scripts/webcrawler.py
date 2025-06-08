@@ -324,7 +324,6 @@ class AsyncWebCrawler:
 
         discovered_urls = []
         
-        # 🔬 SYSTÈME DE DÉTECTION MULTI-NIVEAUX
         response_patterns = {}          # Patterns de réponse identiques
         content_hashes = {}            # Hash complets du contenu
         content_structures = {}        # Structure DOM simplifiée
@@ -467,7 +466,7 @@ class AsyncWebCrawler:
             content_hash = hashlib.sha256(content.encode('utf-8', errors='ignore')).hexdigest()
             if content_hash in content_hashes:
                 content_hashes[content_hash].append(url)
-                if len(content_hashes[content_hash]) > 2:  # Limite stricte pour hash complet
+                if len(content_hashes[content_hash]) > 2:  
                     logger.debug(f"Contenu identique détecté: {url}")
                     return True
             else:
@@ -479,13 +478,6 @@ class AsyncWebCrawler:
                 logger.debug(f"Trop de contenu dynamique: {url} ({len(dynamic_markers)} marqueurs)")
                 return True
             
-            # ANALYSE DES TEMPS DE RÉPONSE
-            response_times.append(response_time)
-            if len(response_times) > 10:
-                avg_time = sum(response_times[-10:]) / 10
-                if abs(response_time - avg_time) / avg_time > response_time_variance:
-                    # Temps de réponse anormal = potentiel traitement spécial
-                    pass  # Pour l'instant on ne rejette pas sur ce critère
             
             #PATTERNS DE RÉPONSE IDENTIQUES (status + taille + début contenu)
             content_preview = content[:200] if content else ""
@@ -494,7 +486,7 @@ class AsyncWebCrawler:
             if response_pattern in response_patterns:
                 response_patterns[response_pattern].append(url)
                 if len(response_patterns[response_pattern]) > duplicate_limit + 2:
-                    logger.debug(f"🚫 Pattern de réponse identique: {url} (pattern: {response_pattern})")
+                    logger.debug(f"Pattern de réponse identique: {url} (pattern: {response_pattern})")
                     return True
             else:
                 response_patterns[response_pattern] = [url]
@@ -594,7 +586,7 @@ class AsyncWebCrawler:
         fuzzing_elapsed = time.time() - fuzzing_start
         self.stats['fuzzing_time'] += fuzzing_elapsed
 
-        logger.info(f"🎯 Fuzzing anti-piège terminé: {len(discovered_urls)} URLs authentiquement valides")
+        logger.info(f"Fuzzing anti-piège terminé: {len(discovered_urls)} URLs authentiquement valides")
         logger.info(f"Performance: {len(valid_test_urls)/fuzzing_elapsed:.1f} req/s")
         
         # Statistiques de filtrage

@@ -22,7 +22,7 @@ def cartographie_all(
     id_audit: int = CURRENT_AUDIT, 
     db: Session = Depends(get_db), 
     fuzzing: bool = False, 
-    worlist_path: str = None
+    wordlist_path: str = None
 ):
     audit = get_audit_by_id(id_audit, db)
     if not audit:
@@ -31,9 +31,8 @@ def cartographie_all(
     try:
         logger.info(f"Démarrage cartographie pour domaine ID: {audit.id_domaine}")
         
-        # 🔍 LOGS DE DIAGNOSTIC
         logger.info("=" * 66)
-        logger.info(f"Paramètres reçus - fuzzing: {fuzzing}, worlist_path: '{worlist_path}'")
+        logger.info(f"Paramètres reçus - fuzzing: {fuzzing}, wordlist path: '{wordlist_path}'")
         logger.info("=" * 66)
     
         
@@ -41,7 +40,7 @@ def cartographie_all(
             audit=audit, 
             db=db, 
             fuzzing=fuzzing, 
-            wordlist_path=worlist_path if worlist_path else "minattack/backend/wordlist/worlist_fuzzer.csv",
+            wordlist_path=wordlist_path if wordlist_path else "minattack/backend/wordlist/worlist_fuzzer.csv",
         )
         
         if isinstance(result, dict):
@@ -50,7 +49,7 @@ def cartographie_all(
             nb_technologies = result.get('technologies_saved', 0)
             nb_erreurs = result.get('errors', 0)
             
-            logger.info(f"✅ Résultats: {nb_sous_domaines} sous-domaines, {nb_urls_totales} URLs, {nb_technologies} technologies")
+            logger.info(f"Résultats: {nb_sous_domaines} sous-domaines, {nb_urls_totales} URLs, {nb_technologies} technologies")
             
             # Réponse structurée
             return {
