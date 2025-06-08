@@ -11,9 +11,9 @@ block_cipher = None
 
 datas = [
     ('.env', '.'),
-    ('minattack/backend/db/.keep', 'minattack/backend/db'),
     ('minattack/backend/app/database/schema.sql', 'minattack/backend/app/database'),
     ('minattack/backend/app/database/init.sql', 'minattack/backend/app/database'),
+    ('minattack/backend/app/database/data_dump.sql', 'minattack/backend/app/database'),
 ]
 
 a = Analysis(
@@ -26,6 +26,7 @@ a = Analysis(
         'PySide6',
         *backend_modules,
         *shared_modules,
+        'sklearn.externals.array_api_compat.numpy.fft',
     ],
     hookspath=[],
     runtime_hooks=[],

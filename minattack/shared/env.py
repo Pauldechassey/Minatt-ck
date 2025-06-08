@@ -1,8 +1,10 @@
 import os
 import sys
 from pathlib import Path
+from platformdirs import user_data_dir
 from dotenv import load_dotenv
 
+LOCAL_DB_PATH = "minattack/backend/db/minattack.sqlite"
 
 def is_frozen() -> bool:
     return getattr(sys, "frozen", False)
@@ -41,3 +43,10 @@ def get_backend_host(default: str = "http://127.0.0.1") -> str:
 
 def set_dynamic_backend_port(port: int):
     os.environ["BACKEND_PORT"] = str(port)
+    load_env()
+
+def get_database_paths() -> str:
+    if is_frozen():
+        return str(Path(user_data_dir()) / "MinAttack" / "minattack.sqlite")
+    else:
+        return get_path(LOCAL_DB_PATH)

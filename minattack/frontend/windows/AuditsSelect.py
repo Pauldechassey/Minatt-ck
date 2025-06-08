@@ -47,7 +47,7 @@ class AuditsSelectWindow(QWidget, Ui_AuditsSelect):
         if success:
             for element in data:
                 self.ui.comboBoxSelectionUrlAuditsSelect.addItem(
-                    f"{element["id_audit"]} : {element["date"]} ~ {element["url_domaine"]} | {element["etat"]}"
+                    f"{element['id_audit']} : {element['date']} ~ {element['url_domaine']} | {element['etat']}"
                 )
 
     def selectAudit(self):
