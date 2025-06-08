@@ -3,7 +3,7 @@ import sqlite3
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from minattack.shared.env import get_path, get_env
+from minattack.shared.env import get_path
 
 
 DB_FILE = get_path("minattack/backend/db/minattack.sqlite")
@@ -59,10 +59,6 @@ def init_db(force=False):
             with open(INIT_SQL_PATH, "r") as f:
                 init_sql_script = f.read()
                 cursor.executescript(init_sql_script)
-            if get_env("dev") == "dev" and os.path.exists(DUMP_SQL_PATH):
-                with open(DUMP_SQL_PATH, "r") as f:
-                    sql_dump_script = f.read()
-                    cursor.executescript(sql_dump_script)
         else:
             print(
                 "Warning: schema.sql and init.sql not found. Skipping SQL script execution."
