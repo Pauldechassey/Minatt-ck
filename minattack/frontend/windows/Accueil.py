@@ -21,13 +21,15 @@ class AccueilWindow(QWidget, Ui_Accueil):
         self.ui.pushButtonDeconnexionAccueil.clicked.connect(
             self.main_window.logout
         )
-        self.ui.pushButtonAccueilAccueil.setDisabled(True)
-        self.ui.pushButtonActualiteAccueil.setDisabled(True)
-        self.ui.pushButtonDocumentationAccueil.setDisabled(True)
 
         # Connecting page buttons
         self.ui.pushButtonCreateAudit.clicked.connect(self.goToAuditsCreate)
         self.ui.pushButtonSelectAudit.clicked.connect(self.goToAuditsSelect)
+        
+        self.ui.pushButtonDocumentationAccueil.setEnabled(True)
+        self.ui.pushButtonActualiteAccueil.setEnabled(True)
+        self.ui.pushButtonDocumentationAccueil.clicked.connect(self.goToDocumentation)
+        self.ui.pushButtonActualiteAccueil.clicked.connect(self.goToActualite)
 
     def goToAuditsCreate(self):
         self.main_window.mainStackedWidget.setCurrentIndex(
@@ -40,5 +42,19 @@ class AccueilWindow(QWidget, Ui_Accueil):
         self.main_window.mainStackedWidget.setCurrentIndex(
             self.main_window.mainStackedWidget.indexOf(
                 self.main_window.auditsSelectPage
+            )
+        )
+        
+    def goToDocumentation(self):
+        self.main_window.mainStackedWidget.setCurrentIndex(
+            self.main_window.mainStackedWidget.indexOf(
+                self.main_window.documentationPage
+            )
+        )
+        
+    def goToActualite(self):
+        self.main_window.mainStackedWidget.setCurrentIndex(
+            self.main_window.mainStackedWidget.indexOf(
+                self.main_window.actualitePage
             )
         )

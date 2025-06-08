@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Documentation</class>
+ <widget class="QWidget" name="Documentation">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1292</width>
+    <height>915</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #121212;
+color: white;</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="5">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="3">
+      <widget class="QPushButton" name="pushButtonActualiteDocumentation">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #00C853; /* Vert */
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px;
+}
+QPushButton:hover {
+    background-color: #009624; / survol */
+}</string>
+       </property>
+       <property name="text">
+        <string>Actualité</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="4">
+      <widget class="QPushButton" name="pushButtonDocumentationDocumentation">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #00C853; /* Vert */
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px;
+}
+QPushButton:hover {
+    background-color: #009624; / survol */
+}</string>
+       </property>
+       <property name="text">
+        <string>Documentation</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QPushButton" name="pushButtonAccueilDocumentation">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>12</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #00C853; /* Vert */
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px;
+}
+QPushButton:hover {
+    background-color: #009624; / survol */
+}</string>
+       </property>
+       <property name="text">
+        <string>Accueil</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelLogo">
+       <property name="minimumSize">
+        <size>
+         <width>65</width>
+         <height>42</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>65</width>
+         <height>42</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>      </string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="6">
+      <widget class="QPushButton" name="pushButtonDeconnexionDocumentation">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QScrollArea" name="scrollArea">
+       <property name="widgetResizable">
+        <bool>true</bool>
+       </property>
+       <widget class="QWidget" name="scrollAreaWidgetContents">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>1270</width>
+          <height>842</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <widget class="QWidget" name="verticalLayoutWidget_2">
+         <property name="geometry">
+          <rect>
+           <x>9</x>
+           <y>-1</y>
+           <width>1261</width>
+           <height>1010</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>&lt;h2&gt;Documentation – Workflow d’Audit&lt;/h2&gt;
+
+&lt;p&gt;Notre interface permet de réaliser des audits de sécurité sur des sites web de manière guidée et structurée. Voici les grandes étapes du processus :&lt;/p&gt;
+
+&lt;h3&gt;1. Création ou sélection d’un audit&lt;/h3&gt;
+&lt;p&gt;
+  Lors de la première utilisation, vous pouvez :
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;Créer un nouvel audit&lt;/strong&gt; en renseignant l’URL cible.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Reprendre un audit existant&lt;/strong&gt; déjà démarré, depuis l’interface de sélection.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/p&gt;
+&lt;p&gt;
+  Chaque audit conserve son avancement sous forme d’un &lt;strong&gt;état numérique&lt;/strong&gt;, ce qui permet de reprendre le processus à n’importe quelle étape sans tout recommencer.
+&lt;/p&gt;
+
+&lt;h3&gt;2. Lancement de la cartographie&lt;/h3&gt;
+&lt;p&gt;
+  Cette étape effectue une analyse initiale du site, incluant :
+  &lt;ul&gt;
+    &lt;li&gt;La &lt;strong&gt;découverte automatique de pages&lt;/strong&gt; accessibles (publiques ou semi-cachées).&lt;/li&gt;
+    &lt;li&gt;L’identification de ressources ou endpoints utiles pour les phases suivantes.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/p&gt;
+&lt;p&gt;Une fois cette étape complétée avec succès, l’&lt;strong&gt;état de l’audit passe à 1&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3&gt;3. Lancement des attaques&lt;/h3&gt;
+&lt;p&gt;
+  Après la cartographie, vous pouvez lancer un ou plusieurs types d’attaques automatisées :
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;SQL Injection (SQLi)&lt;/strong&gt; : Injection de requêtes malveillantes pour tester la robustesse des bases de données.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Cross-Site Scripting (XSS)&lt;/strong&gt; : Injection de scripts côté client visant à manipuler l'affichage ou voler des données.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Cross-Site Request Forgery (CSRF)&lt;/strong&gt; : Simulation de requêtes non autorisées pour tester la validation des actions sensibles.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Analyse des headers et cookies&lt;/strong&gt; : Vérification des en-têtes HTTP, cookies et directives de sécurité (CSP, SameSite, etc.).&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/p&gt;
+&lt;p&gt;Une fois que les attaques sont exécutées, l’&lt;strong&gt;état de l’audit passe à 2&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3&gt;4. Génération du rapport&lt;/h3&gt;
+&lt;p&gt;
+  Un rapport est ensuite généré automatiquement, synthétisant :
+  &lt;ul&gt;
+    &lt;li&gt;Les vulnérabilités identifiées.&lt;/li&gt;
+    &lt;li&gt;Leur criticité.&lt;/li&gt;
+    &lt;li&gt;Les recommandations associées.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/p&gt;
+&lt;p&gt;Une fois cette phase terminée, l’&lt;strong&gt;état de l’audit passe à 3&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3&gt;Gestion de l’état des audits&lt;/h3&gt;
+&lt;p&gt;Le système repose sur une gestion d’état pour permettre de reprendre un audit à n’importe quelle étape :&lt;/p&gt;
+
+&lt;table border=&quot;1&quot; cellspacing=&quot;0&quot; cellpadding=&quot;6&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;État&lt;/th&gt;
+      &lt;th&gt;Signification&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;Audit créé, aucune action lancée.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Cartographie réalisée.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Attaques effectuées.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Rapport généré.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;
+  Il est possible de &lt;strong&gt;s’arrêter à une étape sans tout faire d’un coup&lt;/strong&gt;.&lt;br&gt;
+  Par exemple, si vous vous arrêtez après la cartographie (&lt;strong&gt;état 1&lt;/strong&gt;), vous pourrez &lt;strong&gt;reprendre plus tard l’audit&lt;/strong&gt; en allant dans la section &lt;em&gt;« Sélectionner un audit »&lt;/em&gt;.&lt;br&gt;
+  Si l’audit est à l’état 1, vous serez automatiquement redirigé vers la &lt;strong&gt;page de lancement des attaques&lt;/strong&gt;, sans repasser par la cartographie.
+&lt;/p&gt;
+</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -19,6 +19,8 @@ from minattack.frontend.windows.AuditsSelect import AuditsSelectWindow
 from minattack.frontend.windows.Attaques import AttaquesWindow
 from minattack.frontend.windows.Rapports import RapportsWindow
 from minattack.frontend.windows.Cartographie import CartographieWindow
+from minattack.frontend.windows.Documentation import DocumentationWindow
+from minattack.frontend.windows.Actualite import ActualiteWindow
 from PySide6.QtGui import QIcon, QPixmap
 
 import minattack.frontend.utils.settings as settings
@@ -61,15 +63,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.attaquesPage = AttaquesWindow(self)
         self.rapportsPage = RapportsWindow(self)
         self.cartographiePage = CartographieWindow(self)
+        self.documentationPage = DocumentationWindow(self)
+        self.actualitePage = ActualiteWindow(self)
 
         # Ajout des pages au QStackedWidget
         self.mainStackedWidget.addWidget(self.loginPage)  # 0
-        self.mainStackedWidget.addWidget(self.accueilPage)  # 1
+        self.mainStackedWidget.addWidget(self.accueilPage)# 1
         self.mainStackedWidget.addWidget(self.auditsCreatePage)  # 2
         self.mainStackedWidget.addWidget(self.auditsSelectPage)  # 3
         self.mainStackedWidget.addWidget(self.cartographiePage)  # 4
         self.mainStackedWidget.addWidget(self.attaquesPage)  # 5
         self.mainStackedWidget.addWidget(self.rapportsPage)  # 6
+        self.mainStackedWidget.addWidget(self.documentationPage)  # 7
+        self.mainStackedWidget.addWidget(self.actualitePage)  # 8
 
         # Définir la page initiale
         self.mainStackedWidget.setCurrentIndex(0)
@@ -98,4 +104,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def goToAccueil(self):
         self.mainStackedWidget.setCurrentIndex(
             self.mainStackedWidget.indexOf(self.accueilPage)
+        )
+
+    def goToDocumentation(self):
+        self.mainStackedWidget.setCurrentIndex(
+            self.mainStackedWidget.indexOf(self.documentationPage)
+        )
+
+    def goToActualite(self):
+        self.mainStackedWidget.setCurrentIndex(
+            self.mainStackedWidget.indexOf(self.actualitePage)
         )
