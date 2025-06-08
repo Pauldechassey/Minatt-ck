@@ -39,6 +39,10 @@ class AuditsCreateWindow(QWidget, Ui_AuditsCreate):
         # Disabling url validity warning
         self.ui.labelWarningUrlAuditsCreate.setEnabled(False)
 
+    def updateAuditStateCreate(self, id: int):
+        settings.SELECTED_AUDIT_ID = id
+        settings.SELECTED_AUDIT_STATE = 0
+
     # Creation d'un audit
     def createAudit(self):
         url = self.ui.lineEditUrlAuditsCreate.text()
@@ -61,8 +65,7 @@ class AuditsCreateWindow(QWidget, Ui_AuditsCreate):
             self.ui.labelWarningUrlAuditsCreate.setStyleSheet(
                 "QLabel {color: green;}"
             )
-            settings.SELECTED_AUDIT_ID = result[1]
-            settings.SELECTED_AUDIT_STATE = 0
+            self.updateAuditStateCreate(result[1])
             self.main_window.auditsSelectPage.populateComboBox()
             self.main_window.mainStackedWidget.setCurrentIndex(
                 self.main_window.mainStackedWidget.indexOf(
@@ -70,4 +73,4 @@ class AuditsCreateWindow(QWidget, Ui_AuditsCreate):
                 )
             )
         else:
-            QMessageBox.warning(self, "Erreur", "Création d'audit ECHOUÉ")
+            QMessageBox.critical(self, "Erreur", "Création d'audit ECHOUÉ")

@@ -193,18 +193,17 @@ QPushButton:hover {
        <property name="font">
         <font>
          <family>JetBrainsMono Nerd Font</family>
-         <pointsize>-1</pointsize>
+         <pointsize>12</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">QCheckBox {
     color: white;
-    font-size: 14px;
 }
 
 QCheckBox::indicator {
-    width: 16px;
-    height: 16px;
+    width: 25px;
+    height: 25px;
     border-radius: 8px;
     border: 2px solid #00FF00; 
     background: black;
@@ -256,18 +255,17 @@ QPushButton:hover {
        <property name="font">
         <font>
          <family>JetBrainsMono Nerd Font</family>
-         <pointsize>-1</pointsize>
+         <pointsize>12</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">QCheckBox {
     color: white;
-    font-size: 14px;
 }
 
 QCheckBox::indicator {
-    width: 16px;
-    height: 16px;
+    width: 25px;
+    height: 25px;
     border-radius: 8px;
     border: 2px solid #00FF00; 
     background: black;
@@ -348,18 +346,17 @@ QCheckBox::indicator:checked {
        <property name="font">
         <font>
          <family>JetBrainsMono Nerd Font</family>
-         <pointsize>-1</pointsize>
+         <pointsize>12</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">QCheckBox {
     color: white;
-    font-size: 14px;
 }
 
 QCheckBox::indicator {
-    width: 16px;
-    height: 16px;
+    width: 25px;
+    height: 25px;
     border-radius: 8px;
     border: 2px solid #00FF00; 
     background: black;
@@ -399,18 +396,17 @@ QCheckBox::indicator:checked {
        <property name="font">
         <font>
          <family>JetBrainsMonoNL Nerd Font</family>
-         <pointsize>-1</pointsize>
+         <pointsize>12</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">QCheckBox {
     color: white;
-    font-size: 14px;
 }
 
 QCheckBox::indicator {
-    width: 16px;
-    height: 16px;
+    width: 25px;
+    height: 25px;
     border-radius: 8px;
     border: 2px solid #00FF00; 
     background: black;

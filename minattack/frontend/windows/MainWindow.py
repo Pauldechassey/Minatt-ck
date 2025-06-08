@@ -4,6 +4,7 @@ from PySide6.QtWidgets import (
     QStackedWidget,
 )
 
+from minattack.frontend.repository.AttaquesRepo import AttaquesRepo
 from minattack.frontend.repository.AuditRepo import AuditRepo
 from minattack.frontend.repository.CartoRepo import CartoRepo
 from minattack.frontend.repository.UserRepo import UserRepo
@@ -33,6 +34,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.userRepo = UserRepo()
         self.auditRepo = AuditRepo()
         self.cartoRepo = CartoRepo()
+        self.attackRepo = AttaquesRepo()
 
         self.setStyleSheet("background-color: #121212; color: white;")
         self.setMinimumSize(1400, 900)

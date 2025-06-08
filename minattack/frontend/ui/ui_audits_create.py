@@ -161,12 +161,10 @@ class Ui_AuditsCreate(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lineEditUrlAuditsCreate.sizePolicy().hasHeightForWidth())
         self.lineEditUrlAuditsCreate.setSizePolicy(sizePolicy)
-        font4 = QFont()
-        font4.setFamilies([u"JetBrainsMono Nerd Font"])
-        font4.setPointSize(12)
-        self.lineEditUrlAuditsCreate.setFont(font4)
+        self.lineEditUrlAuditsCreate.setFont(font)
         self.lineEditUrlAuditsCreate.setStyleSheet(u"QLineEdit {\n"
 "	border: 1px solid #ffffff;\n"
+"    border-radius: 5px;\n"
 "}")
 
         self.horizontalLayoutUrlAuditsCreate.addWidget(self.lineEditUrlAuditsCreate)
@@ -181,15 +179,13 @@ class Ui_AuditsCreate(object):
         self.pushButtonCreerAuditsCreate.setSizePolicy(sizePolicy1)
         self.pushButtonCreerAuditsCreate.setMinimumSize(QSize(180, 0))
         self.pushButtonCreerAuditsCreate.setMaximumSize(QSize(180, 16777215))
-        font5 = QFont()
-        font5.setFamilies([u"JetBrainsMono Nerd Font"])
-        font5.setPointSize(14)
-        font5.setBold(True)
-        self.pushButtonCreerAuditsCreate.setFont(font5)
+        font4 = QFont()
+        font4.setFamilies([u"JetBrainsMono Nerd Font"])
+        font4.setPointSize(14)
+        font4.setBold(True)
+        self.pushButtonCreerAuditsCreate.setFont(font4)
         self.pushButtonCreerAuditsCreate.setStyleSheet(u"QPushButton {\n"
 "    background-color: #2E2E2E;      \n"
-"    color: white;\n"
-"    border-radius: 5px;\n"
 "    padding: 10px;\n"
 "}\n"
 "QPushButton:hover {\n"
@@ -206,11 +202,11 @@ class Ui_AuditsCreate(object):
 
         self.labelNomAuditsSelect = QLabel(AuditsCreate)
         self.labelNomAuditsSelect.setObjectName(u"labelNomAuditsSelect")
-        font6 = QFont()
-        font6.setFamilies([u"JetBrainsMonoNL Nerd Font"])
-        font6.setPointSize(14)
-        font6.setBold(True)
-        self.labelNomAuditsSelect.setFont(font6)
+        font5 = QFont()
+        font5.setFamilies([u"JetBrainsMonoNL Nerd Font"])
+        font5.setPointSize(14)
+        font5.setBold(True)
+        self.labelNomAuditsSelect.setFont(font5)
 
         self.gridLayout.addWidget(self.labelNomAuditsSelect, 0, 1, 1, 1)
 
@@ -232,6 +228,8 @@ class Ui_AuditsCreate(object):
         self.labelLogo.setText("")
         self.labelUrlAuditsCreate.setText(QCoreApplication.translate("AuditsCreate", u"Cr\u00e9er un audit:", None))
         self.labelWarningUrlAuditsCreate.setText("")
+        self.lineEditUrlAuditsCreate.setText("")
+        self.lineEditUrlAuditsCreate.setPlaceholderText(QCoreApplication.translate("AuditsCreate", u"Entrer une url", None))
         self.pushButtonCreerAuditsCreate.setText(QCoreApplication.translate("AuditsCreate", u"Cr\u00e9er", None))
         self.labelNomAuditsSelect.setText(QCoreApplication.translate("AuditsCreate", u"Audits", None))
     # retranslateUi

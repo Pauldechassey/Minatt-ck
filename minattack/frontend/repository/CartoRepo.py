@@ -14,10 +14,15 @@ class CartoRepo:
     def __init__(self):
         self.__url = f"{get_backend_host()}:{get_backend_port()}/"
 
-    def runCarto(self, id_audit: int):
-        new_url = self.__url + f"cartographie/{id_audit}"  # A COMPLETER QUAND LA ROUTE DU BACK EST LA
+    def runCarto(self, id_audit: int, fuzzing: bool, wordlist_path: str):
+        new_url = self.__url + "cartographie/"
         try:
-            response = requests.post(url=new_url, timeout=30)
+            params = {
+                "id_audit": id_audit,
+                "fuzzing": str(fuzzing).lower(),
+                "wordlist_path": wordlist_path,
+            }
+            response = requests.post(url=new_url, params=params, timeout=30)
             if response.status_code == 200:
                 print("AuditRepo [SUCCESS]: lancement de la cartographie")
                 return True
@@ -25,6 +30,22 @@ class CartoRepo:
             return False
         except requests.exceptions.Timeout:
             print("AuditRepo [TIMEOUT]: request timed out")
+            return False
         except requests.exceptions.RequestException as e:
             print(f"AuditRepo [ERROR]: {e}")
-        return False
+            return False
+
+    # def runCarto(self, id_audit: int):
+    #     new_url = self.__url + f"cartographie/{id_audit}"  # A COMPLETER QUAND LA ROUTE DU BACK EST LA
+    #     try:
+    #         response = requests.post(url=new_url, timeout=30)
+    #         if response.status_code == 200:
+    #             print("AuditRepo [SUCCESS]: lancement de la cartographie")
+    #             return True
+    #         print("AuditRepo [FAILED]: echec de lancement de la cartographie")
+    #         return False
+    #     except requests.exceptions.Timeout:
+    #         print("AuditRepo [TIMEOUT]: request timed out")
+    #     except requests.exceptions.RequestException as e:
+    #         print(f"AuditRepo [ERROR]: {e}")
+    #     return False

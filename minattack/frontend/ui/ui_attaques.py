@@ -123,15 +123,15 @@ class Ui_Attaques(object):
         self.checkBoxHEADERSCOOKIES.setSizePolicy(sizePolicy)
         font1 = QFont()
         font1.setFamilies([u"JetBrainsMono Nerd Font"])
+        font1.setPointSize(12)
         self.checkBoxHEADERSCOOKIES.setFont(font1)
         self.checkBoxHEADERSCOOKIES.setStyleSheet(u"QCheckBox {\n"
 "    color: white;\n"
-"    font-size: 14px;\n"
 "}\n"
 "\n"
 "QCheckBox::indicator {\n"
-"    width: 16px;\n"
-"    height: 16px;\n"
+"    width: 25px;\n"
+"    height: 25px;\n"
 "    border-radius: 8px;\n"
 "    border: 2px solid #00FF00; \n"
 "    background: black;\n"
@@ -170,12 +170,11 @@ class Ui_Attaques(object):
         self.checkBoxCSRF.setFont(font1)
         self.checkBoxCSRF.setStyleSheet(u"QCheckBox {\n"
 "    color: white;\n"
-"    font-size: 14px;\n"
 "}\n"
 "\n"
 "QCheckBox::indicator {\n"
-"    width: 16px;\n"
-"    height: 16px;\n"
+"    width: 25px;\n"
+"    height: 25px;\n"
 "    border-radius: 8px;\n"
 "    border: 2px solid #00FF00; \n"
 "    background: black;\n"
@@ -215,12 +214,11 @@ class Ui_Attaques(object):
         self.checkBoxSQLI.setFont(font1)
         self.checkBoxSQLI.setStyleSheet(u"QCheckBox {\n"
 "    color: white;\n"
-"    font-size: 14px;\n"
 "}\n"
 "\n"
 "QCheckBox::indicator {\n"
-"    width: 16px;\n"
-"    height: 16px;\n"
+"    width: 25px;\n"
+"    height: 25px;\n"
 "    border-radius: 8px;\n"
 "    border: 2px solid #00FF00; \n"
 "    background: black;\n"
@@ -244,15 +242,15 @@ class Ui_Attaques(object):
         self.checkBoxXSS.setSizePolicy(sizePolicy)
         font4 = QFont()
         font4.setFamilies([u"JetBrainsMonoNL Nerd Font"])
+        font4.setPointSize(12)
         self.checkBoxXSS.setFont(font4)
         self.checkBoxXSS.setStyleSheet(u"QCheckBox {\n"
 "    color: white;\n"
-"    font-size: 14px;\n"
 "}\n"
 "\n"
 "QCheckBox::indicator {\n"
-"    width: 16px;\n"
-"    height: 16px;\n"
+"    width: 25px;\n"
+"    height: 25px;\n"
 "    border-radius: 8px;\n"
 "    border: 2px solid #00FF00; \n"
 "    background: black;\n"
