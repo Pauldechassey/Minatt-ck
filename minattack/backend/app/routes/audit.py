@@ -48,8 +48,8 @@ def read_audit(audit_id: int, db: Session = Depends(get_db)):
 @router.post("/new", status_code=201)
 def new_audit(url: UrlRequest, db: Session = Depends(get_db)):
     try:
-        if create_new_audit(url.url_domaine, db):
-            return {"message": "Audit créé avec succès"}
+        if (result := create_new_audit(url.url_domaine, db))[0]:
+            return {"id": result[1]}
     except HTTPException as http_exc:
         raise http_exc
     except Exception as e:

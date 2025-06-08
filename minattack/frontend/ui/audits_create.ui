@@ -264,13 +264,20 @@ QPushButton:hover {
          <property name="font">
           <font>
            <family>JetBrainsMono Nerd Font</family>
-           <pointsize>12</pointsize>
+           <pointsize>14</pointsize>
           </font>
          </property>
          <property name="styleSheet">
           <string notr="true">QLineEdit {
 	border: 1px solid #ffffff;
+    border-radius: 5px;
 }</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>Entrer une url</string>
          </property>
         </widget>
        </item>
@@ -307,8 +314,6 @@ QPushButton:hover {
          <property name="styleSheet">
           <string notr="true">QPushButton {
     background-color: #2E2E2E;      
-    color: white;
-    border-radius: 5px;
     padding: 10px;
 }
 QPushButton:hover {

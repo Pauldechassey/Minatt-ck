@@ -50,10 +50,15 @@ class AuditsSelectWindow(QWidget, Ui_AuditsSelect):
                     f"{element["id_audit"]} : {element["date"]} ~ {element["url_domaine"]} | {element["etat"]}"
                 )
 
+    def updateAuditStateSelect(self, id: int, state: int):
+        settings.SELECTED_AUDIT_ID = id
+        settings.SELECTED_AUDIT_STATE = state
+
     def selectAudit(self):
         choice = self.ui.comboBoxSelectionUrlAuditsSelect.currentText()
-        settings.SELECTED_AUDIT_ID = int(choice.split(" : ")[0])
-        settings.SELECTED_AUDIT_STATE = int(choice.split(" | ")[1])
+        self.updateAuditStateSelect(
+            int(choice.split(" : ")[0]), int(choice.split(" | ")[1])
+        )
         if settings.SELECTED_AUDIT_STATE == 0:
             self.main_window.mainStackedWidget.setCurrentIndex(
                 self.main_window.mainStackedWidget.indexOf(

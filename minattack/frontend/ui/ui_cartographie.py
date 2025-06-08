@@ -15,8 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QLabel, QPushButton,
-    QSizePolicy, QSpacerItem, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QGridLayout, QHBoxLayout,
+    QLabel, QLineEdit, QPushButton, QSizePolicy,
+    QSpacerItem, QWidget)
 
 class Ui_Cartographie(object):
     def setupUi(self, Cartographie):
@@ -31,6 +32,10 @@ class Ui_Cartographie(object):
         self.gridLayout_4.setContentsMargins(10, 10, 10, 10)
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout.addItem(self.verticalSpacer, 11, 1, 1, 1)
+
         self.labelNomCartographie = QLabel(Cartographie)
         self.labelNomCartographie.setObjectName(u"labelNomCartographie")
         font = QFont()
@@ -55,24 +60,75 @@ class Ui_Cartographie(object):
 "    background-color: #009624; / survol */\n"
 "}")
 
-        self.gridLayout.addWidget(self.pushButtonLancerCartographie, 7, 1, 1, 1)
+        self.gridLayout.addWidget(self.pushButtonLancerCartographie, 10, 1, 1, 1)
 
-        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.verticalSpacer_2 = QSpacerItem(10, 10, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
 
-        self.gridLayout.addItem(self.verticalSpacer_3, 5, 1, 1, 1)
+        self.gridLayout.addItem(self.verticalSpacer_2, 7, 1, 1, 1)
 
-        self.label = QLabel(Cartographie)
-        self.label.setObjectName(u"label")
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(-1, 0, -1, 0)
+        self.checkBoxFuzzingCartographie = QCheckBox(Cartographie)
+        self.checkBoxFuzzingCartographie.setObjectName(u"checkBoxFuzzingCartographie")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.checkBoxFuzzingCartographie.sizePolicy().hasHeightForWidth())
+        self.checkBoxFuzzingCartographie.setSizePolicy(sizePolicy)
+        self.checkBoxFuzzingCartographie.setMinimumSize(QSize(0, 30))
         font1 = QFont()
         font1.setFamilies([u"JetBrainsMono Nerd Font"])
         font1.setPointSize(14)
+        self.checkBoxFuzzingCartographie.setFont(font1)
+        self.checkBoxFuzzingCartographie.setStyleSheet(u"QCheckBox {\n"
+"    color: white;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator {\n"
+"    width: 25px;\n"
+"    height: 25px;\n"
+"    border-radius: 8px;\n"
+"    border: 2px solid #00FF00; \n"
+"    background: black;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:checked {\n"
+"    background: #00FF00; \n"
+"}")
+        self.checkBoxFuzzingCartographie.setChecked(False)
+        self.checkBoxFuzzingCartographie.setAutoRepeat(False)
+
+        self.horizontalLayout.addWidget(self.checkBoxFuzzingCartographie)
+
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer_3)
+
+        self.lineEditWordlistPathCartographie = QLineEdit(Cartographie)
+        self.lineEditWordlistPathCartographie.setObjectName(u"lineEditWordlistPathCartographie")
+        self.lineEditWordlistPathCartographie.setEnabled(False)
+        self.lineEditWordlistPathCartographie.setMinimumSize(QSize(0, 46))
+        self.lineEditWordlistPathCartographie.setFont(font1)
+        self.lineEditWordlistPathCartographie.setStyleSheet(u"QLineEdit {\n"
+"	border: 1px solid #ffffff;\n"
+"    border-radius: 5px;\n"
+"}")
+
+        self.horizontalLayout.addWidget(self.lineEditWordlistPathCartographie)
+
+
+        self.gridLayout.addLayout(self.horizontalLayout, 9, 1, 1, 1)
+
+        self.label = QLabel(Cartographie)
+        self.label.setObjectName(u"label")
         self.label.setFont(font1)
 
         self.gridLayout.addWidget(self.label, 6, 1, 1, 1)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.gridLayout.addItem(self.verticalSpacer, 8, 1, 1, 1)
+        self.gridLayout.addItem(self.verticalSpacer_3, 5, 1, 1, 1)
 
 
         self.gridLayout_4.addLayout(self.gridLayout, 1, 0, 1, 1)
@@ -177,6 +233,8 @@ class Ui_Cartographie(object):
         Cartographie.setWindowTitle(QCoreApplication.translate("Cartographie", u"Cartographie", None))
         self.labelNomCartographie.setText(QCoreApplication.translate("Cartographie", u"Cartographie", None))
         self.pushButtonLancerCartographie.setText(QCoreApplication.translate("Cartographie", u"Lancer", None))
+        self.checkBoxFuzzingCartographie.setText(QCoreApplication.translate("Cartographie", u"Fuzzing", None))
+        self.lineEditWordlistPathCartographie.setPlaceholderText(QCoreApplication.translate("Cartographie", u"(optionnel) chemin absolu de votre propre wordlist", None))
         self.label.setText(QCoreApplication.translate("Cartographie", u"Cette page vous permet de g\u00e9n\u00e9rer une cartographie dynamique \u00e0 partir des donn\u00e9es collect\u00e9es lors des audits.\n"
 "Apr\u00e8s avoir selectionn\u00e9 vos attaques, cliquez sur Lancer pour visualiser la carte.", None))
         self.pushButtonDeconnexionCartographie.setText("")

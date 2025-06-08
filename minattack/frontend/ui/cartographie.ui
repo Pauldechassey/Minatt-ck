@@ -33,6 +33,19 @@ color: white;
    </property>
    <item row="1" column="0">
     <layout class="QGridLayout" name="gridLayout">
+     <item row="11" column="1">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
      <item row="4" column="1">
       <widget class="QLabel" name="labelNomCartographie">
        <property name="font">
@@ -47,7 +60,7 @@ color: white;
        </property>
       </widget>
      </item>
-     <item row="7" column="1">
+     <item row="10" column="1">
       <widget class="QPushButton" name="pushButtonLancerCartographie">
        <property name="font">
         <font>
@@ -73,18 +86,123 @@ QPushButton:hover {
        </property>
       </widget>
      </item>
-     <item row="5" column="1">
-      <spacer name="verticalSpacer_3">
+     <item row="7" column="1">
+      <spacer name="verticalSpacer_2">
        <property name="orientation">
         <enum>Qt::Orientation::Vertical</enum>
        </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::Minimum</enum>
+       </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>20</width>
-         <height>40</height>
+         <width>10</width>
+         <height>10</height>
         </size>
        </property>
       </spacer>
+     </item>
+     <item row="9" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QCheckBox" name="checkBoxFuzzingCartographie">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>JetBrainsMono Nerd Font</family>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QCheckBox {
+    color: white;
+}
+
+QCheckBox::indicator {
+    width: 25px;
+    height: 25px;
+    border-radius: 8px;
+    border: 2px solid #00FF00; 
+    background: black;
+}
+
+QCheckBox::indicator:checked {
+    background: #00FF00; 
+}</string>
+         </property>
+         <property name="text">
+          <string>Fuzzing</string>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+         <property name="autoRepeat">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Policy::Minimum</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditWordlistPathCartographie">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>46</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>JetBrainsMono Nerd Font</family>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+	border: 1px solid #ffffff;
+    border-radius: 5px;
+}</string>
+         </property>
+         <property name="placeholderText">
+          <string>(optionnel) chemin absolu de votre propre wordlist</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item row="6" column="1">
       <widget class="QLabel" name="label">
@@ -100,8 +218,8 @@ Après avoir selectionné vos attaques, cliquez sur Lancer pour visualiser la ca
        </property>
       </widget>
      </item>
-     <item row="8" column="1">
-      <spacer name="verticalSpacer">
+     <item row="5" column="1">
+      <spacer name="verticalSpacer_3">
        <property name="orientation">
         <enum>Qt::Orientation::Vertical</enum>
        </property>

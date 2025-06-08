@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import cast
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 from minattack.backend.app.models.audit import Audit
@@ -59,7 +58,7 @@ def create_new_audit(url_domaine: str, db: Session):
         db.commit()
         db.refresh(new_audit)
         globals.CURRENT_AUDIT = new_audit
-        return True
+        return True, new_audit.id_audit
     else:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

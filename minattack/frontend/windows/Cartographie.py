@@ -35,49 +35,74 @@ class CartographieWindow(QWidget, Ui_Cartographie):
         # )
 
         # Connecting page elemets
-        self.ui.pushButtonLancerCartographie.clicked.connect(
-            self.lancementCarto
+        self.ui.pushButtonLancerCartographie.clicked.connect(self.manageCarto)
+        self.ui.checkBoxFuzzingCartographie.clicked.connect(
+            self.checkFuzzSelect
         )
 
-    def lancementCarto(self):
+    def checkFuzzSelect(self):
+        if self.ui.checkBoxFuzzingCartographie.isChecked():
+            self.ui.lineEditWordlistPathCartographie.setEnabled(True)
+        else:
+            self.ui.lineEditWordlistPathCartographie.clear()
+            self.ui.lineEditWordlistPathCartographie.setEnabled(False)
+
+    def checkAuditStateCartographie(self) -> bool:
         if settings.SELECTED_AUDIT_STATE > 0:
             QMessageBox.warning(
                 self,
                 "Attention",
                 "La cartographie a déjà été effectuée pour cet audit",
             )
-            return
+            return False
         elif settings.SELECTED_AUDIT_STATE < 0:
             QMessageBox.warning(
                 self,
                 "Attention",
                 "Etat de l'audit invalide",
             )
-            return
-        print()
-        if self.main_window.cartoRepo.runCarto(settings.SELECTED_AUDIT_ID):
-            settings.SELECTED_AUDIT_STATE = settings.SELECTED_AUDIT_STATE + 1
-            if self.main_window.auditRepo.updateAuditState(
-                settings.SELECTED_AUDIT_ID, settings.SELECTED_AUDIT_STATE
-            ):
-                QMessageBox.information(
-                    self,
-                    "Succès",
-                    "Cartographie réalisée avec succès",
-                    QMessageBox.StandardButton.Cancel,
+            return False
+        else:
+            return True
+
+    def updateAuditStateCartographie(self):
+        settings.SELECTED_AUDIT_STATE = settings.SELECTED_AUDIT_STATE + 1
+        if self.main_window.auditRepo.updateAuditState(
+            settings.SELECTED_AUDIT_ID, settings.SELECTED_AUDIT_STATE
+        ):
+            QMessageBox.information(
+                self,
+                "Succès",
+                "Cartographie réalisée avec succès",
+                QMessageBox.StandardButton.Cancel,
+            )
+            self.main_window.auditsSelectPage.populateComboBox()
+            self.main_window.mainStackedWidget.setCurrentIndex(
+                self.main_window.mainStackedWidget.indexOf(
+                    self.main_window.attaquesPage
                 )
-                self.main_window.auditsSelectPage.populateComboBox()
-                self.main_window.mainStackedWidget.setCurrentIndex(
-                    self.main_window.mainStackedWidget.indexOf(
-                        self.main_window.attaquesPage
-                    )
-                )
-            else:
-                QMessageBox.warning(
-                    self,
-                    "Attention",
-                    "Cartographie réussie mais erreur lors de la mise à jour de l'état",
-                )
+            )
+        else:
+            QMessageBox.warning(
+                self,
+                "Attention",
+                "Cartographie réussie mais erreur lors de la mise à jour de l'état",
+            )
+
+    def launchCarto(self, fuzzing: bool, wordlist_path: str):
+        if self.main_window.cartoRepo.runCarto(
+            settings.SELECTED_AUDIT_ID, fuzzing, wordlist_path
+        ):
+            self.updateAuditStateCartographie()
         else:
             settings.SELECTED_AUDIT_STATE = settings.SELECTED_AUDIT_STATE - 1
             QMessageBox.critical(self, "Erreur", "La cartographie a échoué")
+
+    def manageCarto(self):
+        check = self.checkAuditStateCartographie()
+        fuzzing = self.ui.checkBoxFuzzingCartographie.isChecked()
+        wordlist_path = self.ui.lineEditWordlistPathCartographie.text()
+        if check and fuzzing is False:
+            self.launchCarto(fuzzing, "")
+        elif check and fuzzing is True:
+            self.launchCarto(fuzzing, wordlist_path)
