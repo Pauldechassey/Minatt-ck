@@ -1,9 +1,5 @@
 from PySide6.QtWidgets import (
     QWidget,
-    QStackedWidget,
-    QMessageBox,
-    QLineEdit,
-    QMainWindow,
 )
 from minattack.frontend.ui.ui_documentation import Ui_Documentation
 from PySide6.QtGui import QIcon, QPixmap
@@ -17,7 +13,7 @@ class DocumentationWindow(QWidget, Ui_Documentation):
         self.ui.setupUi(self)
         self.main_window = main_window  # Stockez la référence à MainWindow
 
-        # Initialising decorative element
+        # Initializing decorative element
         self.ui.pushButtonDeconnexionDocumentation.setIcon(
             QIcon(":/images/deconnexion.png")
         )
@@ -31,7 +27,7 @@ class DocumentationWindow(QWidget, Ui_Documentation):
         self.ui.pushButtonAccueilDocumentation.clicked.connect(
             self.main_window.goToAccueil
         )
-
         self.ui.pushButtonActualiteDocumentation.clicked.connect(
             self.main_window.goToActualite
         )
+

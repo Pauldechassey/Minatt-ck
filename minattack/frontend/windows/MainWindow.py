@@ -54,7 +54,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.current_sd_id = None
 
-        # Initialisation des pages
+        # Initialization des pages
         # Passez une référence à MainWindow
         self.loginPage = LoginWindow(self)
         self.accueilPage = AccueilWindow(self)
@@ -68,7 +68,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # Ajout des pages au QStackedWidget
         self.mainStackedWidget.addWidget(self.loginPage)  # 0
-        self.mainStackedWidget.addWidget(self.accueilPage)# 1
+        self.mainStackedWidget.addWidget(self.accueilPage)  # 1
         self.mainStackedWidget.addWidget(self.auditsCreatePage)  # 2
         self.mainStackedWidget.addWidget(self.auditsSelectPage)  # 3
         self.mainStackedWidget.addWidget(self.cartographiePage)  # 4
@@ -115,3 +115,4 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.mainStackedWidget.setCurrentIndex(
             self.mainStackedWidget.indexOf(self.actualitePage)
         )
+

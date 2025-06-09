@@ -17,7 +17,7 @@ class RapportsWindow(QWidget, Ui_Rapports):
         self.ui.setupUi(self)
         self.main_window = main_window  # Stockez la référence à MainWindow
 
-        # Initialising decorative element
+        # Initializing decorative element
         self.ui.pushButtonDeconnexionRapports.setIcon(
             QIcon(":/images/deconnexion.png")
         )
@@ -31,9 +31,9 @@ class RapportsWindow(QWidget, Ui_Rapports):
         self.ui.pushButtonAccueilRapports.clicked.connect(
             self.main_window.goToAccueil
         )
-        # self.ui.pushButtonActualiteAuditsCreate.clicked.connect(
-        #     self.goToAttaques
-        # )
-        # self.ui.pushButtonDocumentationAuditsCreate.clicked.connect(
-        #     self.goToRapports
-        # )
+        self.ui.pushButtonActualiteRapports.clicked.connect(
+            self.main_window.goToActualite
+        )
+        self.ui.pushButtonDocumentationRapports.clicked.connect(
+            self.main_window.goToDocumentation
+        )
