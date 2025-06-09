@@ -6,12 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1292</width>
-    <height>915</height>
+    <width>1400</width>
+    <height>900</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1400</width>
+    <height>900</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Documentation</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #121212;
@@ -20,10 +32,35 @@ color: white;</string>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="5">
-      <spacer name="horizontalSpacer_2">
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelLogo">
+       <property name="minimumSize">
+        <size>
+         <width>65</width>
+         <height>42</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>65</width>
+         <height>42</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap>../resources/images/logo.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <spacer name="horizontalSpacer">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -33,40 +70,12 @@ color: white;</string>
        </property>
       </spacer>
      </item>
-     <item row="0" column="3">
-      <widget class="QPushButton" name="pushButtonActualiteDocumentation">
-       <property name="font">
-        <font>
-         <family>JetBrainsMono Nerd Font</family>
-         <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    padding: 10px;
-}
-QPushButton:hover {
-    background-color: #009624; / survol */
-}</string>
-       </property>
-       <property name="text">
-        <string>Actualité</string>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="4">
       <widget class="QPushButton" name="pushButtonDocumentationDocumentation">
        <property name="font">
         <font>
          <family>JetBrainsMono Nerd Font</family>
          <pointsize>12</pointsize>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -87,13 +96,38 @@ QPushButton:hover {
        </property>
       </widget>
      </item>
+     <item row="0" column="3">
+      <widget class="QPushButton" name="pushButtonActualiteDocumentation">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #00C853; /* Vert */
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px;
+}
+QPushButton:hover {
+    background-color: #009624; / survol */
+}</string>
+       </property>
+       <property name="text">
+        <string>Actualité</string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="2">
       <widget class="QPushButton" name="pushButtonAccueilDocumentation">
        <property name="font">
         <font>
          <family>JetBrainsMono Nerd Font</family>
          <pointsize>12</pointsize>
-         <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
@@ -114,10 +148,10 @@ QPushButton:hover {
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <spacer name="horizontalSpacer">
+     <item row="0" column="5">
+      <spacer name="horizontalSpacer_2">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -127,75 +161,62 @@ QPushButton:hover {
        </property>
       </spacer>
      </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="labelLogo">
-       <property name="minimumSize">
-        <size>
-         <width>65</width>
-         <height>42</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>65</width>
-         <height>42</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>      </string>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="6">
       <widget class="QPushButton" name="pushButtonDeconnexionDocumentation">
+       <property name="styleSheet">
+        <string notr="true">background-color: #121212;
+color: white;
+</string>
+       </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../resources/images/deconnexion.png</normaloff>../resources/images/deconnexion.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
        </property>
       </widget>
      </item>
     </layout>
    </item>
    <item row="1" column="0">
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <widget class="QScrollArea" name="scrollArea">
-       <property name="widgetResizable">
-        <bool>true</bool>
-       </property>
-       <widget class="QWidget" name="scrollAreaWidgetContents">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>1270</width>
-          <height>842</height>
-         </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <widget class="QWidget" name="verticalLayoutWidget_2">
-         <property name="geometry">
-          <rect>
-           <x>9</x>
-           <y>-1</y>
-           <width>1261</width>
-           <height>1010</height>
-          </rect>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="styleSheet">
+      <string notr="true">QScrollBar::handle:vertical {
+    background-color: #00C853; 
+}</string>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>-296</y>
+        <width>1363</width>
+        <height>1124</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label_4">
+         <property name="font">
+          <font>
+           <family>JetBrainsMono Nerd Font</family>
+           <pointsize>11</pointsize>
+          </font>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item>
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>&lt;h2&gt;Documentation – Workflow d’Audit&lt;/h2&gt;
+         <property name="text">
+          <string>&lt;h2&gt;Documentation – Workflow d’Audit&lt;/h2&gt;
 
-&lt;p&gt;Notre interface permet de réaliser des audits de sécurité sur des sites web de manière guidée et structurée. Voici les grandes étapes du processus :&lt;/p&gt;
+&lt;p&gt;Notre interface permet de réaliser des audits de sécurité sur des sites web de manière guidée et structurée. Voici les grandes étapes du &lt;br&gt;processus :&lt;/p&gt;
 
 &lt;h3&gt;1. Création ou sélection d’un audit&lt;/h3&gt;
 &lt;p&gt;
@@ -206,7 +227,7 @@ QPushButton:hover {
   &lt;/ul&gt;
 &lt;/p&gt;
 &lt;p&gt;
-  Chaque audit conserve son avancement sous forme d’un &lt;strong&gt;état numérique&lt;/strong&gt;, ce qui permet de reprendre le processus à n’importe quelle étape sans tout recommencer.
+  Chaque audit conserve son avancement sous forme d’un &lt;strong&gt;état numérique&lt;/strong&gt;, ce qui permet de reprendre le processus à n’importe quelle étape &lt;br&gt;sans tout recommencer.
 &lt;/p&gt;
 
 &lt;h3&gt;2. Lancement de la cartographie&lt;/h3&gt;
@@ -274,19 +295,16 @@ QPushButton:hover {
 
 &lt;p&gt;
   Il est possible de &lt;strong&gt;s’arrêter à une étape sans tout faire d’un coup&lt;/strong&gt;.&lt;br&gt;
-  Par exemple, si vous vous arrêtez après la cartographie (&lt;strong&gt;état 1&lt;/strong&gt;), vous pourrez &lt;strong&gt;reprendre plus tard l’audit&lt;/strong&gt; en allant dans la section &lt;em&gt;« Sélectionner un audit »&lt;/em&gt;.&lt;br&gt;
-  Si l’audit est à l’état 1, vous serez automatiquement redirigé vers la &lt;strong&gt;page de lancement des attaques&lt;/strong&gt;, sans repasser par la cartographie.
+  Par exemple, si vous vous arrêtez après la cartographie (&lt;strong&gt;état 1&lt;/strong&gt;), vous pourrez &lt;strong&gt;reprendre plus tard l’audit&lt;/strong&gt; en allant dans la section &lt;br&gt;&lt;em&gt;« Sélectionner un audit »&lt;/em&gt;.&lt;br&gt;
+ Si l’audit est à l’état 1, vous serez automatiquement redirigé vers la &lt;strong&gt;page de lancement des attaques&lt;/strong&gt;, sans repasser par la cartographie.
 &lt;/p&gt;
 </string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         </property>
         </widget>
-       </widget>
-      </widget>
-     </item>
-    </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
    </item>
   </layout>
  </widget>

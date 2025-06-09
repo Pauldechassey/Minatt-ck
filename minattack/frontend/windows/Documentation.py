@@ -30,4 +30,3 @@ class DocumentationWindow(QWidget, Ui_Documentation):
         self.ui.pushButtonActualiteDocumentation.clicked.connect(
             self.main_window.goToActualite
         )
-
