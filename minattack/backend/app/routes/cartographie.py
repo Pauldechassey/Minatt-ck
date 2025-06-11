@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from fastapi import APIRouter, Depends, HTTPException
 from minattack.backend.app.database import SessionLocal
 from sqlalchemy.orm import Session
@@ -5,6 +6,7 @@ import logging
 
 from minattack.backend.app.globals import CURRENT_AUDIT
 from minattack.backend.app.services.audit_service import get_audit_by_id
+from minattack.backend.app.services.cartographie_graph_service import DomainGraphService
 from minattack.backend.app.services.cartographie_service import (
     run_cartographie,
 )
@@ -89,3 +91,11 @@ def cartographie_all(
     except Exception as e:
         logger.error(f"Erreur lors de la cartographie: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/graph", summary="Graphique du domaine")
+def get_domain_graph_data(id_audit: int, session: Session) -> Dict[str, Any]:
+    service = DomainGraphService(session)
+    id_domaine = get_audit_by_id(id_audit, session).id_domaine
+    if not id_domaine:
+        raise HTTPException(status_code=404, detail="Domaine non trouvé pour cet audit")
+    return service.get_graph_data(id_domaine)
