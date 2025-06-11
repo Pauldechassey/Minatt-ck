@@ -14,10 +14,7 @@ class RapportRepo:
     def view_rapport(self, audit_id: int) -> bytes:
         """Récupère le rapport PDF pour affichage dans le navigateur"""
         try:
-            response = requests.get(
-                f"{self.__url}/{audit_id}",
-                timeout=30
-            )
+            response = requests.get(f"{self.__url}/{audit_id}", timeout=30)
             if response.status_code == 200:
                 print(f"[SUCCESS] Rapport généré pour l'audit {audit_id}")
                 return response.content
@@ -31,11 +28,10 @@ class RapportRepo:
         """Télécharge le rapport PDF"""
         try:
             response = requests.get(
-                f"{self.__url}/download/{audit_id}",
-                timeout=30
+                f"{self.__url}/download/{audit_id}", timeout=30
             )
             if response.status_code == 200:
-                with open(save_path, 'wb') as f:
+                with open(save_path, "wb") as f:
                     f.write(response.content)
                 print(f"[SUCCESS] Rapport téléchargé: {save_path}")
                 return True
@@ -44,3 +40,4 @@ class RapportRepo:
         except Exception as e:
             print(f"[ERROR] {e}")
             return False
+

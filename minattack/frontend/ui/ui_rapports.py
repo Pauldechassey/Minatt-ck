@@ -37,38 +37,28 @@ class Ui_Rapports(object):
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.gridLayoutMenuRapports = QGridLayout()
         self.gridLayoutMenuRapports.setObjectName(u"gridLayoutMenuRapports")
-        self.pushButtonDeconnexionRapports = QPushButton(Rapports)
-        self.pushButtonDeconnexionRapports.setObjectName(u"pushButtonDeconnexionRapports")
-        icon = QIcon()
-        icon.addFile(u"../../../../../.designer/resources/images/deconnexion.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.pushButtonDeconnexionRapports.setIcon(icon)
-        self.pushButtonDeconnexionRapports.setIconSize(QSize(32, 32))
-
-        self.gridLayoutMenuRapports.addWidget(self.pushButtonDeconnexionRapports, 0, 6, 1, 1)
-
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayoutMenuRapports.addItem(self.horizontalSpacer, 0, 1, 1, 1)
-
-        self.labelLogo = QLabel(Rapports)
-        self.labelLogo.setObjectName(u"labelLogo")
-        self.labelLogo.setMinimumSize(QSize(65, 42))
-        self.labelLogo.setMaximumSize(QSize(65, 42))
-        self.labelLogo.setPixmap(QPixmap(u"../../../../../.designer/resources/images/logo.png"))
-        self.labelLogo.setScaledContents(True)
-
-        self.gridLayoutMenuRapports.addWidget(self.labelLogo, 0, 0, 1, 1)
-
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayoutMenuRapports.addItem(self.horizontalSpacer_2, 0, 5, 1, 1)
-
-        self.pushButtonActualiteRapports = QPushButton(Rapports)
-        self.pushButtonActualiteRapports.setObjectName(u"pushButtonActualiteRapports")
+        self.pushButtonDocumentationRapports = QPushButton(Rapports)
+        self.pushButtonDocumentationRapports.setObjectName(u"pushButtonDocumentationRapports")
         font = QFont()
         font.setFamilies([u"JetBrainsMono Nerd Font"])
         font.setPointSize(12)
         font.setBold(True)
+        self.pushButtonDocumentationRapports.setFont(font)
+        self.pushButtonDocumentationRapports.setStyleSheet(u"QPushButton {\n"
+"    background-color: #00C853; /* Vert */\n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 5px;\n"
+"    padding: 10px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #009624; / survol */\n"
+"}")
+
+        self.gridLayoutMenuRapports.addWidget(self.pushButtonDocumentationRapports, 0, 4, 1, 1)
+
+        self.pushButtonActualiteRapports = QPushButton(Rapports)
+        self.pushButtonActualiteRapports.setObjectName(u"pushButtonActualiteRapports")
         self.pushButtonActualiteRapports.setFont(font)
         self.pushButtonActualiteRapports.setStyleSheet(u"QPushButton {\n"
 "    background-color: #00C853; /* Vert */\n"
@@ -83,21 +73,27 @@ class Ui_Rapports(object):
 
         self.gridLayoutMenuRapports.addWidget(self.pushButtonActualiteRapports, 0, 3, 1, 1)
 
-        self.pushButtonDocumentationRapports = QPushButton(Rapports)
-        self.pushButtonDocumentationRapports.setObjectName(u"pushButtonDocumentationRapports")
-        self.pushButtonDocumentationRapports.setFont(font)
-        self.pushButtonDocumentationRapports.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
-"    color: white;\n"
-"    font-weight: bold;\n"
-"    border-radius: 5px;\n"
-"    padding: 10px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
-"}")
+        self.pushButtonDeconnexionRapports = QPushButton(Rapports)
+        self.pushButtonDeconnexionRapports.setObjectName(u"pushButtonDeconnexionRapports")
+        icon = QIcon()
+        icon.addFile(u"../resources/images/deconnexion.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.pushButtonDeconnexionRapports.setIcon(icon)
+        self.pushButtonDeconnexionRapports.setIconSize(QSize(32, 32))
 
-        self.gridLayoutMenuRapports.addWidget(self.pushButtonDocumentationRapports, 0, 4, 1, 1)
+        self.gridLayoutMenuRapports.addWidget(self.pushButtonDeconnexionRapports, 0, 6, 1, 1)
+
+        self.labelLogo = QLabel(Rapports)
+        self.labelLogo.setObjectName(u"labelLogo")
+        self.labelLogo.setMinimumSize(QSize(65, 42))
+        self.labelLogo.setMaximumSize(QSize(65, 42))
+        self.labelLogo.setPixmap(QPixmap(u"../resources/images/logo.png"))
+        self.labelLogo.setScaledContents(True)
+
+        self.gridLayoutMenuRapports.addWidget(self.labelLogo, 0, 0, 1, 1)
+
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayoutMenuRapports.addItem(self.horizontalSpacer, 0, 1, 1, 1)
 
         self.pushButtonAccueilRapports = QPushButton(Rapports)
         self.pushButtonAccueilRapports.setObjectName(u"pushButtonAccueilRapports")
@@ -115,11 +111,25 @@ class Ui_Rapports(object):
 
         self.gridLayoutMenuRapports.addWidget(self.pushButtonAccueilRapports, 0, 2, 1, 1)
 
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayoutMenuRapports.addItem(self.horizontalSpacer_2, 0, 5, 1, 1)
+
 
         self.gridLayout_2.addLayout(self.gridLayoutMenuRapports, 0, 0, 1, 1)
 
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
+        self.qWebEngineViewPdfRapports = QWebEngineView(Rapports)
+        self.qWebEngineViewPdfRapports.setObjectName(u"qWebEngineViewPdfRapports")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.qWebEngineViewPdfRapports.sizePolicy().hasHeightForWidth())
+        self.qWebEngineViewPdfRapports.setSizePolicy(sizePolicy1)
+
+        self.gridLayout.addWidget(self.qWebEngineViewPdfRapports, 2, 0, 1, 1)
+
         self.labelNomRapports = QLabel(Rapports)
         self.labelNomRapports.setObjectName(u"labelNomRapports")
         font1 = QFont()
@@ -129,9 +139,9 @@ class Ui_Rapports(object):
 
         self.gridLayout.addWidget(self.labelNomRapports, 0, 0, 1, 1)
 
-        self.pushButtonDownload = QPushButton(Rapports)
-        self.pushButtonDownload.setObjectName(u"pushButtonDownload")
-        self.pushButtonDownload.setStyleSheet(u"QPushButton {\n"
+        self.pushButtonDownloadRapports = QPushButton(Rapports)
+        self.pushButtonDownloadRapports.setObjectName(u"pushButtonDownloadRapports")
+        self.pushButtonDownloadRapports.setStyleSheet(u"QPushButton {\n"
 "    background-color: #00C853; /* Vert */\n"
 "    color: white;\n"
 "    font-weight: bold;\n"
@@ -142,16 +152,7 @@ class Ui_Rapports(object):
 "    background-color: #009624; / survol */\n"
 "}")
 
-        self.gridLayout.addWidget(self.pushButtonDownload, 1, 0, 1, 1)
-
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout.addItem(self.verticalSpacer, 3, 0, 1, 1)
-
-        self.widget = QWebEngineView(Rapports)
-        self.widget.setObjectName(u"widget")
-
-        self.gridLayout.addWidget(self.widget, 2, 0, 1, 1)
+        self.gridLayout.addWidget(self.pushButtonDownloadRapports, 1, 0, 1, 1)
 
 
         self.gridLayout_2.addLayout(self.gridLayout, 1, 0, 1, 1)
@@ -164,12 +165,12 @@ class Ui_Rapports(object):
 
     def retranslateUi(self, Rapports):
         Rapports.setWindowTitle(QCoreApplication.translate("Rapports", u"Rapports", None))
+        self.pushButtonDocumentationRapports.setText(QCoreApplication.translate("Rapports", u"Documentation", None))
+        self.pushButtonActualiteRapports.setText(QCoreApplication.translate("Rapports", u"Actualit\u00e9", None))
         self.pushButtonDeconnexionRapports.setText("")
         self.labelLogo.setText("")
-        self.pushButtonActualiteRapports.setText(QCoreApplication.translate("Rapports", u"Actualit\u00e9", None))
-        self.pushButtonDocumentationRapports.setText(QCoreApplication.translate("Rapports", u"Documentation", None))
         self.pushButtonAccueilRapports.setText(QCoreApplication.translate("Rapports", u"Accueil", None))
         self.labelNomRapports.setText(QCoreApplication.translate("Rapports", u"Rapports", None))
-        self.pushButtonDownload.setText(QCoreApplication.translate("Rapports", u"T\u00e9l\u00e9charger le rapport", None))
+        self.pushButtonDownloadRapports.setText(QCoreApplication.translate("Rapports", u"T\u00e9l\u00e9charger le rapport", None))
     # retranslateUi
 

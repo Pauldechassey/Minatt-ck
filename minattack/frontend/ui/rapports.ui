@@ -184,7 +184,7 @@ QPushButton:hover {
    <item row="1" column="0">
     <layout class="QGridLayout" name="gridLayout">
      <item row="2" column="0">
-      <widget class="QWebEngineView" name="widget">
+      <widget class="QWebEngineView" name="qWebEngineViewPdfRapports">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -207,7 +207,7 @@ QPushButton:hover {
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QPushButton" name="pushButtonDownload">
+      <widget class="QPushButton" name="pushButtonDownloadRapports">
        <property name="styleSheet">
         <string notr="true">QPushButton {
     background-color: #00C853; /* Vert */
