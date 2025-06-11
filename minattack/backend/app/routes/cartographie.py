@@ -93,9 +93,9 @@ def cartographie_all(
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/graph", summary="Graphique du domaine")
-def get_domain_graph_data(id_audit: int, session: Session) -> Dict[str, Any]:
-    service = DomainGraphService(session)
-    id_domaine = get_audit_by_id(id_audit, session).id_domaine
-    if not id_domaine:
+async def get_domain_graph_data(id_audit: int, db: Session = Depends(get_db)) -> Dict[str, Any]:
+    service = DomainGraphService(db)
+    audit = get_audit_by_id(id_audit, db)
+    if not audit or not audit.id_domaine:
         raise HTTPException(status_code=404, detail="Domaine non trouvé pour cet audit")
-    return service.get_graph_data(id_domaine)
+    return service.get_graph_data(audit.id_domaine)

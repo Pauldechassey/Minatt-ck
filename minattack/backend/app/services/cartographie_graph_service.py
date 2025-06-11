@@ -30,7 +30,7 @@ class DomainGraphService:
         """
         Récupère toutes les données nécessaires pour construire le graphe
         """
-        domaine = self.session.query(Domaine).filter(Domaine.id == id_domaine).first()
+        domaine = self.session.query(Domaine).filter(Domaine.id_domaine == id_domaine).first()
         
         sous_domaines = self.session.query(SousDomaine).filter(
             SousDomaine.id_domaine == id_domaine

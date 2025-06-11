@@ -23,16 +23,6 @@ from reportlab.platypus.flowables import Flowable
 from io import BytesIO
 import os.path
 
-"""
-REPORT_DIR = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "res"
-)
-
-
-# Création du répertoire s'il n'existe pas
-os.makedirs(REPORT_DIR, exist_ok=True)
-"""
-
 class HorizontalLine(Flowable):
     """Classe personnalisée pour dessiner une ligne horizontale."""
 
@@ -74,11 +64,6 @@ def generer_rapport(data: Dict) -> bytes:
         domaine_name = domaine_name.replace("http://", "").replace("https://", "")
         # supp carracteres spéciaux
         domaine_name = domaine_name.replace(".", "-").replace(":", "-").replace("/", "-")
-
-        """
-        filename = f"rapport-audit_id-{id_audit}_{domaine_name}.pdf"
-        filepath = os.path.join(REPORT_DIR, filename)
-        """
 
         # Créer le document
         doc = SimpleDocTemplate(
@@ -351,13 +336,6 @@ def generer_rapport(data: Dict) -> bytes:
 
         pdf_content = buffer.getvalue()
         buffer.close()
-
-        """
-        # Sauvegarder une copie du PDF dans le répertoire des rapports
-        with open(filepath, "wb") as f:
-            f.write(pdf_content)
-        logger.info(f"PDF sauvegardé sous: {filepath}")
-        """
 
         return pdf_content
     except Exception as e:
