@@ -230,34 +230,8 @@ QCheckBox::indicator:checked {
        </property>
       </widget>
      </item>
-     <item row="9" column="0">
-      <widget class="QPushButton" name="pushButtonLancerAttaques">
-       <property name="font">
-        <font>
-         <family>JetBrainsMono Nerd Font</family>
-         <pointsize>14</pointsize>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
-    color: white;
-    font-weight: bold;
-    border-radius: 10px;
-    padding: 10px;
-}
-QPushButton:hover {
-    background-color: #009624; / survol */
-}</string>
-       </property>
-       <property name="text">
-        <string>Lancer </string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QCheckBox" name="checkBoxCSRF">
+     <item row="5" column="0">
+      <widget class="QCheckBox" name="checkBoxXSS">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -266,7 +240,7 @@ QPushButton:hover {
        </property>
        <property name="font">
         <font>
-         <family>JetBrainsMono Nerd Font</family>
+         <family>JetBrainsMonoNL Nerd Font</family>
          <pointsize>12</pointsize>
         </font>
        </property>
@@ -288,64 +262,9 @@ QCheckBox::indicator:checked {
 }</string>
        </property>
        <property name="text">
-        <string>CSRF</string>
+        <string>XSS</string>
        </property>
       </widget>
-     </item>
-     <item row="7" column="0">
-      <spacer name="verticalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Policy::Minimum</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="10" column="0">
-      <spacer name="verticalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="labelChoixAttaques">
-       <property name="font">
-        <font>
-         <family>JetBrainsMono Nerd Font</family>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Choisissez votre attaque:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Orientation::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
      </item>
      <item row="3" column="0">
       <widget class="QCheckBox" name="checkBoxSQLI">
@@ -383,22 +302,21 @@ QCheckBox::indicator:checked {
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="labelNomAttaques">
-       <property name="font">
-        <font>
-         <family>JetBrainsMono Nerd Font</family>
-         <pointsize>14</pointsize>
-         <bold>true</bold>
-        </font>
+     <item row="1" column="0">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
        </property>
-       <property name="text">
-        <string>Attaques</string>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
        </property>
-      </widget>
+      </spacer>
      </item>
-     <item row="5" column="0">
-      <widget class="QCheckBox" name="checkBoxXSS">
+     <item row="4" column="0">
+      <widget class="QCheckBox" name="checkBoxCSRF">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -407,7 +325,7 @@ QCheckBox::indicator:checked {
        </property>
        <property name="font">
         <font>
-         <family>JetBrainsMonoNL Nerd Font</family>
+         <family>JetBrainsMono Nerd Font</family>
          <pointsize>12</pointsize>
         </font>
        </property>
@@ -429,7 +347,115 @@ QCheckBox::indicator:checked {
 }</string>
        </property>
        <property name="text">
-        <string>XSS</string>
+        <string>CSRF</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="0">
+      <widget class="QPushButton" name="pushButtonLancerAttaques">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>14</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #00C853; /* Vert */
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px;
+}
+QPushButton:hover {
+    background-color: #009624; / survol */
+}</string>
+       </property>
+       <property name="text">
+        <string>Lancer </string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelNomAttaques">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>14</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Attaques</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::Minimum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="labelChoixAttaques">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Choisissez votre attaque:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0">
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="11" column="0">
+      <widget class="QPushButton" name="pushButtonVisualiserAttaques">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>14</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #00C853; /* Vert */
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px;
+}
+QPushButton:hover {
+    background-color: #009624; / survol */
+}</string>
+       </property>
+       <property name="text">
+        <string>Visualiser la cartographie</string>
        </property>
       </widget>
      </item>

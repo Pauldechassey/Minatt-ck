@@ -227,6 +227,32 @@ QPushButton:hover {
      </item>
     </layout>
    </item>
+   <item row="2" column="0">
+    <widget class="QPushButton" name="pushButtonVisualiserRapports">
+     <property name="font">
+      <font>
+       <family>JetBrainsMono Nerd Font</family>
+       <pointsize>14</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #00C853; /* Vert */
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px;
+}
+QPushButton:hover {
+    background-color: #009624; / survol */
+}</string>
+     </property>
+     <property name="text">
+      <string>Visualiser la cartographie</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
