@@ -5,11 +5,13 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import QUrl
 from PySide6.QtGui import QIcon, QPixmap
+from PySide6.QtWebEngineWidgets import QWebEngineView
 from minattack.frontend.ui.ui_rapports import Ui_Rapports
 import tempfile
 import os
 
 from minattack.frontend.utils import settings
+from minattack.frontend.repository.RapportRepo import RapportRepo
 
 
 class RapportsWindow(QWidget, Ui_Rapports):
@@ -17,7 +19,8 @@ class RapportsWindow(QWidget, Ui_Rapports):
         super().__init__(parent)
         self.ui = Ui_Rapports()
         self.ui.setupUi(self)
-        self.main_window = main_window  # Stockez la référence à MainWindow
+        self.main_window = main_window
+        self.rapport_repo = RapportRepo()  
         self.temp_pdf_path = None
 
         # Initializing decorative elements
@@ -41,17 +44,25 @@ class RapportsWindow(QWidget, Ui_Rapports):
             self.main_window.goToDocumentation
         )
 
-        # Connecter le bouton de téléchargement
         self.ui.pushButtonDownloadRapports.clicked.connect(
-            self.display_rapport(settings.SELECTED_AUDIT_ID)
+            lambda: self.download_rapport()  
         )
+
+    def showEvent(self, event):
+        """Appelé quand la fenêtre devient visible"""
+        super().showEvent(event)
+        if settings.SELECTED_AUDIT_ID:
+            print(f"[DEBUG] Loading report for audit {settings.SELECTED_AUDIT_ID}")
+            self.display_rapport(settings.SELECTED_AUDIT_ID)
+        else:
+            print("[DEBUG] No audit selected")
 
     def display_rapport(self, audit_id: int):
         """Affiche le rapport PDF"""
         print(f"[DEBUG] Attempting to display report for audit {audit_id}")
-        pdf_content = self.main_window.rapport_repo.view_rapport(audit_id)
+        # Utiliser self.rapport_repo au lieu de self.main_window.rapportRepo
+        pdf_content = self.rapport_repo.view_rapport(audit_id)
         if pdf_content:
-            # Créer un fichier temporaire pour le PDF
             if self.temp_pdf_path:
                 try:
                     os.remove(self.temp_pdf_path)
@@ -67,7 +78,6 @@ class RapportsWindow(QWidget, Ui_Rapports):
                     f"[DEBUG] PDF saved to temporary file: {self.temp_pdf_path}"
                 )
 
-            # Utiliser directement le QWebEngineView de l'interface
             url = QUrl.fromLocalFile(self.temp_pdf_path)
             self.ui.qWebEngineViewPdfRapports.setUrl(url)
             self.ui.pushButtonDownloadRapports.setEnabled(True)
@@ -79,7 +89,6 @@ class RapportsWindow(QWidget, Ui_Rapports):
 
     def download_rapport(self):
         """Télécharge le rapport PDF"""
-        # Vérifier si un rapport est actuellement affiché
         current_url = self.ui.qWebEngineViewPdfRapports.url()
         if not current_url.isValid() or not current_url.isLocalFile():
             QMessageBox.warning(self, "Erreur", "Aucun rapport à télécharger")
@@ -94,9 +103,7 @@ class RapportsWindow(QWidget, Ui_Rapports):
 
         if file_path:
             try:
-                # Copier le fichier temporaire vers la destination
                 import shutil
-
                 shutil.copy2(self.temp_pdf_path, file_path)
                 QMessageBox.information(
                     self, "Succès", f"Rapport enregistré : {file_path}"
