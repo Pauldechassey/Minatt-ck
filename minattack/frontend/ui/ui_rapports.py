@@ -157,6 +157,26 @@ class Ui_Rapports(object):
 
         self.gridLayout_2.addLayout(self.gridLayout, 1, 0, 1, 1)
 
+        self.pushButtonVisualiserRapports = QPushButton(Rapports)
+        self.pushButtonVisualiserRapports.setObjectName(u"pushButtonVisualiserRapports")
+        font2 = QFont()
+        font2.setFamilies([u"JetBrainsMono Nerd Font"])
+        font2.setPointSize(14)
+        font2.setBold(True)
+        self.pushButtonVisualiserRapports.setFont(font2)
+        self.pushButtonVisualiserRapports.setStyleSheet(u"QPushButton {\n"
+"    background-color: #00C853; /* Vert */\n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 10px;\n"
+"    padding: 10px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #009624; / survol */\n"
+"}")
+
+        self.gridLayout_2.addWidget(self.pushButtonVisualiserRapports, 2, 0, 1, 1)
+
 
         self.retranslateUi(Rapports)
 
@@ -172,5 +192,6 @@ class Ui_Rapports(object):
         self.pushButtonAccueilRapports.setText(QCoreApplication.translate("Rapports", u"Accueil", None))
         self.labelNomRapports.setText(QCoreApplication.translate("Rapports", u"Rapports", None))
         self.pushButtonDownloadRapports.setText(QCoreApplication.translate("Rapports", u"T\u00e9l\u00e9charger le rapport", None))
+        self.pushButtonVisualiserRapports.setText(QCoreApplication.translate("Rapports", u"Visualiser la cartographie", None))
     # retranslateUi
 

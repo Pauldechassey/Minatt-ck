@@ -128,7 +128,7 @@ class Ui_Actualite(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -51, 1363, 879))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 1530, 991))
         self.verticalLayout = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.label = QLabel(self.scrollAreaWidgetContents)
@@ -140,7 +140,7 @@ class Ui_Actualite(object):
         self.label.setSizePolicy(sizePolicy1)
         font1 = QFont()
         font1.setFamilies([u"JetBrainsMono Nerd Font"])
-        font1.setPointSize(11)
+        font1.setPointSize(13)
         self.label.setFont(font1)
 
         self.verticalLayout.addWidget(self.label)
