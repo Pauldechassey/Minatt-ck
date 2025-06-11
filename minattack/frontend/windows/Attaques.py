@@ -4,7 +4,6 @@ from PySide6.QtWidgets import (
     QMessageBox,
 )
 from minattack.frontend.ui.ui_attaques import Ui_Attaques
-from minattack.frontend.repository.AttaquesRepo import AttaquesRepo
 from PySide6.QtGui import QIcon, QPixmap
 from minattack.frontend.utils import settings
 
@@ -16,7 +15,7 @@ class AttaquesWindow(QWidget, Ui_Attaques):
         self.ui.setupUi(self)
         self.main_window = main_window
 
-        # Initialising decorative element
+        # Initializing decorative element
         self.ui.pushButtonDeconnexionAttaques.setIcon(
             QIcon(":/images/deconnexion.png")
         )
@@ -30,12 +29,12 @@ class AttaquesWindow(QWidget, Ui_Attaques):
         self.ui.pushButtonAccueilAttaques.clicked.connect(
             self.main_window.goToAccueil
         )
-        # self.ui.pushButtonActualiteAuditsCreate.clicked.connect(
-        #     self.goToAttaques
-        # )
-        # self.ui.pushButtonDocumentationAuditsCreate.clicked.connect(
-        #     self.goToRapports
-        # )
+        self.ui.pushButtonActualiteAttaques.clicked.connect(
+            self.main_window.goToActualite
+        )
+        self.ui.pushButtonDocumentationAttaques.clicked.connect(
+            self.main_window.goToDocumentation
+        )
 
         # Connecting page elements
         self.ui.pushButtonLancerAttaques.clicked.connect(self.manageAttacks)

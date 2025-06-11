@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Actualite</class>
+ <widget class="QWidget" name="Actualite">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1400</width>
+    <height>900</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1400</width>
+    <height>900</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Actualité</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #121212;
+color: white;</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="4">
+      <widget class="QPushButton" name="pushButtonDocumentationActualite">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #00C853; /* Vert */
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px;
+}
+QPushButton:hover {
+    background-color: #009624; / survol */
+}</string>
+       </property>
+       <property name="text">
+        <string>Documentation</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QPushButton" name="pushButtonActualiteActualite">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #00C853; /* Vert */
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px;
+}
+QPushButton:hover {
+    background-color: #009624; / survol */
+}</string>
+       </property>
+       <property name="text">
+        <string>Actualité</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="5">
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="2">
+      <widget class="QPushButton" name="pushButtonAccueilActualite">
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #00C853; /* Vert */
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px;
+}
+QPushButton:hover {
+    background-color: #009624; / survol */
+}</string>
+       </property>
+       <property name="text">
+        <string>Accueil</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelLogo_2">
+       <property name="minimumSize">
+        <size>
+         <width>65</width>
+         <height>42</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>65</width>
+         <height>42</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap>../resources/images/logo.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="6">
+      <widget class="QPushButton" name="pushButtonDeconnexionActualite">
+       <property name="styleSheet">
+        <string notr="true">background-color: #121212;
+color: white;
+</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../resources/images/deconnexion.png</normaloff>../resources/images/deconnexion.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="styleSheet">
+      <string notr="true">QScrollBar::handle:vertical {
+	background-color: #00C853; 
+}</string>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>-51</y>
+        <width>1363</width>
+        <height>879</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <family>JetBrainsMono Nerd Font</family>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;
+  &lt;head /&gt;
+  &lt;body&gt;
+    &lt;h1 style=&quot;margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;
+      &lt;span style=&quot;font-size:xx-large; font-weight:700;&quot;&gt;Actualités Cybersécurité et MITRE ATTACK – Juin 2025&lt;/span&gt;
+    &lt;/h1&gt;
+
+    &lt;p&gt;
+      Cette section présente les dernières évolutions en matière de sécurité offensive et défensive, en mettant l'accent sur les mises à jour du framework &lt;br /&gt;
+      MITRE ATTACK, les tendances émergentes en matière d'attaques, et les événements clés du secteur.
+    &lt;/p&gt;
+
+    &lt;h2 style=&quot;margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;
+      &lt;span style=&quot;font-size:x-large; font-weight:700;&quot;&gt;MITRE ATTACK v17 – Nouveautés (Avril 2025)&lt;/span&gt;
+    &lt;/h2&gt;
+
+    &lt;p&gt;En avril 2025, MITRE a publié la version 17.0 de son framework ATTACK, introduisant des changements significatifs :&lt;/p&gt;
+    &lt;ul style=&quot;margin: 0; -qt-list-indent: 1;&quot;&gt;
+      &lt;li style=&quot;margin:12px 0 0 0; -qt-block-indent:0; text-indent:0px;&quot;&gt;
+        &lt;span style=&quot;font-weight:700;&quot;&gt;Ajout de la plateforme ESXi&lt;/span&gt; :
+        Une nouvelle matrice dédiée aux hyperviseurs VMware ESXi a été intégrée, reflétant l'augmentation des attaques &lt;br /&gt;
+        ciblant ces environnements virtualisés.
+      &lt;/li&gt;
+      &lt;li style=&quot;margin:0; -qt-block-indent:0; text-indent:0px;&quot;&gt;
+        &lt;span style=&quot;font-weight:700;&quot;&gt;Renforcement des descriptions de mitigations&lt;/span&gt; :
+        Les sections de mitigation ont été enrichies avec des conseils plus détaillés et des exemples &lt;br /&gt;
+        pratiques pour faciliter leur mise en œuvre.
+      &lt;/li&gt;
+      &lt;li style=&quot;margin:0 0 12px 0; -qt-block-indent:0; text-indent:0px;&quot;&gt;
+        &lt;span style=&quot;font-weight:700;&quot;&gt;Renommage de la plateforme &quot;Network&quot; en &quot;Network Devices&quot;&lt;/span&gt; :
+        Ce changement vise à clarifier la portée de cette catégorie, en se concentrant &lt;br /&gt;
+        spécifiquement sur les dispositifs réseau.
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;h2 style=&quot;margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;
+      &lt;span style=&quot;font-size:x-large; font-weight:700;&quot;&gt;Tendances Cybersécurité 2025 selon MITRE ATTACK&lt;/span&gt;
+    &lt;/h2&gt;
+
+    &lt;p&gt;Selon les prévisions basées sur le framework MITRE ATTACK, plusieurs tendances clés se dessinent pour l'année 2025 :&lt;/p&gt;
+    &lt;ol style=&quot;margin: 0; -qt-list-indent: 1;&quot;&gt;
+      &lt;li style=&quot;margin:12px 0 0 0; -qt-block-indent:0; text-indent:0px;&quot;&gt;
+        &lt;span style=&quot;font-weight:700;&quot;&gt;Attaques Alimentées par l'Intelligence Artificielle&lt;/span&gt;&lt;br /&gt;
+        Les cybercriminels exploitent l'IA pour automatiser des attaques telles que le phishing, l'obfuscation de malwares et l'exploitation de &lt;br /&gt;
+        vulnérabilités zero-day.
+      &lt;/li&gt;
+      &lt;li style=&quot;margin:0; -qt-block-indent:0; text-indent:0px;&quot;&gt;
+        &lt;span style=&quot;font-weight:700;&quot;&gt;Prolifération du Ransomware-as-a-Service (RaaS)&lt;/span&gt;&lt;br /&gt;
+        Les modèles RaaS permettent à des acteurs malveillants, même peu expérimentés, de lancer des attaques sophistiquées, ciblant notamment les &lt;br /&gt;
+        environnements cloud mal configurés.
+      &lt;/li&gt;
+      &lt;li style=&quot;margin:0; -qt-block-indent:0; text-indent:0px;&quot;&gt;
+        &lt;span style=&quot;font-weight:700;&quot;&gt;Augmentation des Attaques sur la Chaîne d'Approvisionnement&lt;/span&gt;&lt;br /&gt;
+        Les attaquants ciblent de plus en plus les fournisseurs tiers et les prestataires de services pour infiltrer les réseaux d'entreprise, exploitant &lt;br&gt;les failles dans la chaîne d'approvisionnement logicielle.
+      &lt;/li&gt;
+    &lt;/ol&gt;
+    &lt;p&gt;&lt;/p&gt;
+
+    &lt;h2 style=&quot;margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;
+      &lt;span style=&quot;font-size:x-large; font-weight:700;&quot;&gt;Événements et Conférences&lt;/span&gt;
+    &lt;/h2&gt;
+
+    &lt;ul style=&quot;margin: 0; -qt-list-indent: 1;&quot;&gt;
+      &lt;li style=&quot;margin:12px 0 0 0; -qt-block-indent:0; text-indent:0px;&quot;&gt;
+        &lt;span style=&quot;font-weight:700;&quot;&gt;ATTACKcon 6.0 – Octobre 2025&lt;/span&gt;&lt;br /&gt;
+        La conférence annuelle ATTACKcon se tiendra les 14 et 15 octobre 2025 à McLean, Virginie. Cet événement rassemblera des professionnels de la &lt;br&gt;cybersécurité pour discuter des dernières avancées du framework ATTACK et partager des retours d'expérience.
+      &lt;/li&gt;
+      &lt;li style=&quot;margin:0 0 12px 0; -qt-block-indent:0; text-indent:0px;&quot;&gt;
+        &lt;span style=&quot;font-weight:700;&quot;&gt;Atelier Communautaire EU MITRE ATTACK&lt;/span&gt;&lt;br /&gt;
+        En mai 2025, un atelier communautaire a été organisé par EUROCONTROL, réunissant des praticiens pour échanger sur l'utilisation du framework &lt;br&gt;ATTACK dans les domaines de la prévention, de la détection et de la réponse aux incidents.
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;h2 style=&quot;margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;
+      &lt;span style=&quot;font-size:x-large; font-weight:700;&quot;&gt;Alignement avec le Cyber Resilience Act (CRA)&lt;/span&gt;
+    &lt;/h2&gt;
+
+    &lt;p&gt;
+      Une étude récente a évalué l'alignement entre les exigences essentielles du CRA de l'Union européenne et les mitigations proposées par le framework &lt;br&gt;ATTACK. Les résultats indiquent une bonne correspondance, bien que des écarts subsistent dans des domaines tels que la coordination des &lt;br&gt;vulnérabilités.
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

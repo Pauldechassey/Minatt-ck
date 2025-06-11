@@ -24,6 +24,13 @@ class Ui_AuditsSelect(object):
         if not AuditsSelect.objectName():
             AuditsSelect.setObjectName(u"AuditsSelect")
         AuditsSelect.resize(1400, 900)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(AuditsSelect.sizePolicy().hasHeightForWidth())
+        AuditsSelect.setSizePolicy(sizePolicy)
+        AuditsSelect.setMinimumSize(QSize(1400, 900))
+        AuditsSelect.setMaximumSize(QSize(1400, 900))
         font = QFont()
         font.setFamilies([u"JetBrainsMono Nerd Font"])
         font.setPointSize(14)
@@ -44,11 +51,11 @@ class Ui_AuditsSelect(object):
         self.horizontalLayoutSelectionUrlAuditsSelect.setObjectName(u"horizontalLayoutSelectionUrlAuditsSelect")
         self.comboBoxSelectionUrlAuditsSelect = QComboBox(AuditsSelect)
         self.comboBoxSelectionUrlAuditsSelect.setObjectName(u"comboBoxSelectionUrlAuditsSelect")
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.comboBoxSelectionUrlAuditsSelect.sizePolicy().hasHeightForWidth())
-        self.comboBoxSelectionUrlAuditsSelect.setSizePolicy(sizePolicy)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.comboBoxSelectionUrlAuditsSelect.sizePolicy().hasHeightForWidth())
+        self.comboBoxSelectionUrlAuditsSelect.setSizePolicy(sizePolicy1)
         font1 = QFont()
         font1.setFamilies([u"JetBrainsMono Nerd Font"])
         font1.setPointSize(13)
@@ -111,14 +118,18 @@ class Ui_AuditsSelect(object):
 
         self.gridLayoutMenuAuditsSelect = QGridLayout()
         self.gridLayoutMenuAuditsSelect.setObjectName(u"gridLayoutMenuAuditsSelect")
-        self.pushButtonDocumentationAuditsSelect = QPushButton(AuditsSelect)
-        self.pushButtonDocumentationAuditsSelect.setObjectName(u"pushButtonDocumentationAuditsSelect")
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayoutMenuAuditsSelect.addItem(self.horizontalSpacer_2, 0, 6, 1, 1)
+
+        self.pushButtonActualiteAuditsSelect = QPushButton(AuditsSelect)
+        self.pushButtonActualiteAuditsSelect.setObjectName(u"pushButtonActualiteAuditsSelect")
         font4 = QFont()
         font4.setFamilies([u"JetBrainsMono Nerd Font"])
         font4.setPointSize(12)
         font4.setBold(True)
-        self.pushButtonDocumentationAuditsSelect.setFont(font4)
-        self.pushButtonDocumentationAuditsSelect.setStyleSheet(u"QPushButton {\n"
+        self.pushButtonActualiteAuditsSelect.setFont(font4)
+        self.pushButtonActualiteAuditsSelect.setStyleSheet(u"QPushButton {\n"
 "    background-color: #00C853; /* Vert */\n"
 "    color: white;\n"
 "    font-weight: bold;\n"
@@ -129,7 +140,7 @@ class Ui_AuditsSelect(object):
 "    background-color: #009624; / survol */\n"
 "}")
 
-        self.gridLayoutMenuAuditsSelect.addWidget(self.pushButtonDocumentationAuditsSelect, 0, 4, 1, 1)
+        self.gridLayoutMenuAuditsSelect.addWidget(self.pushButtonActualiteAuditsSelect, 0, 3, 1, 1)
 
         self.pushButtonAccueilAuditsSelect = QPushButton(AuditsSelect)
         self.pushButtonAccueilAuditsSelect.setObjectName(u"pushButtonAccueilAuditsSelect")
@@ -147,13 +158,34 @@ class Ui_AuditsSelect(object):
 
         self.gridLayoutMenuAuditsSelect.addWidget(self.pushButtonAccueilAuditsSelect, 0, 2, 1, 1)
 
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayoutMenuAuditsSelect.addItem(self.horizontalSpacer_2, 0, 6, 1, 1)
-
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.gridLayoutMenuAuditsSelect.addItem(self.horizontalSpacer, 0, 1, 1, 1)
+
+        self.labelLogo = QLabel(AuditsSelect)
+        self.labelLogo.setObjectName(u"labelLogo")
+        self.labelLogo.setMinimumSize(QSize(65, 42))
+        self.labelLogo.setMaximumSize(QSize(65, 42))
+        self.labelLogo.setPixmap(QPixmap(u"../resources/images/logo.png"))
+        self.labelLogo.setScaledContents(True)
+
+        self.gridLayoutMenuAuditsSelect.addWidget(self.labelLogo, 0, 0, 1, 1)
+
+        self.pushButtonDocumentationAuditsSelect = QPushButton(AuditsSelect)
+        self.pushButtonDocumentationAuditsSelect.setObjectName(u"pushButtonDocumentationAuditsSelect")
+        self.pushButtonDocumentationAuditsSelect.setFont(font4)
+        self.pushButtonDocumentationAuditsSelect.setStyleSheet(u"QPushButton {\n"
+"    background-color: #00C853; /* Vert */\n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 5px;\n"
+"    padding: 10px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #009624; / survol */\n"
+"}")
+
+        self.gridLayoutMenuAuditsSelect.addWidget(self.pushButtonDocumentationAuditsSelect, 0, 4, 1, 1)
 
         self.pushButtonDeconnexionAuditsSelect = QPushButton(AuditsSelect)
         self.pushButtonDeconnexionAuditsSelect.setObjectName(u"pushButtonDeconnexionAuditsSelect")
@@ -166,31 +198,6 @@ class Ui_AuditsSelect(object):
         self.pushButtonDeconnexionAuditsSelect.setIconSize(QSize(32, 32))
 
         self.gridLayoutMenuAuditsSelect.addWidget(self.pushButtonDeconnexionAuditsSelect, 0, 7, 1, 1)
-
-        self.pushButtonActualiteAuditsSelect = QPushButton(AuditsSelect)
-        self.pushButtonActualiteAuditsSelect.setObjectName(u"pushButtonActualiteAuditsSelect")
-        self.pushButtonActualiteAuditsSelect.setFont(font4)
-        self.pushButtonActualiteAuditsSelect.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
-"    color: white;\n"
-"    font-weight: bold;\n"
-"    border-radius: 5px;\n"
-"    padding: 10px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
-"}")
-
-        self.gridLayoutMenuAuditsSelect.addWidget(self.pushButtonActualiteAuditsSelect, 0, 3, 1, 1)
-
-        self.labelLogo = QLabel(AuditsSelect)
-        self.labelLogo.setObjectName(u"labelLogo")
-        self.labelLogo.setMinimumSize(QSize(65, 42))
-        self.labelLogo.setMaximumSize(QSize(65, 42))
-        self.labelLogo.setPixmap(QPixmap(u"../resources/images/logo.png"))
-        self.labelLogo.setScaledContents(True)
-
-        self.gridLayoutMenuAuditsSelect.addWidget(self.labelLogo, 0, 0, 1, 1)
 
 
         self.gridLayout_4.addLayout(self.gridLayoutMenuAuditsSelect, 0, 0, 1, 1)
@@ -206,10 +213,10 @@ class Ui_AuditsSelect(object):
         self.pushButtonSelectionUrlAuditsSelect.setText(QCoreApplication.translate("AuditsSelect", u"S\u00e9lectionner", None))
         self.labelSelectionUrlAuditsSelect.setText(QCoreApplication.translate("AuditsSelect", u"S\u00e9lectionner un audit:", None))
         self.labelNomAuditsSelect.setText(QCoreApplication.translate("AuditsSelect", u"Audits", None))
-        self.pushButtonDocumentationAuditsSelect.setText(QCoreApplication.translate("AuditsSelect", u"Documentation", None))
-        self.pushButtonAccueilAuditsSelect.setText(QCoreApplication.translate("AuditsSelect", u"Accueil", None))
-        self.pushButtonDeconnexionAuditsSelect.setText("")
         self.pushButtonActualiteAuditsSelect.setText(QCoreApplication.translate("AuditsSelect", u"Actualit\u00e9", None))
+        self.pushButtonAccueilAuditsSelect.setText(QCoreApplication.translate("AuditsSelect", u"Accueil", None))
         self.labelLogo.setText("")
+        self.pushButtonDocumentationAuditsSelect.setText(QCoreApplication.translate("AuditsSelect", u"Documentation", None))
+        self.pushButtonDeconnexionAuditsSelect.setText("")
     # retranslateUi
 

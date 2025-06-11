@@ -24,6 +24,13 @@ class Ui_Accueil(object):
         if not Accueil.objectName():
             Accueil.setObjectName(u"Accueil")
         Accueil.resize(1400, 900)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(Accueil.sizePolicy().hasHeightForWidth())
+        Accueil.setSizePolicy(sizePolicy)
+        Accueil.setMinimumSize(QSize(1400, 900))
+        Accueil.setMaximumSize(QSize(1400, 900))
         Accueil.setStyleSheet(u"background-color: #121212;\n"
 "color: white;\n"
 "")

@@ -21,9 +21,12 @@ class AccueilWindow(QWidget, Ui_Accueil):
         self.ui.pushButtonDeconnexionAccueil.clicked.connect(
             self.main_window.logout
         )
-        self.ui.pushButtonAccueilAccueil.setDisabled(True)
-        self.ui.pushButtonActualiteAccueil.setDisabled(True)
-        self.ui.pushButtonDocumentationAccueil.setDisabled(True)
+        self.ui.pushButtonDocumentationAccueil.clicked.connect(
+            self.main_window.goToDocumentation
+        )
+        self.ui.pushButtonActualiteAccueil.clicked.connect(
+            self.main_window.goToActualite
+        )
 
         # Connecting page buttons
         self.ui.pushButtonCreateAudit.clicked.connect(self.goToAuditsCreate)

@@ -24,6 +24,12 @@ class Ui_Attaques(object):
         if not Attaques.objectName():
             Attaques.setObjectName(u"Attaques")
         Attaques.resize(1400, 900)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(Attaques.sizePolicy().hasHeightForWidth())
+        Attaques.setSizePolicy(sizePolicy)
+        Attaques.setMinimumSize(QSize(1400, 900))
         Attaques.setStyleSheet(u"background-color: rgb(18, 18, 18);\n"
 "color:white")
         self.gridLayout = QGridLayout(Attaques)
@@ -116,11 +122,11 @@ class Ui_Attaques(object):
         self.gridLayoutContentAttaques.setObjectName(u"gridLayoutContentAttaques")
         self.checkBoxHEADERSCOOKIES = QCheckBox(Attaques)
         self.checkBoxHEADERSCOOKIES.setObjectName(u"checkBoxHEADERSCOOKIES")
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.checkBoxHEADERSCOOKIES.sizePolicy().hasHeightForWidth())
-        self.checkBoxHEADERSCOOKIES.setSizePolicy(sizePolicy)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.checkBoxHEADERSCOOKIES.sizePolicy().hasHeightForWidth())
+        self.checkBoxHEADERSCOOKIES.setSizePolicy(sizePolicy1)
         font1 = QFont()
         font1.setFamilies([u"JetBrainsMono Nerd Font"])
         font1.setPointSize(12)
@@ -165,8 +171,8 @@ class Ui_Attaques(object):
 
         self.checkBoxCSRF = QCheckBox(Attaques)
         self.checkBoxCSRF.setObjectName(u"checkBoxCSRF")
-        sizePolicy.setHeightForWidth(self.checkBoxCSRF.sizePolicy().hasHeightForWidth())
-        self.checkBoxCSRF.setSizePolicy(sizePolicy)
+        sizePolicy1.setHeightForWidth(self.checkBoxCSRF.sizePolicy().hasHeightForWidth())
+        self.checkBoxCSRF.setSizePolicy(sizePolicy1)
         self.checkBoxCSRF.setFont(font1)
         self.checkBoxCSRF.setStyleSheet(u"QCheckBox {\n"
 "    color: white;\n"
@@ -209,8 +215,8 @@ class Ui_Attaques(object):
 
         self.checkBoxSQLI = QCheckBox(Attaques)
         self.checkBoxSQLI.setObjectName(u"checkBoxSQLI")
-        sizePolicy.setHeightForWidth(self.checkBoxSQLI.sizePolicy().hasHeightForWidth())
-        self.checkBoxSQLI.setSizePolicy(sizePolicy)
+        sizePolicy1.setHeightForWidth(self.checkBoxSQLI.sizePolicy().hasHeightForWidth())
+        self.checkBoxSQLI.setSizePolicy(sizePolicy1)
         self.checkBoxSQLI.setFont(font1)
         self.checkBoxSQLI.setStyleSheet(u"QCheckBox {\n"
 "    color: white;\n"
@@ -238,8 +244,8 @@ class Ui_Attaques(object):
 
         self.checkBoxXSS = QCheckBox(Attaques)
         self.checkBoxXSS.setObjectName(u"checkBoxXSS")
-        sizePolicy.setHeightForWidth(self.checkBoxXSS.sizePolicy().hasHeightForWidth())
-        self.checkBoxXSS.setSizePolicy(sizePolicy)
+        sizePolicy1.setHeightForWidth(self.checkBoxXSS.sizePolicy().hasHeightForWidth())
+        self.checkBoxXSS.setSizePolicy(sizePolicy1)
         font4 = QFont()
         font4.setFamilies([u"JetBrainsMonoNL Nerd Font"])
         font4.setPointSize(12)

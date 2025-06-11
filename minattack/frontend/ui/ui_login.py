@@ -24,11 +24,13 @@ class Ui_Login(object):
         if not Login.objectName():
             Login.setObjectName(u"Login")
         Login.resize(1400, 900)
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(Login.sizePolicy().hasHeightForWidth())
         Login.setSizePolicy(sizePolicy)
+        Login.setMinimumSize(QSize(1400, 900))
+        Login.setMaximumSize(QSize(1400, 900))
         Login.setStyleSheet(u"background-color: rgb(18, 18, 18);\n"
 "color:white")
         self.gridLayout = QGridLayout(Login)

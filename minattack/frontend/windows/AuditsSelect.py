@@ -12,7 +12,7 @@ class AuditsSelectWindow(QWidget, Ui_AuditsSelect):
         self.ui.setupUi(self)
         self.main_window = main_window
 
-        # Initialising decorative element
+        # Initializing decorative element
         self.ui.pushButtonDeconnexionAuditsSelect.setIcon(
             QIcon(":/images/deconnexion.png")
         )
@@ -29,12 +29,12 @@ class AuditsSelectWindow(QWidget, Ui_AuditsSelect):
         self.ui.pushButtonAccueilAuditsSelect.clicked.connect(
             self.main_window.goToAccueil
         )
-        # self.ui.pushButtonActualiteAuditsCreate.clicked.connect(
-        #     self.goToAttaques
-        # )
-        # self.ui.pushButtonDocumentationAuditsCreate.clicked.connect(
-        #     self.goToRapports
-        # )
+        self.ui.pushButtonActualiteAuditsSelect.clicked.connect(
+            self.main_window.goToActualite
+        )
+        self.ui.pushButtonDocumentationAuditsSelect.clicked.connect(
+            self.main_window.goToDocumentation
+        )
 
         # Connecting page elemets
         self.ui.pushButtonSelectionUrlAuditsSelect.clicked.connect(

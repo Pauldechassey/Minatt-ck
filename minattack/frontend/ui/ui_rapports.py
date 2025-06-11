@@ -23,6 +23,12 @@ class Ui_Rapports(object):
         if not Rapports.objectName():
             Rapports.setObjectName(u"Rapports")
         Rapports.resize(1400, 900)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(Rapports.sizePolicy().hasHeightForWidth())
+        Rapports.setSizePolicy(sizePolicy)
+        Rapports.setMinimumSize(QSize(1400, 900))
         Rapports.setStyleSheet(u"background-color: #121212;\n"
 "color: white;\n"
 "")
