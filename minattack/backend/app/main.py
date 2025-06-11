@@ -14,7 +14,6 @@ app.include_router(domaine.router)
 app.include_router(attaque.router)
 app.include_router(sous_domaine.router)
 app.include_router(rapport.router)
-
 app.include_router(cartographie.router)
 
 

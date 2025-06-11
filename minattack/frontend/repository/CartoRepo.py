@@ -34,6 +34,23 @@ class CartoRepo:
         except requests.exceptions.RequestException as e:
             print(f"AuditRepo [ERROR]: {e}")
             return False
+        
+    def getCartoGraph(self, id_audit : int):
+        new_url = self.__url  + f"cartographie/graph/"
+        try : 
+            params = {"id_audit": id_audit}
+            response = requests.get(url=new_url, params=params, timeout=30)
+            if response.status_code == 200:
+                print("AuditRepo [SUCCESS]: récupération du graph de la cartographie")
+                return response.json()  # Assuming the response is JSON
+            print("AuditRepo [FAILED]: échec de la récupération du graph de la cartographie")
+            return None
+        except requests.exceptions.Timeout:
+            print("AuditRepo [TIMEOUT]: request timed out")
+            return None
+        except requests.exceptions.RequestException as e:
+            print(f"AuditRepo [ERROR]: {e}")
+            return None
 
     # def runCarto(self, id_audit: int):
     #     new_url = self.__url + f"cartographie/{id_audit}"  # A COMPLETER QUAND LA ROUTE DU BACK EST LA
