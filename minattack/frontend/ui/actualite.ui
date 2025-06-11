@@ -199,9 +199,9 @@ color: white;
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-51</y>
-        <width>1363</width>
-        <height>879</height>
+        <y>0</y>
+        <width>1530</width>
+        <height>991</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -216,7 +216,7 @@ color: white;
          <property name="font">
           <font>
            <family>JetBrainsMono Nerd Font</family>
-           <pointsize>11</pointsize>
+           <pointsize>13</pointsize>
           </font>
          </property>
          <property name="text">

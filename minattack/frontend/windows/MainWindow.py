@@ -8,6 +8,7 @@ from minattack.frontend.repository.AttaquesRepo import AttaquesRepo
 from minattack.frontend.repository.AuditRepo import AuditRepo
 from minattack.frontend.repository.CartoRepo import CartoRepo
 from minattack.frontend.repository.UserRepo import UserRepo
+from minattack.frontend.repository.RapportRepo import RapportRepo
 from minattack.frontend.ui.ui_main_window import Ui_MainWindow
 from PySide6.QtWidgets import QSizePolicy
 from PySide6.QtWidgets import QLayout
@@ -37,6 +38,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.auditRepo = AuditRepo()
         self.cartoRepo = CartoRepo()
         self.attackRepo = AttaquesRepo()
+        self.rapportRepo = RapportRepo()
 
         self.setStyleSheet("background-color: #121212; color: white;")
         self.setMinimumSize(1400, 900)
@@ -115,4 +117,3 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.mainStackedWidget.setCurrentIndex(
             self.mainStackedWidget.indexOf(self.actualitePage)
         )
-
