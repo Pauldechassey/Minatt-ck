@@ -18,9 +18,9 @@ def get_db():
 
 
 
-@router.post("/list/cluster", summary="Attaque sur les centres de clusters : Lister les attaques '[sqli, xss, ...]'  et fournir l'id de l'audit en question", status_code=200)  
-def attaque_all_cluster(SD_initial_id: int, type: TypeAttaqueResquest,   db: Session = Depends(get_db)):
-    if run_cluster_attacks(SD_initial_id, type.attaque_type, db):
+@router.post("/cluster", summary="Attaque sur les centres de clusters : Lister les attaques '[sqli, xss, ...]'  et fournir l'id de l'audit en question", status_code=200)  
+def attaque_all_cluster(id_audit: int, type: TypeAttaqueResquest,   db: Session = Depends(get_db)):
+    if run_cluster_attacks(id_audit, type.attaque_type, db):
         return {"message": "Attaque ALL sur les centres de clusters effectuée avec succès"}  
     else:
         raise HTTPException(status_code=404, detail="Audit non trouvé ou pas de sous-domaines associés")
@@ -28,7 +28,7 @@ def attaque_all_cluster(SD_initial_id: int, type: TypeAttaqueResquest,   db: Ses
 
 ##
 @router.post(
-    "/list/",
+    "/",
     summary="Lister les attaques. ex : [sqli, xss] pour les enfants",
     status_code=200,
 )

@@ -116,7 +116,7 @@ class RapportsWindow(QWidget, Ui_Rapports):
                 QMessageBox.warning(self, "Erreur", "Échec du téléchargement")
 
     def launchGraph(self):
-        if self.checkAuditStateAttaque():
+        if self.checkAuditStateRapport():
             graph_data = (self.main_window.cartoRepo.getCartoGraph(settings.SELECTED_AUDIT_ID))
             if graph_data:
                 self.openGraphWindow(graph_data)

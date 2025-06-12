@@ -30,16 +30,20 @@ def run_attacks(id_audit: int, attaque_type: List[str], db: Session, single: boo
     if not id_domaine:
         logger.error(f"Audit avec ID {id_audit} non trouvé")
         raise HTTPException(status_code=404, detail=f"Audit avec ID {id_audit} non trouvé")
+    id_sous_domaine_initial = get_sous_domaines_by_domaine(id_domaine, db).first()
+    if not id_sous_domaine_initial:
+        logger.error(f"Sous-domaine initial non trouvé pour l'audit ID {id_audit}")
+        raise HTTPException(status_code=404, detail=f"Sous-domaine initial non trouvé pour l'audit ID {id_audit}")
     
     attaque = AttaqueScript()
-    SD_initial = get_sous_domaine_by_id(id_domaine, db)
+    SD_initial = get_sous_domaine_by_id(id_sous_domaine_initial, db)
     if not SD_initial:
         logger.error("Sous-domaine initial non trouvé")
         raise HTTPException(status_code=404, detail="Sous-domaine initial non trouvé")
 
     logger.info(f"Sous-domaine initial trouvé : {SD_initial.url_SD}")
 
-    SD_cibles_id = get_all_child_ids_recursively(SD_initial, db) if not single else [id_domaine]
+    SD_cibles_id = get_all_child_ids_recursively(SD_initial, db) if not single else [SD_initial.id_SD]
 
     if single:
         logger.info(f"Attaque sur le sous-domaine initial uniquement : {SD_initial.url_SD}")
@@ -62,7 +66,7 @@ def run_attacks(id_audit: int, attaque_type: List[str], db: Session, single: boo
     return urls_traitees == len(SD_cibles_id)
 
 
-def run_cluster_attacks(SD_initial_id: int, attaque_type: List[str], db: Session) -> bool:
+def run_cluster_attacks(id_audit: int, attaque_type: List[str], db: Session) -> bool:
     """
     Lance des attaques basées sur le clustering des sous-domaines.
     
@@ -75,15 +79,23 @@ def run_cluster_attacks(SD_initial_id: int, attaque_type: List[str], db: Session
     Returns:
         bool: True si toutes les attaques ont réussi
     """
-    logger.info(f"Début du clustering pour SD_initial_id: {SD_initial_id}")
+    id_domaine = get_audit_by_id(id_audit, db).id_domaine
+    if not id_domaine:
+        logger.error(f"Audit avec ID {id_audit} non trouvé")
+        raise HTTPException(status_code=404, detail=f"Audit avec ID {id_audit} non trouvé")
+    
+    id_sous_domaine_initial = get_sous_domaines_by_domaine(id_domaine, db).first()
+    if not id_sous_domaine_initial:
+        logger.error(f"Sous-domaine initial non trouvé pour l'audit ID {id_audit}")
+        raise HTTPException(status_code=404, detail=f"Sous-domaine initial non trouvé pour l'audit ID {id_audit}")
     
     # Récupération des vecteurs
     
-    ids, vectors = get_vectors_from_sd_initial(db, sd_initial_id=SD_initial_id)
+    ids, vectors = get_vectors_from_sd_initial(db, sd_initial_id=id_sous_domaine_initial)
 
     if len(ids)<15:
         logger.warning(f"Nombre de sous-domaines ({len(ids)}) trop faible pour le clustering, utilisation de l'attaque directe")
-        return run_attacks(SD_initial_id, attaque_type, db, False)
+        return run_attacks(id_sous_domaine_initial, attaque_type, db, False)
 
     if not ids or not vectors:
         logger.error("Aucun vecteur récupéré")
