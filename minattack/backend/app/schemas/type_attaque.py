@@ -8,7 +8,7 @@ class TypeAttaqueSchema(BaseModel):
     description_type: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class TypeAttaqueResquest(BaseModel):

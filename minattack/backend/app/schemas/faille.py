@@ -9,4 +9,4 @@ class FailleSchema(BaseModel):
     id_attaque: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

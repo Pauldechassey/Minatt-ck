@@ -12,7 +12,7 @@ class AttaqueSchema(BaseModel):
     id_Type: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class AttackRequest(BaseModel):
     SD_initial_id: int

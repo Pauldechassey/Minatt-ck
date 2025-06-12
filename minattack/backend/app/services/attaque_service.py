@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 
 
 def run_attacks(id_audit: int, attaque_type: List[str], db: Session, single: bool = False) -> bool:
-    domaine = get_audit_by_id(id_audit, db).id_domaine
+    id_domaine = get_audit_by_id(id_audit, db).id_domaine
     if not id_domaine:
         logger.error(f"Audit avec ID {id_audit} non trouvé")
         raise HTTPException(status_code=404, detail=f"Audit avec ID {id_audit} non trouvé")

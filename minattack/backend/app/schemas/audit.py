@@ -12,7 +12,7 @@ class AuditSchema(BaseModel):
     id_domaine: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class AuditStateUpdateSchema(BaseModel):

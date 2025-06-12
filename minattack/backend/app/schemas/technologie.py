@@ -7,4 +7,4 @@ class TechnologieSchema(BaseModel):
     version_techno: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True

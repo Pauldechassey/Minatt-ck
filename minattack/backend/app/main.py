@@ -32,6 +32,11 @@ def root():
                     """
 
 
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+
+
 import logging
 
 logging.basicConfig(

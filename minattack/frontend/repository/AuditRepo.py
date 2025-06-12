@@ -53,9 +53,9 @@ class AuditRepo:
             response = requests.post(url=new_url, json=data, timeout=30)
             if response.status_code == 201:
                 print("AuditRepo [SUCCESS]: audit creation successful")
-                # print("------------")
-                # print(f"AUDIT REPO : {response.json()["id"]}")
-                # print("------------")
+                print("------------")
+                print(f"AUDIT REPO : {response.json()['id']}")
+                print("------------")
                 return True, response.json()["id"]
             print("AuditRepo [FAILED]: audit creation failed")
             return False, None
