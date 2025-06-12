@@ -11,7 +11,8 @@ from minattack.frontend.windows.MainWindow import MainWindow
 from minattack.frontend.utils.port_handler import find_available_port
 from minattack.shared.env import set_dynamic_backend_port
 
-def wait_for_backend(port: int, timeout: float = 20.0) -> bool :
+
+def wait_for_backend(port: int, timeout: float = 20.0) -> bool:
     deadline = time.time() + timeout
     url = f"http://127.0.0.1:{port}/health"
     while time.time() < deadline:
@@ -23,6 +24,7 @@ def wait_for_backend(port: int, timeout: float = 20.0) -> bool :
             pass
         time.sleep(0.1)
     return False
+
 
 def main():
     backend_port = find_available_port()
@@ -36,9 +38,9 @@ def main():
     )
     backend_process.start()
 
-    if not wait_for_backend(backend_port):
-        print("[INFO] Backend failed to start")
-        sys.exit(1)
+    # if not wait_for_backend(backend_port):
+    #     print("[INFO] Backend failed to start")
+    #     sys.exit(1)
 
     app = QApplication(sys.argv)
     window = MainWindow()
@@ -51,6 +53,6 @@ def main():
 
 
 if __name__ == "__main__":
-    freeze_support()
-    set_start_method("spawn", force=True)
+    # freeze_support()
+    # set_start_method("spawn", force=True)
     main()
