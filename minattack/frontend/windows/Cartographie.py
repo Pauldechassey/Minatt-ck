@@ -83,11 +83,7 @@ class CartographieWindow(QWidget, Ui_Cartographie):
                 QMessageBox.StandardButton.Cancel,
             )
             self.main_window.auditsSelectPage.populateComboBox()
-            self.main_window.mainStackedWidget.setCurrentIndex(
-                self.main_window.mainStackedWidget.indexOf(
-                    self.main_window.attaquesPage
-                )
-            )
+            self.main_window.goToAttaque()
         else:
             QMessageBox.warning(
                 self,
@@ -127,7 +123,5 @@ class CartographieWindow(QWidget, Ui_Cartographie):
             )
 
     def openGraphWindow(self, graph_data):
-        from minattack.frontend.windows.Cartographie import GraphWindow
-
         self.graph_window = GraphWindow(graph_data, parent=self)
         self.graph_window.show()

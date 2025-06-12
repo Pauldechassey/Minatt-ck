@@ -103,11 +103,7 @@ class AttaquesWindow(QWidget, Ui_Attaques):
                 QMessageBox.StandardButton.Cancel,
             )
             self.main_window.auditsSelectPage.populateComboBox()
-            self.main_window.mainStackedWidget.setCurrentIndex(
-                self.main_window.mainStackedWidget.indexOf(
-                    self.main_window.rapportsPage
-                )
-            )
+            self.main_window.goToRapport()
         else:
             QMessageBox.warning(
                 self,

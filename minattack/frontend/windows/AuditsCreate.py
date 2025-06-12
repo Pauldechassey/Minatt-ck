@@ -67,10 +67,6 @@ class AuditsCreateWindow(QWidget, Ui_AuditsCreate):
             )
             self.updateAuditStateCreate(result[1])
             self.main_window.auditsSelectPage.populateComboBox()
-            self.main_window.mainStackedWidget.setCurrentIndex(
-                self.main_window.mainStackedWidget.indexOf(
-                    self.main_window.cartographiePage
-                )
-            )
+            self.main_window.goToCartographie()
         else:
             QMessageBox.critical(self, "Erreur", "Création d'audit ECHOUÉ")

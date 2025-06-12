@@ -3,12 +3,9 @@ from PySide6.QtWebEngineCore import QWebEngineSettings
 from PySide6.QtWidgets import (
     QWidget,
     QMessageBox,
-    QFileDialog,
 )
-from PySide6.QtCore import QUrl
 from PySide6.QtGui import QIcon, QPixmap
 from minattack.frontend.ui.ui_rapports import Ui_Rapports
-import tempfile
 import os
 
 from minattack.frontend.utils import settings

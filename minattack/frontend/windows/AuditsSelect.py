@@ -60,21 +60,9 @@ class AuditsSelectWindow(QWidget, Ui_AuditsSelect):
             int(choice.split(" : ")[0]), int(choice.split(" | ")[1])
         )
         if settings.SELECTED_AUDIT_STATE == 0:
-            self.main_window.mainStackedWidget.setCurrentIndex(
-                self.main_window.mainStackedWidget.indexOf(
-                    self.main_window.cartographiePage
-                )
-            )
+            self.main_window.goToCartographie()
         elif settings.SELECTED_AUDIT_STATE == 1:
-            self.main_window.mainStackedWidget.setCurrentIndex(
-                self.main_window.mainStackedWidget.indexOf(
-                    self.main_window.attaquesPage
-                )
-            )
+            self.main_window.goToAttaque()
         elif settings.SELECTED_AUDIT_STATE in [2, 3]:
-            self.main_window.mainStackedWidget.setCurrentIndex(
-                self.main_window.mainStackedWidget.indexOf(
-                    self.main_window.rapportsPage
-                )
-            )
+            self.main_window.goToRapport()
             self.main_window.rapportsPage.manage_rapport()
