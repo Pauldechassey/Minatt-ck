@@ -30,7 +30,14 @@ def run_attacks(id_audit: int, attaque_type: List[str], db: Session, single: boo
     if not id_domaine:
         logger.error(f"Audit avec ID {id_audit} non trouvé")
         raise HTTPException(status_code=404, detail=f"Audit avec ID {id_audit} non trouvé")
-    id_sous_domaine_initial = get_sous_domaines_by_domaine(id_domaine, db).first()
+    sous_domaines = get_sous_domaines_by_domaine(id_domaine, db)
+    
+    id_sous_domaine_initial = None
+    for sd in sous_domaines:
+        if sd.degre == 0:  # Sous-domaine racine
+            id_sous_domaine_initial = sd.id_SD
+            break
+    
     if not id_sous_domaine_initial:
         logger.error(f"Sous-domaine initial non trouvé pour l'audit ID {id_audit}")
         raise HTTPException(status_code=404, detail=f"Sous-domaine initial non trouvé pour l'audit ID {id_audit}")
@@ -55,7 +62,7 @@ def run_attacks(id_audit: int, attaque_type: List[str], db: Session, single: boo
     for sous_domaine_id in SD_cibles_id:
         sous_domaine = get_sous_domaine_by_id(sous_domaine_id, db)
         if not sous_domaine:
-            # logger.warning(f"Sous-domaine cible avec ID {sous_domaine_id} non trouvé.")
+            logger.warning(f"Sous-domaine cible avec ID {sous_domaine_id} non trouvé.")
             continue
 
         logger.info(f"Lancement de l'attaque sur : {sous_domaine.url_SD}")
@@ -84,7 +91,14 @@ def run_cluster_attacks(id_audit: int, attaque_type: List[str], db: Session) -> 
         logger.error(f"Audit avec ID {id_audit} non trouvé")
         raise HTTPException(status_code=404, detail=f"Audit avec ID {id_audit} non trouvé")
     
-    id_sous_domaine_initial = get_sous_domaines_by_domaine(id_domaine, db).first()
+    sous_domaines = get_sous_domaines_by_domaine(id_domaine, db)
+    
+    id_sous_domaine_initial = None
+    for sd in sous_domaines:
+        if sd.degre == 0:  # Sous-domaine racine
+            id_sous_domaine_initial = sd.id_SD
+            break
+    
     if not id_sous_domaine_initial:
         logger.error(f"Sous-domaine initial non trouvé pour l'audit ID {id_audit}")
         raise HTTPException(status_code=404, detail=f"Sous-domaine initial non trouvé pour l'audit ID {id_audit}")
