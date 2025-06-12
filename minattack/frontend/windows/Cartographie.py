@@ -80,7 +80,7 @@ class CartographieWindow(QWidget, Ui_Cartographie):
                 self,
                 "Succès",
                 "Cartographie réalisée avec succès",
-                QMessageBox.StandardButton.Cancel,
+                QMessageBox.StandardButton.Ok,
             )
             self.main_window.auditsSelectPage.populateComboBox()
             self.main_window.goToAttaque()
@@ -89,6 +89,7 @@ class CartographieWindow(QWidget, Ui_Cartographie):
                 self,
                 "Attention",
                 "Cartographie réussie mais erreur lors de la mise à jour de l'état",
+                QMessageBox.StandardButton.Ok,
             )
 
     def launchCarto(self, fuzzing: bool, wordlist_path: str):
@@ -98,7 +99,12 @@ class CartographieWindow(QWidget, Ui_Cartographie):
             self.updateAuditStateCartographie()
         else:
             settings.SELECTED_AUDIT_STATE = settings.SELECTED_AUDIT_STATE - 1
-            QMessageBox.critical(self, "Erreur", "La cartographie a échoué")
+            QMessageBox.critical(
+                self,
+                "Erreur",
+                "La cartographie a échoué",
+                QMessageBox.StandardButton.Ok,
+            )
 
     def manageCarto(self):
         check = self.checkAuditStateCartographie()
@@ -120,6 +126,7 @@ class CartographieWindow(QWidget, Ui_Cartographie):
                 self,
                 "Erreur",
                 "Impossible de récupérer les données de cartographie",
+                QMessageBox.StandardButton.Ok,
             )
 
     def openGraphWindow(self, graph_data):

@@ -62,30 +62,34 @@ class AttaquesWindow(QWidget, Ui_Attaques):
                 self,
                 "État inconnu",
                 "L'état de l'audit n'est pas défini.",
+                QMessageBox.StandardButton.Ok,
             )
             return False
         elif (
             settings.SELECTED_AUDIT_STATE < 0
             or settings.SELECTED_AUDIT_STATE > 3
         ):
-            QMessageBox.warning(
+            QMessageBox.critical(
                 self,
-                "Attention",
+                "Erreur",
                 "Etat de l'audit invalide",
+                QMessageBox.StandardButton.Ok,
             )
             return False
         elif settings.SELECTED_AUDIT_STATE == 0:
             QMessageBox.warning(
                 self,
-                "Cartographie requise",
+                "Attention",
                 "La cartographie doit être effectuée avant de lancer une attaque.",
+                QMessageBox.StandardButton.Ok,
             )
             return False
         elif settings.SELECTED_AUDIT_STATE > 1:
             QMessageBox.warning(
                 self,
-                "Attaque déjà effectuée",
+                "Attention",
                 "Une attaque a déjà été lancée sur cet audit.",
+                QMessageBox.StandardButton.Ok,
             )
             return False
         else:
@@ -100,7 +104,7 @@ class AttaquesWindow(QWidget, Ui_Attaques):
                 self,
                 "Succès",
                 "Attaques lancées avec succès",
-                QMessageBox.StandardButton.Cancel,
+                QMessageBox.StandardButton.Ok,
             )
             self.main_window.auditsSelectPage.populateComboBox()
             self.main_window.goToRapport()
@@ -109,6 +113,7 @@ class AttaquesWindow(QWidget, Ui_Attaques):
                 self,
                 "Attention",
                 "Attaques réussies mais erreur lors de la mise à jour de l'état",
+                QMessageBox.StandardButton.Ok,
             )
 
     def checkSelectedAttaque(self) -> tuple[bool, Any]:
@@ -116,8 +121,9 @@ class AttaquesWindow(QWidget, Ui_Attaques):
         if not selected_attacks:
             QMessageBox.warning(
                 self,
-                "Aucune sélection",
+                "Attention",
                 "Veuillez sélectionner au moins une attaque.",
+                QMessageBox.StandardButton.Ok,
             )
             return False, None
         return True, selected_attacks
@@ -145,5 +151,8 @@ class AttaquesWindow(QWidget, Ui_Attaques):
                 self.main_window.rapportsPage.manage_rapport()
             else:
                 QMessageBox.critical(
-                    self, "Erreur", "La cartographie a échoué"
+                    self,
+                    "Erreur",
+                    "L'attaque a échoué",
+                    QMessageBox.StandardButton.Ok,
                 )

@@ -92,11 +92,14 @@ class RapportsWindow(QWidget, Ui_Rapports):
                 self,
                 "Succès",
                 f"Rapport enregistré  {file_path}",
-                QMessageBox.StandardButton.Cancel,
+                QMessageBox.StandardButton.Ok,
             )
         else:
             QMessageBox.warning(
-                self, "Erreur", "Échec du téléchargement du rapport"
+                self,
+                "Erreur",
+                "Échec du téléchargement du rapport",
+                QMessageBox.StandardButton.Ok,
             )
 
     def manage_rapport(self):
@@ -111,10 +114,18 @@ class RapportsWindow(QWidget, Ui_Rapports):
                     self.load_pdf_as_html()
                 )
             else:
-                QMessageBox.warning(self, "Attention", "PDF non trouve")
+                QMessageBox.warning(
+                    self,
+                    "Attention",
+                    "PDF non trouve",
+                    QMessageBox.StandardButton.Ok,
+                )
         else:
             QMessageBox.critical(
-                self, "Erreur", "Echec du téléchargement du rapport"
+                self,
+                "Erreur",
+                "Echec du téléchargement du rapport",
+                QMessageBox.StandardButton.Ok,
             )
 
     def load_pdf_as_html(self) -> str:
