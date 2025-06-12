@@ -3,12 +3,9 @@ from PySide6.QtWebEngineCore import QWebEngineSettings
 from PySide6.QtWidgets import (
     QWidget,
     QMessageBox,
-    QFileDialog,
 )
-from PySide6.QtCore import QUrl
 from PySide6.QtGui import QIcon, QPixmap
 from minattack.frontend.ui.ui_rapports import Ui_Rapports
-import tempfile
 import os
 
 from minattack.frontend.utils import settings
@@ -95,11 +92,14 @@ class RapportsWindow(QWidget, Ui_Rapports):
                 self,
                 "Succès",
                 f"Rapport enregistré  {file_path}",
-                QMessageBox.StandardButton.Cancel,
+                QMessageBox.StandardButton.Ok,
             )
         else:
             QMessageBox.warning(
-                self, "Erreur", "Échec du téléchargement du rapport"
+                self,
+                "Erreur",
+                "Échec du téléchargement du rapport",
+                QMessageBox.StandardButton.Ok,
             )
 
     def manage_rapport(self):
@@ -114,10 +114,18 @@ class RapportsWindow(QWidget, Ui_Rapports):
                     self.load_pdf_as_html()
                 )
             else:
-                QMessageBox.warning(self, "Attention", "PDF non trouve")
+                QMessageBox.warning(
+                    self,
+                    "Attention",
+                    "PDF non trouve",
+                    QMessageBox.StandardButton.Ok,
+                )
         else:
             QMessageBox.critical(
-                self, "Erreur", "Echec du téléchargement du rapport"
+                self,
+                "Erreur",
+                "Echec du téléchargement du rapport",
+                QMessageBox.StandardButton.Ok,
             )
 
     def load_pdf_as_html(self) -> str:

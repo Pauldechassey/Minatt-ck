@@ -119,3 +119,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.mainStackedWidget.setCurrentIndex(
             self.mainStackedWidget.indexOf(self.actualitePage)
         )
+
+    def goToCartographie(self):
+        self.mainStackedWidget.setCurrentIndex(
+            self.mainStackedWidget.indexOf(self.cartographiePage)
+        )
+
+    def goToAttaque(self):
+        self.mainStackedWidget.setCurrentIndex(
+            self.mainStackedWidget.indexOf(self.attaquesPage)
+        )
+
+    def goToRapport(self):
+        self.mainStackedWidget.setCurrentIndex(
+            self.mainStackedWidget.indexOf(self.rapportsPage)
+        )
