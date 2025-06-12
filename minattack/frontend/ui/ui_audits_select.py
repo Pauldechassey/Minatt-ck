@@ -109,7 +109,12 @@ class Ui_AuditsSelect(object):
 
         self.labelNomAuditsSelect = QLabel(AuditsSelect)
         self.labelNomAuditsSelect.setObjectName(u"labelNomAuditsSelect")
-        self.labelNomAuditsSelect.setFont(font2)
+        font4 = QFont()
+        font4.setFamilies([u"JetBrainsMono Nerd Font"])
+        font4.setPointSize(16)
+        font4.setBold(True)
+        self.labelNomAuditsSelect.setFont(font4)
+        self.labelNomAuditsSelect.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.gridLayout.addWidget(self.labelNomAuditsSelect, 0, 1, 1, 1)
 
@@ -124,11 +129,11 @@ class Ui_AuditsSelect(object):
 
         self.pushButtonActualiteAuditsSelect = QPushButton(AuditsSelect)
         self.pushButtonActualiteAuditsSelect.setObjectName(u"pushButtonActualiteAuditsSelect")
-        font4 = QFont()
-        font4.setFamilies([u"JetBrainsMono Nerd Font"])
-        font4.setPointSize(12)
-        font4.setBold(True)
-        self.pushButtonActualiteAuditsSelect.setFont(font4)
+        font5 = QFont()
+        font5.setFamilies([u"JetBrainsMono Nerd Font"])
+        font5.setPointSize(12)
+        font5.setBold(True)
+        self.pushButtonActualiteAuditsSelect.setFont(font5)
         self.pushButtonActualiteAuditsSelect.setStyleSheet(u"QPushButton {\n"
 "    background-color: #00C853; /* Vert */\n"
 "    color: white;\n"
@@ -144,7 +149,7 @@ class Ui_AuditsSelect(object):
 
         self.pushButtonAccueilAuditsSelect = QPushButton(AuditsSelect)
         self.pushButtonAccueilAuditsSelect.setObjectName(u"pushButtonAccueilAuditsSelect")
-        self.pushButtonAccueilAuditsSelect.setFont(font4)
+        self.pushButtonAccueilAuditsSelect.setFont(font5)
         self.pushButtonAccueilAuditsSelect.setStyleSheet(u"QPushButton {\n"
 "    background-color: #00C853; /* Vert */\n"
 "    color: white;\n"
@@ -173,7 +178,7 @@ class Ui_AuditsSelect(object):
 
         self.pushButtonDocumentationAuditsSelect = QPushButton(AuditsSelect)
         self.pushButtonDocumentationAuditsSelect.setObjectName(u"pushButtonDocumentationAuditsSelect")
-        self.pushButtonDocumentationAuditsSelect.setFont(font4)
+        self.pushButtonDocumentationAuditsSelect.setFont(font5)
         self.pushButtonDocumentationAuditsSelect.setStyleSheet(u"QPushButton {\n"
 "    background-color: #00C853; /* Vert */\n"
 "    color: white;\n"

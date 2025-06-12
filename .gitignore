@@ -100,3 +100,6 @@ config.yaml
 # -----------------------
 *.tar.gz
 *.zip
+
+Rapports
+rapports

@@ -133,14 +133,20 @@ class Ui_Rapports(object):
         self.labelNomRapports = QLabel(Rapports)
         self.labelNomRapports.setObjectName(u"labelNomRapports")
         font1 = QFont()
-        font1.setPointSize(13)
+        font1.setPointSize(16)
         font1.setBold(True)
         self.labelNomRapports.setFont(font1)
+        self.labelNomRapports.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.gridLayout.addWidget(self.labelNomRapports, 0, 0, 1, 1)
 
         self.pushButtonDownloadRapports = QPushButton(Rapports)
         self.pushButtonDownloadRapports.setObjectName(u"pushButtonDownloadRapports")
+        font2 = QFont()
+        font2.setFamilies([u"JetBrainsMono Nerd Font"])
+        font2.setPointSize(14)
+        font2.setBold(True)
+        self.pushButtonDownloadRapports.setFont(font2)
         self.pushButtonDownloadRapports.setStyleSheet(u"QPushButton {\n"
 "    background-color: #00C853; /* Vert */\n"
 "    color: white;\n"
@@ -159,10 +165,6 @@ class Ui_Rapports(object):
 
         self.pushButtonVisualiserRapports = QPushButton(Rapports)
         self.pushButtonVisualiserRapports.setObjectName(u"pushButtonVisualiserRapports")
-        font2 = QFont()
-        font2.setFamilies([u"JetBrainsMono Nerd Font"])
-        font2.setPointSize(14)
-        font2.setBold(True)
         self.pushButtonVisualiserRapports.setFont(font2)
         self.pushButtonVisualiserRapports.setStyleSheet(u"QPushButton {\n"
 "    background-color: #00C853; /* Vert */\n"

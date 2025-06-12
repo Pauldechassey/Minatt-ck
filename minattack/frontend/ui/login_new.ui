@@ -24,8 +24,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>16777215</width>
-    <height>16777215</height>
+    <width>1400</width>
+    <height>900</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -37,23 +37,7 @@ color:white</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Orientation::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="0" column="1">
-    <layout class="QVBoxLayout" name="verticalLayoutLogin">
-     <property name="sizeConstraint">
-      <enum>QLayout::SizeConstraint::SetMaximumSize</enum>
-     </property>
+    <layout class="QVBoxLayout" name="verticalLayoutLogin_2">
      <item>
       <spacer name="verticalSpacer_4">
        <property name="orientation">
@@ -68,7 +52,7 @@ color:white</string>
       </spacer>
      </item>
      <item>
-      <widget class="QLabel" name="labelUsernameLogin">
+      <widget class="QLabel" name="labelUsernameLogin_2">
        <property name="font">
         <font>
          <family>JetBrainsMono Nerd Font</family>
@@ -81,7 +65,7 @@ color:white</string>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEditUsernameLogin">
+      <widget class="QLineEdit" name="lineEditUsernameLogin_2">
        <property name="font">
         <font>
          <family>JetBrainsMonoNL Nerd Font</family>
@@ -97,7 +81,7 @@ border-radius: 4px;
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="labelPasswordLogin">
+      <widget class="QLabel" name="labelPasswordLogin_2">
        <property name="font">
         <font>
          <family>JetBrainsMonoNL Nerd Font</family>
@@ -110,7 +94,7 @@ border-radius: 4px;
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEditPasswordLogin">
+      <widget class="QLineEdit" name="lineEditPasswordLogin_2">
        <property name="font">
         <font>
          <family>JetBrainsMono Nerd Font</family>
@@ -145,7 +129,7 @@ border-radius: 4px;
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="buttonLogin">
+      <widget class="QPushButton" name="buttonLogin_2">
        <property name="font">
         <font>
          <family>JetBrainsMonoNL Nerd Font</family>
@@ -184,19 +168,6 @@ QPushButton:hover {
       </spacer>
      </item>
     </layout>
-   </item>
-   <item row="0" column="2">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Orientation::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>

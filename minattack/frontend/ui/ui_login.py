@@ -30,23 +30,21 @@ class Ui_Login(object):
         sizePolicy.setHeightForWidth(Login.sizePolicy().hasHeightForWidth())
         Login.setSizePolicy(sizePolicy)
         Login.setMinimumSize(QSize(1400, 900))
-        Login.setMaximumSize(QSize(1400, 900))
+        Login.setMaximumSize(QSize(16777215, 16777215))
         Login.setStyleSheet(u"background-color: rgb(18, 18, 18);\n"
 "color:white")
         self.gridLayout = QGridLayout(Login)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.gridLayoutLogin = QGridLayout()
-        self.gridLayoutLogin.setObjectName(u"gridLayoutLogin")
-        self.gridLayoutLogin.setSizeConstraint(QLayout.SizeConstraint.SetDefaultConstraint)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout.addItem(self.horizontalSpacer, 0, 0, 1, 1)
+
         self.verticalLayoutLogin = QVBoxLayout()
         self.verticalLayoutLogin.setObjectName(u"verticalLayoutLogin")
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.verticalLayoutLogin.setSizeConstraint(QLayout.SizeConstraint.SetMaximumSize)
+        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.verticalLayoutLogin.addItem(self.verticalSpacer)
-
-        self.horizontalSpacer_3 = QSpacerItem(550, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
-
-        self.verticalLayoutLogin.addItem(self.horizontalSpacer_3)
+        self.verticalLayoutLogin.addItem(self.verticalSpacer_4)
 
         self.labelUsernameLogin = QLabel(Login)
         self.labelUsernameLogin.setObjectName(u"labelUsernameLogin")
@@ -87,9 +85,9 @@ class Ui_Login(object):
 
         self.verticalLayoutLogin.addWidget(self.lineEditPasswordLogin)
 
-        self.verticalSpacer_3 = QSpacerItem(20, 10, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+        self.verticalSpacer_5 = QSpacerItem(20, 10, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
 
-        self.verticalLayoutLogin.addItem(self.verticalSpacer_3)
+        self.verticalLayoutLogin.addItem(self.verticalSpacer_5)
 
         self.buttonLogin = QPushButton(Login)
         self.buttonLogin.setObjectName(u"buttonLogin")
@@ -111,19 +109,12 @@ class Ui_Login(object):
 
         self.verticalLayoutLogin.addWidget(self.buttonLogin)
 
-        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.verticalSpacer_6 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.verticalLayoutLogin.addItem(self.verticalSpacer_2)
-
-
-        self.gridLayoutLogin.addLayout(self.verticalLayoutLogin, 0, 0, 1, 1)
+        self.verticalLayoutLogin.addItem(self.verticalSpacer_6)
 
 
-        self.gridLayout.addLayout(self.gridLayoutLogin, 0, 1, 1, 1)
-
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout.addItem(self.horizontalSpacer, 0, 0, 1, 1)
+        self.gridLayout.addLayout(self.verticalLayoutLogin, 0, 1, 1, 1)
 
         self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 

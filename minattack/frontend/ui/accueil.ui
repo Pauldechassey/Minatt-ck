@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1400</width>
+    <width>1404</width>
     <height>900</height>
    </rect>
   </property>
@@ -24,8 +24,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>1400</width>
-    <height>900</height>
+    <width>16777215</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -51,6 +51,54 @@ color: white;
    </property>
    <item row="3" column="0">
     <layout class="QGridLayout" name="infoLayout">
+     <item row="3" column="1">
+      <widget class="QLabel" name="presentationLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>340</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>JetBrainsMono Nerd Font</family>
+         <pointsize>14</pointsize>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;
+&lt;body&gt;
+&lt;span style=&quot;font-weight: bold; font-size:20pt;&quot;&gt;
+&lt;p&gt;
+Bienvenue sur &lt;span style=&quot;color:#00FFAA;&quot;&gt;Minattack&lt;/span&gt;
+&lt;/p&gt;
+&lt;/span&gt;
+&lt;p&gt;
+Auditer votre site web !
+  &lt;ul&gt;
+    &lt;li&gt;Lancer des attaques ciblées (SQLi, CSRF...)&lt;/li&gt;
+    &lt;li&gt;Générer des rapports détaillés&lt;/li&gt;
+    &lt;li&gt;Visualiser la cartographie des ressources&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;span style=&quot;color:#FF0000&quot;&gt;
+Vous êtes responsable de l'utilisation de cet outil. L’audit d’un site tiers peut &lt;br&gt; contrevenir aux conditions générales d’utilisation de son hébergeur. De telles &lt;br&gt;actions peuvent engager votre responsabilité et relever des infractions prévues &lt;br&gt; aux articles 323-1, 323-2, 323-3 et 323-4 du Code pénal.&lt;/span&gt;
+&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</string>
+       </property>
+       <property name="margin">
+        <number>30</number>
+       </property>
+      </widget>
+     </item>
      <item row="3" column="0">
       <widget class="QLabel" name="labelLogo">
        <property name="minimumSize">
@@ -82,7 +130,7 @@ color: white;
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
+     <item row="2" column="1">
       <spacer name="verticalSpacer">
        <property name="orientation">
         <enum>Qt::Orientation::Vertical</enum>
@@ -95,43 +143,32 @@ color: white;
        </property>
       </spacer>
      </item>
-     <item row="3" column="1">
-      <widget class="QLabel" name="presentationLabel">
-       <property name="font">
-        <font>
-         <family>JetBrainsMono Nerd Font</family>
-         <pointsize>14</pointsize>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;
-&lt;body&gt;
-&lt;span style=&quot;font-weight: bold; font-size:20pt;&quot;&gt;
-&lt;p&gt;
-Bienvenue sur &lt;span style=&quot;color:#00FFAA;&quot;&gt;Minattack&lt;/span&gt;
-&lt;/p&gt;
-&lt;/span&gt;
-&lt;p&gt;
-Auditer votre site web !
-  &lt;ul&gt;
-    &lt;li&gt;Lancer des attaques ciblées (SQLi, CSRF...)&lt;/li&gt;
-    &lt;li&gt;Générer des rapports détaillés&lt;/li&gt;
-    &lt;li&gt;Visualiser la cartographie des ressources&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;</string>
-       </property>
-       <property name="margin">
-        <number>30</number>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
    <item row="1" column="0">
     <layout class="QHBoxLayout" name="menuAccueil">
+     <item>
+      <widget class="QLabel" name="labelLogo_2">
+       <property name="minimumSize">
+        <size>
+         <width>65</width>
+         <height>42</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>65</width>
+         <height>42</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">

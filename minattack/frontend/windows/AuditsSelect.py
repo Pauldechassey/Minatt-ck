@@ -77,3 +77,4 @@ class AuditsSelectWindow(QWidget, Ui_AuditsSelect):
                     self.main_window.rapportsPage
                 )
             )
+            self.main_window.rapportsPage.manage_rapport()

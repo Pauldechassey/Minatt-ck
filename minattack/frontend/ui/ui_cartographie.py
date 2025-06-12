@@ -46,15 +46,20 @@ class Ui_Cartographie(object):
         self.labelNomCartographie.setObjectName(u"labelNomCartographie")
         font = QFont()
         font.setFamilies([u"JetBrainsMono Nerd Font"])
-        font.setPointSize(14)
+        font.setPointSize(16)
         font.setBold(True)
         self.labelNomCartographie.setFont(font)
+        self.labelNomCartographie.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.gridLayout.addWidget(self.labelNomCartographie, 4, 1, 1, 1)
 
         self.pushButtonLancerCartographie = QPushButton(Cartographie)
         self.pushButtonLancerCartographie.setObjectName(u"pushButtonLancerCartographie")
-        self.pushButtonLancerCartographie.setFont(font)
+        font1 = QFont()
+        font1.setFamilies([u"JetBrainsMono Nerd Font"])
+        font1.setPointSize(14)
+        font1.setBold(True)
+        self.pushButtonLancerCartographie.setFont(font1)
         self.pushButtonLancerCartographie.setStyleSheet(u"QPushButton {\n"
 "    background-color: #00C853; /* Vert */\n"
 "    color: white;\n"
@@ -83,10 +88,10 @@ class Ui_Cartographie(object):
         sizePolicy1.setHeightForWidth(self.checkBoxFuzzingCartographie.sizePolicy().hasHeightForWidth())
         self.checkBoxFuzzingCartographie.setSizePolicy(sizePolicy1)
         self.checkBoxFuzzingCartographie.setMinimumSize(QSize(0, 30))
-        font1 = QFont()
-        font1.setFamilies([u"JetBrainsMono Nerd Font"])
-        font1.setPointSize(14)
-        self.checkBoxFuzzingCartographie.setFont(font1)
+        font2 = QFont()
+        font2.setFamilies([u"JetBrainsMono Nerd Font"])
+        font2.setPointSize(14)
+        self.checkBoxFuzzingCartographie.setFont(font2)
         self.checkBoxFuzzingCartographie.setStyleSheet(u"QCheckBox {\n"
 "    color: white;\n"
 "}\n"
@@ -115,7 +120,7 @@ class Ui_Cartographie(object):
         self.lineEditWordlistPathCartographie.setObjectName(u"lineEditWordlistPathCartographie")
         self.lineEditWordlistPathCartographie.setEnabled(False)
         self.lineEditWordlistPathCartographie.setMinimumSize(QSize(0, 46))
-        self.lineEditWordlistPathCartographie.setFont(font1)
+        self.lineEditWordlistPathCartographie.setFont(font2)
         self.lineEditWordlistPathCartographie.setStyleSheet(u"QLineEdit {\n"
 "	border: 1px solid #ffffff;\n"
 "    border-radius: 5px;\n"
@@ -128,7 +133,7 @@ class Ui_Cartographie(object):
 
         self.label = QLabel(Cartographie)
         self.label.setObjectName(u"label")
-        self.label.setFont(font1)
+        self.label.setFont(font2)
 
         self.gridLayout.addWidget(self.label, 6, 1, 1, 1)
 
@@ -155,11 +160,11 @@ class Ui_Cartographie(object):
 
         self.pushButtonDocumentationCartographie = QPushButton(Cartographie)
         self.pushButtonDocumentationCartographie.setObjectName(u"pushButtonDocumentationCartographie")
-        font2 = QFont()
-        font2.setFamilies([u"JetBrainsMonoNL Nerd Font"])
-        font2.setPointSize(12)
-        font2.setBold(True)
-        self.pushButtonDocumentationCartographie.setFont(font2)
+        font3 = QFont()
+        font3.setFamilies([u"JetBrainsMonoNL Nerd Font"])
+        font3.setPointSize(12)
+        font3.setBold(True)
+        self.pushButtonDocumentationCartographie.setFont(font3)
         self.pushButtonDocumentationCartographie.setStyleSheet(u"QPushButton {\n"
 "    background-color: #00C853; /* Vert */\n"
 "    color: white;\n"
@@ -179,11 +184,11 @@ class Ui_Cartographie(object):
 
         self.pushButtonActualiteCartographie = QPushButton(Cartographie)
         self.pushButtonActualiteCartographie.setObjectName(u"pushButtonActualiteCartographie")
-        font3 = QFont()
-        font3.setFamilies([u"JetBrainsMono Nerd Font"])
-        font3.setPointSize(12)
-        font3.setBold(True)
-        self.pushButtonActualiteCartographie.setFont(font3)
+        font4 = QFont()
+        font4.setFamilies([u"JetBrainsMono Nerd Font"])
+        font4.setPointSize(12)
+        font4.setBold(True)
+        self.pushButtonActualiteCartographie.setFont(font4)
         self.pushButtonActualiteCartographie.setStyleSheet(u"QPushButton {\n"
 "    background-color: #00C853; /* Vert */\n"
 "    color: white;\n"
@@ -212,7 +217,7 @@ class Ui_Cartographie(object):
 
         self.pushButtonAccueilCartographie = QPushButton(Cartographie)
         self.pushButtonAccueilCartographie.setObjectName(u"pushButtonAccueilCartographie")
-        self.pushButtonAccueilCartographie.setFont(font3)
+        self.pushButtonAccueilCartographie.setFont(font4)
         self.pushButtonAccueilCartographie.setStyleSheet(u"QPushButton {\n"
 "    background-color: #00C853; /* Vert */\n"
 "    color: white;\n"

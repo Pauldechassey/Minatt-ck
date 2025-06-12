@@ -3,7 +3,6 @@ from PySide6.QtWidgets import (
 )
 from minattack.frontend.ui.ui_documentation import Ui_Documentation
 from PySide6.QtGui import QIcon, QPixmap
-from minattack.frontend.resources import resources_rc
 
 
 class DocumentationWindow(QWidget, Ui_Documentation):

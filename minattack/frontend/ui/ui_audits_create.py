@@ -30,7 +30,7 @@ class Ui_AuditsCreate(object):
         sizePolicy.setHeightForWidth(AuditsCreate.sizePolicy().hasHeightForWidth())
         AuditsCreate.setSizePolicy(sizePolicy)
         AuditsCreate.setMinimumSize(QSize(1400, 900))
-        AuditsCreate.setMaximumSize(QSize(1400, 900))
+        AuditsCreate.setMaximumSize(QSize(16777215, 16777215))
         font = QFont()
         font.setFamilies([u"JetBrainsMono Nerd Font"])
         font.setPointSize(14)
@@ -211,9 +211,10 @@ class Ui_AuditsCreate(object):
         self.labelNomAuditsSelect.setObjectName(u"labelNomAuditsSelect")
         font5 = QFont()
         font5.setFamilies([u"JetBrainsMonoNL Nerd Font"])
-        font5.setPointSize(14)
+        font5.setPointSize(16)
         font5.setBold(True)
         self.labelNomAuditsSelect.setFont(font5)
+        self.labelNomAuditsSelect.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.gridLayout.addWidget(self.labelNomAuditsSelect, 0, 1, 1, 1)
 

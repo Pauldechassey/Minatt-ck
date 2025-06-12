@@ -1,3 +1,4 @@
+import os
 from fastapi import HTTPException
 import logging
 from sqlalchemy.orm import Session
@@ -13,6 +14,8 @@ from typing import Dict, List
 from datetime import datetime
 from io import BytesIO
 from minattack.backend.app.scripts.rapport_script import generer_rapport
+from minattack.shared.env import get_report_dir_path
+
 
 def get_audit_data(db: Session, audit_id: int) -> Dict:
     """Récupère toutes les données nécessaires pour le rapport"""
@@ -20,9 +23,15 @@ def get_audit_data(db: Session, audit_id: int) -> Dict:
     # Vérification/récupération audit et domaine
     audit = db.query(Audit).filter(Audit.id_audit == audit_id).first()
     if not audit:
-        raise HTTPException(status_code=404, detail=f"Audit {audit_id} non trouvé")
+        raise HTTPException(
+            status_code=404, detail=f"Audit {audit_id} non trouvé"
+        )
 
-    domaine = db.query(Domaine).filter(Domaine.id_domaine == audit.id_domaine).first()
+    domaine = (
+        db.query(Domaine)
+        .filter(Domaine.id_domaine == audit.id_domaine)
+        .first()
+    )
     if not domaine:
         raise HTTPException(
             status_code=404, detail=f"Domaine {audit.id_domaine} non trouvé"
@@ -117,32 +126,50 @@ def get_audit_data(db: Session, audit_id: int) -> Dict:
     }
 
 
-def rapport(audit_id: int, db: Session) -> bytes:
+def rapport(audit_id: int, db: Session) -> tuple[bytes, str]:
     """Service principal de génération de rapport"""
     try:
-        data = get_audit_data(db, audit_id)
-        return generer_rapport(data)
-
+        file_name = path_file(audit_id, db)
+        file_path = get_report_dir_path() + "/" + file_name
+        pdf_content = generer_rapport(get_audit_data(db, audit_id))
+        return pdf_content, file_path
     except HTTPException as he:
         raise he
     except Exception as e:
         raise HTTPException(
-            status_code=500, detail=f"Erreur lors de la génération du rapport: {str(e)}"
+            status_code=500,
+            detail=f"Erreur lors de la génération du rapport: {str(e)}",
         )
+
+
+def download_in_system(audit_id: int, db: Session) -> tuple[str, str]:
+    file_name = path_file(audit_id, db)
+    file_path = get_report_dir_path() + "/" + file_name
+    pdf_content = generer_rapport(get_audit_data(db, audit_id))
+    if not os.path.exists(file_path):
+        with open(file_path, "wb") as f:
+            f.write(pdf_content)
+    return file_name, file_path
+
 
 def path_file(id_audit: int, db: Session) -> str:
     """Génère le chemin de téléchargement du rapport PDF"""
     audit = db.query(Audit).filter(Audit.id_audit == id_audit).first()
     if not audit:
         raise HTTPException(status_code=404, detail="Audit non trouvé")
-        
-    domaine = db.query(Domaine).filter(Domaine.id_domaine == audit.id_domaine).first()
+
+    domaine = (
+        db.query(Domaine)
+        .filter(Domaine.id_domaine == audit.id_domaine)
+        .first()
+    )
     if not domaine:
         raise HTTPException(status_code=404, detail="Domaine non trouvé")
-        
+
     domaine_name = domaine.url_domaine
     domaine_name = domaine_name.replace("http://", "").replace("https://", "")
-    domaine_name = domaine_name.replace(".", "-").replace(":", "-").replace("/", "-")
-    
+    domaine_name = (
+        domaine_name.replace(".", "-").replace(":", "-").replace("/", "-")
+    )
+
     return f"rapport-audit_id-{id_audit}_{domaine_name}.pdf"
-    

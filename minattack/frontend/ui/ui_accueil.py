@@ -23,14 +23,14 @@ class Ui_Accueil(object):
     def setupUi(self, Accueil):
         if not Accueil.objectName():
             Accueil.setObjectName(u"Accueil")
-        Accueil.resize(1400, 900)
+        Accueil.resize(1404, 900)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(Accueil.sizePolicy().hasHeightForWidth())
         Accueil.setSizePolicy(sizePolicy)
         Accueil.setMinimumSize(QSize(1400, 900))
-        Accueil.setMaximumSize(QSize(1400, 900))
+        Accueil.setMaximumSize(QSize(16777215, 16777215))
         Accueil.setStyleSheet(u"background-color: #121212;\n"
 "color: white;\n"
 "")
@@ -39,14 +39,31 @@ class Ui_Accueil(object):
         self.gridLayout_2.setContentsMargins(10, 10, 10, 10)
         self.infoLayout = QGridLayout()
         self.infoLayout.setObjectName(u"infoLayout")
+        self.presentationLabel = QLabel(Accueil)
+        self.presentationLabel.setObjectName(u"presentationLabel")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Minimum)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.presentationLabel.sizePolicy().hasHeightForWidth())
+        self.presentationLabel.setSizePolicy(sizePolicy1)
+        self.presentationLabel.setMinimumSize(QSize(0, 340))
+        font = QFont()
+        font.setFamilies([u"JetBrainsMono Nerd Font"])
+        font.setPointSize(14)
+        font.setBold(False)
+        self.presentationLabel.setFont(font)
+        self.presentationLabel.setMargin(30)
+
+        self.infoLayout.addWidget(self.presentationLabel, 3, 1, 1, 1)
+
         self.labelLogo = QLabel(Accueil)
         self.labelLogo.setObjectName(u"labelLogo")
         self.labelLogo.setMinimumSize(QSize(380, 242))
         self.labelLogo.setMaximumSize(QSize(350, 242))
-        font = QFont()
-        font.setPointSize(14)
-        font.setBold(True)
-        self.labelLogo.setFont(font)
+        font1 = QFont()
+        font1.setPointSize(14)
+        font1.setBold(True)
+        self.labelLogo.setFont(font1)
         self.labelLogo.setPixmap(QPixmap(u"../resources/images/logo.png"))
         self.labelLogo.setScaledContents(True)
 
@@ -54,24 +71,21 @@ class Ui_Accueil(object):
 
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.infoLayout.addItem(self.verticalSpacer, 1, 1, 1, 1)
-
-        self.presentationLabel = QLabel(Accueil)
-        self.presentationLabel.setObjectName(u"presentationLabel")
-        font1 = QFont()
-        font1.setFamilies([u"JetBrainsMono Nerd Font"])
-        font1.setPointSize(14)
-        font1.setBold(False)
-        self.presentationLabel.setFont(font1)
-        self.presentationLabel.setMargin(30)
-
-        self.infoLayout.addWidget(self.presentationLabel, 3, 1, 1, 1)
+        self.infoLayout.addItem(self.verticalSpacer, 2, 1, 1, 1)
 
 
         self.gridLayout_2.addLayout(self.infoLayout, 3, 0, 1, 1)
 
         self.menuAccueil = QHBoxLayout()
         self.menuAccueil.setObjectName(u"menuAccueil")
+        self.labelLogo_2 = QLabel(Accueil)
+        self.labelLogo_2.setObjectName(u"labelLogo_2")
+        self.labelLogo_2.setMinimumSize(QSize(65, 42))
+        self.labelLogo_2.setMaximumSize(QSize(65, 42))
+        self.labelLogo_2.setScaledContents(True)
+
+        self.menuAccueil.addWidget(self.labelLogo_2)
+
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.menuAccueil.addItem(self.horizontalSpacer)
@@ -206,7 +220,6 @@ class Ui_Accueil(object):
 
     def retranslateUi(self, Accueil):
         Accueil.setWindowTitle(QCoreApplication.translate("Accueil", u"Accueil", None))
-        self.labelLogo.setText("")
         self.presentationLabel.setText(QCoreApplication.translate("Accueil", u"<html>\n"
 "<body>\n"
 "<span style=\"font-weight: bold; font-size:20pt;\">\n"
@@ -222,8 +235,13 @@ class Ui_Accueil(object):
 "    <li>Visualiser la cartographie des ressources</li>\n"
 "  </ul>\n"
 "</p>\n"
+"<p><span style=\"color:#FF0000\">\n"
+"Vous \u00eates responsable de l'utilisation de cet outil. L\u2019audit d\u2019un site tiers peut <br> contrevenir aux conditions g\u00e9n\u00e9rales d\u2019utilisation de son h\u00e9bergeur. De telles <br>actions peuvent engager votre responsabilit\u00e9 et relever des infractions pr\u00e9vues <br> aux articles 323-1, 323-2, 323-3 et 323-4 du Code p\u00e9nal.</span>\n"
+"</p>\n"
 "</body>\n"
 "</html>", None))
+        self.labelLogo.setText("")
+        self.labelLogo_2.setText("")
         self.pushButtonAccueilAccueil.setText(QCoreApplication.translate("Accueil", u"Accueil", None))
         self.pushButtonActualiteAccueil.setText(QCoreApplication.translate("Accueil", u"Actualit\u00e9", None))
         self.pushButtonDocumentationAccueil.setText(QCoreApplication.translate("Accueil", u"Documentation", None))

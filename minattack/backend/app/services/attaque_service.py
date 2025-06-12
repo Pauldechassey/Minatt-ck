@@ -25,8 +25,7 @@ logger = logging.getLogger(__name__)
 
 
 def run_attacks(id_audit: int, attaque_type: List[str], db: Session, single: bool = False) -> bool:
-
-    id_domaine = get_audit_by_id(id_audit, db).id_domaine
+    domaine = get_audit_by_id(id_audit, db).id_domaine
     if not id_domaine:
         logger.error(f"Audit avec ID {id_audit} non trouvé")
         raise HTTPException(status_code=404, detail=f"Audit avec ID {id_audit} non trouvé")
@@ -109,7 +108,7 @@ def run_cluster_attacks(id_audit: int, attaque_type: List[str], db: Session) -> 
 
     if len(ids)<15:
         logger.warning(f"Nombre de sous-domaines ({len(ids)}) trop faible pour le clustering, utilisation de l'attaque directe")
-        return run_attacks(id_sous_domaine_initial, attaque_type, db, False)
+        return run_attacks(id_audit, attaque_type, db, False)
 
     if not ids or not vectors:
         logger.error("Aucun vecteur récupéré")

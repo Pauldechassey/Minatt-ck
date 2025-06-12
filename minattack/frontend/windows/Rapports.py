@@ -1,3 +1,5 @@
+import base64
+from PySide6.QtWebEngineCore import QWebEngineSettings
 from PySide6.QtWidgets import (
     QWidget,
     QMessageBox,
@@ -5,13 +7,11 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import QUrl
 from PySide6.QtGui import QIcon, QPixmap
-from PySide6.QtWebEngineWidgets import QWebEngineView
 from minattack.frontend.ui.ui_rapports import Ui_Rapports
 import tempfile
 import os
 
 from minattack.frontend.utils import settings
-from minattack.frontend.repository.RapportRepo import RapportRepo
 
 
 class RapportsWindow(QWidget, Ui_Rapports):
@@ -20,7 +20,6 @@ class RapportsWindow(QWidget, Ui_Rapports):
         self.ui = Ui_Rapports()
         self.ui.setupUi(self)
         self.main_window = main_window
-        self.rapport_repo = RapportRepo()  
         self.temp_pdf_path = None
 
         # Initializing decorative elements
@@ -29,6 +28,7 @@ class RapportsWindow(QWidget, Ui_Rapports):
         )
         pixmap = QPixmap(":/images/logo.png")
         self.ui.labelLogo.setPixmap(pixmap)
+        self.setup_pdf_support()
 
         # Connecting menu buttons
         self.ui.pushButtonDeconnexionRapports.clicked.connect(
@@ -44,88 +44,103 @@ class RapportsWindow(QWidget, Ui_Rapports):
             self.main_window.goToDocumentation
         )
 
+        # Connecting page elements
         self.ui.pushButtonDownloadRapports.clicked.connect(
-            lambda: self.download_rapport()  
+            self.download_rapport
         )
         self.ui.pushButtonVisualiserRapports.clicked.connect(
-            self.launchGraph
+            self.main_window.cartographiePage.launchGraph
         )
 
-    def showEvent(self, event):
-        """Appelé quand la fenêtre devient visible"""
-        super().showEvent(event)
-        if settings.SELECTED_AUDIT_ID:
-            print(f"[DEBUG] Loading report for audit {settings.SELECTED_AUDIT_ID}")
-            self.display_rapport(settings.SELECTED_AUDIT_ID)
-        else:
-            print("[DEBUG] No audit selected")
+    def setup_pdf_support(self):
+        settings = self.ui.qWebEngineViewPdfRapports.settings()
 
-    def display_rapport(self, audit_id: int):
-        """Affiche le rapport PDF"""
-        print(f"[DEBUG] Attempting to display report for audit {audit_id}")
-        # Utiliser self.rapport_repo au lieu de self.main_window.rapportRepo
-        pdf_content = self.rapport_repo.view_rapport(audit_id)
-        if pdf_content:
-            if self.temp_pdf_path:
-                try:
-                    os.remove(self.temp_pdf_path)
-                except Exception:
-                    pass
+        # Paramètres essentiels pour les PDF
+        settings.setAttribute(
+            QWebEngineSettings.WebAttribute.PdfViewerEnabled, True
+        )
+        settings.setAttribute(
+            QWebEngineSettings.WebAttribute.PluginsEnabled, True
+        )
+        settings.setAttribute(
+            QWebEngineSettings.WebAttribute.JavascriptEnabled, True
+        )
 
-            with tempfile.NamedTemporaryFile(
-                suffix=".pdf", delete=False
-            ) as tmp:
-                tmp.write(pdf_content)
-                self.temp_pdf_path = tmp.name
-                print(
-                    f"[DEBUG] PDF saved to temporary file: {self.temp_pdf_path}"
-                )
+        # Paramètres de sécurité
+        settings.setAttribute(
+            QWebEngineSettings.WebAttribute.LocalContentCanAccessRemoteUrls,
+            True,
+        )
+        settings.setAttribute(
+            QWebEngineSettings.WebAttribute.LocalContentCanAccessFileUrls, True
+        )
 
-            url = QUrl.fromLocalFile(self.temp_pdf_path)
-            self.ui.qWebEngineViewPdfRapports.setUrl(url)
-            self.ui.pushButtonDownloadRapports.setEnabled(True)
-        else:
-            print("[ERROR] Failed to get PDF content")
-            QMessageBox.warning(
-                self, "Erreur", "Impossible de charger le rapport"
-            )
+        # Paramètres d'affichage
+        settings.setAttribute(
+            QWebEngineSettings.WebAttribute.AutoLoadImages, True
+        )
+        settings.setAttribute(
+            QWebEngineSettings.WebAttribute.ErrorPageEnabled, True
+        )
+
+    print("Configuration PDF appliquée")
 
     def download_rapport(self):
-        """Télécharge le rapport PDF"""
-        current_url = self.ui.qWebEngineViewPdfRapports.url()
-        if not current_url.isValid() or not current_url.isLocalFile():
-            QMessageBox.warning(self, "Erreur", "Aucun rapport à télécharger")
-            return
+        if (
+            file_path := self.main_window.rapportRepo.get_data_rapport(
+                settings.SELECTED_AUDIT_ID
+            )
+        )[0]:
+            QMessageBox.information(
+                self,
+                "Succès",
+                f"Rapport enregistré  {file_path}",
+                QMessageBox.StandardButton.Cancel,
+            )
+        else:
+            QMessageBox.warning(
+                self, "Erreur", "Échec du téléchargement du rapport"
+            )
 
-        file_path, _ = QFileDialog.getSaveFileName(
-            self,
-            "Enregistrer le rapport",
-            f"rapport_audit_{settings.SELECTED_AUDIT_ID}.pdf",
-            "PDF (*.pdf)",
-        )
-
-        if file_path:
-            try:
-                import shutil
-                shutil.copy2(self.temp_pdf_path, file_path)
-                QMessageBox.information(
-                    self, "Succès", f"Rapport enregistré : {file_path}"
+    def manage_rapport(self):
+        if (
+            results := self.main_window.rapportRepo.download_rapport(
+                settings.SELECTED_AUDIT_ID
+            )
+        )[0]:
+            if os.path.exists(results[1]):
+                settings.SELECTED_RAPPORT_PATH = results[1]
+                self.ui.qWebEngineViewPdfRapports.setHtml(
+                    self.load_pdf_as_html()
                 )
-            except Exception as e:
-                print(f"[ERROR] Failed to save PDF: {e}")
-                QMessageBox.warning(self, "Erreur", "Échec du téléchargement")
-
-    def launchGraph(self):
-        if self.checkAuditStateRapport():
-            graph_data = (self.main_window.cartoRepo.getCartoGraph(settings.SELECTED_AUDIT_ID))
-            if graph_data:
-                self.openGraphWindow(graph_data)
             else:
-                QMessageBox.critical(
-                    self, "Erreur", "Impossible de récupérer les données de cartographie"
-                )
-        
-    def openGraphWindow(self, graph_data):
-        from minattack.frontend.windows.Cartographie import GraphWindow 
-        self.graph_window = GraphWindow(graph_data, parent=self)
-        self.graph_window.show()
+                QMessageBox.warning(self, "Attention", "PDF non trouve")
+        else:
+            QMessageBox.critical(
+                self, "Erreur", "Echec du téléchargement du rapport"
+            )
+
+    def load_pdf_as_html(self) -> str:
+        with open(settings.SELECTED_RAPPORT_PATH, "rb") as f:
+            pdf_data = f.read()
+        pdf_base64 = base64.b64encode(pdf_data).decode("utf-8")
+        html_content = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
+        <style>
+            body {{ margin: 0; padding: 0; height: 100vh; }}
+            object {{ width: 100%; height: 100%; }}
+        </style>
+        </head>
+        <body>
+            <object data="data:application/pdf;base64,{pdf_base64}"
+                    type="application/pdf"
+                    width="100%"
+                    height="100%">
+            </object>
+        </body>
+        </html>
+        """
+        return html_content

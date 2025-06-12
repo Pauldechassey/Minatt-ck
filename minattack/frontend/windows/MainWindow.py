@@ -26,6 +26,8 @@ from PySide6.QtGui import QIcon, QPixmap
 
 import minattack.frontend.utils.settings as settings
 
+from minattack.frontend.resources import resources_rc
+
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -62,9 +64,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.accueilPage = AccueilWindow(self)
         self.auditsCreatePage = AuditsCreateWindow(self)
         self.auditsSelectPage = AuditsSelectWindow(self)
+        self.cartographiePage = CartographieWindow(self)
         self.attaquesPage = AttaquesWindow(self)
         self.rapportsPage = RapportsWindow(self)
-        self.cartographiePage = CartographieWindow(self)
         self.documentationPage = DocumentationWindow(self)
         self.actualitePage = ActualiteWindow(self)
 

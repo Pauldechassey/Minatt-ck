@@ -24,8 +24,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>1400</width>
-    <height>900</height>
+    <width>16777215</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="font">
@@ -353,12 +353,15 @@ QPushButton:pressed {
        <property name="font">
         <font>
          <family>JetBrainsMonoNL Nerd Font</family>
-         <pointsize>14</pointsize>
+         <pointsize>16</pointsize>
          <bold>true</bold>
         </font>
        </property>
        <property name="text">
         <string>Audits</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
        </property>
       </widget>
      </item>

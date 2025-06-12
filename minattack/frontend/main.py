@@ -16,7 +16,9 @@ def main():
     print(f"[FRONTEND] Running in PID: {os.getpid()}")
     print(f"[INFO] Backend running on port: {backend_port}")
 
-    backend_process = Process(target=run_backend, args=(backend_port,), daemon=True)
+    backend_process = Process(
+        target=run_backend, args=(backend_port,), daemon=True
+    )
     backend_process.start()
 
     time.sleep(1)

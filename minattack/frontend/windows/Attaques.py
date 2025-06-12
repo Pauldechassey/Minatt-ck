@@ -5,6 +5,7 @@ from PySide6.QtWidgets import (
 )
 from minattack.frontend.ui.ui_attaques import Ui_Attaques
 from PySide6.QtGui import QIcon, QPixmap
+
 from minattack.frontend.utils import settings
 
 
@@ -35,18 +36,11 @@ class AttaquesWindow(QWidget, Ui_Attaques):
         self.ui.pushButtonDocumentationAttaques.clicked.connect(
             self.main_window.goToDocumentation
         )
-        self.ui.pushButtonVisualiserAttaques.clicked.connect(
-            self.launchGraph
-        )
 
         # Connecting page elements
-        self.ui.pushButtonLancerAttaques.clicked.connect(self.manageAttacks)
-
-    def goToAccueil(self):
-        self.main_window.mainStackedWidget.setCurrentIndex(
-            self.main_window.mainStackedWidget.indexOf(
-                self.main_window.accueilPage
-            )
+        self.ui.pushButtonLancerAttaques.clicked.connect(self.manageAttaque)
+        self.ui.pushButtonVisualiserAttaques.clicked.connect(
+            self.main_window.cartographiePage.launchGraph
         )
 
     def get_selected_attacks(self) -> list[str]:
@@ -70,7 +64,10 @@ class AttaquesWindow(QWidget, Ui_Attaques):
                 "L'état de l'audit n'est pas défini.",
             )
             return False
-        elif settings.SELECTED_AUDIT_STATE < 0:
+        elif (
+            settings.SELECTED_AUDIT_STATE < 0
+            or settings.SELECTED_AUDIT_STATE > 3
+        ):
             QMessageBox.warning(
                 self,
                 "Attention",
@@ -94,7 +91,7 @@ class AttaquesWindow(QWidget, Ui_Attaques):
         else:
             return True
 
-    def updateAuditStateAttacks(self, results):
+    def updateAuditStateAttaque(self):
         settings.SELECTED_AUDIT_STATE = settings.SELECTED_AUDIT_STATE + 1
         if self.main_window.auditRepo.updateAuditState(
             settings.SELECTED_AUDIT_ID, settings.SELECTED_AUDIT_STATE
@@ -118,7 +115,7 @@ class AttaquesWindow(QWidget, Ui_Attaques):
                 "Attaques réussies mais erreur lors de la mise à jour de l'état",
             )
 
-    def checkSelectedAttacks(self) -> tuple[bool, Any]:
+    def checkSelectedAttaque(self) -> tuple[bool, Any]:
         selected_attacks = self.get_selected_attacks()
         if not selected_attacks:
             QMessageBox.warning(
@@ -128,47 +125,29 @@ class AttaquesWindow(QWidget, Ui_Attaques):
             )
             return False, None
         return True, selected_attacks
-    
-    def checkSelectedAttacksCluster(self) -> bool:
-        # TODO
-        pass
 
-    def sendAttacks(self, selected_attacks):
-        if self.checkSelectedAttacksCluster():
+    def sendAttaque(self, selected_attacks):
+        if self.ui.checkBoxClusterAttaques.isChecked():
             return self.main_window.attackRepo.send_attacks_cluster(
-                settings.SELECTED_AUDIT_ID, selected_attacks, settings.SELECTED_AUDIT_STATE
+                settings.SELECTED_AUDIT_ID,
+                selected_attacks,
             )
         else:
             return self.main_window.attackRepo.send_attacks(
                 settings.SELECTED_AUDIT_ID,
                 selected_attacks,
-                settings.SELECTED_AUDIT_STATE
             )
 
-    def manageAttacks(self, recursive=True):
+    def manageAttaque(self):
         if (
             self.checkAuditStateAttaque()
-            and (selected_attacks := self.checkSelectedAttacks())[0]
+            and (selected_attacks := self.checkSelectedAttaque())[0]
         ):
-            results = self.sendAttacks(selected_attacks[1], recursive)
+            results = self.sendAttaque(selected_attacks[1])
             if results:
-                self.updateAuditStateAttacks(results)
+                self.updateAuditStateAttaque()
+                self.main_window.rapportsPage.manage_rapport()
             else:
                 QMessageBox.critical(
                     self, "Erreur", "La cartographie a échoué"
                 )
-    
-    def launchGraph(self):
-        if self.checkAuditStateAttaque():
-            graph_data = (self.main_window.cartoRepo.getCartoGraph(settings.SELECTED_AUDIT_ID))
-            if graph_data:
-                self.openGraphWindow(graph_data)
-            else:
-                QMessageBox.critical(
-                    self, "Erreur", "Impossible de récupérer les données de cartographie"
-                )
-        
-    def openGraphWindow(self, graph_data):
-        from minattack.frontend.windows.Cartographie import GraphWindow 
-        self.graph_window = GraphWindow(graph_data, parent=self)
-        self.graph_window.show()
