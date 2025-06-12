@@ -26,8 +26,9 @@
    <string>Actualité</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #121212;
-color: white;</string>
+   <string notr="true">background-color: #300711;
+color: white;
+</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
@@ -43,14 +44,14 @@ color: white;</string>
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
+    background-color: #94112b; 
     color: white;
     font-weight: bold;
     border-radius: 5px;
-    padding: 10px;
+    padding: 8px;
 }
 QPushButton:hover {
-    background-color: #009624; / survol */
+    background-color: #76061c;
 }</string>
        </property>
        <property name="text">
@@ -69,14 +70,14 @@ QPushButton:hover {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
+    background-color: #94112b; 
     color: white;
     font-weight: bold;
     border-radius: 5px;
-    padding: 10px;
+    padding: 8px;
 }
 QPushButton:hover {
-    background-color: #009624; / survol */
+    background-color: #76061c;
 }</string>
        </property>
        <property name="text">
@@ -121,14 +122,14 @@ QPushButton:hover {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
+    background-color: #94112b; 
     color: white;
     font-weight: bold;
     border-radius: 5px;
-    padding: 10px;
+    padding: 8px;
 }
 QPushButton:hover {
-    background-color: #009624; / survol */
+    background-color: #76061c;
 }</string>
        </property>
        <property name="text">
@@ -189,7 +190,10 @@ color: white;
     <widget class="QScrollArea" name="scrollArea">
      <property name="styleSheet">
       <string notr="true">QScrollBar::handle:vertical {
-	background-color: #00C853; 
+	background-color: #76061C; 
+}
+QScrollBar::handle:horizontal {
+	background-color: #76061C; 
 }</string>
      </property>
      <property name="widgetResizable">

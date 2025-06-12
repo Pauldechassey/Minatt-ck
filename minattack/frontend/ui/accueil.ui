@@ -32,7 +32,7 @@
    <string>Accueil</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #121212;
+   <string notr="true">background-color: #300711;
 color: white;
 </string>
   </property>
@@ -72,12 +72,15 @@ color: white;
          <bold>false</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: #300711;</string>
+       </property>
        <property name="text">
         <string>&lt;html&gt;
 &lt;body&gt;
 &lt;span style=&quot;font-weight: bold; font-size:20pt;&quot;&gt;
 &lt;p&gt;
-Bienvenue sur &lt;span style=&quot;color:#00FFAA;&quot;&gt;Minattack&lt;/span&gt;
+Bienvenue sur &lt;span style=&quot;color:#00E920&quot;&gt;Minattack&lt;/span&gt;
 &lt;/p&gt;
 &lt;/span&gt;
 &lt;p&gt;
@@ -88,7 +91,7 @@ Auditer votre site web !
     &lt;li&gt;Visualiser la cartographie des ressources&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/p&gt;
-&lt;p&gt;&lt;span style=&quot;color:#FF0000&quot;&gt;
+&lt;p&gt;&lt;span style=&quot;color: #00E920; font-weight: bold&quot;&gt;
 Vous êtes responsable de l'utilisation de cet outil. L’audit d’un site tiers peut &lt;br&gt; contrevenir aux conditions générales d’utilisation de son hébergeur. De telles &lt;br&gt;actions peuvent engager votre responsabilité et relever des infractions prévues &lt;br&gt; aux articles 323-1, 323-2, 323-3 et 323-4 du Code pénal.&lt;/span&gt;
 &lt;/p&gt;
 &lt;/body&gt;
@@ -161,6 +164,9 @@ Vous êtes responsable de l'utilisation de cet outil. L’audit d’un site tier
          <height>42</height>
         </size>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: #300711;</string>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -193,14 +199,14 @@ Vous êtes responsable de l'utilisation de cet outil. L’audit d’un site tier
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
+    background-color: #94112b; 
     color: white;
     font-weight: bold;
     border-radius: 5px;
     padding: 8px;
 }
 QPushButton:hover {
-    background-color: #009624; / survol */
+    background-color: #76061c;
 }</string>
        </property>
        <property name="text">
@@ -219,14 +225,14 @@ QPushButton:hover {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
+    background-color: #94112b; 
     color: white;
     font-weight: bold;
     border-radius: 5px;
     padding: 8px;
 }
 QPushButton:hover {
-    background-color: #009624; / survol */
+    background-color: #76061c;
 }</string>
        </property>
        <property name="text">
@@ -245,14 +251,14 @@ QPushButton:hover {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
+    background-color: #94112b; 
     color: white;
     font-weight: bold;
     border-radius: 5px;
     padding: 8px;
 }
 QPushButton:hover {
-    background-color: #009624; / survol */
+    background-color: #76061c;
 }</string>
        </property>
        <property name="text">
@@ -275,6 +281,9 @@ QPushButton:hover {
      </item>
      <item>
       <widget class="QPushButton" name="pushButtonDeconnexionAccueil">
+       <property name="styleSheet">
+        <string notr="true">`</string>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -324,14 +333,14 @@ QPushButton:hover {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
+    background-color: #94112b; 
     color: white;
     font-weight: bold;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 10px;
 }
 QPushButton:hover {
-    background-color: #009624; / survol */
+    background-color: #76061c;
 }</string>
        </property>
        <property name="text">
@@ -366,14 +375,14 @@ QPushButton:hover {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
+    background-color: #94112b; 
     color: white;
     font-weight: bold;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 10px;
 }
 QPushButton:hover {
-    background-color: #009624; / survol */
+    background-color: #76061c;
 }</string>
        </property>
        <property name="text">

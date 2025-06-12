@@ -38,7 +38,7 @@
    <string>Sélection d'audit</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #121212;
+   <string notr="true">background-color: #300711;
 color: white;
 </string>
   </property>
@@ -116,17 +116,14 @@ color: white;
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-    background-color: #2E2E2E;      
+    background-color: #94112b; 
     color: white;
-	font-weight: bold;
-    border-radius: 5px;
+    font-weight: bold;
+    border-radius: 10px;
     padding: 10px;
 }
 QPushButton:hover {
-    background-color: #4CAF50;      
-}
-QPushButton:pressed {
-    background-color: #388E3C;      
+    background-color: #76061c;
 }</string>
          </property>
          <property name="text">
@@ -207,14 +204,14 @@ QPushButton:pressed {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
+    background-color: #94112b; 
     color: white;
     font-weight: bold;
     border-radius: 5px;
-    padding: 10px;
+    padding: 8px;
 }
 QPushButton:hover {
-    background-color: #009624; / survol */
+    background-color: #76061c;
 }</string>
        </property>
        <property name="text">
@@ -233,14 +230,14 @@ QPushButton:hover {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
+    background-color: #94112b; 
     color: white;
     font-weight: bold;
     border-radius: 5px;
-    padding: 10px;
+    padding: 8px;
 }
 QPushButton:hover {
-    background-color: #009624; / survol */
+    background-color: #76061c;
 }</string>
        </property>
        <property name="text">
@@ -297,14 +294,14 @@ QPushButton:hover {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
+    background-color: #94112b; 
     color: white;
     font-weight: bold;
     border-radius: 5px;
-    padding: 10px;
+    padding: 8px;
 }
 QPushButton:hover {
-    background-color: #009624; / survol */
+    background-color: #76061c;
 }</string>
        </property>
        <property name="text">

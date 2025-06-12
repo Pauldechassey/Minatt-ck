@@ -32,8 +32,9 @@
    <string>Login</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(18, 18, 18);
-color:white</string>
+   <string notr="true">background-color: #300711;
+color: white;
+</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
@@ -155,14 +156,14 @@ border-radius: 4px;
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
+    background-color: #94112b; 
     color: white;
     font-weight: bold;
     border-radius: 10px;
     padding: 10px;
 }
 QPushButton:hover {
-    background-color: #009624; / survol */
+    background-color: #76061c;
 }</string>
        </property>
        <property name="text">

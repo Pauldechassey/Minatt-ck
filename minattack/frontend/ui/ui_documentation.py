@@ -30,8 +30,9 @@ class Ui_Documentation(object):
         sizePolicy.setHeightForWidth(Documentation.sizePolicy().hasHeightForWidth())
         Documentation.setSizePolicy(sizePolicy)
         Documentation.setMinimumSize(QSize(1400, 900))
-        Documentation.setStyleSheet(u"background-color: #121212;\n"
-"color: white;")
+        Documentation.setStyleSheet(u"background-color: #300711;\n"
+"color: white;\n"
+"")
         self.gridLayout_2 = QGridLayout(Documentation)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.gridLayout = QGridLayout()
@@ -57,14 +58,14 @@ class Ui_Documentation(object):
         font.setBold(True)
         self.pushButtonDocumentationDocumentation.setFont(font)
         self.pushButtonDocumentationDocumentation.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayout.addWidget(self.pushButtonDocumentationDocumentation, 0, 4, 1, 1)
@@ -73,14 +74,14 @@ class Ui_Documentation(object):
         self.pushButtonActualiteDocumentation.setObjectName(u"pushButtonActualiteDocumentation")
         self.pushButtonActualiteDocumentation.setFont(font)
         self.pushButtonActualiteDocumentation.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayout.addWidget(self.pushButtonActualiteDocumentation, 0, 3, 1, 1)
@@ -89,14 +90,14 @@ class Ui_Documentation(object):
         self.pushButtonAccueilDocumentation.setObjectName(u"pushButtonAccueilDocumentation")
         self.pushButtonAccueilDocumentation.setFont(font)
         self.pushButtonAccueilDocumentation.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayout.addWidget(self.pushButtonAccueilDocumentation, 0, 2, 1, 1)
@@ -123,7 +124,10 @@ class Ui_Documentation(object):
         self.scrollArea = QScrollArea(Documentation)
         self.scrollArea.setObjectName(u"scrollArea")
         self.scrollArea.setStyleSheet(u"QScrollBar::handle:vertical {\n"
-"    background-color: #00C853; \n"
+"	background-color: #76061C; \n"
+"}\n"
+"QScrollBar::handle:horizontal {\n"
+"	background-color: #76061C; \n"
 "}")
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()

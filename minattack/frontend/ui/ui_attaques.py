@@ -30,8 +30,9 @@ class Ui_Attaques(object):
         sizePolicy.setHeightForWidth(Attaques.sizePolicy().hasHeightForWidth())
         Attaques.setSizePolicy(sizePolicy)
         Attaques.setMinimumSize(QSize(1400, 900))
-        Attaques.setStyleSheet(u"background-color: rgb(18, 18, 18);\n"
-"color:white")
+        Attaques.setStyleSheet(u"background-color: #300711;\n"
+"color: white;\n"
+"")
         self.gridLayout = QGridLayout(Attaques)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(10, 10, 10, 10)
@@ -58,14 +59,14 @@ class Ui_Attaques(object):
         font.setBold(True)
         self.pushButtonAccueilAttaques.setFont(font)
         self.pushButtonAccueilAttaques.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayoutMenuAttaques.addWidget(self.pushButtonAccueilAttaques)
@@ -74,14 +75,14 @@ class Ui_Attaques(object):
         self.pushButtonActualiteAttaques.setObjectName(u"pushButtonActualiteAttaques")
         self.pushButtonActualiteAttaques.setFont(font)
         self.pushButtonActualiteAttaques.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayoutMenuAttaques.addWidget(self.pushButtonActualiteAttaques)
@@ -90,14 +91,14 @@ class Ui_Attaques(object):
         self.pushButtonDocumentationAttaques.setObjectName(u"pushButtonDocumentationAttaques")
         self.pushButtonDocumentationAttaques.setFont(font)
         self.pushButtonDocumentationAttaques.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayoutMenuAttaques.addWidget(self.pushButtonDocumentationAttaques)
@@ -139,12 +140,12 @@ class Ui_Attaques(object):
 "    width: 25px;\n"
 "    height: 25px;\n"
 "    border-radius: 8px;\n"
-"    border: 2px solid #00FF00; \n"
+"    border: 2px solid #00E920; \n"
 "    background: black;\n"
 "}\n"
 "\n"
 "QCheckBox::indicator:checked {\n"
-"    background: #00FF00; \n"
+"    background: #00E920; \n"
 "}")
 
         self.gridLayoutContentAttaques.addWidget(self.checkBoxCSRF, 4, 0, 1, 1)
@@ -157,14 +158,14 @@ class Ui_Attaques(object):
         font2.setBold(True)
         self.pushButtonVisualiserAttaques.setFont(font2)
         self.pushButtonVisualiserAttaques.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 10px;\n"
 "    padding: 10px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayoutContentAttaques.addWidget(self.pushButtonVisualiserAttaques, 12, 0, 1, 1)
@@ -199,12 +200,12 @@ class Ui_Attaques(object):
 "    width: 25px;\n"
 "    height: 25px;\n"
 "    border-radius: 8px;\n"
-"    border: 2px solid #00FF00; \n"
+"    border: 2px solid #00E920; \n"
 "    background: black;\n"
 "}\n"
 "\n"
 "QCheckBox::indicator:checked {\n"
-"    background: #00FF00; \n"
+"    background: #00E920; \n"
 "}")
 
         self.gridLayoutContentAttaques.addWidget(self.checkBoxSQLI, 3, 0, 1, 1)
@@ -223,14 +224,14 @@ class Ui_Attaques(object):
         self.pushButtonLancerAttaques.setObjectName(u"pushButtonLancerAttaques")
         self.pushButtonLancerAttaques.setFont(font2)
         self.pushButtonLancerAttaques.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 10px;\n"
 "    padding: 10px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayoutContentAttaques.addWidget(self.pushButtonLancerAttaques, 9, 0, 1, 1)
@@ -248,12 +249,12 @@ class Ui_Attaques(object):
 "    width: 25px;\n"
 "    height: 25px;\n"
 "    border-radius: 8px;\n"
-"    border: 2px solid #00FF00; \n"
+"    border: 2px solid #00E920; \n"
 "    background: black;\n"
 "}\n"
 "\n"
 "QCheckBox::indicator:checked {\n"
-"    background: #00FF00; \n"
+"    background: #00E920; \n"
 "}")
 
         self.gridLayoutContentAttaques.addWidget(self.checkBoxHEADERSCOOKIES, 6, 0, 1, 1)
@@ -274,12 +275,12 @@ class Ui_Attaques(object):
 "    width: 25px;\n"
 "    height: 25px;\n"
 "    border-radius: 8px;\n"
-"    border: 2px solid #00FF00; \n"
+"    border: 2px solid #00E920; \n"
 "    background: black;\n"
 "}\n"
 "\n"
 "QCheckBox::indicator:checked {\n"
-"    background: #00FF00; \n"
+"    background: #00E920; \n"
 "}")
 
         self.gridLayoutContentAttaques.addWidget(self.checkBoxXSS, 5, 0, 1, 1)
@@ -297,12 +298,12 @@ class Ui_Attaques(object):
 "    width: 25px;\n"
 "    height: 25px;\n"
 "    border-radius: 8px;\n"
-"    border: 2px solid #00FF00; \n"
+"    border: 2px solid #00E920; \n"
 "    background: black;\n"
 "}\n"
 "\n"
 "QCheckBox::indicator:checked {\n"
-"    background: #00FF00; \n"
+"    background: #00E920; \n"
 "}")
 
         self.gridLayoutContentAttaques.addWidget(self.checkBoxClusterAttaques, 10, 0, 1, 1)
