@@ -128,17 +128,21 @@ class AttaquesWindow(QWidget, Ui_Attaques):
             )
             return False, None
         return True, selected_attacks
+    
+    def checkSelectedAttacksCluster(self) -> bool:
+        # TODO
+        pass
 
-    def sendAttacks(self, selected_attacks, recursive=True):
-        if recursive:
-            return self.main_window.attackRepo.send_attacks_recursive(
-                settings.SELECTED_AUDIT_ID, selected_attacks
+    def sendAttacks(self, selected_attacks):
+        if self.checkSelectedAttacksCluster():
+            return self.main_window.attackRepo.send_attacks_cluster(
+                settings.SELECTED_AUDIT_ID, selected_attacks, settings.SELECTED_AUDIT_STATE
             )
         else:
-            return self.main_window.attackRepo.send_attacks_single(
+            return self.main_window.attackRepo.send_attacks(
                 settings.SELECTED_AUDIT_ID,
                 selected_attacks,
-                settings.SELECTED_AUDIT_STATE,
+                settings.SELECTED_AUDIT_STATE
             )
 
     def manageAttacks(self, recursive=True):
