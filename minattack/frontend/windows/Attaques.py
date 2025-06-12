@@ -166,5 +166,5 @@ class AttaquesWindow(QWidget, Ui_Attaques):
         
     def openGraphWindow(self, graph_data):
         from minattack.frontend.windows.Cartographie import GraphWindow 
-        self.graph_window = GraphWindow(graph_data, self)
+        self.graph_window = GraphWindow(graph_data, parent=self)
         self.graph_window.show()

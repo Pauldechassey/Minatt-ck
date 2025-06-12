@@ -47,6 +47,9 @@ class RapportsWindow(QWidget, Ui_Rapports):
         self.ui.pushButtonDownloadRapports.clicked.connect(
             lambda: self.download_rapport()  
         )
+        self.ui.pushButtonVisualiserRapports.clicked.connect(
+            self.launchGraph
+        )
 
     def showEvent(self, event):
         """Appelé quand la fenêtre devient visible"""
@@ -111,3 +114,18 @@ class RapportsWindow(QWidget, Ui_Rapports):
             except Exception as e:
                 print(f"[ERROR] Failed to save PDF: {e}")
                 QMessageBox.warning(self, "Erreur", "Échec du téléchargement")
+
+    def launchGraph(self):
+        if self.checkAuditStateAttaque():
+            graph_data = (self.main_window.cartoRepo.getCartoGraph(settings.SELECTED_AUDIT_ID))
+            if graph_data:
+                self.openGraphWindow(graph_data)
+            else:
+                QMessageBox.critical(
+                    self, "Erreur", "Impossible de récupérer les données de cartographie"
+                )
+        
+    def openGraphWindow(self, graph_data):
+        from minattack.frontend.windows.Cartographie import GraphWindow 
+        self.graph_window = GraphWindow(graph_data, parent=self)
+        self.graph_window.show()

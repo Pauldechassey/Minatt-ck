@@ -7,6 +7,7 @@ import logging
 from minattack.backend.app.scripts.classification_DBSCAN_script import classification_DBSCAN
 from minattack.backend.app.scripts.attaque_script import AttaqueScript
 from minattack.backend.app.models.sous_domaine import SousDomaine
+from minattack.backend.app.services.audit_service import get_audit_by_id
 from minattack.backend.app.services.cluster_service import get_vectors_from_sd_initial, validate_vectors
 from minattack.backend.app.services.embedder_service import Embedder
 from minattack.backend.app.services.sous_domaine_service import (
@@ -23,17 +24,22 @@ import numpy as np
 logger = logging.getLogger(__name__)
 
 
-def run_attacks(SD_initial_id: int, attaque_type: List[str], db: Session, single: bool = False) -> bool:
+def run_attacks(id_audit: int, attaque_type: List[str], db: Session, single: bool = False) -> bool:
 
+    id_domaine = get_audit_by_id(id_audit, db).id_domaine
+    if not id_domaine:
+        logger.error(f"Audit avec ID {id_audit} non trouvé")
+        raise HTTPException(status_code=404, detail=f"Audit avec ID {id_audit} non trouvé")
+    
     attaque = AttaqueScript()
-    SD_initial = get_sous_domaine_by_id(SD_initial_id, db)
+    SD_initial = get_sous_domaine_by_id(id_domaine, db)
     if not SD_initial:
         logger.error("Sous-domaine initial non trouvé")
         raise HTTPException(status_code=404, detail="Sous-domaine initial non trouvé")
 
     logger.info(f"Sous-domaine initial trouvé : {SD_initial.url_SD}")
 
-    SD_cibles_id = get_all_child_ids_recursively(SD_initial, db) if not single else [SD_initial_id]
+    SD_cibles_id = get_all_child_ids_recursively(SD_initial, db) if not single else [id_domaine]
 
     if single:
         logger.info(f"Attaque sur le sous-domaine initial uniquement : {SD_initial.url_SD}")

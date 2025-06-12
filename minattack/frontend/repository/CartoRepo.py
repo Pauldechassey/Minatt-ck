@@ -42,7 +42,7 @@ class CartoRepo:
             response = requests.get(url=new_url, params=params, timeout=30)
             if response.status_code == 200:
                 print("AuditRepo [SUCCESS]: récupération du graph de la cartographie")
-                return response.json()  # Assuming the response is JSON
+                return response.json()
             print("AuditRepo [FAILED]: échec de la récupération du graph de la cartographie")
             return None
         except requests.exceptions.Timeout:
