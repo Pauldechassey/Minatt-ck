@@ -38,9 +38,9 @@ def main():
     )
     backend_process.start()
 
-    # if not wait_for_backend(backend_port):
-    #     print("[INFO] Backend failed to start")
-    #     sys.exit(1)
+    if not wait_for_backend(backend_port):
+        print("[INFO] Backend failed to start")
+        sys.exit(1)
 
     app = QApplication(sys.argv)
     window = MainWindow()
@@ -53,6 +53,6 @@ def main():
 
 
 if __name__ == "__main__":
-    # freeze_support()
-    # set_start_method("spawn", force=True)
+    freeze_support()
+    set_start_method("spawn", force=True)
     main()
