@@ -89,9 +89,16 @@ class Ui_AuditsCreate(object):
 
         self.pushButtonDeconnexionAuditsCreate = QPushButton(AuditsCreate)
         self.pushButtonDeconnexionAuditsCreate.setObjectName(u"pushButtonDeconnexionAuditsCreate")
-        self.pushButtonDeconnexionAuditsCreate.setStyleSheet(u"background-color: #121212;\n"
-"color: white;\n"
-"")
+        self.pushButtonDeconnexionAuditsCreate.setStyleSheet(u"QPushButton {\n"
+"    background-color: #94112b; \n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 5px;\n"
+"    padding: 3px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #76061c;\n"
+"}")
         icon = QIcon()
         icon.addFile(u"../resources/images/deconnexion.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.pushButtonDeconnexionAuditsCreate.setIcon(icon)

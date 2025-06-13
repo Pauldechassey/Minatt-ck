@@ -87,6 +87,18 @@ QPushButton:hover {
      </item>
      <item row="0" column="6">
       <widget class="QPushButton" name="pushButtonDeconnexionRapports">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #94112b; 
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 3px;
+}
+QPushButton:hover {
+    background-color: #76061c;
+}</string>
+       </property>
        <property name="text">
         <string/>
        </property>

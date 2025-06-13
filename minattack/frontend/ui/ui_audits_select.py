@@ -30,7 +30,7 @@ class Ui_AuditsSelect(object):
         sizePolicy.setHeightForWidth(AuditsSelect.sizePolicy().hasHeightForWidth())
         AuditsSelect.setSizePolicy(sizePolicy)
         AuditsSelect.setMinimumSize(QSize(1400, 900))
-        AuditsSelect.setMaximumSize(QSize(1400, 900))
+        AuditsSelect.setMaximumSize(QSize(16777215, 16777215))
         font = QFont()
         font.setFamilies([u"JetBrainsMono Nerd Font"])
         font.setPointSize(14)
@@ -191,9 +191,16 @@ class Ui_AuditsSelect(object):
 
         self.pushButtonDeconnexionAuditsSelect = QPushButton(AuditsSelect)
         self.pushButtonDeconnexionAuditsSelect.setObjectName(u"pushButtonDeconnexionAuditsSelect")
-        self.pushButtonDeconnexionAuditsSelect.setStyleSheet(u"background-color: #121212;\n"
-"color: white;\n"
-"")
+        self.pushButtonDeconnexionAuditsSelect.setStyleSheet(u"QPushButton {\n"
+"    background-color: #94112b; \n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 5px;\n"
+"    padding: 3px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #76061c;\n"
+"}")
         icon = QIcon()
         icon.addFile(u"../resources/images/deconnexion.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.pushButtonDeconnexionAuditsSelect.setIcon(icon)

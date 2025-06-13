@@ -108,9 +108,16 @@ class Ui_Actualite(object):
 
         self.pushButtonDeconnexionActualite = QPushButton(Actualite)
         self.pushButtonDeconnexionActualite.setObjectName(u"pushButtonDeconnexionActualite")
-        self.pushButtonDeconnexionActualite.setStyleSheet(u"background-color: #121212;\n"
-"color: white;\n"
-"")
+        self.pushButtonDeconnexionActualite.setStyleSheet(u"QPushButton {\n"
+"    background-color: #94112b; \n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 5px;\n"
+"    padding: 3px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #76061c;\n"
+"}")
         icon = QIcon()
         icon.addFile(u"../resources/images/deconnexion.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.pushButtonDeconnexionActualite.setIcon(icon)

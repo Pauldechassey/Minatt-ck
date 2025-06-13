@@ -24,8 +24,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>1400</width>
-    <height>900</height>
+    <width>16777215</width>
+    <height>16777215</height>
    </size>
   </property>
   <property name="font">
@@ -312,9 +312,16 @@ QPushButton:hover {
      <item row="0" column="7">
       <widget class="QPushButton" name="pushButtonDeconnexionAuditsSelect">
        <property name="styleSheet">
-        <string notr="true">background-color: #121212;
-color: white;
-</string>
+        <string notr="true">QPushButton {
+    background-color: #94112b; 
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 3px;
+}
+QPushButton:hover {
+    background-color: #76061c;
+}</string>
        </property>
        <property name="text">
         <string/>
