@@ -30,12 +30,12 @@ class Ui_AuditsSelect(object):
         sizePolicy.setHeightForWidth(AuditsSelect.sizePolicy().hasHeightForWidth())
         AuditsSelect.setSizePolicy(sizePolicy)
         AuditsSelect.setMinimumSize(QSize(1400, 900))
-        AuditsSelect.setMaximumSize(QSize(1400, 900))
+        AuditsSelect.setMaximumSize(QSize(16777215, 16777215))
         font = QFont()
         font.setFamilies([u"JetBrainsMono Nerd Font"])
         font.setPointSize(14)
         AuditsSelect.setFont(font)
-        AuditsSelect.setStyleSheet(u"background-color: #121212;\n"
+        AuditsSelect.setStyleSheet(u"background-color: #300711;\n"
 "color: white;\n"
 "")
         self.gridLayout_4 = QGridLayout(AuditsSelect)
@@ -76,17 +76,14 @@ class Ui_AuditsSelect(object):
         font2.setBold(True)
         self.pushButtonSelectionUrlAuditsSelect.setFont(font2)
         self.pushButtonSelectionUrlAuditsSelect.setStyleSheet(u"QPushButton {\n"
-"    background-color: #2E2E2E;      \n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
-"	font-weight: bold;\n"
-"    border-radius: 5px;\n"
+"    font-weight: bold;\n"
+"    border-radius: 10px;\n"
 "    padding: 10px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #4CAF50;      \n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: #388E3C;      \n"
+"    background-color: #76061c;\n"
 "}")
 
         self.horizontalLayoutSelectionUrlAuditsSelect.addWidget(self.pushButtonSelectionUrlAuditsSelect)
@@ -135,14 +132,14 @@ class Ui_AuditsSelect(object):
         font5.setBold(True)
         self.pushButtonActualiteAuditsSelect.setFont(font5)
         self.pushButtonActualiteAuditsSelect.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayoutMenuAuditsSelect.addWidget(self.pushButtonActualiteAuditsSelect, 0, 3, 1, 1)
@@ -151,14 +148,14 @@ class Ui_AuditsSelect(object):
         self.pushButtonAccueilAuditsSelect.setObjectName(u"pushButtonAccueilAuditsSelect")
         self.pushButtonAccueilAuditsSelect.setFont(font5)
         self.pushButtonAccueilAuditsSelect.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayoutMenuAuditsSelect.addWidget(self.pushButtonAccueilAuditsSelect, 0, 2, 1, 1)
@@ -180,23 +177,30 @@ class Ui_AuditsSelect(object):
         self.pushButtonDocumentationAuditsSelect.setObjectName(u"pushButtonDocumentationAuditsSelect")
         self.pushButtonDocumentationAuditsSelect.setFont(font5)
         self.pushButtonDocumentationAuditsSelect.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayoutMenuAuditsSelect.addWidget(self.pushButtonDocumentationAuditsSelect, 0, 4, 1, 1)
 
         self.pushButtonDeconnexionAuditsSelect = QPushButton(AuditsSelect)
         self.pushButtonDeconnexionAuditsSelect.setObjectName(u"pushButtonDeconnexionAuditsSelect")
-        self.pushButtonDeconnexionAuditsSelect.setStyleSheet(u"background-color: #121212;\n"
-"color: white;\n"
-"")
+        self.pushButtonDeconnexionAuditsSelect.setStyleSheet(u"QPushButton {\n"
+"    background-color: #94112b; \n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 5px;\n"
+"    padding: 3px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #76061c;\n"
+"}")
         icon = QIcon()
         icon.addFile(u"../resources/images/deconnexion.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.pushButtonDeconnexionAuditsSelect.setIcon(icon)

@@ -31,7 +31,7 @@ class Ui_Accueil(object):
         Accueil.setSizePolicy(sizePolicy)
         Accueil.setMinimumSize(QSize(1400, 900))
         Accueil.setMaximumSize(QSize(16777215, 16777215))
-        Accueil.setStyleSheet(u"background-color: #121212;\n"
+        Accueil.setStyleSheet(u"background-color: #300711;\n"
 "color: white;\n"
 "")
         self.gridLayout_2 = QGridLayout(Accueil)
@@ -52,6 +52,7 @@ class Ui_Accueil(object):
         font.setPointSize(14)
         font.setBold(False)
         self.presentationLabel.setFont(font)
+        self.presentationLabel.setStyleSheet(u"background-color: #300711;")
         self.presentationLabel.setMargin(30)
 
         self.infoLayout.addWidget(self.presentationLabel, 3, 1, 1, 1)
@@ -82,6 +83,7 @@ class Ui_Accueil(object):
         self.labelLogo_2.setObjectName(u"labelLogo_2")
         self.labelLogo_2.setMinimumSize(QSize(65, 42))
         self.labelLogo_2.setMaximumSize(QSize(65, 42))
+        self.labelLogo_2.setStyleSheet(u"background-color: #300711;")
         self.labelLogo_2.setScaledContents(True)
 
         self.menuAccueil.addWidget(self.labelLogo_2)
@@ -98,14 +100,14 @@ class Ui_Accueil(object):
         font2.setBold(True)
         self.pushButtonAccueilAccueil.setFont(font2)
         self.pushButtonAccueilAccueil.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
 "    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.menuAccueil.addWidget(self.pushButtonAccueilAccueil)
@@ -114,14 +116,14 @@ class Ui_Accueil(object):
         self.pushButtonActualiteAccueil.setObjectName(u"pushButtonActualiteAccueil")
         self.pushButtonActualiteAccueil.setFont(font2)
         self.pushButtonActualiteAccueil.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
 "    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.menuAccueil.addWidget(self.pushButtonActualiteAccueil)
@@ -130,14 +132,14 @@ class Ui_Accueil(object):
         self.pushButtonDocumentationAccueil.setObjectName(u"pushButtonDocumentationAccueil")
         self.pushButtonDocumentationAccueil.setFont(font2)
         self.pushButtonDocumentationAccueil.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
 "    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.menuAccueil.addWidget(self.pushButtonDocumentationAccueil)
@@ -148,6 +150,16 @@ class Ui_Accueil(object):
 
         self.pushButtonDeconnexionAccueil = QPushButton(Accueil)
         self.pushButtonDeconnexionAccueil.setObjectName(u"pushButtonDeconnexionAccueil")
+        self.pushButtonDeconnexionAccueil.setStyleSheet(u"QPushButton {\n"
+"    background-color: #94112b; \n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 5px;\n"
+"    padding: 3px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #76061c;\n"
+"}")
         icon = QIcon()
         icon.addFile(u"../resources/images/deconnexion.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.pushButtonDeconnexionAccueil.setIcon(icon)
@@ -173,14 +185,14 @@ class Ui_Accueil(object):
         font3.setBold(True)
         self.pushButtonCreateAudit.setFont(font3)
         self.pushButtonCreateAudit.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
-"    border-radius: 5px;\n"
+"    border-radius: 10px;\n"
 "    padding: 10px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.auditSelectLayout.addWidget(self.pushButtonCreateAudit)
@@ -193,14 +205,14 @@ class Ui_Accueil(object):
         self.pushButtonSelectAudit.setObjectName(u"pushButtonSelectAudit")
         self.pushButtonSelectAudit.setFont(font3)
         self.pushButtonSelectAudit.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
-"    border-radius: 5px;\n"
+"    border-radius: 10px;\n"
 "    padding: 10px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.auditSelectLayout.addWidget(self.pushButtonSelectAudit)
@@ -224,7 +236,7 @@ class Ui_Accueil(object):
 "<body>\n"
 "<span style=\"font-weight: bold; font-size:20pt;\">\n"
 "<p>\n"
-"Bienvenue sur <span style=\"color:#00FFAA;\">Minattack</span>\n"
+"Bienvenue sur <span style=\"color:#00E920\">Minattack</span>\n"
 "</p>\n"
 "</span>\n"
 "<p>\n"
@@ -235,7 +247,7 @@ class Ui_Accueil(object):
 "    <li>Visualiser la cartographie des ressources</li>\n"
 "  </ul>\n"
 "</p>\n"
-"<p><span style=\"color:#FF0000\">\n"
+"<p><span style=\"color: #00E920; font-weight: bold\">\n"
 "Vous \u00eates responsable de l'utilisation de cet outil. L\u2019audit d\u2019un site tiers peut <br> contrevenir aux conditions g\u00e9n\u00e9rales d\u2019utilisation de son h\u00e9bergeur. De telles <br>actions peuvent engager votre responsabilit\u00e9 et relever des infractions pr\u00e9vues <br> aux articles 323-1, 323-2, 323-3 et 323-4 du Code p\u00e9nal.</span>\n"
 "</p>\n"
 "</body>\n"

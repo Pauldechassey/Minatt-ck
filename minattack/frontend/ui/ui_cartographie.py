@@ -30,7 +30,7 @@ class Ui_Cartographie(object):
         sizePolicy.setHeightForWidth(Cartographie.sizePolicy().hasHeightForWidth())
         Cartographie.setSizePolicy(sizePolicy)
         Cartographie.setMinimumSize(QSize(1400, 900))
-        Cartographie.setStyleSheet(u"background-color: #121212;\n"
+        Cartographie.setStyleSheet(u"background-color: #300711;\n"
 "color: white;\n"
 "")
         self.gridLayout_4 = QGridLayout(Cartographie)
@@ -38,44 +38,49 @@ class Ui_Cartographie(object):
         self.gridLayout_4.setContentsMargins(10, 10, 10, 10)
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout.addItem(self.verticalSpacer, 11, 1, 1, 1)
-
-        self.labelNomCartographie = QLabel(Cartographie)
-        self.labelNomCartographie.setObjectName(u"labelNomCartographie")
-        font = QFont()
-        font.setFamilies([u"JetBrainsMono Nerd Font"])
-        font.setPointSize(16)
-        font.setBold(True)
-        self.labelNomCartographie.setFont(font)
-        self.labelNomCartographie.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.gridLayout.addWidget(self.labelNomCartographie, 4, 1, 1, 1)
-
         self.pushButtonLancerCartographie = QPushButton(Cartographie)
         self.pushButtonLancerCartographie.setObjectName(u"pushButtonLancerCartographie")
-        font1 = QFont()
-        font1.setFamilies([u"JetBrainsMono Nerd Font"])
-        font1.setPointSize(14)
-        font1.setBold(True)
-        self.pushButtonLancerCartographie.setFont(font1)
+        font = QFont()
+        font.setFamilies([u"JetBrainsMono Nerd Font"])
+        font.setPointSize(14)
+        font.setBold(True)
+        self.pushButtonLancerCartographie.setFont(font)
         self.pushButtonLancerCartographie.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 10px;\n"
 "    padding: 10px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayout.addWidget(self.pushButtonLancerCartographie, 10, 1, 1, 1)
 
-        self.verticalSpacer_2 = QSpacerItem(10, 10, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+        self.labelNomCartographie = QLabel(Cartographie)
+        self.labelNomCartographie.setObjectName(u"labelNomCartographie")
+        font1 = QFont()
+        font1.setFamilies([u"JetBrainsMono Nerd Font"])
+        font1.setPointSize(16)
+        font1.setBold(True)
+        self.labelNomCartographie.setFont(font1)
+        self.labelNomCartographie.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.gridLayout.addItem(self.verticalSpacer_2, 7, 1, 1, 1)
+        self.gridLayout.addWidget(self.labelNomCartographie, 4, 1, 1, 1)
+
+        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout.addItem(self.verticalSpacer_3, 5, 1, 1, 1)
+
+        self.label = QLabel(Cartographie)
+        self.label.setObjectName(u"label")
+        font2 = QFont()
+        font2.setFamilies([u"JetBrainsMono Nerd Font"])
+        font2.setPointSize(14)
+        self.label.setFont(font2)
+
+        self.gridLayout.addWidget(self.label, 6, 1, 1, 1)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -88,9 +93,6 @@ class Ui_Cartographie(object):
         sizePolicy1.setHeightForWidth(self.checkBoxFuzzingCartographie.sizePolicy().hasHeightForWidth())
         self.checkBoxFuzzingCartographie.setSizePolicy(sizePolicy1)
         self.checkBoxFuzzingCartographie.setMinimumSize(QSize(0, 30))
-        font2 = QFont()
-        font2.setFamilies([u"JetBrainsMono Nerd Font"])
-        font2.setPointSize(14)
         self.checkBoxFuzzingCartographie.setFont(font2)
         self.checkBoxFuzzingCartographie.setStyleSheet(u"QCheckBox {\n"
 "    color: white;\n"
@@ -100,12 +102,12 @@ class Ui_Cartographie(object):
 "    width: 25px;\n"
 "    height: 25px;\n"
 "    border-radius: 8px;\n"
-"    border: 2px solid #00FF00; \n"
+"    border: 2px solid #00E920; \n"
 "    background: black;\n"
 "}\n"
 "\n"
 "QCheckBox::indicator:checked {\n"
-"    background: #00FF00; \n"
+"    background: #00E920; \n"
 "}")
         self.checkBoxFuzzingCartographie.setChecked(False)
         self.checkBoxFuzzingCartographie.setAutoRepeat(False)
@@ -131,15 +133,13 @@ class Ui_Cartographie(object):
 
         self.gridLayout.addLayout(self.horizontalLayout, 9, 1, 1, 1)
 
-        self.label = QLabel(Cartographie)
-        self.label.setObjectName(u"label")
-        self.label.setFont(font2)
+        self.verticalSpacer_2 = QSpacerItem(10, 10, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
 
-        self.gridLayout.addWidget(self.label, 6, 1, 1, 1)
+        self.gridLayout.addItem(self.verticalSpacer_2, 7, 1, 1, 1)
 
-        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.gridLayout.addItem(self.verticalSpacer_3, 5, 1, 1, 1)
+        self.gridLayout.addItem(self.verticalSpacer, 11, 1, 1, 1)
 
 
         self.gridLayout_4.addLayout(self.gridLayout, 1, 0, 1, 1)
@@ -148,9 +148,16 @@ class Ui_Cartographie(object):
         self.gridLayoutMenuCartographie.setObjectName(u"gridLayoutMenuCartographie")
         self.pushButtonDeconnexionCartographie = QPushButton(Cartographie)
         self.pushButtonDeconnexionCartographie.setObjectName(u"pushButtonDeconnexionCartographie")
-        self.pushButtonDeconnexionCartographie.setStyleSheet(u"background-color: #121212;\n"
-"color: white;\n"
-"")
+        self.pushButtonDeconnexionCartographie.setStyleSheet(u"QPushButton {\n"
+"    background-color: #94112b; \n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 5px;\n"
+"    padding: 3px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #76061c;\n"
+"}")
         icon = QIcon()
         icon.addFile(u"../resources/images/deconnexion.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.pushButtonDeconnexionCartographie.setIcon(icon)
@@ -166,14 +173,14 @@ class Ui_Cartographie(object):
         font3.setBold(True)
         self.pushButtonDocumentationCartographie.setFont(font3)
         self.pushButtonDocumentationCartographie.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayoutMenuCartographie.addWidget(self.pushButtonDocumentationCartographie, 0, 4, 1, 1)
@@ -190,14 +197,14 @@ class Ui_Cartographie(object):
         font4.setBold(True)
         self.pushButtonActualiteCartographie.setFont(font4)
         self.pushButtonActualiteCartographie.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayoutMenuCartographie.addWidget(self.pushButtonActualiteCartographie, 0, 3, 1, 1)
@@ -219,14 +226,14 @@ class Ui_Cartographie(object):
         self.pushButtonAccueilCartographie.setObjectName(u"pushButtonAccueilCartographie")
         self.pushButtonAccueilCartographie.setFont(font4)
         self.pushButtonAccueilCartographie.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayoutMenuCartographie.addWidget(self.pushButtonAccueilCartographie, 0, 2, 1, 1)
@@ -242,12 +249,12 @@ class Ui_Cartographie(object):
 
     def retranslateUi(self, Cartographie):
         Cartographie.setWindowTitle(QCoreApplication.translate("Cartographie", u"Cartographie", None))
-        self.labelNomCartographie.setText(QCoreApplication.translate("Cartographie", u"Cartographie", None))
         self.pushButtonLancerCartographie.setText(QCoreApplication.translate("Cartographie", u"Lancer", None))
-        self.checkBoxFuzzingCartographie.setText(QCoreApplication.translate("Cartographie", u"Fuzzing", None))
-        self.lineEditWordlistPathCartographie.setPlaceholderText(QCoreApplication.translate("Cartographie", u"(optionnel) chemin absolu de votre propre wordlist", None))
+        self.labelNomCartographie.setText(QCoreApplication.translate("Cartographie", u"Cartographie", None))
         self.label.setText(QCoreApplication.translate("Cartographie", u"Cette page vous permet de g\u00e9n\u00e9rer une cartographie dynamique \u00e0 partir des donn\u00e9es collect\u00e9es lors des audits.\n"
 "Apr\u00e8s avoir selectionn\u00e9 vos attaques, cliquez sur Lancer pour visualiser la carte.", None))
+        self.checkBoxFuzzingCartographie.setText(QCoreApplication.translate("Cartographie", u"Fuzzing", None))
+        self.lineEditWordlistPathCartographie.setPlaceholderText(QCoreApplication.translate("Cartographie", u"(optionnel) chemin absolu de votre propre wordlist", None))
         self.pushButtonDeconnexionCartographie.setText("")
         self.pushButtonDocumentationCartographie.setText(QCoreApplication.translate("Cartographie", u"Documentation", None))
         self.pushButtonActualiteCartographie.setText(QCoreApplication.translate("Cartographie", u"Actualit\u00e9", None))

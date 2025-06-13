@@ -35,13 +35,22 @@ class Ui_AuditsCreate(object):
         font.setFamilies([u"JetBrainsMono Nerd Font"])
         font.setPointSize(14)
         AuditsCreate.setFont(font)
-        AuditsCreate.setStyleSheet(u"background-color: #121212;\n"
+        AuditsCreate.setStyleSheet(u"background-color: #300711;\n"
 "color: white;\n"
 "")
         self.gridLayout_4 = QGridLayout(AuditsCreate)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.gridLayoutMenuAuditsCreate = QGridLayout()
         self.gridLayoutMenuAuditsCreate.setObjectName(u"gridLayoutMenuAuditsCreate")
+        self.labelLogo = QLabel(AuditsCreate)
+        self.labelLogo.setObjectName(u"labelLogo")
+        self.labelLogo.setMinimumSize(QSize(65, 42))
+        self.labelLogo.setMaximumSize(QSize(65, 42))
+        self.labelLogo.setPixmap(QPixmap(u"../resources/images/logo.png"))
+        self.labelLogo.setScaledContents(True)
+
+        self.gridLayoutMenuAuditsCreate.addWidget(self.labelLogo, 0, 0, 1, 1)
+
         self.pushButtonDocumentationAuditsCreate = QPushButton(AuditsCreate)
         self.pushButtonDocumentationAuditsCreate.setObjectName(u"pushButtonDocumentationAuditsCreate")
         font1 = QFont()
@@ -50,33 +59,52 @@ class Ui_AuditsCreate(object):
         font1.setBold(True)
         self.pushButtonDocumentationAuditsCreate.setFont(font1)
         self.pushButtonDocumentationAuditsCreate.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayoutMenuAuditsCreate.addWidget(self.pushButtonDocumentationAuditsCreate, 0, 4, 1, 1)
 
-        self.pushButtonAccueilAuditsCreate = QPushButton(AuditsCreate)
-        self.pushButtonAccueilAuditsCreate.setObjectName(u"pushButtonAccueilAuditsCreate")
-        self.pushButtonAccueilAuditsCreate.setFont(font1)
-        self.pushButtonAccueilAuditsCreate.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+        self.pushButtonActualiteAuditsCreate = QPushButton(AuditsCreate)
+        self.pushButtonActualiteAuditsCreate.setObjectName(u"pushButtonActualiteAuditsCreate")
+        self.pushButtonActualiteAuditsCreate.setFont(font1)
+        self.pushButtonActualiteAuditsCreate.setStyleSheet(u"QPushButton {\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
-        self.gridLayoutMenuAuditsCreate.addWidget(self.pushButtonAccueilAuditsCreate, 0, 2, 1, 1)
+        self.gridLayoutMenuAuditsCreate.addWidget(self.pushButtonActualiteAuditsCreate, 0, 3, 1, 1)
+
+        self.pushButtonDeconnexionAuditsCreate = QPushButton(AuditsCreate)
+        self.pushButtonDeconnexionAuditsCreate.setObjectName(u"pushButtonDeconnexionAuditsCreate")
+        self.pushButtonDeconnexionAuditsCreate.setStyleSheet(u"QPushButton {\n"
+"    background-color: #94112b; \n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 5px;\n"
+"    padding: 3px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #76061c;\n"
+"}")
+        icon = QIcon()
+        icon.addFile(u"../resources/images/deconnexion.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.pushButtonDeconnexionAuditsCreate.setIcon(icon)
+        self.pushButtonDeconnexionAuditsCreate.setIconSize(QSize(32, 32))
+
+        self.gridLayoutMenuAuditsCreate.addWidget(self.pushButtonDeconnexionAuditsCreate, 0, 7, 1, 1)
 
         self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
@@ -86,42 +114,21 @@ class Ui_AuditsCreate(object):
 
         self.gridLayoutMenuAuditsCreate.addItem(self.horizontalSpacer, 0, 1, 1, 1)
 
-        self.pushButtonDeconnexionAuditsCreate = QPushButton(AuditsCreate)
-        self.pushButtonDeconnexionAuditsCreate.setObjectName(u"pushButtonDeconnexionAuditsCreate")
-        self.pushButtonDeconnexionAuditsCreate.setStyleSheet(u"background-color: #121212;\n"
-"color: white;\n"
-"")
-        icon = QIcon()
-        icon.addFile(u"../resources/images/deconnexion.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.pushButtonDeconnexionAuditsCreate.setIcon(icon)
-        self.pushButtonDeconnexionAuditsCreate.setIconSize(QSize(32, 32))
-
-        self.gridLayoutMenuAuditsCreate.addWidget(self.pushButtonDeconnexionAuditsCreate, 0, 7, 1, 1)
-
-        self.pushButtonActualiteAuditsCreate = QPushButton(AuditsCreate)
-        self.pushButtonActualiteAuditsCreate.setObjectName(u"pushButtonActualiteAuditsCreate")
-        self.pushButtonActualiteAuditsCreate.setFont(font1)
-        self.pushButtonActualiteAuditsCreate.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+        self.pushButtonAccueilAuditsCreate = QPushButton(AuditsCreate)
+        self.pushButtonAccueilAuditsCreate.setObjectName(u"pushButtonAccueilAuditsCreate")
+        self.pushButtonAccueilAuditsCreate.setFont(font1)
+        self.pushButtonAccueilAuditsCreate.setStyleSheet(u"QPushButton {\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
-        self.gridLayoutMenuAuditsCreate.addWidget(self.pushButtonActualiteAuditsCreate, 0, 3, 1, 1)
-
-        self.labelLogo = QLabel(AuditsCreate)
-        self.labelLogo.setObjectName(u"labelLogo")
-        self.labelLogo.setMinimumSize(QSize(65, 42))
-        self.labelLogo.setMaximumSize(QSize(65, 42))
-        self.labelLogo.setPixmap(QPixmap(u"../resources/images/logo.png"))
-        self.labelLogo.setScaledContents(True)
-
-        self.gridLayoutMenuAuditsCreate.addWidget(self.labelLogo, 0, 0, 1, 1)
+        self.gridLayoutMenuAuditsCreate.addWidget(self.pushButtonAccueilAuditsCreate, 0, 2, 1, 1)
 
 
         self.gridLayout_4.addLayout(self.gridLayoutMenuAuditsCreate, 0, 0, 1, 1)
@@ -192,14 +199,14 @@ class Ui_AuditsCreate(object):
         font4.setBold(True)
         self.pushButtonCreerAuditsCreate.setFont(font4)
         self.pushButtonCreerAuditsCreate.setStyleSheet(u"QPushButton {\n"
-"    background-color: #2E2E2E;      \n"
+"    background-color: #94112b; \n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 10px;\n"
 "    padding: 10px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #4CAF50;      \n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background-color: #388E3C;      \n"
+"    background-color: #76061c;\n"
 "}")
 
         self.horizontalLayoutUrlAuditsCreate.addWidget(self.pushButtonCreerAuditsCreate)
@@ -229,11 +236,11 @@ class Ui_AuditsCreate(object):
 
     def retranslateUi(self, AuditsCreate):
         AuditsCreate.setWindowTitle(QCoreApplication.translate("AuditsCreate", u"Cr\u00e9ation d'audits", None))
-        self.pushButtonDocumentationAuditsCreate.setText(QCoreApplication.translate("AuditsCreate", u"Documentation", None))
-        self.pushButtonAccueilAuditsCreate.setText(QCoreApplication.translate("AuditsCreate", u"Accueil", None))
-        self.pushButtonDeconnexionAuditsCreate.setText("")
-        self.pushButtonActualiteAuditsCreate.setText(QCoreApplication.translate("AuditsCreate", u"Actualit\u00e9", None))
         self.labelLogo.setText("")
+        self.pushButtonDocumentationAuditsCreate.setText(QCoreApplication.translate("AuditsCreate", u"Documentation", None))
+        self.pushButtonActualiteAuditsCreate.setText(QCoreApplication.translate("AuditsCreate", u"Actualit\u00e9", None))
+        self.pushButtonDeconnexionAuditsCreate.setText("")
+        self.pushButtonAccueilAuditsCreate.setText(QCoreApplication.translate("AuditsCreate", u"Accueil", None))
         self.labelUrlAuditsCreate.setText(QCoreApplication.translate("AuditsCreate", u"Cr\u00e9er un audit:", None))
         self.labelWarningUrlAuditsCreate.setText("")
         self.lineEditUrlAuditsCreate.setText("")

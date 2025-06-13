@@ -38,13 +38,38 @@
    <string>Création d'audits</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #121212;
+   <string notr="true">background-color: #300711;
 color: white;
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout_4">
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayoutMenuAuditsCreate">
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelLogo">
+       <property name="minimumSize">
+        <size>
+         <width>65</width>
+         <height>42</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>65</width>
+         <height>42</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap>../resources/images/logo.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="4">
       <widget class="QPushButton" name="pushButtonDocumentationAuditsCreate">
        <property name="font">
@@ -56,14 +81,14 @@ color: white;
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
+    background-color: #94112b; 
     color: white;
     font-weight: bold;
     border-radius: 5px;
-    padding: 10px;
+    padding: 8px;
 }
 QPushButton:hover {
-    background-color: #009624; / survol */
+    background-color: #76061c;
 }</string>
        </property>
        <property name="text">
@@ -71,8 +96,8 @@ QPushButton:hover {
        </property>
       </widget>
      </item>
-     <item row="0" column="2">
-      <widget class="QPushButton" name="pushButtonAccueilAuditsCreate">
+     <item row="0" column="3">
+      <widget class="QPushButton" name="pushButtonActualiteAuditsCreate">
        <property name="font">
         <font>
          <family>JetBrainsMono Nerd Font</family>
@@ -82,18 +107,47 @@ QPushButton:hover {
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
+    background-color: #94112b; 
     color: white;
     font-weight: bold;
     border-radius: 5px;
-    padding: 10px;
+    padding: 8px;
 }
 QPushButton:hover {
-    background-color: #009624; / survol */
+    background-color: #76061c;
 }</string>
        </property>
        <property name="text">
-        <string>Accueil</string>
+        <string>Actualité</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="7">
+      <widget class="QPushButton" name="pushButtonDeconnexionAuditsCreate">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #94112b; 
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 3px;
+}
+QPushButton:hover {
+    background-color: #76061c;
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../resources/images/deconnexion.png</normaloff>../resources/images/deconnexion.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
        </property>
       </widget>
      </item>
@@ -123,30 +177,8 @@ QPushButton:hover {
        </property>
       </spacer>
      </item>
-     <item row="0" column="7">
-      <widget class="QPushButton" name="pushButtonDeconnexionAuditsCreate">
-       <property name="styleSheet">
-        <string notr="true">background-color: #121212;
-color: white;
-</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>../resources/images/deconnexion.png</normaloff>../resources/images/deconnexion.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>32</width>
-         <height>32</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="3">
-      <widget class="QPushButton" name="pushButtonActualiteAuditsCreate">
+     <item row="0" column="2">
+      <widget class="QPushButton" name="pushButtonAccueilAuditsCreate">
        <property name="font">
         <font>
          <family>JetBrainsMono Nerd Font</family>
@@ -156,43 +188,18 @@ color: white;
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
-    background-color: #00C853; /* Vert */
+    background-color: #94112b; 
     color: white;
     font-weight: bold;
     border-radius: 5px;
-    padding: 10px;
+    padding: 8px;
 }
 QPushButton:hover {
-    background-color: #009624; / survol */
+    background-color: #76061c;
 }</string>
        </property>
        <property name="text">
-        <string>Actualité</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="labelLogo">
-       <property name="minimumSize">
-        <size>
-         <width>65</width>
-         <height>42</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>65</width>
-         <height>42</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap>../resources/images/logo.png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
+        <string>Accueil</string>
        </property>
       </widget>
      </item>
@@ -331,14 +338,14 @@ QPushButton:hover {
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-    background-color: #2E2E2E;      
+    background-color: #94112b; 
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
     padding: 10px;
 }
 QPushButton:hover {
-    background-color: #4CAF50;      
-}
-QPushButton:pressed {
-    background-color: #388E3C;      
+    background-color: #76061c;
 }</string>
          </property>
          <property name="text">

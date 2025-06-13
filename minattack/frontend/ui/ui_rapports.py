@@ -30,7 +30,7 @@ class Ui_Rapports(object):
         sizePolicy.setHeightForWidth(Rapports.sizePolicy().hasHeightForWidth())
         Rapports.setSizePolicy(sizePolicy)
         Rapports.setMinimumSize(QSize(1400, 900))
-        Rapports.setStyleSheet(u"background-color: #121212;\n"
+        Rapports.setStyleSheet(u"background-color: #300711;\n"
 "color: white;\n"
 "")
         self.gridLayout_2 = QGridLayout(Rapports)
@@ -45,14 +45,14 @@ class Ui_Rapports(object):
         font.setBold(True)
         self.pushButtonDocumentationRapports.setFont(font)
         self.pushButtonDocumentationRapports.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayoutMenuRapports.addWidget(self.pushButtonDocumentationRapports, 0, 4, 1, 1)
@@ -61,20 +61,30 @@ class Ui_Rapports(object):
         self.pushButtonActualiteRapports.setObjectName(u"pushButtonActualiteRapports")
         self.pushButtonActualiteRapports.setFont(font)
         self.pushButtonActualiteRapports.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayoutMenuRapports.addWidget(self.pushButtonActualiteRapports, 0, 3, 1, 1)
 
         self.pushButtonDeconnexionRapports = QPushButton(Rapports)
         self.pushButtonDeconnexionRapports.setObjectName(u"pushButtonDeconnexionRapports")
+        self.pushButtonDeconnexionRapports.setStyleSheet(u"QPushButton {\n"
+"    background-color: #94112b; \n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 5px;\n"
+"    padding: 3px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #76061c;\n"
+"}")
         icon = QIcon()
         icon.addFile(u"../resources/images/deconnexion.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.pushButtonDeconnexionRapports.setIcon(icon)
@@ -99,14 +109,14 @@ class Ui_Rapports(object):
         self.pushButtonAccueilRapports.setObjectName(u"pushButtonAccueilRapports")
         self.pushButtonAccueilRapports.setFont(font)
         self.pushButtonAccueilRapports.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayoutMenuRapports.addWidget(self.pushButtonAccueilRapports, 0, 2, 1, 1)
@@ -148,14 +158,14 @@ class Ui_Rapports(object):
         font2.setBold(True)
         self.pushButtonDownloadRapports.setFont(font2)
         self.pushButtonDownloadRapports.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
-"    border-radius: 5px;\n"
+"    border-radius: 10px;\n"
 "    padding: 10px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayout.addWidget(self.pushButtonDownloadRapports, 1, 0, 1, 1)
@@ -167,14 +177,14 @@ class Ui_Rapports(object):
         self.pushButtonVisualiserRapports.setObjectName(u"pushButtonVisualiserRapports")
         self.pushButtonVisualiserRapports.setFont(font2)
         self.pushButtonVisualiserRapports.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 10px;\n"
 "    padding: 10px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayout_2.addWidget(self.pushButtonVisualiserRapports, 2, 0, 1, 1)

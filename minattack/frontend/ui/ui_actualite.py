@@ -30,8 +30,9 @@ class Ui_Actualite(object):
         sizePolicy.setHeightForWidth(Actualite.sizePolicy().hasHeightForWidth())
         Actualite.setSizePolicy(sizePolicy)
         Actualite.setMinimumSize(QSize(1400, 900))
-        Actualite.setStyleSheet(u"background-color: #121212;\n"
-"color: white;")
+        Actualite.setStyleSheet(u"background-color: #300711;\n"
+"color: white;\n"
+"")
         self.gridLayout_2 = QGridLayout(Actualite)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.gridLayout = QGridLayout()
@@ -44,14 +45,14 @@ class Ui_Actualite(object):
         font.setBold(True)
         self.pushButtonDocumentationActualite.setFont(font)
         self.pushButtonDocumentationActualite.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayout.addWidget(self.pushButtonDocumentationActualite, 0, 4, 1, 1)
@@ -60,14 +61,14 @@ class Ui_Actualite(object):
         self.pushButtonActualiteActualite.setObjectName(u"pushButtonActualiteActualite")
         self.pushButtonActualiteActualite.setFont(font)
         self.pushButtonActualiteActualite.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayout.addWidget(self.pushButtonActualiteActualite, 0, 3, 1, 1)
@@ -84,14 +85,14 @@ class Ui_Actualite(object):
         self.pushButtonAccueilActualite.setObjectName(u"pushButtonAccueilActualite")
         self.pushButtonAccueilActualite.setFont(font)
         self.pushButtonAccueilActualite.setStyleSheet(u"QPushButton {\n"
-"    background-color: #00C853; /* Vert */\n"
+"    background-color: #94112b; \n"
 "    color: white;\n"
 "    font-weight: bold;\n"
 "    border-radius: 5px;\n"
-"    padding: 10px;\n"
+"    padding: 8px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #009624; / survol */\n"
+"    background-color: #76061c;\n"
 "}")
 
         self.gridLayout.addWidget(self.pushButtonAccueilActualite, 0, 2, 1, 1)
@@ -107,9 +108,16 @@ class Ui_Actualite(object):
 
         self.pushButtonDeconnexionActualite = QPushButton(Actualite)
         self.pushButtonDeconnexionActualite.setObjectName(u"pushButtonDeconnexionActualite")
-        self.pushButtonDeconnexionActualite.setStyleSheet(u"background-color: #121212;\n"
-"color: white;\n"
-"")
+        self.pushButtonDeconnexionActualite.setStyleSheet(u"QPushButton {\n"
+"    background-color: #94112b; \n"
+"    color: white;\n"
+"    font-weight: bold;\n"
+"    border-radius: 5px;\n"
+"    padding: 3px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #76061c;\n"
+"}")
         icon = QIcon()
         icon.addFile(u"../resources/images/deconnexion.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.pushButtonDeconnexionActualite.setIcon(icon)
@@ -123,7 +131,10 @@ class Ui_Actualite(object):
         self.scrollArea = QScrollArea(Actualite)
         self.scrollArea.setObjectName(u"scrollArea")
         self.scrollArea.setStyleSheet(u"QScrollBar::handle:vertical {\n"
-"	background-color: #00C853; \n"
+"	background-color: #76061C; \n"
+"}\n"
+"QScrollBar::handle:horizontal {\n"
+"	background-color: #76061C; \n"
 "}")
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
