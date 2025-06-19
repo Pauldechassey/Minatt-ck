@@ -1,6 +1,3 @@
-
-# 🔴 **RESPONSABILITÉ ET USAGE LÉGAL / LEGAL RESPONSIBILITY AND USAGE**
-
 **🇫🇷 :**
 > **ATTENTION : Cet outil est développé UNIQUEMENT à des fins éducatives dans le cadre d'un projet de cours.**
 > 
